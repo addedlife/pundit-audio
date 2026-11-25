@@ -1,0 +1,390 @@
+{
+  "voice": "en-GB-RyanNeural",
+  "rate": "+0%",
+  "pitch": "+0Hz",
+  "bitrate": "32k",
+  "generated_at": "2026-11-25T14:58:56",
+  "count": 76,
+  "clips": {
+    "sbr-intro": {
+      "file": "sbr-intro.mp3",
+      "text": "This ... is SBR News.",
+      "duration": 2.273
+    },
+    "its": {
+      "file": "its.mp3",
+      "text": "It's",
+      "duration": 0.34
+    },
+    "am": {
+      "file": "am.mp3",
+      "text": "A.M.",
+      "duration": 0.496
+    },
+    "pm": {
+      "file": "pm.mp3",
+      "text": "P.M.",
+      "duration": 0.496
+    },
+    "h-01": {
+      "file": "h-01.mp3",
+      "text": "one",
+      "duration": 0.366
+    },
+    "h-02": {
+      "file": "h-02.mp3",
+      "text": "two",
+      "duration": 0.366
+    },
+    "h-03": {
+      "file": "h-03.mp3",
+      "text": "three",
+      "duration": 0.444
+    },
+    "h-04": {
+      "file": "h-04.mp3",
+      "text": "four",
+      "duration": 0.418
+    },
+    "h-05": {
+      "file": "h-05.mp3",
+      "text": "five",
+      "duration": 0.575
+    },
+    "h-06": {
+      "file": "h-06.mp3",
+      "text": "six",
+      "duration": 0.549
+    },
+    "h-07": {
+      "file": "h-07.mp3",
+      "text": "seven",
+      "duration": 0.444
+    },
+    "h-08": {
+      "file": "h-08.mp3",
+      "text": "eight",
+      "duration": 0.418
+    },
+    "h-09": {
+      "file": "h-09.mp3",
+      "text": "nine",
+      "duration": 0.522
+    },
+    "h-10": {
+      "file": "h-10.mp3",
+      "text": "ten",
+      "duration": 0.392
+    },
+    "h-11": {
+      "file": "h-11.mp3",
+      "text": "eleven",
+      "duration": 0.522
+    },
+    "h-12": {
+      "file": "h-12.mp3",
+      "text": "twelve",
+      "duration": 0.575
+    },
+    "m-00": {
+      "file": "m-00.mp3",
+      "text": "o'clock",
+      "duration": 0.601
+    },
+    "m-01": {
+      "file": "m-01.mp3",
+      "text": "oh one",
+      "duration": 0.522
+    },
+    "m-02": {
+      "file": "m-02.mp3",
+      "text": "oh two",
+      "duration": 0.601
+    },
+    "m-03": {
+      "file": "m-03.mp3",
+      "text": "oh three",
+      "duration": 0.575
+    },
+    "m-04": {
+      "file": "m-04.mp3",
+      "text": "oh four",
+      "duration": 0.575
+    },
+    "m-05": {
+      "file": "m-05.mp3",
+      "text": "oh five",
+      "duration": 0.731
+    },
+    "m-06": {
+      "file": "m-06.mp3",
+      "text": "oh six",
+      "duration": 0.758
+    },
+    "m-07": {
+      "file": "m-07.mp3",
+      "text": "oh seven",
+      "duration": 0.653
+    },
+    "m-08": {
+      "file": "m-08.mp3",
+      "text": "oh eight",
+      "duration": 0.653
+    },
+    "m-09": {
+      "file": "m-09.mp3",
+      "text": "oh nine",
+      "duration": 0.679
+    },
+    "m-10": {
+      "file": "m-10.mp3",
+      "text": "ten",
+      "duration": 0.392
+    },
+    "m-11": {
+      "file": "m-11.mp3",
+      "text": "eleven",
+      "duration": 0.522
+    },
+    "m-12": {
+      "file": "m-12.mp3",
+      "text": "twelve",
+      "duration": 0.575
+    },
+    "m-13": {
+      "file": "m-13.mp3",
+      "text": "thirteen",
+      "duration": 0.601
+    },
+    "m-14": {
+      "file": "m-14.mp3",
+      "text": "fourteen",
+      "duration": 0.679
+    },
+    "m-15": {
+      "file": "m-15.mp3",
+      "text": "fifteen",
+      "duration": 0.627
+    },
+    "m-16": {
+      "file": "m-16.mp3",
+      "text": "sixteen",
+      "duration": 0.679
+    },
+    "m-17": {
+      "file": "m-17.mp3",
+      "text": "seventeen",
+      "duration": 0.731
+    },
+    "m-18": {
+      "file": "m-18.mp3",
+      "text": "eighteen",
+      "duration": 0.575
+    },
+    "m-19": {
+      "file": "m-19.mp3",
+      "text": "nineteen",
+      "duration": 0.705
+    },
+    "m-20": {
+      "file": "m-20.mp3",
+      "text": "twenty",
+      "duration": 0.47
+    },
+    "m-21": {
+      "file": "m-21.mp3",
+      "text": "twenty-one",
+      "duration": 0.679
+    },
+    "m-22": {
+      "file": "m-22.mp3",
+      "text": "twenty-two",
+      "duration": 0.784
+    },
+    "m-23": {
+      "file": "m-23.mp3",
+      "text": "twenty-three",
+      "duration": 0.758
+    },
+    "m-24": {
+      "file": "m-24.mp3",
+      "text": "twenty-four",
+      "duration": 0.758
+    },
+    "m-25": {
+      "file": "m-25.mp3",
+      "text": "twenty-five",
+      "duration": 0.888
+    },
+    "m-26": {
+      "file": "m-26.mp3",
+      "text": "twenty-six",
+      "duration": 0.888
+    },
+    "m-27": {
+      "file": "m-27.mp3",
+      "text": "twenty-seven",
+      "duration": 0.784
+    },
+    "m-28": {
+      "file": "m-28.mp3",
+      "text": "twenty-eight",
+      "duration": 0.731
+    },
+    "m-29": {
+      "file": "m-29.mp3",
+      "text": "twenty-nine",
+      "duration": 0.758
+    },
+    "m-30": {
+      "file": "m-30.mp3",
+      "text": "thirty",
+      "duration": 0.47
+    },
+    "m-31": {
+      "file": "m-31.mp3",
+      "text": "thirty-one",
+      "duration": 0.653
+    },
+    "m-32": {
+      "file": "m-32.mp3",
+      "text": "thirty-two",
+      "duration": 0.679
+    },
+    "m-33": {
+      "file": "m-33.mp3",
+      "text": "thirty-three",
+      "duration": 0.731
+    },
+    "m-34": {
+      "file": "m-34.mp3",
+      "text": "thirty-four",
+      "duration": 0.705
+    },
+    "m-35": {
+      "file": "m-35.mp3",
+      "text": "thirty-five",
+      "duration": 0.862
+    },
+    "m-36": {
+      "file": "m-36.mp3",
+      "text": "thirty-six",
+      "duration": 0.862
+    },
+    "m-37": {
+      "file": "m-37.mp3",
+      "text": "thirty-seven",
+      "duration": 0.784
+    },
+    "m-38": {
+      "file": "m-38.mp3",
+      "text": "thirty-eight",
+      "duration": 0.731
+    },
+    "m-39": {
+      "file": "m-39.mp3",
+      "text": "thirty-nine",
+      "duration": 0.758
+    },
+    "m-40": {
+      "file": "m-40.mp3",
+      "text": "forty",
+      "duration": 0.522
+    },
+    "m-41": {
+      "file": "m-41.mp3",
+      "text": "forty-one",
+      "duration": 0.731
+    },
+    "m-42": {
+      "file": "m-42.mp3",
+      "text": "forty-two",
+      "duration": 0.731
+    },
+    "m-43": {
+      "file": "m-43.mp3",
+      "text": "forty-three",
+      "duration": 0.81
+    },
+    "m-44": {
+      "file": "m-44.mp3",
+      "text": "forty-four",
+      "duration": 0.758
+    },
+    "m-45": {
+      "file": "m-45.mp3",
+      "text": "forty-five",
+      "duration": 0.914
+    },
+    "m-46": {
+      "file": "m-46.mp3",
+      "text": "forty-six",
+      "duration": 0.888
+    },
+    "m-47": {
+      "file": "m-47.mp3",
+      "text": "forty-seven",
+      "duration": 0.784
+    },
+    "m-48": {
+      "file": "m-48.mp3",
+      "text": "forty-eight",
+      "duration": 0.758
+    },
+    "m-49": {
+      "file": "m-49.mp3",
+      "text": "forty-nine",
+      "duration": 0.784
+    },
+    "m-50": {
+      "file": "m-50.mp3",
+      "text": "fifty",
+      "duration": 0.522
+    },
+    "m-51": {
+      "file": "m-51.mp3",
+      "text": "fifty-one",
+      "duration": 0.731
+    },
+    "m-52": {
+      "file": "m-52.mp3",
+      "text": "fifty-two",
+      "duration": 0.731
+    },
+    "m-53": {
+      "file": "m-53.mp3",
+      "text": "fifty-three",
+      "duration": 0.784
+    },
+    "m-54": {
+      "file": "m-54.mp3",
+      "text": "fifty-four",
+      "duration": 0.784
+    },
+    "m-55": {
+      "file": "m-55.mp3",
+      "text": "fifty-five",
+      "duration": 0.914
+    },
+    "m-56": {
+      "file": "m-56.mp3",
+      "text": "fifty-six",
+      "duration": 0.94
+    },
+    "m-57": {
+      "file": "m-57.mp3",
+      "text": "fifty-seven",
+      "duration": 0.836
+    },
+    "m-58": {
+      "file": "m-58.mp3",
+      "text": "fifty-eight",
+      "duration": 0.758
+    },
+    "m-59": {
+      "file": "m-59.mp3",
+      "text": "fifty-nine",
+      "duration": 0.784
+    }
+  }
+}

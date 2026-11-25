@@ -65,6 +65,11 @@ button.ctrl:active{opacity:.75;transform:scale(.98)}
 </div>
 <script>
 const TRACKS = [{"num": 1, "id": "intro", "section": "SBR News", "title": "This ... is SBR News (Noon Brief)", "file": "01-intro.mp3", "duration": 10.37, "src": "01-intro.mp3"}, {"num": 2, "id": "story-01", "section": "Top Stories", "title": "AI selloff resumes as inflation heats up", "file": "02-story-01.mp3", "duration": 80.4, "src": "02-story-01.mp3"}, {"num": 3, "id": "story-02", "section": "Top Stories", "title": "U.S. proposes new tariffs on 14 trading partners", "file": "03-story-02.mp3", "duration": 78.89, "src": "03-story-02.mp3"}, {"num": 4, "id": "story-03", "section": "Top Stories", "title": "Iran’s army claims a third tanker hit a Hormuz mine", "file": "04-story-03.mp3", "duration": 55.95, "src": "04-story-03.mp3"}, {"num": 5, "id": "story-04", "section": "Israel", "title": "Knesset advances PM term limits as unity talks go on", "file": "05-story-04.mp3", "duration": 58.7, "src": "05-story-04.mp3"}, {"num": 6, "id": "story-05", "section": "Chareidi World", "title": "Knesset rejects arrest-freeze bills, 63-49", "file": "06-story-05.mp3", "duration": 78.86, "src": "06-story-05.mp3"}, {"num": 7, "id": "story-06", "section": "Chareidi World", "title": "Agudah source: religion-and-state status quo agreed", "file": "07-story-06.mp3", "duration": 55.51, "src": "07-story-06.mp3"}, {"num": 8, "id": "story-07", "section": "Region", "title": "Satmar Rebbe’s letter to Trump: Israel does not represent American Jews", "file": "08-story-07.mp3", "duration": 84.24, "src": "08-story-07.mp3"}, {"num": 9, "id": "story-08", "section": "Tech", "title": "Microsoft declares “Code Red” after Outlook outage", "file": "09-story-08.mp3", "duration": 58.64, "src": "09-story-08.mp3"}, {"num": 10, "id": "story-09", "section": "Other Notable", "title": "Russian strikes kill five, cut power in five regions", "file": "10-story-09.mp3", "duration": 62.09, "src": "10-story-09.mp3"}, {"num": 11, "id": "weather", "section": "Weather", "title": "South Bend, IN Forecast & 5-Day Outlook", "file": "11-weather.mp3", "duration": 68.13, "src": "11-weather.mp3"}, {"num": 12, "id": "signoff", "section": "SBR News", "title": "You've been listening to SBR News", "file": "12-signoff.mp3", "duration": 3.06, "src": "12-signoff.mp3"}];
+const CLOCK_ABS = "https://addedlife.github.io/pundit-audio/clock/";
+const CLOCK_BASE = false ? CLOCK_ABS : (location.protocol === 'file:' ? CLOCK_ABS : '../clock/');
+const TIME_CHECK_EVERY = 3;
+const SILENT_WAV = 'data:audio/wav;base64,UklGRmQBAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YUABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==';
+
 const au = document.getElementById('au');
 const playBtn = document.getElementById('play');
 const prevBtn = document.getElementById('prev');
@@ -78,6 +83,14 @@ const listEl = document.getElementById('list');
 const spdEl = document.getElementById('spd');
 
 let idx = 0, rate = 1.0, playing = false;
+let phase = 'track'; // 'track' | 'intro-clock' | 'timecheck' | 'outro-clock'
+let pendingNextIdx = 0;
+let loadSeq = 0;
+let activeBlobUrl = null;
+let prewarmedIntro = null;
+let prewarmPromise = null;
+let userInteracted = false;
+
 const overlay = document.getElementById('tap-overlay');
 const q = new URLSearchParams(location.search);
 const qt = parseInt(q.get('track') || q.get('story') || '0', 10);
@@ -85,6 +98,182 @@ if (qt >= 1 && qt <= TRACKS.length) idx = qt - 1;
 const hasTrack = q.has('track') || q.has('story');
 const apRaw = (q.get('autoplay') || '').toLowerCase();
 const wantAuto = apRaw === '1' || apRaw === 'true' || (q.has('autoplay') && apRaw === '') || (!hasTrack && apRaw !== '0' && apRaw !== 'false');
+let liveClock = !hasTrack || qt === 1;
+
+const AC = window.AudioContext || window.webkitAudioContext;
+let actx = null;
+const clipCache = new Map();
+
+function getActx(){
+  if (!actx && AC) actx = new AC();
+  return actx;
+}
+
+function timeKeys(d){
+  const h24 = d.getHours();
+  const m = d.getMinutes();
+  const h12 = (h24 % 12) || 12;
+  const ampm = h24 < 12 ? 'am' : 'pm';
+  const hKey = 'h-' + String(h12).padStart(2, '0');
+  const mKey = 'm-' + String(m).padStart(2, '0');
+  const label = `${h12}:${String(m).padStart(2, '0')} ${ampm.toUpperCase()}`;
+  return { key: `${hKey}_${mKey}_${ampm}`, hKey, mKey, ampm, label, nextMKey: 'm-' + String((m + 1) % 60).padStart(2, '0') };
+}
+
+async function fetchClipBuffer(name){
+  if (clipCache.has(name)) return clipCache.get(name);
+  const p = (async () => {
+    const ctx = getActx();
+    if (!ctx) throw new Error('no AudioContext');
+    let resp;
+    try {
+      resp = await fetch(CLOCK_BASE + name + '.mp3', { cache: 'force-cache' });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    } catch (e) {
+      if (CLOCK_ABS && CLOCK_BASE !== CLOCK_ABS) {
+        resp = await fetch(CLOCK_ABS + name + '.mp3', { cache: 'force-cache' });
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      } else {
+        throw e;
+      }
+    }
+    const ab = await resp.arrayBuffer();
+    return await new Promise((res, rej) => {
+      const pr = ctx.decodeAudioData(ab, res, rej);
+      if (pr && pr.then) pr.then(res, rej);
+    });
+  })();
+  p.catch(() => clipCache.delete(name));
+  clipCache.set(name, p);
+  return p;
+}
+
+function trimPcm(f32, sr, thr = 0.004){
+  let s = 0, e = f32.length;
+  while (s < e && Math.abs(f32[s]) < thr) s++;
+  while (e > s && Math.abs(f32[e - 1]) < thr) e--;
+  const pad = Math.floor(sr * 0.004);
+  s = Math.max(0, s - pad);
+  e = Math.min(f32.length, e + pad);
+  return f32.subarray(s, e);
+}
+
+function encodeWav(parts, gapsSec, sr){
+  let totalSamples = 0;
+  const gapSamples = gapsSec.map(g => Math.max(0, Math.round(g * sr)));
+  for (let i = 0; i < parts.length; i++) {
+    totalSamples += parts[i].length;
+    if (i < gapSamples.length) totalSamples += gapSamples[i];
+  }
+  const dataBytes = totalSamples * 2;
+  const buf = new ArrayBuffer(44 + dataBytes);
+  const v = new DataView(buf);
+  const ws = (off, s) => { for (let i = 0; i < s.length; i++) v.setUint8(off + i, s.charCodeAt(i)); };
+  ws(0, 'RIFF');
+  v.setUint32(4, 36 + dataBytes, true);
+  ws(8, 'WAVE');
+  ws(12, 'fmt ');
+  v.setUint32(16, 16, true);
+  v.setUint16(20, 1, true);
+  v.setUint16(22, 1, true);
+  v.setUint32(24, sr, true);
+  v.setUint32(28, sr * 2, true);
+  v.setUint16(32, 2, true);
+  v.setUint16(34, 16, true);
+  ws(36, 'data');
+  v.setUint32(40, dataBytes, true);
+  let off = 44;
+  for (let i = 0; i < parts.length; i++) {
+    const ch = parts[i];
+    const fadeLen = Math.min(Math.floor(sr * 0.004), Math.floor(ch.length / 4));
+    for (let j = 0; j < ch.length; j++) {
+      let x = ch[j];
+      if (fadeLen > 0) {
+        if (j < fadeLen) x *= j / fadeLen;
+        else if (j >= ch.length - fadeLen) x *= (ch.length - 1 - j) / fadeLen;
+      }
+      if (x > 1) x = 1; else if (x < -1) x = -1;
+      v.setInt16(off, x < 0 ? x * 0x8000 : x * 0x7fff, true);
+      off += 2;
+    }
+    if (i < gapSamples.length) off += gapSamples[i] * 2;
+  }
+  return { blob: new Blob([buf], { type: 'audio/wav' }), duration: totalSamples / sr };
+}
+
+async function buildClockBlob(kind, d){
+  const tk = timeKeys(d || new Date());
+  let seq, gaps;
+  if (kind === 'intro') {
+    seq = ['sbr-intro', 'its', tk.hKey, tk.mKey, tk.ampm];
+    gaps = [0.38, 0.035, 0.025, 0.045];
+  } else if (kind === 'outro') {
+    seq = ['its', tk.hKey, tk.mKey, tk.ampm, 'sbr-intro'];
+    gaps = [0.035, 0.025, 0.045, 0.42];
+  } else {
+    seq = ['its', tk.hKey, tk.mKey, tk.ampm];
+    gaps = [0.035, 0.025, 0.045];
+  }
+  const bufs = await Promise.all(seq.map(fetchClipBuffer));
+  const sr = bufs[0].sampleRate;
+  const parts = bufs.map(b => trimPcm(b.getChannelData(0), sr));
+  const wav = encodeWav(parts, gaps, sr);
+  return { url: URL.createObjectURL(wav.blob), label: tk.label, key: kind + '_' + tk.key, duration: wav.duration };
+}
+
+function prewarmMinute(){
+  if (!liveClock || !AC) return;
+  const tk = timeKeys(new Date());
+  ['sbr-intro', 'its', 'am', 'pm', tk.hKey, tk.mKey, tk.nextMKey].forEach(k => {
+    fetchClipBuffer(k).catch(() => {});
+  });
+}
+
+function prewarmIntro(){
+  if (!liveClock || !AC) return Promise.resolve(null);
+  const tk = timeKeys(new Date());
+  if (prewarmedIntro && prewarmedIntro.key === 'intro_' + tk.key) return Promise.resolve(prewarmedIntro);
+  if (prewarmPromise) return prewarmPromise;
+  prewarmMinute();
+  prewarmPromise = buildClockBlob('intro', new Date()).then(res => {
+    if (prewarmedIntro && prewarmedIntro.url !== activeBlobUrl) URL.revokeObjectURL(prewarmedIntro.url);
+    prewarmedIntro = res;
+    prewarmPromise = null;
+    return res;
+  }).catch(() => {
+    prewarmPromise = null;
+    return null;
+  });
+  return prewarmPromise;
+}
+
+function setBlobSrc(url){
+  if (activeBlobUrl && activeBlobUrl !== url && (!prewarmedIntro || activeBlobUrl !== prewarmedIntro.url)) {
+    URL.revokeObjectURL(activeBlobUrl);
+  }
+  activeBlobUrl = url;
+  au.src = url;
+}
+
+function setClockActive(res, pName){
+  phase = pName;
+  setBlobSrc(res.url);
+  au.playbackRate = rate;
+  if (pName === 'intro-clock') {
+    nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
+    ntit.textContent = `This ... is SBR News · It's ${res.label}`;
+  } else if (pName === 'timecheck') {
+    nsec.textContent = `Time Check · SBR News`;
+    ntit.textContent = `It's ${res.label}`;
+  } else if (pName === 'outro-clock') {
+    nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
+    ntit.textContent = `It's ${res.label} · This ... is SBR News`;
+  }
+  durEl.textContent = fmt(res.duration);
+  curEl.textContent = '0:00';
+  seek.value = 0;
+  updateMediaSession(ntit.textContent);
+}
 
 function hideOverlay(){ overlay.classList.remove('show'); }
 function showOverlay(){ overlay.classList.add('show'); }
@@ -93,23 +282,58 @@ function tryPlay(){
   if (p && p.then) p.then(hideOverlay).catch(showOverlay);
   else hideOverlay();
 }
-overlay.addEventListener('click', () => { hideOverlay(); au.play().catch(showOverlay); });
-overlay.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hideOverlay(); au.play().catch(showOverlay); } });
+
+function startFromGesture(){
+  userInteracted = true;
+  hideOverlay();
+  if (phase === 'intro-clock' || phase === 'outro-clock' || phase === 'timecheck') {
+    const kind = phase === 'intro-clock' ? 'intro' : (phase === 'outro-clock' ? 'outro' : 'check');
+    const tk = timeKeys(new Date());
+    if (kind === 'intro' && prewarmedIntro && prewarmedIntro.key === 'intro_' + tk.key) {
+      setClockActive(prewarmedIntro, 'intro-clock');
+      const p = au.play();
+      if (p && p.catch) p.catch(showOverlay);
+      return;
+    }
+    au.src = SILENT_WAV;
+    const prime = au.play();
+    if (prime && prime.catch) prime.catch(() => {});
+    const mySeq = loadSeq;
+    const targetPhase = phase;
+    buildClockBlob(kind, new Date()).then(res => {
+      if (mySeq !== loadSeq) return;
+      setClockActive(res, targetPhase);
+      au.play().catch(showOverlay);
+    }).catch(() => {
+      if (mySeq !== loadSeq) return;
+      phase = 'track';
+      au.src = TRACKS[idx].src;
+      au.playbackRate = rate;
+      au.play().catch(showOverlay);
+    });
+    return;
+  }
+  const p = au.play();
+  if (p && p.catch) p.catch(showOverlay);
+}
+
+overlay.addEventListener('click', startFromGesture);
+overlay.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startFromGesture(); } });
 
 function fmt(s){ if(!isFinite(s)||s<0)return '0:00'; s=Math.floor(s); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
 
-function updateMediaSession(){
+function updateMediaSession(titleOverride){
   if (!('mediaSession' in navigator)) return;
   const t = TRACKS[idx];
   navigator.mediaSession.metadata = new MediaMetadata({
-    title: t.title,
+    title: titleOverride || t.title,
     artist: 'SBR News',
     album: 'Wednesday, November 25, 2026 · Noon Brief',
   });
-  navigator.mediaSession.setActionHandler('play', () => au.play());
+  navigator.mediaSession.setActionHandler('play', () => startFromGesture());
   navigator.mediaSession.setActionHandler('pause', () => au.pause());
-  navigator.mediaSession.setActionHandler('previoustrack', () => load(idx - 1, true));
-  navigator.mediaSession.setActionHandler('nexttrack', () => load(idx + 1, true));
+  navigator.mediaSession.setActionHandler('previoustrack', () => prevBtn.click());
+  navigator.mediaSession.setActionHandler('nexttrack', () => nextBtn.click());
   try {
     navigator.mediaSession.setActionHandler('seekto', (d) => { if (d.seekTime != null) au.currentTime = d.seekTime; });
   } catch {}
@@ -121,8 +345,80 @@ function renderList(){
     const b = document.createElement('button');
     b.className = 'row' + (i === idx ? ' on' : '');
     b.innerHTML = `<span class="num">${t.num}</span><span class="meta"><div class="rsec">${t.section}</div><div class="rtit">${t.title}</div></span><span class="rdur">${fmt(t.duration)}</span>`;
-    b.onclick = () => load(i, true);
+    b.onclick = () => {
+      userInteracted = true;
+      if (t.id === 'intro') liveClock = true;
+      load(i, true);
+    };
     listEl.appendChild(b);
+  });
+}
+
+function playClockPhase(kind, pName, autoPlay, fallbackTrackIdx){
+  const mySeq = loadSeq;
+  phase = pName;
+  if (kind === 'intro') {
+    nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
+    ntit.textContent = TRACKS[idx].title;
+  } else if (kind === 'check') {
+    nsec.textContent = `Time Check · SBR News`;
+    ntit.textContent = `It's ${timeKeys(new Date()).label}`;
+  } else {
+    nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
+    ntit.textContent = `It's ${timeKeys(new Date()).label} · This ... is SBR News`;
+  }
+  renderList();
+  updateMediaSession(ntit.textContent);
+
+  const tk = timeKeys(new Date());
+  if (kind === 'intro' && prewarmedIntro && prewarmedIntro.key === 'intro_' + tk.key) {
+    setClockActive(prewarmedIntro, pName);
+    if (autoPlay) tryPlay();
+    return;
+  }
+  if (kind === 'intro' && autoPlay && !userInteracted) {
+    // Show overlay promptly if clip build takes >200ms (e.g. slow mobile connection)
+    const ovTimer = setTimeout(() => { if (mySeq === loadSeq && !userInteracted && au.paused) showOverlay(); }, 220);
+    const builder = kind === 'intro' ? prewarmIntro() : buildClockBlob(kind, new Date());
+    builder.then(res => {
+      clearTimeout(ovTimer);
+      if (mySeq !== loadSeq) return;
+      if (res) {
+        setClockActive(res, pName);
+        if (!userInteracted) tryPlay();
+      } else {
+        phase = 'track';
+        au.src = TRACKS[fallbackTrackIdx].src;
+        au.playbackRate = rate;
+        if (!userInteracted) tryPlay();
+      }
+    }).catch(() => {
+      clearTimeout(ovTimer);
+      if (mySeq !== loadSeq) return;
+      phase = 'track';
+      au.src = TRACKS[fallbackTrackIdx].src;
+      au.playbackRate = rate;
+      if (!userInteracted) tryPlay();
+    });
+    return;
+  }
+  (kind === 'intro' ? prewarmIntro() : buildClockBlob(kind, new Date())).then(res => {
+    if (mySeq !== loadSeq) return;
+    if (res) {
+      setClockActive(res, pName);
+      if (autoPlay) tryPlay();
+    } else {
+      phase = 'track';
+      au.src = TRACKS[fallbackTrackIdx].src;
+      au.playbackRate = rate;
+      if (autoPlay) tryPlay();
+    }
+  }).catch(() => {
+    if (mySeq !== loadSeq) return;
+    phase = 'track';
+    au.src = TRACKS[fallbackTrackIdx].src;
+    au.playbackRate = rate;
+    if (autoPlay) tryPlay();
   });
 }
 
@@ -130,7 +426,17 @@ function load(i, autoPlay){
   if (i < 0) i = 0;
   if (i >= TRACKS.length){ playing = false; playBtn.innerHTML = '&#9654; Play'; return; }
   idx = i;
+  loadSeq++;
   const t = TRACKS[idx];
+  if (liveClock && t.id === 'intro' && AC) {
+    playClockPhase('intro', 'intro-clock', autoPlay, idx);
+    return;
+  }
+  if (liveClock && t.id === 'signoff' && AC) {
+    playClockPhase('outro', 'outro-clock', autoPlay, idx);
+    return;
+  }
+  phase = 'track';
   nsec.textContent = `Track ${t.num} of ${TRACKS.length} · ${t.section}`;
   ntit.textContent = t.title;
   au.src = t.src;
@@ -143,18 +449,73 @@ function load(i, autoPlay){
   if (autoPlay) tryPlay();
 }
 
-playBtn.onclick = () => { if (au.paused) au.play(); else au.pause(); };
-prevBtn.onclick = () => { if (au.currentTime > 4) { au.currentTime = 0; } else { load(idx - 1, true); } };
-nextBtn.onclick = () => load(idx + 1, true);
+playBtn.onclick = () => {
+  if (au.paused) {
+    if (!au.getAttribute('src') || (phase !== 'track' && au.currentTime === 0)) {
+      startFromGesture();
+    } else {
+      userInteracted = true;
+      au.play().catch(showOverlay);
+    }
+  } else {
+    au.pause();
+  }
+};
+prevBtn.onclick = () => {
+  userInteracted = true;
+  if (phase === 'timecheck') { load(idx, true); return; }
+  if (au.currentTime > 4) { au.currentTime = 0; } else { load(idx - 1, true); }
+};
+nextBtn.onclick = () => {
+  userInteracted = true;
+  if (phase === 'timecheck') { load(pendingNextIdx, true); return; }
+  load(idx + 1, true);
+};
 au.onplay = () => { playing = true; playBtn.innerHTML = '&#10074;&#10074; Pause'; if('mediaSession' in navigator) navigator.mediaSession.playbackState='playing'; };
 au.onpause = () => { playing = false; playBtn.innerHTML = '&#9654; Play'; if('mediaSession' in navigator) navigator.mediaSession.playbackState='paused'; };
-au.onended = () => { if (idx + 1 < TRACKS.length) load(idx + 1, true); };
+au.onended = () => {
+  if (phase === 'intro-clock') {
+    if (TRACKS[idx].clock_intro === 'after') {
+      phase = 'track';
+      au.src = TRACKS[idx].src;
+      au.playbackRate = rate;
+      tryPlay();
+    } else {
+      load(idx + 1, true);
+    }
+    return;
+  }
+  if (phase === 'timecheck') {
+    load(pendingNextIdx, true);
+    return;
+  }
+  if (phase === 'outro-clock') {
+    playing = false;
+    playBtn.innerHTML = '&#9654; Play';
+    return;
+  }
+  if (idx + 1 < TRACKS.length) {
+    const curT = TRACKS[idx], nextT = TRACKS[idx + 1];
+    if (liveClock && AC && curT.id && curT.id.startsWith('story-') && nextT.id && nextT.id.startsWith('story-')) {
+      const m = curT.id.match(/^story-(\d+)$/);
+      const sNum = m ? parseInt(m[1], 10) : 0;
+      if (sNum > 0 && sNum % TIME_CHECK_EVERY === 0) {
+        pendingNextIdx = idx + 1;
+        loadSeq++;
+        playClockPhase('check', 'timecheck', true, idx + 1);
+        return;
+      }
+    }
+    load(idx + 1, true);
+  }
+};
 au.ontimeupdate = () => {
   if (!au.duration) return;
   seek.max = au.duration;
   seek.value = au.currentTime;
   curEl.textContent = fmt(au.currentTime);
   durEl.textContent = fmt(au.duration);
+  if (liveClock && au.duration - au.currentTime < 15) prewarmMinute();
 };
 seek.oninput = () => { au.currentTime = Number(seek.value); };
 
@@ -169,5 +530,9 @@ seek.oninput = () => { au.currentTime = Number(seek.value); };
   spdEl.appendChild(b);
 });
 
+if (liveClock) {
+  prewarmIntro();
+  setInterval(() => { if (!playing && phase === 'intro-clock') prewarmIntro(); }, 15000);
+}
 load(idx, wantAuto);
 </script></body></html>
