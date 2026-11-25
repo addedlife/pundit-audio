@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SBR News — Voice samples 2</title>
+<style>
+:root{--bg:#EDECE8;--card:#F4F3EF;--ink:#231F20;--mut:#5c5755;--line:#d5d1c8;--acc:#0f7ec8}
+@media(prefers-color-scheme:dark){:root{--bg:#161615;--card:#21201e;--ink:#f2efe9;--mut:#a7a29b;--line:#35332f;--acc:#4ba3e3}}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',Georgia,serif}
+.wrap{max-width:480px;margin:0 auto;padding:16px 14px 40px}
+.hdr{border-bottom:1.5px solid var(--ink);padding-bottom:10px;margin-bottom:14px;text-align:center}
+.brand{font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:28px;letter-spacing:-.01em}
+.sub{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:4px;font-family:-apple-system,sans-serif}
+.lead{font-size:15px;line-height:1.45;margin:0 0 16px}
+.lead em{font-style:italic}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;margin-bottom:10px}
+.card.rec{border:1.5px solid var(--ink)}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-family:-apple-system,sans-serif}
+.card.rec .kicker{color:var(--ink)}
+.title{font-size:18px;line-height:1.25;font-weight:700;margin:4px 0 6px}
+.why{font-size:14px;line-height:1.4;color:var(--ink);margin:0 0 10px}
+audio{width:100%;height:40px;margin-top:2px}
+.foot{font-size:13px;line-height:1.45;color:var(--mut);margin-top:16px}
+.foot a{color:var(--ink)}
+.voicelab{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-family:-apple-system,sans-serif;margin:2px 0 6px}
+select#voice{width:100%;font-size:16px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);margin-bottom:10px}
+.btns{display:flex;gap:8px}
+.btns button{flex:1;font-size:16px;font-weight:600;padding:10px 12px;border-radius:10px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
+.btns button#stop{background:transparent;color:var(--ink)}
+.btns button:disabled{opacity:.45;cursor:default}
+.status{font-size:13px;color:var(--mut);margin:8px 0 0;min-height:1.2em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div class="brand">SBR News</div>
+    <div class="sub">Voice samples · set 2 · 25 November 2026</div>
+  </div>
+  <p class="lead">Each clip is the same passage from today’s noon brief, about half a minute, at natural pitch. A is Ryan, the voice on the player now. B–E are free local neural voices (Kokoro), no paid service. F uses the voices already on this phone, also free.</p>
+
+  <div class="card rec">
+    <div class="kicker">A · Current player · reference</div>
+    <div class="title">Ryan</div>
+    <p class="why">The voice used on the player now: Microsoft Ryan, British, at plain settings, with the pronunciation fix for <em>resumed</em>.</p>
+    <audio controls preload="metadata" playsinline src="a-ryan.mp3"></audio>
+  </div>
+
+  <div class="card">
+    <div class="kicker">B · Kokoro · often the BBC-style pick</div>
+    <div class="title">George</div>
+    <p class="why">A British neural voice usually described as the older newsreader. Free, and it runs on the brief machine, not a paid API.</p>
+    <audio controls preload="metadata" playsinline src="b-george.mp3"></audio>
+  </div>
+
+  <div class="card">
+    <div class="kicker">C · Kokoro · lowest measured pitch</div>
+    <div class="title">Lewis</div>
+    <p class="why">The same engine as George. On these clips his pitch measured a little lower than the others.</p>
+    <audio controls preload="metadata" playsinline src="c-lewis.mp3"></audio>
+  </div>
+
+  <div class="card">
+    <div class="kicker">D · Kokoro</div>
+    <div class="title">Daniel</div>
+    <p class="why">Another British neural male from the same set. A bit quicker than George and Lewis on this passage.</p>
+    <audio controls preload="metadata" playsinline src="d-daniel.mp3"></audio>
+  </div>
+
+  <div class="card">
+    <div class="kicker">E · Kokoro</div>
+    <div class="title">Fable</div>
+    <p class="why">The fourth British neural male. Measured close to Lewis in pitch, with a darker tone on the numbers.</p>
+    <audio controls preload="metadata" playsinline src="e-fable.mp3"></audio>
+  </div>
+
+  <div class="card">
+    <div class="kicker">F · Your iPhone's voice (free, Apple)</div>
+    <div class="title">The voices already on this phone</div>
+    <p class="why">This uses your device’s own reader, at no cost. On iPhone, try Daniel, Arthur or Oliver. Pick a voice, then tap Play. Nothing is uploaded.</p>
+    <label class="voicelab" for="voice">Voice</label>
+    <select id="voice"><option value="">Loading voices…</option></select>
+    <div class="btns">
+      <button type="button" id="play">Play</button>
+      <button type="button" id="stop">Stop</button>
+    </div>
+    <p class="status" id="status"></p>
+  </div>
+
+  <p class="foot">Older, more robotic readers were left out of this set. The live player is unchanged until you pick one. <a href="../voice-test/">Earlier Ryan / Thomas samples</a> · <a href="../2026-11-25-noon/player.html">Today’s noon brief</a>.</p>
+</div>
+<script>
+(function(){
+  var PASSAGE = "Your noon brief for Wednesday. Stocks tumbled as the AI selloff resumed, with the Nasdaq down about 4 percent and Nvidia sliding again, after October core PCE inflation rose to 3.3 percent and cemented bets on a December Fed hike. In late-morning trading the Nasdaq Composite was down 4.2 percent, the S and P 500 2.7 percent, and the Dow about 727 points, or 1.5 percent, CNBC reported.";
+  var PREFERRED = [/daniel/i, /arthur/i, /oliver/i, /george/i, /gordon/i, /rishi/i];
+  var sel = document.getElementById('voice');
+  var play = document.getElementById('play');
+  var stop = document.getElementById('stop');
+  var status = document.getElementById('status');
+  var utter = null;
+
+  function voiceLang(v){ return (v.lang || '').replace('_','-'); }
+  function isEnGB(v){ return /^en-GB/i.test(voiceLang(v)); }
+  function isEn(v){ return /^en(-|$)/i.test(voiceLang(v)); }
+  function preferScore(v){
+    var name = v.name || '';
+    var s = 0;
+    if (isEnGB(v)) s += 200;
+    else if (isEn(v)) s += 50;
+    for (var i=0;i<PREFERRED.length;i++) if (PREFERRED[i].test(name)) s += 100 - i;
+    if (/\bmale\b/i.test(name)) s += 10;
+    if (/(enhanced|premium|siri|neural)/i.test(name)) s += 5;
+    return s;
+  }
+  function label(v){
+    return v.name + ' (' + voiceLang(v) + ')';
+  }
+  function fill(){
+    if (!('speechSynthesis' in window)) {
+      sel.innerHTML = '<option value="">Not available in this browser</option>';
+      status.textContent = 'This browser does not offer a built-in reader.';
+      play.disabled = true;
+      return;
+    }
+    var voices = speechSynthesis.getVoices() || [];
+    if (!voices.length) {
+      sel.innerHTML = '<option value="">Waiting for voices…</option>';
+      return;
+    }
+    voices = voices.slice().sort(function(a,b){
+      var d = preferScore(b) - preferScore(a);
+      if (d) return d;
+      return (a.name||'').localeCompare(b.name||'');
+    });
+    var prev = sel.value;
+    sel.innerHTML = '';
+    voices.forEach(function(v){
+      var opt = document.createElement('option');
+      opt.value = v.voiceURI || (v.name + '|' + voiceLang(v));
+      opt.textContent = label(v);
+      sel.appendChild(opt);
+    });
+    var chosen = '';
+    if (prev) {
+      for (var i=0;i<sel.options.length;i++) if (sel.options[i].value === prev) { chosen = prev; break; }
+    }
+    if (!chosen) {
+      for (var j=0;j<voices.length;j++) {
+        if (isEnGB(voices[j]) && PREFERRED.some(function(rx){ return rx.test(voices[j].name||''); })) {
+          chosen = sel.options[j].value;
+          break;
+        }
+      }
+    }
+    if (!chosen && sel.options.length) chosen = sel.options[0].value;
+    sel.value = chosen;
+    status.textContent = voices.length + ' voices on this device. Default is the first British male it can find.';
+  }
+  function currentVoice(){
+    var voices = speechSynthesis.getVoices() || [];
+    var val = sel.value;
+    for (var i=0;i<voices.length;i++) {
+      var key = voices[i].voiceURI || (voices[i].name + '|' + voiceLang(voices[i]));
+      if (key === val) return voices[i];
+    }
+    return voices[0] || null;
+  }
+  function stopTalking(){
+    if ('speechSynthesis' in window) speechSynthesis.cancel();
+    utter = null;
+  }
+  play.addEventListener('click', function(){
+    if (!('speechSynthesis' in window)) return;
+    stopTalking();
+    var u = new SpeechSynthesisUtterance(PASSAGE);
+    u.rate = 1;
+    u.pitch = 1;
+    u.volume = 1;
+    var v = currentVoice();
+    if (v) { u.voice = v; u.lang = v.lang || 'en-GB'; }
+    else u.lang = 'en-GB';
+    u.onend = function(){ if (utter === u) utter = null; };
+    u.onerror = function(){ status.textContent = 'Could not start the device voice.'; };
+    utter = u;
+    speechSynthesis.speak(u);
+  });
+  stop.addEventListener('click', stopTalking);
+  if ('speechSynthesis' in window) {
+    fill();
+    speechSynthesis.addEventListener('voiceschanged', fill);
+    // iOS sometimes populates voices only after a second pass
+    setTimeout(fill, 250);
+    setTimeout(fill, 1000);
+  } else {
+    fill();
+  }
+})();
+</script>
+</body>
+</html>
