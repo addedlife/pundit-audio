@@ -5,7 +5,7 @@
   "slot": "noon",
   "label": "Noon Brief",
   "voice": "en-GB-RyanNeural",
-  "total_duration": 602.23,
+  "total_duration": 608.07,
   "tracks": [
     {
       "num": 1,
@@ -13,7 +13,7 @@
       "section": "SBR News",
       "title": "This ... is SBR News (Noon Brief)",
       "file": "01-intro.mp3",
-      "duration": 5.02,
+      "duration": 5.56,
       "text": "This ... is SBR News. Your Noon Brief for 2026-11-25.",
       "clock_intro": "after"
     },
@@ -23,7 +23,7 @@
       "section": "Top Stories",
       "title": "AI selloff resumes as inflation heats up",
       "file": "02-story-01.mp3",
-      "duration": 70.84,
+      "duration": 71.37,
       "text": "Wall Street sold off again Wednesday as the artificial-intelligence trade came under fresh pressure. In late-morning trading the Nasdaq Composite was down four point two percent, the S and P five hundred two point seven percent and the Dow about seven hundred twenty-seven points, or one point five percent, CNBC reported. Nvidia fell six percent to eight percent in the morning, giving back much of Monday’s rally on Jensen Huang’s reinstatement, and Anthropic slid about four percent, a day after closing below its eighty-three dollars I P O price for the first time. Micron dropped ten percent and Oracle more than six percent. The October personal consumption expenditures report added to the gloom. Headline P C E rose zero point three percent for the month, lifting the annual rate to three point eight percent from three point seven percent, and core P C E, the Fed’s preferred gauge, rose three point three percent from a year earlier, slightly above forecasts, CNBC said. Yahoo Finance reported traders pricing about a ninety-eight percent chance of a quarter-point Fed rate increase in December. New U S tariff proposals weighed on stocks too. U S stock and bond markets are closed Thursday for Thanksgiving and reopen Friday for a half day."
     },
     {
@@ -32,7 +32,7 @@
       "section": "Top Stories",
       "title": "U.S. proposes new tariffs on 14 trading partners",
       "file": "03-story-02.mp3",
-      "duration": 69.85,
+      "duration": 70.4,
       "text": "The Trump administration on Wednesday proposed new tariffs on fourteen major trading partners, including China, Japan and the European Union, under a Section three oh one investigation into excess industrial capacity, Reuters reported. The Wall Street Journal had reported the plan Tuesday, Nov. twenty-four. Headline rates of twenty percent to forty percent were proposed, but duties would be capped at levels set in trade deals already concluded or under negotiation. China would face a capped twenty percent, on top of roughly twenty-five percent in first-term tariffs, rising to forty percent if the U S-China truce that expires Jan. ten unravels. The E U, Japan, South Korea, Taiwan and Switzerland would face fifteen percent, five Southeast and South Asian nations eighteen percent, India seventeen percent with a deal or twenty-five percent without, and Vietnam twenty percent or thirty-five percent. Trade Representative Jamieson Greer said the tariffs would not take effect until after a Jan. twenty-five public hearing. Our take: Because the caps mirror the deals already struck, the real bite falls on countries still without a deal, chiefly India and Vietnam, and on China if the truce breaks."
     },
     {
@@ -41,7 +41,7 @@
       "section": "Top Stories",
       "title": "Iran’s army claims a third tanker hit a Hormuz mine",
       "file": "04-story-03.mp3",
-      "duration": 48.17,
+      "duration": 48.69,
       "text": "An oil tanker hit a naval mine and caught fire in a “restricted zone” of the Strait of Hormuz on Wednesday, Iran’s semi-official Fars news agency reported, citing an Iranian army statement. Reuters could not independently verify the claim. It follows the Revolutionary Guards navy’s claim, in this morning’s brief, that two other tankers struck mines. Army spokesman Mohammad Akraminia said the military had deployed new systems and upgraded others to tighten surveillance and control of the strait, and that ships passing without coordinating with Iranian forces had faced greater risks and “struck mines” in recent weeks. Tehran has told Washington it will not restore normal shipping until its demands are met, including lifting the U S naval blockade of Iranian ports, and has offered through Qatari mediators to reopen the waterway within forty-eight hours of that, Reuters said."
     },
     {
@@ -50,7 +50,7 @@
       "section": "Israel",
       "title": "Knesset advances PM term limits as unity talks go on",
       "file": "05-story-04.mp3",
-      "duration": 50.0,
+      "duration": 50.52,
       "text": "The Knesset on Wednesday passed in a preliminary reading, sixty-five to forty-eight, a bill that would bar anyone who has served eight consecutive years as prime minister from returning until after an eight-year cooling-off period, The Jerusalem Post reported. It would also bar an M K facing a felony indictment from forming a government. Sponsored by Yisrael Beytenu’s Oded Forer and others in Gadi Eisenkot’s bloc, it would count past terms, so it would hit Prime Minister Benjamin Netanyahu, who is on trial. It needs three more readings. Ynet reported that a bill to set up a state commission of inquiry into October seventh and the war also passed a preliminary reading; Likud accused the opposition of targeting Netanyahu. Meanwhile, Likud and Eisenkot’s Yashar negotiating teams met Wednesday for a fourth round of unity talks in two weeks, the Post said; no outcome had been reported by midday."
     },
     {
@@ -59,7 +59,7 @@
       "section": "Chareidi World",
       "title": "Knesset rejects arrest-freeze bills, 63-49",
       "file": "06-story-05.mp3",
-      "duration": 68.81,
+      "duration": 69.36,
       "text": "The Knesset voted sixty-three to forty-nine on Wednesday against the bills to freeze arrests of yeshiva students declared draft evaders, The Times of Israel reported. One, by U T J M Ks Meir Porush and Eliakim Stark, would have frozen arrests, investigations and enforcement for a year; the other, by Shas M K Yinon Azoulay, would have suspended arrests until a new government is formed. N twelve reported that Netanyahu voted in favor and Gadi Eisenkot and Avigdor Liberman against. Calcalist said the defeated Porush bill cannot be brought back for six months. Presenting the bill, M K Porush said he stood “with a pained heart, as a representative of a pained public,” speaking of young men “whose only sin is the desire to sit and learn Torah”, Yeshiva World. Afterward he said settling the status of yeshiva students “is a condition that cannot be violated”, Shtetl. Shas said Eisenkot, Liberman “and their friends in the left bloc,” despite promises to settle the status of yeshiva students, had voted against stopping arrests and chose “to hold them hostage for political purposes.” Our take: The vote is the test the ha-ray-dee parties set for the change bloc, and the bloc’s answer is that nothing passes before a government is formed."
     },
     {
@@ -68,7 +68,7 @@
       "section": "Chareidi World",
       "title": "Agudah source: religion-and-state status quo agreed",
       "file": "07-story-06.mp3",
-      "duration": 47.57,
+      "duration": 48.09,
       "text": "A senior Agudas Yisroel figure told Kikar HaShabbat on Wednesday that understandings had been reached with the change bloc to keep the religion-and-state status quo. “There are agreements that the status quo in religion and state will be kept; there will be no changes in anything to do with religion and state, from Shah-biss to conversion and kashrus,” the source said, translated from the Hebrew. The source said the sides were nearing agreement on education, and that the draft remained under discussion while a legal solution is still sought. A senior U T J figure repeated to Kikar that there is “already an agreed text in principle” for a draft law, now awaiting I D F and legal sign-off. Kikar also reported that Shas chairman Aryeh Deri said in closed conversations that U T J has “no guarantees” the draft law will pass, citing the parliamentary and legal timetable."
     },
     {
@@ -77,7 +77,7 @@
       "section": "Region",
       "title": "Satmar Rebbe’s letter to Trump: Israel does not represent American Jews",
       "file": "08-story-07.mp3",
-      "duration": 74.0,
+      "duration": 74.53,
       "text": "The full text of a personal letter that Rahv Aharon Tytelbaum, the Sat-mar Rehbeh of Keer-yas Yoel, handed to President Donald Trump at a private White House meeting on Sept. three was published Wednesday by Matzav, The Yeshiva World, Kikar HaShabbat and JFeed. The meeting, in Elul, came ahead of a reception for a delegation of American admorim and roshei yeshiva; during it the Rehbeh also raised matters of pidyon shevuyim, Matzav reported. In the letter, dated September third, the Rehbeh writes: “I write to state one principle as plainly as possible: Israel does not represent American Jews merely because they are Jewish. We are American Jews and American citizens.” He adds, “I am not asking you to accept our theology, our anti-Zionism, or any particular view of American policy toward Israel,” and concludes, “Our political home is the United States of America.” The Rehbeh writes that when an Israeli leader claims to represent American Jews, “we object,” and that Prime Minister Benjamin Netanyahu “does not represent us.” He invokes his great-uncle, Rahv Yoel Tytelbaum, and writes: “Mr. President, when your Administration deals with us, please deal with us as Americans—not as representatives, dependents, constituents, or extensions of a foreign country.”"
     },
     {
@@ -86,7 +86,7 @@
       "section": "Tech",
       "title": "Microsoft declares “Code Red” after Outlook outage",
       "file": "09-story-08.mp3",
-      "duration": 50.89,
+      "duration": 51.44,
       "text": "Microsoft has declared an unusual internal “Code Red” after this month’s Exchange Online and Outlook outage, Reuters reported, The Verge said Wednesday. The nearly twenty-four hour outage on Thursday, Nov. nineteen, took down email for millions of customers and was triggered by a bug that had sat on Microsoft three hundred sixty-five networking gateway servers since July. In a memo, Microsoft three hundred sixty-five Core president Jason Henderson called it the most significant outage in history for Microsoft’s customers: “Unfortunately, all the work we have done over the years was not sufficient to protect us on Thursday. Code Red means that this is the highest priority work for our team.” Microsoft now aims to resolve future outages within an hour, is focusing on load shedding and faster recovery, and is holding daily meetings with the Microsoft three hundred sixty-five engineering group, The Verge reported."
     },
     {
@@ -95,7 +95,7 @@
       "section": "Other Notable",
       "title": "Russian strikes kill five, cut power in five regions",
       "file": "10-story-09.mp3",
-      "duration": 54.54,
+      "duration": 55.07,
       "text": "Elsewhere, Russian attacks across Ukraine killed at least five people, wounded dozens and caused power outages in the Dnipropetrovsk, Donetsk, Zaporizhzhia, Odesa and Kharkiv regions, Deputy Energy Minister Artem Nekrasov said Wednesday, according to Al Jazeera and Reuters. The Russian-occupied Zaporizhzhia nuclear plant lost external power after shelling and switched to diesel generators, its seventeenth such loss this year. A Ukrainian drone attack killed one person and cut power in Russia’s Samara region, a Rosneft refining hub, Russian agencies said. Separately, the Financial Times reported Wednesday that the Trump administration has quietly shelved proposals to use business deals, such as energy and aviation ventures, as an incentive for Russia to end the war, after Moscow showed little interest; envoys Steve Witkoff and Jared Kushner told European officials so, the paper said. Reuters could not immediately verify the report."
     },
     {
@@ -104,7 +104,7 @@
       "section": "Weather",
       "title": "South Bend, IN Forecast & 5-Day Outlook",
       "file": "11-weather.mp3",
-      "duration": 60.29,
+      "duration": 60.79,
       "text": "Now, your South Bend, Indiana weather forecast from the National Weather Service. This afternoon: Mostly cloudy, with a high near forty-six. Northeast wind ten to fifteen miles per hour, with gusts as high as twenty-five miles per hour. Tonight: Mostly cloudy, with a low around thirty-one. Northeast wind around ten miles per hour, with gusts as high as twenty-five miles per hour. On Thanksgiving Day, light rain, high near forty-four. Thursday Night, light rain then rain and snow, low around thirty-five. On Friday, rain and snow, high near forty-eight. Friday Night, a chance of light rain then partly cloudy, low around twenty-eight. On Saturday, partly sunny, high near fifty. Saturday Night, mostly cloudy then a slight chance of light rain, low around thirty-four. On Sunday, light rain, high near forty-nine. Sunday Night, light rain, low around thirty-two. On Monday, partly sunny, high near forty-four.",
       "periods": [
         {
