@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SBR News — Wednesday, November 25, 2026 · Noon Brief</title>
+<style>
+:root{--bg:#F0EFEB;--card:#F7F6F2;--ink:#231F20;--mut:#5c5755;--line:#d5d1c8;--acc:#0f7ec8}
+@media(prefers-color-scheme:dark){:root{--bg:#161615;--card:#21201e;--ink:#f2efe9;--mut:#a7a29b;--line:#35332f;--acc:#4ba3e3}}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',Georgia,serif}
+.wrap{max-width:480px;margin:0 auto;padding:16px 14px 34px}
+.hdr{border-bottom:1.5px solid var(--ink);padding-bottom:10px;margin-bottom:14px;text-align:center}
+.brand{font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:28px;letter-spacing:-.01em}
+.sub{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:4px;font-family:-apple-system,sans-serif}
+.deck{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.now-sec{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-family:-apple-system,sans-serif}
+.now-title{font-size:20px;line-height:1.22;font-weight:700;margin:6px 0 10px;min-height:48px}
+.prog{width:100%;height:34px;accent-color:var(--ink)}
+.times{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);font-family:-apple-system,sans-serif;margin-top:2px}
+.ctrls{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:10px;margin-top:14px}
+button.ctrl{appearance:none;border:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:12px;padding:16px 8px;font-size:16px;font-weight:700;font-family:-apple-system,sans-serif;cursor:pointer;touch-action:manipulation}
+button.ctrl.play{background:var(--ink);color:var(--bg);font-size:18px}
+button.ctrl:active{opacity:.75;transform:scale(.98)}
+.spd{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.spd button{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:6px 12px;font-size:12px;font-family:-apple-system,sans-serif;cursor:pointer}
+.spd button.on{border-color:var(--ink);font-weight:700}
+.list{display:flex;flex-direction:column;gap:6px}
+.row{display:flex;align-items:center;gap:10px;text-align:left;width:100%;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:11px 12px;cursor:pointer;font-family:-apple-system,sans-serif}
+.row.on{border:1.5px solid var(--ink)}
+.num{font-weight:700;font-size:13px;min-width:22px;color:var(--mut)}
+.row.on .num{color:var(--ink)}
+.meta{flex:1;min-width:0}
+.rsec{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.rtit{font-size:14px;font-weight:600;line-height:1.25;margin-top:2px}
+.rdur{font-size:12px;color:var(--mut);white-space:nowrap}
+</style></head><body>
+<div class="wrap">
+  <div class="hdr"><div class="brand">SBR News</div><div class="sub">Wednesday, November 25, 2026 · Noon Brief</div></div>
+  <div class="deck">
+    <div class="now-sec" id="nsec"></div>
+    <div class="now-title" id="ntit"></div>
+    <audio id="au" preload="metadata" playsinline></audio>
+    <input class="prog" id="seek" type="range" min="0" max="100" value="0" step="0.5">
+    <div class="times"><span id="cur">0:00</span><span id="dur">0:00</span></div>
+    <div class="ctrls">
+      <button class="ctrl" id="prev" aria-label="Previous story">&#9664;&#9664; Prev</button>
+      <button class="ctrl play" id="play" aria-label="Play or Pause">&#9654; Play</button>
+      <button class="ctrl" id="next" aria-label="Next story">Next &#9654;&#9654;</button>
+    </div>
+    <div class="spd" id="spd"></div>
+  </div>
+  <div class="list" id="list"></div>
+</div>
+<script>
+const TRACKS = [{"num": 1, "id": "intro", "section": "SBR News", "title": "This ... is SBR News (Noon Brief)", "file": "01-intro.mp3", "duration": 9.4, "src": "01-intro.mp3"}, {"num": 2, "id": "story-01", "section": "Top Stories", "title": "AI selloff resumes as inflation heats up", "file": "02-story-01.mp3", "duration": 76.56, "src": "02-story-01.mp3"}, {"num": 3, "id": "story-02", "section": "Top Stories", "title": "U.S. proposes new tariffs on 14 trading partners", "file": "03-story-02.mp3", "duration": 74.68, "src": "03-story-02.mp3"}, {"num": 4, "id": "story-03", "section": "Top Stories", "title": "Iran’s army claims a third tanker hit a Hormuz mine", "file": "04-story-03.mp3", "duration": 53.26, "src": "04-story-03.mp3"}, {"num": 5, "id": "story-04", "section": "Israel", "title": "Knesset advances PM term limits as unity talks go on", "file": "05-story-04.mp3", "duration": 55.56, "src": "05-story-04.mp3"}, {"num": 6, "id": "story-05", "section": "Chareidi World", "title": "Knesset rejects arrest-freeze bills, 63-49", "file": "06-story-05.mp3", "duration": 75.57, "src": "06-story-05.mp3"}, {"num": 7, "id": "story-06", "section": "Chareidi World", "title": "Agudah source: religion-and-state status quo agreed", "file": "07-story-06.mp3", "duration": 52.4, "src": "07-story-06.mp3"}, {"num": 8, "id": "story-07", "section": "Tech", "title": "Microsoft declares “Code Red” after Outlook outage", "file": "08-story-07.mp3", "duration": 56.06, "src": "08-story-07.mp3"}, {"num": 9, "id": "story-08", "section": "Other Notable", "title": "Russian strikes kill five, cut power in five regions", "file": "09-story-08.mp3", "duration": 57.78, "src": "09-story-08.mp3"}, {"num": 10, "id": "weather", "section": "Weather", "title": "South Bend, IN Forecast & 5-Day Outlook", "file": "10-weather.mp3", "duration": 62.93, "src": "10-weather.mp3"}, {"num": 11, "id": "signoff", "section": "SBR News", "title": "You've been listening to SBR News", "file": "11-signoff.mp3", "duration": 3.06, "src": "11-signoff.mp3"}];
+const au = document.getElementById('au');
+const playBtn = document.getElementById('play');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+const seek = document.getElementById('seek');
+const curEl = document.getElementById('cur');
+const durEl = document.getElementById('dur');
+const nsec = document.getElementById('nsec');
+const ntit = document.getElementById('ntit');
+const listEl = document.getElementById('list');
+const spdEl = document.getElementById('spd');
+
+let idx = 0, rate = 1.0, playing = false;
+const q = new URLSearchParams(location.search);
+const qt = parseInt(q.get('track') || q.get('story') || '0', 10);
+if (qt >= 1 && qt <= TRACKS.length) idx = qt - 1;
+
+function fmt(s){ if(!isFinite(s)||s<0)return '0:00'; s=Math.floor(s); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+
+function updateMediaSession(){
+  if (!('mediaSession' in navigator)) return;
+  const t = TRACKS[idx];
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: t.title,
+    artist: 'SBR News',
+    album: 'Wednesday, November 25, 2026 · Noon Brief',
+  });
+  navigator.mediaSession.setActionHandler('play', () => au.play());
+  navigator.mediaSession.setActionHandler('pause', () => au.pause());
+  navigator.mediaSession.setActionHandler('previoustrack', () => load(idx - 1, true));
+  navigator.mediaSession.setActionHandler('nexttrack', () => load(idx + 1, true));
+  try {
+    navigator.mediaSession.setActionHandler('seekto', (d) => { if (d.seekTime != null) au.currentTime = d.seekTime; });
+  } catch {}
+}
+
+function renderList(){
+  listEl.innerHTML = '';
+  TRACKS.forEach((t, i) => {
+    const b = document.createElement('button');
+    b.className = 'row' + (i === idx ? ' on' : '');
+    b.innerHTML = `<span class="num">${t.num}</span><span class="meta"><div class="rsec">${t.section}</div><div class="rtit">${t.title}</div></span><span class="rdur">${fmt(t.duration)}</span>`;
+    b.onclick = () => load(i, true);
+    listEl.appendChild(b);
+  });
+}
+
+function load(i, autoPlay){
+  if (i < 0) i = 0;
+  if (i >= TRACKS.length){ playing = false; playBtn.innerHTML = '&#9654; Play'; return; }
+  idx = i;
+  const t = TRACKS[idx];
+  nsec.textContent = `Track ${t.num} of ${TRACKS.length} · ${t.section}`;
+  ntit.textContent = t.title;
+  au.src = t.src;
+  au.playbackRate = rate;
+  durEl.textContent = fmt(t.duration);
+  curEl.textContent = '0:00';
+  seek.value = 0;
+  renderList();
+  updateMediaSession();
+  if (autoPlay) au.play().catch(()=>{});
+}
+
+playBtn.onclick = () => { if (au.paused) au.play(); else au.pause(); };
+prevBtn.onclick = () => { if (au.currentTime > 4) { au.currentTime = 0; } else { load(idx - 1, true); } };
+nextBtn.onclick = () => load(idx + 1, true);
+au.onplay = () => { playing = true; playBtn.innerHTML = '&#10074;&#10074; Pause'; if('mediaSession' in navigator) navigator.mediaSession.playbackState='playing'; };
+au.onpause = () => { playing = false; playBtn.innerHTML = '&#9654; Play'; if('mediaSession' in navigator) navigator.mediaSession.playbackState='paused'; };
+au.onended = () => { if (idx + 1 < TRACKS.length) load(idx + 1, true); };
+au.ontimeupdate = () => {
+  if (!au.duration) return;
+  seek.max = au.duration;
+  seek.value = au.currentTime;
+  curEl.textContent = fmt(au.currentTime);
+  durEl.textContent = fmt(au.duration);
+};
+seek.oninput = () => { au.currentTime = Number(seek.value); };
+
+[0.9, 1.0, 1.15, 1.25].forEach(r => {
+  const b = document.createElement('button');
+  b.textContent = r + 'x';
+  if (r === rate) b.className = 'on';
+  b.onclick = () => {
+    rate = r; au.playbackRate = r;
+    [...spdEl.children].forEach(c => c.className = c.textContent === (r+'x') ? 'on' : '');
+  };
+  spdEl.appendChild(b);
+});
+
+load(idx, false);
+</script></body></html>
