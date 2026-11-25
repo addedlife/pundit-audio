@@ -44,7 +44,7 @@ button.ctrl:active{opacity:.75;transform:scale(.98)}
   <div class="deck">
     <div class="now-sec" id="nsec"></div>
     <div class="now-title" id="ntit"></div>
-    <audio id="au" preload="metadata" playsinline></audio>
+    <audio id="au" preload="auto" playsinline></audio>
     <input class="prog" id="seek" type="range" min="0" max="100" value="0" step="0.5">
     <div class="times"><span id="cur">0:00</span><span id="dur">0:00</span></div>
     <div class="ctrls">
@@ -64,7 +64,7 @@ button.ctrl:active{opacity:.75;transform:scale(.98)}
   </div>
 </div>
 <script>
-const TRACKS = [{"num": 1, "id": "intro", "section": "SBR News", "title": "This ... is SBR News (Noon Brief)", "file": "01-intro.mp3", "duration": 10.37, "src": "01-intro.mp3"}, {"num": 2, "id": "story-01", "section": "Top Stories", "title": "AI selloff resumes as inflation heats up", "file": "02-story-01.mp3", "duration": 80.4, "src": "02-story-01.mp3"}, {"num": 3, "id": "story-02", "section": "Top Stories", "title": "U.S. proposes new tariffs on 14 trading partners", "file": "03-story-02.mp3", "duration": 78.89, "src": "03-story-02.mp3"}, {"num": 4, "id": "story-03", "section": "Top Stories", "title": "Iran’s army claims a third tanker hit a Hormuz mine", "file": "04-story-03.mp3", "duration": 55.95, "src": "04-story-03.mp3"}, {"num": 5, "id": "story-04", "section": "Israel", "title": "Knesset advances PM term limits as unity talks go on", "file": "05-story-04.mp3", "duration": 58.7, "src": "05-story-04.mp3"}, {"num": 6, "id": "story-05", "section": "Chareidi World", "title": "Knesset rejects arrest-freeze bills, 63-49", "file": "06-story-05.mp3", "duration": 78.86, "src": "06-story-05.mp3"}, {"num": 7, "id": "story-06", "section": "Chareidi World", "title": "Agudah source: religion-and-state status quo agreed", "file": "07-story-06.mp3", "duration": 55.51, "src": "07-story-06.mp3"}, {"num": 8, "id": "story-07", "section": "Region", "title": "Satmar Rebbe’s letter to Trump: Israel does not represent American Jews", "file": "08-story-07.mp3", "duration": 84.24, "src": "08-story-07.mp3"}, {"num": 9, "id": "story-08", "section": "Tech", "title": "Microsoft declares “Code Red” after Outlook outage", "file": "09-story-08.mp3", "duration": 58.64, "src": "09-story-08.mp3"}, {"num": 10, "id": "story-09", "section": "Other Notable", "title": "Russian strikes kill five, cut power in five regions", "file": "10-story-09.mp3", "duration": 62.09, "src": "10-story-09.mp3"}, {"num": 11, "id": "weather", "section": "Weather", "title": "South Bend, IN Forecast & 5-Day Outlook", "file": "11-weather.mp3", "duration": 68.13, "src": "11-weather.mp3"}, {"num": 12, "id": "signoff", "section": "SBR News", "title": "You've been listening to SBR News", "file": "12-signoff.mp3", "duration": 3.06, "src": "12-signoff.mp3"}];
+const TRACKS = [{"num": 1, "id": "intro", "section": "SBR News", "title": "This ... is SBR News (Noon Brief)", "file": "01-intro.mp3", "duration": 5.02, "clock_intro": "after", "src": "01-intro.mp3"}, {"num": 2, "id": "story-01", "section": "Top Stories", "title": "AI selloff resumes as inflation heats up", "file": "02-story-01.mp3", "duration": 70.84, "src": "02-story-01.mp3"}, {"num": 3, "id": "story-02", "section": "Top Stories", "title": "U.S. proposes new tariffs on 14 trading partners", "file": "03-story-02.mp3", "duration": 69.85, "src": "03-story-02.mp3"}, {"num": 4, "id": "story-03", "section": "Top Stories", "title": "Iran’s army claims a third tanker hit a Hormuz mine", "file": "04-story-03.mp3", "duration": 48.17, "src": "04-story-03.mp3"}, {"num": 5, "id": "story-04", "section": "Israel", "title": "Knesset advances PM term limits as unity talks go on", "file": "05-story-04.mp3", "duration": 50.0, "src": "05-story-04.mp3"}, {"num": 6, "id": "story-05", "section": "Chareidi World", "title": "Knesset rejects arrest-freeze bills, 63-49", "file": "06-story-05.mp3", "duration": 68.81, "src": "06-story-05.mp3"}, {"num": 7, "id": "story-06", "section": "Chareidi World", "title": "Agudah source: religion-and-state status quo agreed", "file": "07-story-06.mp3", "duration": 47.6, "src": "07-story-06.mp3"}, {"num": 8, "id": "story-07", "section": "Region", "title": "Satmar Rebbe’s letter to Trump: Israel does not represent American Jews", "file": "08-story-07.mp3", "duration": 73.98, "src": "08-story-07.mp3"}, {"num": 9, "id": "story-08", "section": "Tech", "title": "Microsoft declares “Code Red” after Outlook outage", "file": "09-story-08.mp3", "duration": 50.89, "src": "09-story-08.mp3"}, {"num": 10, "id": "story-09", "section": "Other Notable", "title": "Russian strikes kill five, cut power in five regions", "file": "10-story-09.mp3", "duration": 54.54, "src": "10-story-09.mp3"}, {"num": 11, "id": "weather", "section": "Weather", "title": "South Bend, IN Forecast & 5-Day Outlook", "file": "11-weather.mp3", "duration": 60.29, "src": "11-weather.mp3"}, {"num": 12, "id": "signoff", "section": "SBR News", "title": "That's the latest from SBR News", "file": "12-signoff.mp3", "duration": 2.25, "src": "12-signoff.mp3"}];
 const CLOCK_ABS = "https://addedlife.github.io/pundit-audio/clock/";
 const CLOCK_BASE = false ? CLOCK_ABS : (location.protocol === 'file:' ? CLOCK_ABS : '../clock/');
 const TIME_CHECK_EVERY = 3;
@@ -89,7 +89,11 @@ let loadSeq = 0;
 let activeBlobUrl = null;
 let prewarmedIntro = null;
 let prewarmPromise = null;
+let prewarmedNextClock = null;
+let prewarmNextClockPromise = null;
 let userInteracted = false;
+const preloadedTracks = new Map();
+const preloadingTracks = new Set();
 
 const overlay = document.getElementById('tap-overlay');
 const q = new URLSearchParams(location.search);
@@ -212,7 +216,7 @@ async function buildClockBlob(kind, d){
     gaps = [0.035, 0.025, 0.045, 0.42];
   } else {
     seq = ['its', tk.hKey, tk.mKey, tk.ampm];
-    gaps = [0.035, 0.025, 0.045];
+    gaps = [0.035, 0.025, 0.045, 0.42];
   }
   const bufs = await Promise.all(seq.map(fetchClipBuffer));
   const sr = bufs[0].sampleRate;
@@ -229,7 +233,65 @@ function prewarmMinute(){
   });
 }
 
+function resolvedTrackSrc(t){
+  return (t && preloadedTracks.get(t.src)) || (t ? t.src : '');
+}
+
+function preloadTrack(i){
+  if (i < 0 || i >= TRACKS.length) return;
+  const t = TRACKS[i];
+  if (!t || !t.src || t.src.startsWith('data:') || preloadedTracks.has(t.src) || preloadingTracks.has(t.src)) return;
+  preloadingTracks.add(t.src);
+  fetch(t.src, { cache: 'force-cache' })
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.blob(); })
+    .then(b => {
+      preloadedTracks.set(t.src, URL.createObjectURL(b));
+      // Evict tracks well behind current index to keep memory small
+      for (let j = 0; j < idx - 2; j++) {
+        const old = TRACKS[j];
+        if (old && preloadedTracks.has(old.src)) {
+          URL.revokeObjectURL(preloadedTracks.get(old.src));
+          preloadedTracks.delete(old.src);
+        }
+      }
+    })
+    .catch(() => {})
+    .finally(() => preloadingTracks.delete(t.src));
+}
+
+function nextClockKindAfter(i){
+  if (!liveClock || !AC || i + 1 >= TRACKS.length) return null;
+  const curT = TRACKS[i], nextT = TRACKS[i + 1];
+  if (nextT.id === 'signoff') return 'outro';
+  if (curT.id && curT.id.startsWith('story-') && nextT.id && nextT.id.startsWith('story-')) {
+    const m = curT.id.match(/^story-(\d+)$/);
+    const sNum = m ? parseInt(m[1], 10) : 0;
+    if (sNum > 0 && sNum % TIME_CHECK_EVERY === 0) return 'check';
+  }
+  return null;
+}
+
+function prewarmNextClock(){
+  const kind = nextClockKindAfter(idx);
+  if (!kind) return;
+  const tk = timeKeys(new Date());
+  const expectedKey = kind + '_' + tk.key;
+  if (prewarmedNextClock && prewarmedNextClock.key === expectedKey) return;
+  if (prewarmNextClockPromise) return;
+  prewarmMinute();
+  prewarmNextClockPromise = buildClockBlob(kind, new Date()).then(res => {
+    if (prewarmedNextClock && prewarmedNextClock.url !== activeBlobUrl) URL.revokeObjectURL(prewarmedNextClock.url);
+    prewarmedNextClock = res;
+    prewarmNextClockPromise = null;
+    return res;
+  }).catch(() => {
+    prewarmNextClockPromise = null;
+    return null;
+  });
+}
+
 function prewarmIntro(){
+  preloadTrack(idx);
   if (!liveClock || !AC) return Promise.resolve(null);
   const tk = timeKeys(new Date());
   if (prewarmedIntro && prewarmedIntro.key === 'intro_' + tk.key) return Promise.resolve(prewarmedIntro);
@@ -307,7 +369,7 @@ function startFromGesture(){
     }).catch(() => {
       if (mySeq !== loadSeq) return;
       phase = 'track';
-      au.src = TRACKS[idx].src;
+      au.src = resolvedTrackSrc(TRACKS[idx]);
       au.playbackRate = rate;
       au.play().catch(showOverlay);
     });
@@ -373,6 +435,13 @@ function playClockPhase(kind, pName, autoPlay, fallbackTrackIdx){
   const tk = timeKeys(new Date());
   if (kind === 'intro' && prewarmedIntro && prewarmedIntro.key === 'intro_' + tk.key) {
     setClockActive(prewarmedIntro, pName);
+    preloadTrack(idx);
+    if (autoPlay) tryPlay();
+    return;
+  }
+  if (kind !== 'intro' && prewarmedNextClock && prewarmedNextClock.key === kind + '_' + tk.key) {
+    setClockActive(prewarmedNextClock, pName);
+    if (kind === 'check') preloadTrack(fallbackTrackIdx);
     if (autoPlay) tryPlay();
     return;
   }
@@ -396,7 +465,7 @@ function playClockPhase(kind, pName, autoPlay, fallbackTrackIdx){
       clearTimeout(ovTimer);
       if (mySeq !== loadSeq) return;
       phase = 'track';
-      au.src = TRACKS[fallbackTrackIdx].src;
+      au.src = resolvedTrackSrc(TRACKS[fallbackTrackIdx]);
       au.playbackRate = rate;
       if (!userInteracted) tryPlay();
     });
@@ -409,14 +478,14 @@ function playClockPhase(kind, pName, autoPlay, fallbackTrackIdx){
       if (autoPlay) tryPlay();
     } else {
       phase = 'track';
-      au.src = TRACKS[fallbackTrackIdx].src;
+      au.src = resolvedTrackSrc(TRACKS[fallbackTrackIdx]);
       au.playbackRate = rate;
       if (autoPlay) tryPlay();
     }
   }).catch(() => {
     if (mySeq !== loadSeq) return;
     phase = 'track';
-    au.src = TRACKS[fallbackTrackIdx].src;
+    au.src = resolvedTrackSrc(TRACKS[fallbackTrackIdx]);
     au.playbackRate = rate;
     if (autoPlay) tryPlay();
   });
@@ -439,13 +508,14 @@ function load(i, autoPlay){
   phase = 'track';
   nsec.textContent = `Track ${t.num} of ${TRACKS.length} · ${t.section}`;
   ntit.textContent = t.title;
-  au.src = t.src;
+  au.src = resolvedTrackSrc(t);
   au.playbackRate = rate;
   durEl.textContent = fmt(t.duration);
   curEl.textContent = '0:00';
   seek.value = 0;
   renderList();
   updateMediaSession();
+  preloadTrack(idx + 1);
   if (autoPlay) tryPlay();
 }
 
@@ -477,8 +547,9 @@ au.onended = () => {
   if (phase === 'intro-clock') {
     if (TRACKS[idx].clock_intro === 'after') {
       phase = 'track';
-      au.src = TRACKS[idx].src;
+      au.src = resolvedTrackSrc(TRACKS[idx]);
       au.playbackRate = rate;
+      preloadTrack(idx + 1);
       tryPlay();
     } else {
       load(idx + 1, true);
@@ -515,7 +586,8 @@ au.ontimeupdate = () => {
   seek.value = au.currentTime;
   curEl.textContent = fmt(au.currentTime);
   durEl.textContent = fmt(au.duration);
-  if (liveClock && au.duration - au.currentTime < 15) prewarmMinute();
+  if (au.duration - au.currentTime < 25) preloadTrack(idx + 1);
+  if (liveClock && au.duration - au.currentTime < 15) prewarmNextClock();
 };
 seek.oninput = () => { au.currentTime = Number(seek.value); };
 
