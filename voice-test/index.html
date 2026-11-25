@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SBR News — Voice samples</title>
+<style>
+:root{--bg:#EDECE8;--card:#F4F3EF;--ink:#231F20;--mut:#5c5755;--line:#d5d1c8;--acc:#0f7ec8}
+@media(prefers-color-scheme:dark){:root{--bg:#161615;--card:#21201e;--ink:#f2efe9;--mut:#a7a29b;--line:#35332f;--acc:#4ba3e3}}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',Georgia,serif}
+.wrap{max-width:480px;margin:0 auto;padding:16px 14px 40px}
+.hdr{border-bottom:1.5px solid var(--ink);padding-bottom:10px;margin-bottom:14px;text-align:center}
+.brand{font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:28px;letter-spacing:-.01em}
+.sub{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:4px;font-family:-apple-system,sans-serif}
+.lead{font-size:15px;line-height:1.45;margin:0 0 16px}
+.lead em{font-style:italic}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;margin-bottom:10px}
+.card.rec{border:1.5px solid var(--ink)}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-family:-apple-system,sans-serif}
+.card.rec .kicker{color:var(--ink)}
+.title{font-size:18px;line-height:1.25;font-weight:700;margin:4px 0 6px}
+.why{font-size:14px;line-height:1.4;color:var(--ink);margin:0 0 10px}
+audio{width:100%;height:40px;margin-top:2px}
+.foot{font-size:13px;line-height:1.45;color:var(--mut);margin-top:16px}
+.foot a{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div class="brand">SBR News</div>
+    <div class="sub">Voice samples · 25 November 2026</div>
+  </div>
+  <p class="lead">Each clip is the same short script: <em>This &hellip; is SBR News.</em> then the noon-brief headline <em>AI selloff resumes as inflation heats up</em>, and the first sentence of that story. D is the one now used on the player.</p>
+
+  <div class="card">
+    <div class="kicker">A · Current player settings</div>
+    <div class="title">Thomas, sped up and pitched down</div>
+    <p class="why">The voice that was on the player: Thomas, a little faster, and pitched down 4 Hz. That pitch shift is what makes it sound thin and robotic.</p>
+    <audio controls preload="metadata" playsinline src="a-thomas-current.mp3"></audio>
+  </div>
+
+  <div class="card">
+    <div class="kicker">B · Thomas, natural</div>
+    <div class="title">Thomas, no tweaks</div>
+    <p class="why">The same Thomas voice with the pitch and speed left alone. Cleaner than A, still a lighter voice.</p>
+    <audio controls preload="metadata" playsinline src="b-thomas-natural.mp3"></audio>
+  </div>
+
+  <div class="card">
+    <div class="kicker">C · Ryan, natural</div>
+    <div class="title">Ryan, no tweaks</div>
+    <p class="why">The voice you liked, at plain settings. Listen for <em>resumes</em> in the headline — he says it like the noun, résumé.</p>
+    <audio controls preload="metadata" playsinline src="c-ryan-natural.mp3"></audio>
+  </div>
+
+  <div class="card rec">
+    <div class="kicker">D · Recommended · now on the player</div>
+    <div class="title">Ryan, with a pronunciation fix</div>
+    <p class="why">Same Ryan as C, but <em>resumes</em> is the verb: re-ZOOM. This is what the noon player uses now.</p>
+    <audio controls preload="metadata" playsinline src="d-ryan-lexicon.mp3"></audio>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Resumes only</div>
+    <div class="title">Before and after the fix</div>
+    <p class="why">Ryan saying the headline verb, unfixed then fixed.</p>
+    <p class="why" style="margin-bottom:4px">Unfixed</p>
+    <audio controls preload="metadata" playsinline src="resumes-ryan-unfixed.mp3"></audio>
+    <p class="why" style="margin:10px 0 4px">Fixed</p>
+    <audio controls preload="metadata" playsinline src="resumes-ryan-fixed.mp3"></audio>
+  </div>
+
+  <p class="foot">The chat memos use Leo, a different voice that isn’t available on the free reader used for the player. <a href="../2026-11-25-noon/player.html">Back to today’s noon brief</a>.</p>
+</div>
+</body>
+</html>
