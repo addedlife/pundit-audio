@@ -6,7 +6,7 @@
   "label": "Evening Brief",
   "voice": "en-GB-RyanNeural",
   "arad_delivery": "off",
-  "total_duration": 668.35,
+  "total_duration": 610.95,
   "tracks": [
     {
       "num": 1,
@@ -42,8 +42,8 @@
       "section": "Top Stories",
       "title": "Cairo Ring Road fuel-tanker crash ignites inferno, killing at least 31",
       "file": "04-story-03.mp3",
-      "duration": 33.96,
-      "text": "A crash involving a fuel tanker sparked a massive fire on Cairo’s Ring Road on Wednesday, killing at least thirty-one people and injuring at least twenty-one others, Egyptian health authorities said, according to the Associated Press. The blaze along the major artery encircling the Egyptian capital sent towering flames into the night sky and left more than two dozen cars and motorcycles charred, AP reported. Local accounts cited by Yeshiva World News said the tanker overturned while turning on the highway before exploding. Authorities said the exact cause of Wednesday’s crash remained under investigation."
+      "duration": 24.63,
+      "text": "A crash involving a fuel tanker sparked a massive fire on Cairo’s Ring Road on Wednesday, killing at least thirty-one people and injuring at least twenty-one others, Egyptian health authorities said, according to the Associated Press. The blaze sent towering flames into the night sky and left over two dozen vehicles charred, AP reported, after the tanker overturned while turning, local accounts cited by Yeshiva World News said."
     },
     {
       "num": 5,
@@ -96,8 +96,8 @@
       "section": "Region",
       "title": "New Jersey declares state of emergency starting 6 PM ahead of Thanksgiving storm",
       "file": "10-story-09.mp3",
-      "duration": 45.04,
-      "text": "New Jersey Gov. Mikie Sherrill declared a statewide state of emergency taking effect at six p.m. Wednesday ahead of a powerful Thanksgiving storm expected to lash the region through Friday, the New York Post and CBS Philadelphia reported. The National Weather Service issued high-wind warnings for fifty to seventy mph gusts, up to four inches of rain, and coastal flood warnings along the Jersey Shore. Sherrill specifically warned that Ocean County—home to Lakewood—along with Atlantic and Cape May counties face the highest risk of severe storm impacts, urging residents to travel Wednesday and prepare for prolonged power outages and road closures. New York City also faces wind gusts up to sixty mph on Thanksgiving, raising potential adjustments to Thursday’s Macy’s Thanksgiving Day Parade."
+      "duration": 26.15,
+      "text": "New Jersey Gov. Mikie Sherrill declared a statewide state of emergency taking effect at six p.m. Wednesday ahead of a Thanksgiving storm lasting through Friday, the New York Post and CBS Philadelphia reported. With fifty to seventy mph gusts, up to four inches of rain and coastal flooding forecast, Sherrill warned Ocean County—home to Lakewood—Atlantic and Cape May face the highest risk, while NYC faces sixty mph winds."
     },
     {
       "num": 11,
@@ -105,8 +105,8 @@
       "section": "Tech",
       "title": "FCC grants SpaceX conditional approval for orbital AI data-center satellites",
       "file": "11-story-10.mp3",
-      "duration": 52.4,
-      "text": "The Federal Communications Commission on Wednesday gave Elon Musk’s SpaceX conditional approval to deploy and operate up to one million satellites for its planned “Starmind” orbital artificial-intelligence data center network, TechCrunch reported. The authorization cleared objections from Amazon, Viasat and the American Astronomical Society over orbital debris, congestion and radiofrequency interference, with the FCC saying scientific-research concerns fell outside its authority. FCC Chair Brendan Carr said the move opens “a bold new frontier” for computing infrastructure, and Musk thanked him on X. Major technical, financial and regulatory hurdles remain: SpaceX must still solve space-based chip cooling and win a separate FCC debris-disposal waiver for satellites operating above six hundred kilometers, with seven years to launch its first operational satellite and fourteen years to build out the constellation."
+      "duration": 23.22,
+      "text": "The FCC on Wednesday gave Elon Musk’s SpaceX conditional approval to deploy up to one million satellites for its “Starmind” orbital A I data center network, TechCrunch reported. The order cleared objections from Amazon, Viasat and astronomers over debris and interference, with Musk thanking FCC Chair Brendan Carr on X, though debris waivers above six hundred km remain unresolved."
     },
     {
       "num": 12,
