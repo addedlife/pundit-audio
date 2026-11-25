@@ -1,0 +1,196 @@
+{
+  "brand": "SBR News",
+  "date": "2026-11-25",
+  "date_display": "Wednesday, November 25, 2026",
+  "slot": "evening",
+  "label": "Evening Brief",
+  "voice": "en-GB-RyanNeural",
+  "arad_delivery": "off",
+  "total_duration": 668.35,
+  "tracks": [
+    {
+      "num": 1,
+      "id": "intro",
+      "section": "SBR News",
+      "title": "This ... is SBR News (Evening Brief)",
+      "file": "01-intro.mp3",
+      "duration": 5.67,
+      "text": "This ... is SBR News. Your Evening Brief for 2026-11-25.",
+      "clock_intro": "after"
+    },
+    {
+      "num": 2,
+      "id": "story-01",
+      "section": "Top Stories",
+      "title": "Dow erases 1,100-point plunge in late rebound; Nasdaq trims AI losses",
+      "file": "02-story-01.mp3",
+      "duration": 96.34,
+      "text": "Wall Street staged a dramatic afternoon turnaround Wednesday, wiping out a deep morning rout ahead of the Thanksgiving holiday. The Dow Jones Industrial Average erased a drop of more than one,one hundred points to close up one hundred sixty-four.twenty-five points, or zero point three three percent, at fifty,one hundred eighty-two.ninety-five, CNBC and the Associated Press reported. The Nasdaq Composite pared an intraday slide of four point six percent to finish down zero point six two percent at twenty-three,five hundred eighty-five.eighty, and the S and P five hundred trimmed a three point two percent drop to close off zero point two five percent at seven,one hundred eighty-two.seventy-eight. Semiconductor and artificial-intelligence shares still ended lower, though off their worst levels. Nvidia closed down three point nine one percent at one hundred forty-nine point three zero dollars, Micron Technology fell four point five percent and Oracle dropped more than five percent. Earlier, October personal consumption expenditures data showed annual headline inflation ticking up to three point eight percent and core P C E rising to three point three percent, reinforcing expectations for a December Federal Reserve rate increase. Markets also absorbed new U S tariff proposals unveiled Wednesday under Section three oh one over alleged excess factory capacity in fourteen trading partners, including capped twenty percent duties on China and fifteen percent on the European Union and Japan after a Jan. twenty-five hearing. China’s embassy in Washington rejected the overcapacity claim as a false issue, while the E U pushed back and noted its fifteen percent cap remains in place."
+    },
+    {
+      "num": 3,
+      "id": "story-02",
+      "section": "Top Stories",
+      "title": "Oil jumps as Houthis claim Saudi refinery strike and Iran reports LNG tanker hit",
+      "file": "03-story-02.mp3",
+      "duration": 53.94,
+      "text": "Crude oil prices rallied Wednesday as maritime and energy risks escalated across the Persian Gulf. Brent crude settled up three point five percent at ninety-four point six one dollars a barrel and U S West Texas Intermediate rose two percent to eighty-three point six eight dollars, CNBC reported, extending Tuesday’s gains ahead of Sunday’s OPEC+ output meeting. Yemen’s Iran-aligned Houthis said Wednesday they had attacked Saudi Arabia’s Ras Tanura oil refinery, the kingdom’s largest, along with Riyadh’s financial district and the ports of Jeddah and Jazan, according to CNBC and the Associated Press. Separately, Iran’s Islamic Revolutionary Guard Corps told state media that a ship carrying liquefied natural gas struck a naval mine and caught fire in the Strait of Hormuz, following earlier Iranian army and Guard claims that three oil tankers hit mines in restricted zones. Reuters could not independently verify the Hormuz claims."
+    },
+    {
+      "num": 4,
+      "id": "story-03",
+      "section": "Top Stories",
+      "title": "Cairo Ring Road fuel-tanker crash ignites inferno, killing at least 31",
+      "file": "04-story-03.mp3",
+      "duration": 33.96,
+      "text": "A crash involving a fuel tanker sparked a massive fire on Cairo’s Ring Road on Wednesday, killing at least thirty-one people and injuring at least twenty-one others, Egyptian health authorities said, according to the Associated Press. The blaze along the major artery encircling the Egyptian capital sent towering flames into the night sky and left more than two dozen cars and motorcycles charred, AP reported. Local accounts cited by Yeshiva World News said the tanker overturned while turning on the highway before exploding. Authorities said the exact cause of Wednesday’s crash remained under investigation."
+    },
+    {
+      "num": 5,
+      "id": "story-04",
+      "section": "Israel",
+      "title": "Court casts heavy doubt on Netanyahu bribery charges; PM urges immediate end",
+      "file": "05-story-04.mp3",
+      "duration": 59.09,
+      "text": "The judges in Prime Minister Benjamin Netanyahu’s seven-year corruption trial dealt a major blow to the prosecution Wednesday, summoning Attorney General Gali Baharav-Miara to the Jerusalem District Court and warning there is little chance of a bribery conviction in Case 4000, The Times of Israel reported. Presiding Judge Rivka Friedman-Feldman said the odds of conviction on bribery and breach-of-trust charges in Case 4000 were low enough to require reconsidering the case, and the panel indicated Case twenty zero likely did not constitute a crime, leaving Case one thousand over illicit gifts as the main remaining count. Baharav-Miara said prosecutors would weigh the judges’ recommendation. Speaking at the Knesset on Wednesday evening, Netanyahu declared that “the trial collapsed today” after “ten years of terrible suffering” for himself and his family, according to Kikar HaShabbat. He demanded the trial end immediately, blasted the opposition’s bill barring indicted lawmakers from forming a government as a political weapon, and said he was extending a hand toward unity."
+    },
+    {
+      "num": 6,
+      "id": "story-05",
+      "section": "Israel",
+      "title": "Likud appeals 120 ballot boxes as Kushner presses Netanyahu on Gaza plan",
+      "file": "06-story-05.mp3",
+      "duration": 63.71,
+      "text": "Likud petitioned the Jerusalem District Court on Wednesday to annul results from up to one hundred twenty ballot boxes in the Oct. twenty-seven Knesset election and order revotes there, alleging Arab-led parties unlawfully tracked voter turnout at ninety-five boxes and violated ballot secrecy at fifty-three, The Times of Israel reported. A shift could affect one Knesset seat, though Central Elections Committee chief Noam Sohlberg and Shin Bet head David Zini have said vote-buying probes found no evidence on a scale able to alter the outcome. Separately, U S envoy Jared Kushner urged Netanyahu to expand winter humanitarian aid into Gaza and advance the deployment of a multinational stabilization force under President Trump’s peace plan, The Jerusalem Post reported Wednesday evening, citing a Board of Peace official who described the talks as positive. Meanwhile, Likud and Yashar held a fourth round of unity talks without a breakthrough on rotation, while Yair Golan’s Democrats halted coalition negotiations with Gadi Eisenkot’s party over the Likud contacts even as Yisrael Beytenu chief Avigdor Liberman agreed in principle to a deal with Yashar."
+    },
+    {
+      "num": 7,
+      "id": "story-06",
+      "section": "Israel",
+      "title": "IDF kills Hamas northern Gaza security chief slated to succeed slain head",
+      "file": "07-story-06.mp3",
+      "duration": 48.25,
+      "text": "The Israeli military and Shin Bet said Wednesday they killed Muhammad Abu al-Awf, forty-seven, Hamas’s director of internal security for northern Gaza, in an overnight airstrike in Gaza City’s Shati camp, The Times of Israel reported. Israeli officials said Abu al-Awf had been expected to succeed Naim Abu Nahal, the head of Hamas’s internal security apparatus who was killed in an Israeli strike a day earlier. Hamas’s interior ministry said Abu al-Awf was killed alongside his wife and two teenage daughters. The I D F said Abu al-Awf had been advancing attacks on Israeli troops and rebuilding Hamas’s capabilities in violation of the ceasefire, and added that Abu Nahal had belonged to a secret circle that held the body of slain soldier Staff Sgt. Oron Shaul for over a decade before Israel recovered his remains in January twenty twenty-five."
+    },
+    {
+      "num": 8,
+      "id": "story-07",
+      "section": "Chareidi World",
+      "title": "Court orders historic rooms atop Rashbi’s kever in Meron vacated in 45 days",
+      "file": "08-story-07.mp3",
+      "duration": 47.12,
+      "text": "A magistrate’s court in Nof HaGalil has ordered the full evacuation within forty-five days of thirteen historic rooms above the kever of Rabbi Shimon bar Yochai in Meron, known as the Mahara Galanti rooms, Kikar HaShabbat reported Wednesday. Known to generations of pilgrims as rooms of chesed and hachnosas orchim, the spaces have been held for decades—and in some cases nearly a century—by veteran families and Chassidic courts, including Zvhil. Judge Adham Safadi rejected claims of longstanding religious-use rights and ordered each defendant to pay twelve,zero shekels in court costs and legal fees. The ruling gives the state-recognized Va’ad HaChamisha legal backing to reclaim the rooftop complex and convert it into spacious prayer and study halls for the wider public; the current occupants have not yet announced whether they will appeal."
+    },
+    {
+      "num": 9,
+      "id": "story-08",
+      "section": "Chareidi World",
+      "title": "Chareidi driver firms seek workarounds after arrests; protests hit Yerushalayim",
+      "file": "09-story-08.mp3",
+      "duration": 52.04,
+      "text": "Managers of ha-ray-dee private car-service companies have opened urgent talks with anti-draft legal-aid groups after repeated military-police arrests of yeshiva-student drivers, especially near Ben Gurion Airport and along Route ninety, Kikar HaShabbat reported Wednesday. Several drivers classified as draft evaders have refused airport runs, and an avreich learning in Ganei Tikva was arrested on Route ninety on Wednesday. Separately, demonstrators rallied on Givat Moshe Street in Yerushalayim on Wednesday afternoon to protest the continuing arrests of yeshiva bochurim, Yeshiva World News reported. The arrests came as Shas and U T J M K Meir Porush sharply attacked Gadi Eisenkot and Avigdor Liberman after the Knesset voted sixty-three to forty-nine to defeat Porush’s bill freezing draft arrests, while internal U T J critics questioned M K Yaakov Asher for continuing coalition talks without an arrest freeze."
+    },
+    {
+      "num": 10,
+      "id": "story-09",
+      "section": "Region",
+      "title": "New Jersey declares state of emergency starting 6 PM ahead of Thanksgiving storm",
+      "file": "10-story-09.mp3",
+      "duration": 45.04,
+      "text": "New Jersey Gov. Mikie Sherrill declared a statewide state of emergency taking effect at six p.m. Wednesday ahead of a powerful Thanksgiving storm expected to lash the region through Friday, the New York Post and CBS Philadelphia reported. The National Weather Service issued high-wind warnings for fifty to seventy mph gusts, up to four inches of rain, and coastal flood warnings along the Jersey Shore. Sherrill specifically warned that Ocean County—home to Lakewood—along with Atlantic and Cape May counties face the highest risk of severe storm impacts, urging residents to travel Wednesday and prepare for prolonged power outages and road closures. New York City also faces wind gusts up to sixty mph on Thanksgiving, raising potential adjustments to Thursday’s Macy’s Thanksgiving Day Parade."
+    },
+    {
+      "num": 11,
+      "id": "story-10",
+      "section": "Tech",
+      "title": "FCC grants SpaceX conditional approval for orbital AI data-center satellites",
+      "file": "11-story-10.mp3",
+      "duration": 52.4,
+      "text": "The Federal Communications Commission on Wednesday gave Elon Musk’s SpaceX conditional approval to deploy and operate up to one million satellites for its planned “Starmind” orbital artificial-intelligence data center network, TechCrunch reported. The authorization cleared objections from Amazon, Viasat and the American Astronomical Society over orbital debris, congestion and radiofrequency interference, with the FCC saying scientific-research concerns fell outside its authority. FCC Chair Brendan Carr said the move opens “a bold new frontier” for computing infrastructure, and Musk thanked him on X. Major technical, financial and regulatory hurdles remain: SpaceX must still solve space-based chip cooling and win a separate FCC debris-disposal waiver for satellites operating above six hundred kilometers, with seven years to launch its first operational satellite and fourteen years to build out the constellation."
+    },
+    {
+      "num": 12,
+      "id": "story-11",
+      "section": "Other Notable",
+      "title": "North Korea expels Swiss envoy and shuts Pyongyang office over sanctions",
+      "file": "12-story-11.mp3",
+      "duration": 40.28,
+      "text": "Elsewhere, North Korea on Wednesday ordered Switzerland’s top representative in Pyongyang, Sylvain Astier, to leave the country within forty-eight hours and shut down Switzerland’s newly reopened diplomatic office just weeks after it opened, the Associated Press and Al Jazeera reported. Pyongyang’s Foreign Ministry declared Astier persona non grata in retaliation for Bern adding North Korea’s Songdowon International Children’s Camp to its sanctions list over Western allegations that it received children transferred from Russian-occupied areas of Ukraine. Switzerland said it regretted the closure and will return Astier to its Beijing embassy while maintaining diplomatic relations via Beijing and North Korea’s embassy in Bern."
+    },
+    {
+      "num": 13,
+      "id": "weather",
+      "section": "Weather",
+      "title": "South Bend, IN Forecast & 5-Day Outlook",
+      "file": "13-weather.mp3",
+      "duration": 68.26,
+      "text": "Now, your South Bend, Indiana weather forecast from the National Weather Service. Tonight: Mostly cloudy, with a low around thirty-one. Northeast wind around ten miles per hour, with gusts as high as twenty-five miles per hour. Thanksgiving day: Rain after eleven a m. Cloudy, with a high near forty-four. Northeast wind ten to fifteen miles per hour, with gusts as high as thirty miles per hour. Chance of precipitation is ninety percent. New rainfall amounts between a tenth and quarter of an inch possible. Thursday Night, light rain then rain and snow, low around thirty-five. On Friday, rain and snow, high near forty-eight. Friday Night, a chance of light rain then partly cloudy, low around twenty-eight. On Saturday, partly sunny, high near fifty. Saturday Night, mostly cloudy then a slight chance of light rain, low around thirty-four. On Sunday, light rain, high near forty-nine. Sunday Night, light rain, low around thirty-two. On Monday, partly sunny, high near forty-four. Monday Night, partly cloudy, low around twenty-six.",
+      "periods": [
+        {
+          "name": "Tonight",
+          "temp": "31F",
+          "short": "Mostly Cloudy"
+        },
+        {
+          "name": "Thanksgiving Day",
+          "temp": "44F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Thursday Night",
+          "temp": "35F",
+          "short": "Light Rain then Rain And Snow"
+        },
+        {
+          "name": "Friday",
+          "temp": "48F",
+          "short": "Rain And Snow"
+        },
+        {
+          "name": "Friday Night",
+          "temp": "28F",
+          "short": "Chance Light Rain then Partly Cloudy"
+        },
+        {
+          "name": "Saturday",
+          "temp": "50F",
+          "short": "Partly Sunny"
+        },
+        {
+          "name": "Saturday Night",
+          "temp": "34F",
+          "short": "Mostly Cloudy then Slight Chance Light Rain"
+        },
+        {
+          "name": "Sunday",
+          "temp": "49F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Sunday Night",
+          "temp": "32F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Monday",
+          "temp": "44F",
+          "short": "Partly Sunny"
+        },
+        {
+          "name": "Monday Night",
+          "temp": "26F",
+          "short": "Partly Cloudy"
+        }
+      ]
+    },
+    {
+      "num": 14,
+      "id": "signoff",
+      "section": "SBR News",
+      "title": "That's the latest from SBR News",
+      "file": "14-signoff.mp3",
+      "duration": 2.25,
+      "text": "That's the latest from SBR News."
+    }
+  ]
+}
