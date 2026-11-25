@@ -4,17 +4,20 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>SBR News — Arad, from Yerushalayim</title>
+<title>SBR News — Arad voice test: current, A, B</title>
 <style>
 :root{--bg:#EDECE8;--card:#F4F3EF;--ink:#231F20;--mut:#5c5755;--line:#d5d1c8;--acc:#0f7ec8}
 @media(prefers-color-scheme:dark){:root{--bg:#161615;--card:#21201e;--ink:#f2efe9;--mut:#a7a29b;--line:#35332f;--acc:#4ba3e3}}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',Georgia,serif}
-.wrap{max-width:480px;margin:0 auto;padding:16px 14px 40px}
+.wrap{max-width:520px;margin:0 auto;padding:16px 14px 48px}
 .hdr{border-bottom:1.5px solid var(--ink);padding-bottom:10px;margin-bottom:14px;text-align:center}
 .brand{font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:28px;letter-spacing:-.01em}
 .sub{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:4px;font-family:-apple-system,sans-serif}
-.lead{font-size:15px;line-height:1.45;margin:0 0 16px}
+.lead{font-size:15px;line-height:1.45;margin:0 0 14px}
 .lead em{font-style:italic}
+.sec{margin:22px 0 8px;padding-top:16px;border-top:1.5px solid var(--ink)}
+.sec h2{font-family:Georgia,serif;font-size:22px;margin:0 0 4px;font-weight:700}
+.sec .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-family:-apple-system,sans-serif;border:1px solid var(--ink);border-radius:999px;padding:2px 8px;margin:0 0 8px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;margin-bottom:10px}
 .card.rec{border:1.5px solid var(--ink)}
 .kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-family:-apple-system,sans-serif}
@@ -22,7 +25,11 @@
 .title{font-size:18px;line-height:1.25;font-weight:700;margin:4px 0 6px}
 .why{font-size:14px;line-height:1.4;color:var(--ink);margin:0 0 10px}
 audio{width:100%;height:40px;margin-top:2px}
-.foot{font-size:13px;line-height:1.45;color:var(--mut);margin-top:16px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:0 0 16px;font-family:-apple-system,sans-serif}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);font-weight:700}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.foot{font-size:13px;line-height:1.45;color:var(--mut);margin-top:18px}
 .foot a{color:var(--ink)}
 </style>
 </head>
@@ -30,47 +37,139 @@ audio{width:100%;height:40px;margin-top:2px}
 <div class="wrap">
   <div class="hdr">
     <div class="brand">SBR News</div>
-    <div class="sub">Arad · from Yerushalayim · 25 November 2026</div>
+    <div class="sub">Arad comparison · 25 November 2026</div>
   </div>
-  <p class="lead">A revised sample of the Israel and Chareidi World stories from today’s noon brief. Avri, a male Israeli Hebrew voice, reads the English with an Israeli accent. Short words that he had been spelling out (like <em>n o</em> for <em>no</em>) have been fixed, and vote counts are in English, not Hebrew. The rest of the brief stays with Ryan.</p>
-  <p class="lead">The cue and sign-off follow the BBC package form: the anchor says <em>Arad reports from Yerushalayim.</em> The dispatch ends <em>Arad, SBR News, Yerushalayim.</em></p>
+  <p class="lead">Three ways to hear the same Israel and Chareidi World stories from today’s noon brief. The Ryan cue is always <em>Arad reports from Yerushalayim.</em> The sign-off is always <em>Arad, SBR News, Yerushalayim.</em></p>
+  <p class="lead">Word accuracy is faster-whisper (small, English) against the original story text, 507 words. Option A is slower and shorter, but it is not more accurate against the source — some of that gap is extra wording in the rewrite — so the default for tonight’s 8:53 PM build stays <em>current</em>.</p>
 
-  <div class="card rec">
-    <div class="kicker">As it will play in the brief</div>
-    <div class="title">Handover + first Israel story</div>
-    <p class="why">Ryan hands over, then Avri reads the Knesset term-limits story. In the noon player this is joined to the first Israel track, after the mid-bulletin time check.</p>
-    <audio controls preload="metadata" playsinline src="00-segment-open.mp3"></audio>
-  </div>
+  <table>
+    <thead>
+      <tr><th>Option</th><th>Voice</th><th>Word accuracy</th><th>Words found</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Current · default</td>
+        <td>Avri, normal rate, long sentences</td>
+        <td class="num">79.5%</td>
+        <td class="num">87.4%</td>
+      </tr>
+      <tr>
+        <td>A · Avri clearer</td>
+        <td>Avri, −12%, short sentences</td>
+        <td class="num">73.6%</td>
+        <td class="num">86.2%</td>
+      </tr>
+      <tr>
+        <td>B · Hybrid</td>
+        <td>Ryan on the stories; Avri intro and sign-off</td>
+        <td class="num">89.2%</td>
+        <td class="num">90.5%</td>
+      </tr>
+    </tbody>
+  </table>
 
-  <div class="card">
-    <div class="kicker">Ryan · handover only</div>
-    <div class="title">Arad reports from Yerushalayim.</div>
-    <p class="why">The London anchor’s cue, on its own.</p>
-    <audio controls preload="metadata" playsinline src="01-cue-ryan.mp3"></audio>
-  </div>
+  <section class="sec" id="current">
+    <div class="tag">Default · tonight’s build</div>
+    <h2>Current · reference</h2>
+    <p class="lead">Avri reads the dispatch at normal rate, with the English and number fixes already in place. This is the sample you heard last.</p>
 
-  <div class="card">
-    <div class="kicker">Avri · Israel</div>
-    <div class="title">Knesset advances PM term limits as unity talks go on</div>
-    <p class="why">Listen for <em>no outcome</em>, <em>sixty-five against forty-eight</em>, and <em>who is on trial</em> — those had been spelled or mumbled before.</p>
-    <audio controls preload="metadata" playsinline src="02-story-01.mp3"></audio>
-  </div>
+    <div class="card rec">
+      <div class="kicker">As it will play in the brief</div>
+      <div class="title">Handover + first Israel story</div>
+      <p class="why">Ryan cues, then Avri reads the Knesset term-limits story.</p>
+      <audio controls preload="metadata" playsinline src="00-segment-open.mp3"></audio>
+    </div>
+    <div class="card">
+      <div class="kicker">Ryan · handover only</div>
+      <div class="title">Arad reports from Yerushalayim.</div>
+      <audio controls preload="metadata" playsinline src="01-cue-ryan.mp3"></audio>
+    </div>
+    <div class="card">
+      <div class="kicker">Avri · Israel</div>
+      <div class="title">Knesset advances PM term limits as unity talks go on</div>
+      <audio controls preload="metadata" playsinline src="02-story-01.mp3"></audio>
+    </div>
+    <div class="card">
+      <div class="kicker">Avri · Chareidi World</div>
+      <div class="title">Knesset rejects arrest-freeze bills, 63-49</div>
+      <audio controls preload="metadata" playsinline src="03-story-02.mp3"></audio>
+    </div>
+    <div class="card rec">
+      <div class="kicker">Avri · Chareidi World · out cue</div>
+      <div class="title">Agudah source: religion-and-state status quo agreed</div>
+      <p class="why">Ends <em>Arad, SBR News, Yerushalayim.</em></p>
+      <audio controls preload="metadata" playsinline src="04-story-03.mp3"></audio>
+    </div>
+  </section>
 
-  <div class="card">
-    <div class="kicker">Avri · Chareidi World</div>
-    <div class="title">Knesset rejects arrest-freeze bills, 63-49</div>
-    <p class="why">Second story in the segment, still Avri. Vote count and <em>United Torah Judaism</em> should come through as words, not letters.</p>
-    <audio controls preload="metadata" playsinline src="03-story-02.mp3"></audio>
-  </div>
+  <section class="sec" id="option-a">
+    <div class="tag">Option A</div>
+    <h2>Avri clearer</h2>
+    <p class="lead">Same Avri voice, 12% slower, with long sentences split into short declaratives and commas for phrasing. Facts are unchanged. Words he had been straining on are avoided where a substitute kept the meaning.</p>
 
-  <div class="card rec">
-    <div class="kicker">Avri · Chareidi World · out cue</div>
-    <div class="title">Agudah source: religion-and-state status quo agreed</div>
-    <p class="why">Listen for <em>there will be no changes</em> and the close: <em>Arad, SBR News, Yerushalayim.</em></p>
-    <audio controls preload="metadata" playsinline src="04-story-03.mp3"></audio>
-  </div>
+    <div class="card rec">
+      <div class="kicker">Handover + first Israel story</div>
+      <div class="title">Ryan cue, then slower Avri</div>
+      <audio controls preload="metadata" playsinline src="a-00-open.mp3"></audio>
+    </div>
+    <div class="card">
+      <div class="kicker">Avri · Israel · clearer</div>
+      <div class="title">Knesset advances PM term limits as unity talks go on</div>
+      <audio controls preload="metadata" playsinline src="a-02-story-01.mp3"></audio>
+    </div>
+    <div class="card">
+      <div class="kicker">Avri · Chareidi World · clearer</div>
+      <div class="title">Knesset rejects arrest-freeze bills, 63-49</div>
+      <audio controls preload="metadata" playsinline src="a-03-story-02.mp3"></audio>
+    </div>
+    <div class="card rec">
+      <div class="kicker">Avri · Chareidi World · clearer · out cue</div>
+      <div class="title">Agudah source: religion-and-state status quo agreed</div>
+      <p class="why">Same sign-off: <em>Arad, SBR News, Yerushalayim.</em></p>
+      <audio controls preload="metadata" playsinline src="a-04-story-03.mp3"></audio>
+    </div>
+  </section>
 
-  <p class="foot">This is a sample only. It does not replace the live noon player. Tonight’s brief will use this voice and these pronunciation fixes for the Israel and Chareidi World stories.</p>
+  <section class="sec" id="option-b">
+    <div class="tag">Option B</div>
+    <h2>Hybrid</h2>
+    <p class="lead">Ryan reads the Israel and Chareidi stories, including his usual pronunciation fixes for Hebrew names. Avri speaks only a short Hebrew-flavored intro and the sign-off. The Ryan cue is unchanged.</p>
+
+    <div class="card rec">
+      <div class="kicker">As it would play in the brief</div>
+      <div class="title">Ryan cue + Avri intro + first Israel story</div>
+      <p class="why">Ryan: <em>Arad reports from Yerushalayim.</em> Avri: <em>From Yerushalayim, this is Arad.</em> Then Ryan reads the dispatch.</p>
+      <audio controls preload="metadata" playsinline src="b-00-open.mp3"></audio>
+    </div>
+    <div class="card">
+      <div class="kicker">Avri · intro only</div>
+      <div class="title">From Yerushalayim, this is Arad.</div>
+      <audio controls preload="metadata" playsinline src="b-intro-avri.mp3"></audio>
+    </div>
+    <div class="card">
+      <div class="kicker">Ryan · Israel</div>
+      <div class="title">Knesset advances PM term limits as unity talks go on</div>
+      <audio controls preload="metadata" playsinline src="b-02-story-01.mp3"></audio>
+    </div>
+    <div class="card">
+      <div class="kicker">Ryan · Chareidi World</div>
+      <div class="title">Knesset rejects arrest-freeze bills, 63-49</div>
+      <audio controls preload="metadata" playsinline src="b-03-story-02.mp3"></audio>
+    </div>
+    <div class="card rec">
+      <div class="kicker">Ryan · last story + Avri out cue</div>
+      <div class="title">Agudah source: religion-and-state status quo agreed</div>
+      <p class="why">Ryan finishes the story; Avri signs off <em>Arad, SBR News, Yerushalayim.</em></p>
+      <audio controls preload="metadata" playsinline src="b-04-story-03.mp3"></audio>
+    </div>
+    <div class="card">
+      <div class="kicker">Avri · sign-off only</div>
+      <div class="title">Arad, SBR News, Yerushalayim.</div>
+      <audio controls preload="metadata" playsinline src="b-outcue-avri.mp3"></audio>
+    </div>
+  </section>
+
+  <p class="foot">This is a sample only. It does not replace the live noon player. In the engine, all three modes are selectable with one setting, <code>ARAD_DELIVERY</code> (<code>current</code>, <code>clearer</code>, or <code>hybrid</code>). The default stays <em>current</em> until you pick one. Tonight’s 8:53 PM brief will use the default.</p>
 </div>
 </body>
 </html>
