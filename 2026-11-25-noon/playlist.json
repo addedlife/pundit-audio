@@ -5,7 +5,7 @@
   "slot": "noon",
   "label": "Noon Brief",
   "voice": "en-GB-RyanNeural",
-  "total_duration": 610.5,
+  "total_duration": 694.84,
   "tracks": [
     {
       "num": 1,
@@ -13,7 +13,7 @@
       "section": "SBR News",
       "title": "This ... is SBR News (Noon Brief)",
       "file": "01-intro.mp3",
-      "duration": 10.27,
+      "duration": 10.37,
       "text": "This ... is SBR News. Your Noon Brief for 2026-11-25."
     },
     {
@@ -73,27 +73,36 @@
     {
       "num": 8,
       "id": "story-07",
-      "section": "Tech",
-      "title": "Microsoft declares “Code Red” after Outlook outage",
+      "section": "Region",
+      "title": "Satmar Rebbe’s letter to Trump: Israel does not represent American Jews",
       "file": "08-story-07.mp3",
-      "duration": 58.64,
-      "text": "Next story: Microsoft declares “Code Red” after Outlook outage. Microsoft has declared an unusual internal “Code Red” after this month’s Exchange Online and Outlook outage, Reuters reported, The Verge said Wednesday. The nearly twenty-four hour outage on Thursday (Nov. nineteen) took down email for millions of customers and was triggered by a bug that had sat on Microsoft three hundred sixty-five networking gateway servers since July. In a memo, Microsoft three hundred sixty-five Core president Jason Henderson called it the most significant outage in history for Microsoft’s customers: “Unfortunately, all the work we have done over the years was not sufficient to protect us on Thursday. Code Red means that this is the highest priority work for our team.” Microsoft now aims to resolve future outages within an hour, is focusing on load shedding and faster recovery, and is holding daily meetings with the Microsoft three hundred sixty-five engineering group, The Verge reported."
+      "duration": 84.24,
+      "text": "Next story: Sat-mar Rehbeh’s letter to Trump: Israel does not represent American Jews. The full text of a personal letter that Rahv Aharon Tytelbaum, the Sat-mar Rehbeh of Keer-yas Yoel, handed to President Donald Trump at a private White House meeting on Sept. three was published Wednesday by Matzav, The Yeshiva World, Kikar HaShabbat and JFeed. The meeting, in Elul, came ahead of a reception for a delegation of American admorim and roshei yeshiva; during it the Rehbeh also raised matters of pidyon shevuyim, Matzav reported. In the letter, dated September third, the Rehbeh writes: “I write to state one principle as plainly as possible: Israel does not represent American Jews merely because they are Jewish. We are American Jews and American citizens.” He adds, “I am not asking you to accept our theology, our anti-Zionism, or any particular view of American policy toward Israel,” and concludes, “Our political home is the United States of America.” The Rehbeh writes that when an Israeli leader claims to represent American Jews, “we object,” and that Prime Minister Benjamin Netanyahu “does not represent us.” He invokes his great-uncle, Rahv Yoel Tytelbaum, and writes: “Mr. President, when your Administration deals with us, please deal with us as Americans—not as representatives, dependents, constituents, or extensions of a foreign country.”"
     },
     {
       "num": 9,
       "id": "story-08",
+      "section": "Tech",
+      "title": "Microsoft declares “Code Red” after Outlook outage",
+      "file": "09-story-08.mp3",
+      "duration": 58.64,
+      "text": "Next story: Microsoft declares “Code Red” after Outlook outage. Microsoft has declared an unusual internal “Code Red” after this month’s Exchange Online and Outlook outage, Reuters reported, The Verge said Wednesday. The nearly twenty-four hour outage on Thursday (Nov. nineteen) took down email for millions of customers and was triggered by a bug that had sat on Microsoft three hundred sixty-five networking gateway servers since July. In a memo, Microsoft three hundred sixty-five Core president Jason Henderson called it the most significant outage in history for Microsoft’s customers: “Unfortunately, all the work we have done over the years was not sufficient to protect us on Thursday. Code Red means that this is the highest priority work for our team.” Microsoft now aims to resolve future outages within an hour, is focusing on load shedding and faster recovery, and is holding daily meetings with the Microsoft three hundred sixty-five engineering group, The Verge reported."
+    },
+    {
+      "num": 10,
+      "id": "story-09",
       "section": "Other Notable",
       "title": "Russian strikes kill five, cut power in five regions",
-      "file": "09-story-08.mp3",
+      "file": "10-story-09.mp3",
       "duration": 62.09,
       "text": "Next story: Russian strikes kill five, cut power in five regions. Russian attacks across Ukraine killed at least five people, wounded dozens and caused power outages in the Dnipropetrovsk, Donetsk, Zaporizhzhia, Odesa and Kharkiv regions, Deputy Energy Minister Artem Nekrasov said Wednesday, according to Al Jazeera and Reuters. The Russian-occupied Zaporizhzhia nuclear plant lost external power after shelling and switched to diesel generators, its seventeenth such loss this year. A Ukrainian drone attack killed one person and cut power in Russia’s Samara region, a Rosneft refining hub, Russian agencies said. Separately, the Financial Times reported Wednesday that the Trump administration has quietly shelved proposals to use business deals, such as energy and aviation ventures, as an incentive for Russia to end the war, after Moscow showed little interest; envoys Steve Witkoff and Jared Kushner told European officials so, the paper said. Reuters could not immediately verify the report."
     },
     {
-      "num": 10,
+      "num": 11,
       "id": "weather",
       "section": "Weather",
       "title": "South Bend, IN Forecast & 5-Day Outlook",
-      "file": "10-weather.mp3",
+      "file": "11-weather.mp3",
       "duration": 68.13,
       "text": "Now, your South Bend, Indiana weather forecast from the National Weather Service. This afternoon: Mostly cloudy, with a high near forty-six. Northeast wind ten to fifteen miles per hour, with gusts as high as twenty-five miles per hour. Tonight: Mostly cloudy, with a low around thirty-one. Northeast wind around ten miles per hour, with gusts as high as twenty-five miles per hour. On Thanksgiving Day, light rain, high near forty-four. Thursday Night, light rain then rain and snow, low around thirty-five. On Friday, rain and snow, high near forty-eight. Friday Night, a chance of light rain then partly cloudy, low around twenty-eight. On Saturday, partly sunny, high near fifty. Saturday Night, mostly cloudy then a slight chance of light rain, low around thirty-four. On Sunday, light rain, high near forty-nine. Sunday Night, light rain, low around thirty-two. On Monday, partly sunny, high near forty-four.",
       "periods": [
@@ -155,11 +164,11 @@
       ]
     },
     {
-      "num": 11,
+      "num": 12,
       "id": "signoff",
       "section": "SBR News",
       "title": "You've been listening to SBR News",
-      "file": "11-signoff.mp3",
+      "file": "12-signoff.mp3",
       "duration": 3.06,
       "text": "You've been listening to SBR News."
     }
