@@ -35,12 +35,6 @@ button.ctrl:active{opacity:.75;transform:scale(.98)}
 .rsec{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
 .rtit{font-size:14px;font-weight:600;line-height:1.25;margin-top:2px}
 .rdur{font-size:12px;color:var(--mut);white-space:nowrap}
-#tap-overlay{position:fixed;inset:0;background:color-mix(in srgb,var(--bg) 97%,transparent);display:none;align-items:center;justify-content:center;z-index:99;cursor:pointer;-webkit-tap-highlight-color:transparent}
-#tap-overlay.show{display:flex}
-.tap-card{text-align:center;padding:28px 32px}
-.tap-brand{font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:32px;letter-spacing:-.01em;margin-bottom:8px}
-.tap-sub{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-family:-apple-system,sans-serif;margin-bottom:22px}
-.tap-cta{display:inline-block;border:2px solid var(--ink);background:var(--ink);color:var(--bg);font-size:28px;font-weight:700;font-family:-apple-system,sans-serif;border-radius:18px;padding:22px 40px;line-height:1.15}
 </style></head><body>
 <div class="wrap">
   <div class="hdr"><div class="brand">SBR News</div><div class="sub">Wednesday, November 25, 2026 · Noon Brief</div>
@@ -62,13 +56,6 @@ button.ctrl:active{opacity:.75;transform:scale(.98)}
     <div class="spd" id="spd"></div>
   </div>
   <div class="list" id="list"></div>
-</div>
-<div id="tap-overlay" role="button" aria-label="Tap to play">
-  <div class="tap-card">
-    <div class="tap-brand">SBR News</div>
-    <div class="tap-sub">Wednesday, November 25, 2026 · Noon Brief</div>
-    <div class="tap-cta">Tap to play</div>
-  </div>
 </div>
 <script>
 const TRACKS = [{"num": 1, "id": "intro", "section": "SBR News", "title": "This ... is SBR News (Noon Brief)", "file": "01-intro.mp3", "duration": 5.56, "clock_intro": "after", "src": "01-intro.mp3"}, {"num": 2, "id": "story-01", "section": "Top Stories", "title": "AI selloff resumes as inflation heats up", "file": "02-story-01.mp3", "duration": 71.37, "src": "02-story-01.mp3"}, {"num": 3, "id": "story-02", "section": "Top Stories", "title": "U.S. proposes new tariffs on 14 trading partners", "file": "03-story-02.mp3", "duration": 70.4, "src": "03-story-02.mp3"}, {"num": 4, "id": "story-03", "section": "Top Stories", "title": "Iran’s army claims a third tanker hit a Hormuz mine", "file": "04-story-03.mp3", "duration": 48.69, "src": "04-story-03.mp3"}, {"num": 5, "id": "story-04", "section": "Israel", "title": "Knesset advances PM term limits as unity talks go on", "file": "05-story-04.mp3", "duration": 50.52, "src": "05-story-04.mp3"}, {"num": 6, "id": "story-05", "section": "Chareidi World", "title": "Knesset rejects arrest-freeze bills, 63-49", "file": "06-story-05.mp3", "duration": 69.36, "src": "06-story-05.mp3"}, {"num": 7, "id": "story-06", "section": "Chareidi World", "title": "Agudah source: religion-and-state status quo agreed", "file": "07-story-06.mp3", "duration": 48.09, "src": "07-story-06.mp3"}, {"num": 8, "id": "story-07", "section": "Region", "title": "Satmar Rebbe’s letter to Trump: Israel does not represent American Jews", "file": "08-story-07.mp3", "duration": 74.53, "src": "08-story-07.mp3"}, {"num": 9, "id": "story-08", "section": "Tech", "title": "Microsoft declares “Code Red” after Outlook outage", "file": "09-story-08.mp3", "duration": 51.44, "src": "09-story-08.mp3"}, {"num": 10, "id": "story-09", "section": "Other Notable", "title": "Russian strikes kill five, cut power in five regions", "file": "10-story-09.mp3", "duration": 55.07, "src": "10-story-09.mp3"}, {"num": 11, "id": "weather", "section": "Weather", "title": "South Bend, IN Forecast & 5-Day Outlook", "file": "11-weather.mp3", "duration": 60.79, "src": "11-weather.mp3"}, {"num": 12, "id": "signoff", "section": "SBR News", "title": "That's the latest from SBR News", "file": "12-signoff.mp3", "duration": 2.25, "src": "12-signoff.mp3"}];
@@ -102,7 +89,6 @@ let userInteracted = false;
 const preloadedTracks = new Map();
 const preloadingTracks = new Set();
 
-const overlay = document.getElementById('tap-overlay');
 const q = new URLSearchParams(location.search);
 const qt = parseInt(q.get('track') || q.get('story') || '0', 10);
 if (qt >= 1 && qt <= TRACKS.length) idx = qt - 1;
@@ -344,24 +330,20 @@ function setClockActive(res, pName){
   updateMediaSession(ntit.textContent);
 }
 
-function hideOverlay(){ overlay.classList.remove('show'); }
-function showOverlay(){ overlay.classList.add('show'); }
 function tryPlay(){
   const p = au.play();
-  if (p && p.then) p.then(hideOverlay).catch(showOverlay);
-  else hideOverlay();
+  if (p && p.catch) p.catch(() => {});
 }
 
 function startFromGesture(){
   userInteracted = true;
-  hideOverlay();
   if (phase === 'intro-clock' || phase === 'outro-clock' || phase === 'timecheck') {
     const kind = phase === 'intro-clock' ? 'intro' : (phase === 'outro-clock' ? 'outro' : 'check');
     const tk = timeKeys(new Date());
     if (kind === 'intro' && prewarmedIntro && prewarmedIntro.key === 'intro_' + tk.key) {
       setClockActive(prewarmedIntro, 'intro-clock');
       const p = au.play();
-      if (p && p.catch) p.catch(showOverlay);
+      if (p && p.catch) p.catch(() => {});
       return;
     }
     au.src = SILENT_WAV;
@@ -372,22 +354,19 @@ function startFromGesture(){
     buildClockBlob(kind, new Date()).then(res => {
       if (mySeq !== loadSeq) return;
       setClockActive(res, targetPhase);
-      au.play().catch(showOverlay);
+      au.play().catch(() => {});
     }).catch(() => {
       if (mySeq !== loadSeq) return;
       phase = 'track';
       au.src = resolvedTrackSrc(TRACKS[idx]);
       au.playbackRate = rate;
-      au.play().catch(showOverlay);
+      au.play().catch(() => {});
     });
     return;
   }
   const p = au.play();
-  if (p && p.catch) p.catch(showOverlay);
+  if (p && p.catch) p.catch(() => {});
 }
-
-overlay.addEventListener('click', startFromGesture);
-overlay.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startFromGesture(); } });
 
 function fmt(s){ if(!isFinite(s)||s<0)return '0:00'; s=Math.floor(s); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
 
@@ -453,11 +432,8 @@ function playClockPhase(kind, pName, autoPlay, fallbackTrackIdx){
     return;
   }
   if (kind === 'intro' && autoPlay && !userInteracted) {
-    // Show overlay promptly if clip build takes >200ms (e.g. slow mobile connection)
-    const ovTimer = setTimeout(() => { if (mySeq === loadSeq && !userInteracted && au.paused) showOverlay(); }, 220);
     const builder = kind === 'intro' ? prewarmIntro() : buildClockBlob(kind, new Date());
     builder.then(res => {
-      clearTimeout(ovTimer);
       if (mySeq !== loadSeq) return;
       if (res) {
         setClockActive(res, pName);
@@ -469,7 +445,6 @@ function playClockPhase(kind, pName, autoPlay, fallbackTrackIdx){
         if (!userInteracted) tryPlay();
       }
     }).catch(() => {
-      clearTimeout(ovTimer);
       if (mySeq !== loadSeq) return;
       phase = 'track';
       au.src = resolvedTrackSrc(TRACKS[fallbackTrackIdx]);
@@ -532,7 +507,7 @@ playBtn.onclick = () => {
       startFromGesture();
     } else {
       userInteracted = true;
-      au.play().catch(showOverlay);
+      au.play().catch(() => {});
     }
   } else {
     au.pause();
