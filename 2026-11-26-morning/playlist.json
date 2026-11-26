@@ -1,0 +1,232 @@
+{
+  "brand": "SBR News",
+  "date": "2026-11-26",
+  "date_display": "Thursday, November 26, 2026",
+  "slot": "morning",
+  "label": "Morning Brief",
+  "voice": "en-GB-RyanNeural",
+  "arad_delivery": "off",
+  "total_duration": 653.17,
+  "tracks": [
+    {
+      "num": 1,
+      "id": "intro",
+      "section": "SBR News",
+      "title": "This ... is SBR News (Morning Brief)",
+      "file": "01-intro.mp3",
+      "duration": 5.72,
+      "text": "This ... is SBR News. Your Morning Brief for 2026-11-26.",
+      "clock_intro": "after"
+    },
+    {
+      "num": 2,
+      "id": "story-01",
+      "section": "Top Stories",
+      "title": "Iran’s Guards claim two more tankers hit mines off Oman",
+      "file": "02-story-01.mp3",
+      "duration": 57.94,
+      "text": "Iran’s Revolutionary Guards said Thursday that two tankers exploded and caught fire after hitting sea mines north of Oman’s Khasab port while trying to cross the Strait of Hormuz by an unauthorized route, according to a statement carried by the semi-official Tasnim news agency, Reuters reported. The Guards said one was a supertanker carrying more than two million barrels of crude. The claim could not be independently verified. Separately, the U.K. Maritime Trade Operations agency reported an explosion from an unknown projectile near a tanker about fifty nautical miles west of Dubai. Guards spokesman Hossein Mohebbi said the force was using heavy firepower to keep the strait closed to pressure the U S economy, state media said. Brent crude edged up to about ninety-four point seven one dollars a barrel in early Asian trade, extending Wednesday’s three point five percent gain after Houthi claims of attacks on Saudi Arabia’s Ras Tanura refinery, CNBC reported. There will be no WTI settlement Thursday because of Thanksgiving."
+    },
+    {
+      "num": 3,
+      "id": "story-02",
+      "section": "Top Stories",
+      "title": "Trump and Rutte warn Russia not to widen the war",
+      "file": "03-story-02.mp3",
+      "duration": 37.64,
+      "text": "President Trump and NATO Secretary-General Mark Rutte, after meeting Wednesday evening at Mar-a-Lago, issued a joint statement urging Russia to avoid “any actions that intentionally, or unintentionally, expand the war” and calling for a peaceful resolution “as rapidly as possible.” The statement said the war in Ukraine and the conflict with Iran were the main subjects, and that the two discussed expanding defense spending and investment in the industrial base in the U S and across NATO. CNBC noted the meeting came a week after Trump’s trilateral meeting with Vladimir Putin and Xi Jinping, which alarmed some European lawmakers, and as Russia steps up attacks on Ukraine’s energy grid."
+    },
+    {
+      "num": 4,
+      "id": "story-03",
+      "section": "Top Stories",
+      "title": "Russian ballistic missiles hit Kyiv, wounding seven",
+      "file": "04-story-03.mp3",
+      "duration": 43.86,
+      "text": "Russia struck Kyiv with ballistic missiles overnight, wounding seven people, two seriously, and hitting a shopping center and two other buildings on the city’s east bank, Mayor Vitali Klitschko said, Reuters reported. A large fire was still burning Thursday morning. Russia’s Defense Ministry said it hit two sites in Kyiv tied to drone production; Reuters could not verify that. Ukraine’s air force said Russia also launched one hundred thirteen Shahed-type drones, eighty-seven of which were shot down or neutralized. A separate strike on Kharkiv wounded three people with others trapped under rubble, its mayor said. The U S on Wednesday approved a six hundred twenty-one point nine million dollars F-sixteen support package for Ukraine, funded by European countries."
+    },
+    {
+      "num": 5,
+      "id": "story-04",
+      "section": "Top Stories",
+      "title": "China vows it may retaliate for new U.S. tariff plan",
+      "file": "05-story-04.mp3",
+      "duration": 42.14,
+      "text": "China’s Commerce Ministry said Thursday it firmly opposes the Trump administration’s proposed Section three oh one tariffs on fourteen economies, calling the “overcapacity” investigation “a typical act of unilateralism” that violates World Trade Organization rules, Xinhua reported. Spokesman He Yadong said China “reserves the right to take necessary measures.” He noted the U S had exempted products covered by a thirty billion dollars reciprocal tariff-reduction arrangement reached in September and urged Washington to put it into effect soon. U S Trade Representative Jamieson Greer told CNBC he did not expect the new tariffs, including an extra twenty percent on Chinese goods, to take effect for a couple of months, AP reported."
+    },
+    {
+      "num": 6,
+      "id": "story-05",
+      "section": "Top Stories",
+      "title": "EU summit weighs €45 billion Ukraine loan; Bulgaria joins",
+      "file": "06-story-05.mp3",
+      "duration": 37.36,
+      "text": "European Union leaders opened a two-day summit in Brussels on Thursday to tackle the bloc’s twenty twenty-eight–twenty thirty-four budget and a new €forty-five billion loan to cover two-thirds of Ukraine’s twenty twenty-seven wartime deficit. Bulgarian Prime Minister Rumen Radev said his country will join the loan but only its €twenty billion budget-aid portion, not the €twenty-five billion for weapons, Euronews reported. Slovakia, Hungary and the Czech Republic still oppose the loan. Germany, the Netherlands, Sweden, Denmark and Ireland have said the long-term budget cannot be agreed until Ukraine’s twenty twenty-seven support is locked in."
+    },
+    {
+      "num": 7,
+      "id": "story-06",
+      "section": "Israel",
+      "title": "Yashar resumes coalition talks with the Democrats",
+      "file": "07-story-06.mp3",
+      "duration": 36.73,
+      "text": "Gadi Ayzenkot’s Yahshar party said Thursday it has rezoomed coalition talks with Yair Golan’s Democrats, with “marathon discussions” planned for the day, ending a freeze Golan announced Tuesday in protest of Yahshar’s unity talks with Leekood, The Times of Israel reported. Golan reportedly wants defense, finance or foreign affairs, which are earmarked for Avigdor Liberman’s and Naftali Bennett’s parties, and is seeking justice and education instead; Ayzenkot is expected to offer only national security. Ynet said Ayzenkot aims to finalize portfolio deals within his four-party bloc by the weekend before turning to partners outside it."
+    },
+    {
+      "num": 8,
+      "id": "story-07",
+      "section": "Chareidi World",
+      "title": "Shas sages press Deri over Eisenkot government",
+      "file": "08-story-07.mp3",
+      "duration": 47.2,
+      "text": "Several members of Shahs’s Council of Toerah Sages and heads of Sephardic yesheevoes have voiced support in recent days for backing a government led by Gadi Ayzenkot, Channel thirteen reported, The Times of Israel said. “We don’t understand his insistence on sticking with Netanyahu,” a senior council member said of Aryeh Deri. The council member said that if Rahv Duv Lando and the Hasidic leaders approve a government with the change bloc, “we will immediately demand that the Council of Toerah Sages convene. Everything must be done to save the Toerah world.” Channel thirteen said Deri remarked Wednesday that if the Shahs rahbaneem force the party to back a new government, “it will be very difficult for me to remain in politics.” Separately, Ayzenkot is reportedly holding the interior and religious-services ministries for Shahs, despite its refusals to join."
+    },
+    {
+      "num": 9,
+      "id": "story-08",
+      "section": "Chareidi World",
+      "title": "UTJ: no talk of portfolios, only bnei yeshivos and status quo",
+      "file": "09-story-08.mp3",
+      "duration": 40.83,
+      "text": "United Toerah Judaism said in an official statement Thursday that, contrary to reports, it is not dealing with the division of ministries and positions at this stage. “The only issues on our agenda are regulating the status of yesheeva students and Toerah learners, the independence of ha-ray-dee education, preserving the status quo and the Jewish character of the State of Israel,” the party said, Keekar Hashabbat reported. Channel twelve reported that the change bloc plans to keep the health and housing ministries for U T J but leave them unfilled until a draft law is settled. A senior U T J figure told Kikar there is already “an agreed text in principle” on the draft, now awaiting approval from the I D F and legal advisers."
+    },
+    {
+      "num": 10,
+      "id": "story-09",
+      "section": "Chareidi World",
+      "title": "Ben-Gvir appeals to chareidim: don’t join Eisenkot",
+      "file": "10-story-09.mp3",
+      "duration": 33.1,
+      "text": "Otzma Yehudit chairman Itamar Ben-Gvir issued a personal appeal Thursday morning to the ha-ray-dee public and its representatives against joining a government led by Gadi Ayzenkot, warning it could permanently damage ties among ha-ray-dee, religious and traditional Jews, YWN and Keekar Hashabbat reported. Citing this week’s parsha, “Hakol kol Yahahkov vehayadayim yedei Esav,” he urged ha-ray-dee leaders to weigh prospective partners’ past conduct, recalling Avigdor Liberman’s “wheelbarrow” remark, and warned that “such a decision could be a cause for weeping for generations.”"
+    },
+    {
+      "num": 11,
+      "id": "story-10",
+      "section": "Chareidi World",
+      "title": "Bnei Brak’s Yeshivas Rabbeinu Chaim Ozer to close after Chanukah",
+      "file": "11-story-10.mp3",
+      "duration": 42.48,
+      "text": "yesheevas Rabbeinu Chaim Ozer, operating in B'nay Brak since 5751, is expected to close right after Hah-noo-kah, in about two weeks, under debts estimated at about NIS twenty-five million, including at least NIS ten million owed to the Israel Land Authority and loans from gemachs, Keekar Hashabbat reported Thursday. The site said a dormitory floor was vandalized overnight, with graffiti sprayed and items smashed; who was behind it is unclear. bakhureem have begun looking for other yesheevoes. The rosh yesheeva, Rahv Menachem Tzvi Berlin, is sitting shivah for his brother, Rahv Elchanan Berlin zt\"l, of the Erlau yesheeva leadership, who was niftar last Thursday at ninety-one."
+    },
+    {
+      "num": 12,
+      "id": "story-11",
+      "section": "Region",
+      "title": "Shore told to be off the roads by noon as nor’easter hits",
+      "file": "12-story-11.mp3",
+      "duration": 46.26,
+      "text": "Jersey Shore residents traveling for Thanksgiving were told to be at their destinations by noon in southern Ocean County and one o'clock in the afternoon in northern Monmouth as a fast-moving coastal storm brings gusts of fifty to seventy mph, two to three inches of rain and major tidal flooding, the Asbury Park Press reported early Thursday. Gov. Mikie Sherrill warned flooding could rival or exceed the late-September nor’easter and that outages could be prolonged because crews can’t run bucket trucks in high winds. Forecasters expected peak gusts in southern Ocean County around one to two o'clock in the afternoon. In New York City, Mayor Zohran Mamdani issued a travel advisory, with gusts up to sixty–sixty-five mph forecast from afternoon into late evening; the postponed Macy’s parade is now set for eight thirty in the morning Saturday."
+    },
+    {
+      "num": 13,
+      "id": "story-12",
+      "section": "Tech",
+      "title": "Nvidia halts AI-chip shipments to Southeast Asia",
+      "file": "13-story-12.mp3",
+      "duration": 21.55,
+      "text": "Nvidia has halted A I-chip shipments to Malaysia, Singapore, Thailand and Indonesia, the Financial Times reported, The Verge said Thursday. The company had already said it stopped selling A I chips to China. The move follows tighter U S restrictions introduced last week aimed at limiting Chinese access to A I computing power through overseas data centers."
+    },
+    {
+      "num": 14,
+      "id": "story-13",
+      "section": "Tech",
+      "title": "Anthropic begins paying authors in $1.5 billion settlement",
+      "file": "14-story-13.mp3",
+      "duration": 18.78,
+      "text": "Anthropic has started paying out the one point five billion dollars it agreed last year to settle a class-action copyright suit by authors, The Verge reported Thursday, citing a novelist who said she had already received her share. The full payout should come to about three dollars,zero per book, with part still to come early next year."
+    },
+    {
+      "num": 15,
+      "id": "story-14",
+      "section": "Other Notable",
+      "title": "Explosion and fire at Bangkok refinery injure nine",
+      "file": "15-story-14.mp3",
+      "duration": 27.45,
+      "text": "Elsewhere, an explosion and fire at Bangchak Corp.’s refinery in Bangkok injured at least nine people Thursday afternoon local time, most with burns and three in critical condition, AP reported, citing the Erawan Medical Center. Nearby residents were briefly evacuated. The fire was quickly contained and Bangchak halted production. Energy Minister Akanat Promphan said it began in a refinery unit; Thailand’s oil supply is not expected to be affected."
+    },
+    {
+      "num": 16,
+      "id": "story-15",
+      "section": "Other Notable",
+      "title": "U.K. antisemitism adviser to probe BBC treatment of Jewish staff",
+      "file": "16-story-15.mp3",
+      "duration": 32.05,
+      "text": "Britain’s antisemitism adviser, Lord John Mann, is set to launch an investigation into allegations of a “hostile work environment” for Jewish staff at the BBC, British media reported, The Times of Israel said Thursday. Mann told The Times the broadcaster’s problems with antisemitism are “institutional.” The review is to take several months and go to Culture Secretary Lisa Nandy. A BBC spokesperson said the corporation takes discrimination allegations “extremely seriously” and has introduced compulsory antisemitism training for all staff."
+    },
+    {
+      "num": 17,
+      "id": "weather",
+      "section": "Weather",
+      "title": "South Bend, IN Forecast & 5-Day Outlook",
+      "file": "17-weather.mp3",
+      "duration": 79.83,
+      "text": "Now, your South Bend, Indiana weather forecast from the National Weather Service. Thanksgiving day: Rain after ten o'clock in the morning. Cloudy. High near forty-six, with temperatures falling to around forty-one in the afternoon. Northeast wind around fifteen miles per hour, with gusts as high as thirty miles per hour. Chance of precipitation is one hundred percent. New rainfall amounts between a quarter and half of an inch possible. Tonight: Rain before two o'clock in the morning, then rain and snow. Cloudy, with a low around thirty-two. North wind ten to twenty miles per hour, with gusts as high as thirty-five miles per hour. Chance of precipitation is one hundred percent. New rainfall amounts between a half and three quarters of an inch possible. On Friday, rain and snow, high near forty-eight. Friday Night, mostly cloudy, low around twenty-nine. On Saturday, mostly sunny, high near fifty-one. Saturday Night, mostly cloudy then a chance of light rain, low around thirty-five. On Sunday, light rain, high near forty-eight. Sunday Night, light rain, low around thirty-two. On Monday, mostly cloudy, high near forty-three. Monday Night, partly cloudy, low around twenty-seven. On Tuesday, partly sunny, high near forty-seven.",
+      "periods": [
+        {
+          "name": "Thanksgiving Day",
+          "temp": "46F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Tonight",
+          "temp": "32F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Friday",
+          "temp": "48F",
+          "short": "Rain And Snow"
+        },
+        {
+          "name": "Friday Night",
+          "temp": "29F",
+          "short": "Mostly Cloudy"
+        },
+        {
+          "name": "Saturday",
+          "temp": "51F",
+          "short": "Mostly Sunny"
+        },
+        {
+          "name": "Saturday Night",
+          "temp": "35F",
+          "short": "Mostly Cloudy then Chance Light Rain"
+        },
+        {
+          "name": "Sunday",
+          "temp": "48F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Sunday Night",
+          "temp": "32F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Monday",
+          "temp": "43F",
+          "short": "Mostly Cloudy"
+        },
+        {
+          "name": "Monday Night",
+          "temp": "27F",
+          "short": "Partly Cloudy"
+        },
+        {
+          "name": "Tuesday",
+          "temp": "47F",
+          "short": "Partly Sunny"
+        }
+      ]
+    },
+    {
+      "num": 18,
+      "id": "signoff",
+      "section": "SBR News",
+      "title": "That's the latest from SBR News",
+      "file": "18-signoff.mp3",
+      "duration": 2.25,
+      "text": "That's the latest from SBR News."
+    }
+  ]
+}
