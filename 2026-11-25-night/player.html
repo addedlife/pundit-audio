@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SBR News — Wednesday, November 25, 2026 · Night Brief</title>
+<style>
+:root{--bg:#EDECE8;--card:#F4F3EF;--ink:#231F20;--mut:#5c5755;--line:#d5d1c8;--acc:#0f7ec8}
+@media(prefers-color-scheme:dark){:root{--bg:#161615;--card:#21201e;--ink:#f2efe9;--mut:#a7a29b;--line:#35332f;--acc:#4ba3e3}}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',Georgia,serif}
+.wrap{max-width:480px;margin:0 auto;padding:16px 14px 34px}
+.hdr{border-bottom:1.5px solid var(--ink);padding-bottom:10px;margin-bottom:14px;text-align:center}
+.brand{font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:28px;letter-spacing:-.01em}
+.sub{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:4px;font-family:-apple-system,sans-serif}
+.fpback{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;border:1.5px solid var(--ink);color:var(--ink);background:transparent;text-decoration:none;font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;padding:8px 14px;border-radius:0}
+.fpback:active{opacity:.75}
+.fpico{width:22px;height:16px;display:block;flex:none}
+.deck{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.now-sec{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-family:-apple-system,sans-serif}
+.now-title{font-size:20px;line-height:1.22;font-weight:700;margin:6px 0 10px;min-height:48px}
+.prog{width:100%;height:34px;accent-color:var(--ink)}
+.times{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);font-family:-apple-system,sans-serif;margin-top:2px}
+.ctrls{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:10px;margin-top:14px}
+button.ctrl{appearance:none;border:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:12px;padding:16px 8px;font-size:16px;font-weight:700;font-family:-apple-system,sans-serif;cursor:pointer;touch-action:manipulation}
+button.ctrl.play{background:var(--ink);color:var(--bg);font-size:18px}
+button.ctrl:active{opacity:.75;transform:scale(.98)}
+.spd{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.spd button{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:6px 12px;font-size:12px;font-family:-apple-system,sans-serif;cursor:pointer}
+.spd button.on{border-color:var(--ink);font-weight:700}
+.list{display:flex;flex-direction:column;gap:6px}
+.row{display:flex;align-items:center;gap:10px;text-align:left;width:100%;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:11px 12px;cursor:pointer;font-family:-apple-system,sans-serif}
+.row.on{border:1.5px solid var(--ink)}
+.num{font-weight:700;font-size:13px;min-width:22px;color:var(--mut)}
+.row.on .num{color:var(--ink)}
+.meta{flex:1;min-width:0}
+.rsec{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.rtit{font-size:14px;font-weight:600;line-height:1.25;margin-top:2px}
+.rdur{font-size:12px;color:var(--mut);white-space:nowrap}
+</style></head><body>
+<div class="wrap">
+  <div class="hdr"><div class="brand">SBR News</div><div class="sub">Wednesday, November 25, 2026 · Night Brief</div>
+    <a class="fpback" href="brief.pdf" target="_blank" rel="noopener" title="Open the front page (audio keeps playing)">
+      <svg class="fpico" viewBox="0 0 24 18" aria-hidden="true"><rect x="1.2" y="1" width="21.6" height="16" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M1.2 5.2h21.6" stroke="currentColor" stroke-width="1.3"/><path d="M4 8.2h7.5M4 10.6h7.5M4 13h5.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><rect x="13.6" y="8" width="6.2" height="5.2" fill="none" stroke="currentColor" stroke-width="1.1"/></svg>
+      Front Page
+    </a></div>
+  <div class="deck">
+    <div class="now-sec" id="nsec"></div>
+    <div class="now-title" id="ntit"></div>
+    <audio id="au" preload="auto" playsinline></audio>
+    <input class="prog" id="seek" type="range" min="0" max="100" value="0" step="0.5">
+    <div class="times"><span id="cur">0:00</span><span id="dur">0:00</span></div>
+    <div class="ctrls">
+      <button class="ctrl" id="prev" aria-label="Previous story">&#9664;&#9664; Prev</button>
+      <button class="ctrl play" id="play" aria-label="Play or Pause">&#9654; Play</button>
+      <button class="ctrl" id="next" aria-label="Next story">Next &#9654;&#9654;</button>
+    </div>
+    <div class="spd" id="spd"></div>
+  </div>
+  <div class="list" id="list"></div>
+</div>
+<script>
+const TRACKS = [{"num": 1, "id": "intro", "section": "SBR News", "title": "This ... is SBR News (Night Brief)", "file": "01-intro.mp3", "duration": 5.54, "clock_intro": "after", "src": "01-intro.mp3"}, {"num": 2, "id": "story-01", "section": "Top Stories", "title": "Storm postpones Macy’s 100th parade for the first time", "file": "02-story-01.mp3", "duration": 67.94, "src": "02-story-01.mp3"}, {"num": 3, "id": "story-02", "section": "Top Stories", "title": "Third-quarter growth revised up to 4.3%", "file": "03-story-02.mp3", "duration": 52.53, "src": "03-story-02.mp3"}, {"num": 4, "id": "story-03", "section": "Top Stories", "title": "Projectile explodes near tanker off Dubai", "file": "04-story-03.mp3", "duration": 46.76, "src": "04-story-03.mp3"}, {"num": 5, "id": "story-04", "section": "Israel", "title": "Liberman’s party slated for defense, justice in Eisenkot deal", "file": "05-story-04.mp3", "duration": 55.8, "src": "05-story-04.mp3"}, {"num": 6, "id": "story-05", "section": "Israel", "title": "Knesset advances repeal of Karhi broadcasting law", "file": "06-story-05.mp3", "duration": 44.09, "src": "06-story-05.mp3"}, {"num": 7, "id": "story-06", "section": "Chareidi World", "title": "Liberman: UTJ has rabbanim’s green light; Likud’s Chikli attacks draft deal", "file": "07-story-06.mp3", "duration": 54.36, "src": "07-story-06.mp3"}, {"num": 8, "id": "story-07", "section": "Tech", "title": "New York bans AI chatbot toys for five years", "file": "08-story-07.mp3", "duration": 21.47, "src": "08-story-07.mp3"}, {"num": 9, "id": "story-08", "section": "Other Notable", "title": "Army blows up its lead azide stockpile in Iowa", "file": "09-story-08.mp3", "duration": 45.58, "src": "09-story-08.mp3"}, {"num": 10, "id": "story-09", "section": "Other Notable", "title": "Colombian forces free 76 hostages in Cartagena supermarket", "file": "10-story-09.mp3", "duration": 43.39, "src": "10-story-09.mp3"}, {"num": 11, "id": "weather", "section": "Weather", "title": "South Bend, IN Forecast & 5-Day Outlook", "file": "11-weather.mp3", "duration": 68.26, "src": "11-weather.mp3"}, {"num": 12, "id": "signoff", "section": "SBR News", "title": "That's the latest from SBR News", "file": "12-signoff.mp3", "duration": 2.25, "src": "12-signoff.mp3"}];
+const CLOCK_ABS = "https://addedlife.github.io/pundit-audio/clock/";
+const CLOCK_BASE = false ? CLOCK_ABS : (location.protocol === 'file:' ? CLOCK_ABS : '../clock/');
+const TIME_CHECK_EVERY = 3;
+const SILENT_WAV = 'data:audio/wav;base64,UklGRmQBAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YUABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==';
+
+const au = document.getElementById('au');
+const playBtn = document.getElementById('play');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+const seek = document.getElementById('seek');
+const curEl = document.getElementById('cur');
+const durEl = document.getElementById('dur');
+const nsec = document.getElementById('nsec');
+const ntit = document.getElementById('ntit');
+const listEl = document.getElementById('list');
+const spdEl = document.getElementById('spd');
+
+let idx = 0, rate = 1.0, playing = false;
+let phase = 'track'; // 'track' | 'intro-clock' | 'timecheck' | 'outro-clock'
+let pendingNextIdx = 0;
+let loadSeq = 0;
+let activeBlobUrl = null;
+let prewarmedIntro = null;
+let prewarmPromise = null;
+let prewarmedNextClock = null;
+let prewarmNextClockPromise = null;
+let userInteracted = false;
+const preloadedTracks = new Map();
+const preloadingTracks = new Set();
+
+const q = new URLSearchParams(location.search);
+const qt = parseInt(q.get('track') || q.get('story') || '0', 10);
+if (qt >= 1 && qt <= TRACKS.length) idx = qt - 1;
+const hasTrack = q.has('track') || q.has('story');
+const apRaw = (q.get('autoplay') || '').toLowerCase();
+const wantAuto = apRaw === '1' || apRaw === 'true' || (q.has('autoplay') && apRaw === '') || (!hasTrack && apRaw !== '0' && apRaw !== 'false');
+let liveClock = !hasTrack || qt === 1;
+
+const AC = window.AudioContext || window.webkitAudioContext;
+let actx = null;
+const clipCache = new Map();
+
+function getActx(){
+  if (!actx && AC) actx = new AC();
+  return actx;
+}
+
+function timeKeys(d){
+  const h24 = d.getHours();
+  const m = d.getMinutes();
+  const h12 = (h24 % 12) || 12;
+  const ampm = h24 < 12 ? 'am' : 'pm';
+  const hKey = 'h-' + String(h12).padStart(2, '0');
+  const mKey = 'm-' + String(m).padStart(2, '0');
+  const label = `${h12}:${String(m).padStart(2, '0')} ${ampm.toUpperCase()}`;
+  return { key: `${hKey}_${mKey}_${ampm}`, hKey, mKey, ampm, label, nextMKey: 'm-' + String((m + 1) % 60).padStart(2, '0') };
+}
+
+async function fetchClipBuffer(name){
+  if (clipCache.has(name)) return clipCache.get(name);
+  const p = (async () => {
+    const ctx = getActx();
+    if (!ctx) throw new Error('no AudioContext');
+    let resp;
+    try {
+      resp = await fetch(CLOCK_BASE + name + '.mp3', { cache: 'force-cache' });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    } catch (e) {
+      if (CLOCK_ABS && CLOCK_BASE !== CLOCK_ABS) {
+        resp = await fetch(CLOCK_ABS + name + '.mp3', { cache: 'force-cache' });
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      } else {
+        throw e;
+      }
+    }
+    const ab = await resp.arrayBuffer();
+    return await new Promise((res, rej) => {
+      const pr = ctx.decodeAudioData(ab, res, rej);
+      if (pr && pr.then) pr.then(res, rej);
+    });
+  })();
+  p.catch(() => clipCache.delete(name));
+  clipCache.set(name, p);
+  return p;
+}
+
+function trimPcm(f32, sr, thr = 0.004){
+  let s = 0, e = f32.length;
+  while (s < e && Math.abs(f32[s]) < thr) s++;
+  while (e > s && Math.abs(f32[e - 1]) < thr) e--;
+  const pad = Math.floor(sr * 0.004);
+  s = Math.max(0, s - pad);
+  e = Math.min(f32.length, e + pad);
+  return f32.subarray(s, e);
+}
+
+function encodeWav(parts, gapsSec, sr){
+  let totalSamples = 0;
+  const gapSamples = gapsSec.map(g => Math.max(0, Math.round(g * sr)));
+  for (let i = 0; i < parts.length; i++) {
+    totalSamples += parts[i].length;
+    if (i < gapSamples.length) totalSamples += gapSamples[i];
+  }
+  const dataBytes = totalSamples * 2;
+  const buf = new ArrayBuffer(44 + dataBytes);
+  const v = new DataView(buf);
+  const ws = (off, s) => { for (let i = 0; i < s.length; i++) v.setUint8(off + i, s.charCodeAt(i)); };
+  ws(0, 'RIFF');
+  v.setUint32(4, 36 + dataBytes, true);
+  ws(8, 'WAVE');
+  ws(12, 'fmt ');
+  v.setUint32(16, 16, true);
+  v.setUint16(20, 1, true);
+  v.setUint16(22, 1, true);
+  v.setUint32(24, sr, true);
+  v.setUint32(28, sr * 2, true);
+  v.setUint16(32, 2, true);
+  v.setUint16(34, 16, true);
+  ws(36, 'data');
+  v.setUint32(40, dataBytes, true);
+  let off = 44;
+  for (let i = 0; i < parts.length; i++) {
+    const ch = parts[i];
+    const fadeLen = Math.min(Math.floor(sr * 0.004), Math.floor(ch.length / 4));
+    for (let j = 0; j < ch.length; j++) {
+      let x = ch[j];
+      if (fadeLen > 0) {
+        if (j < fadeLen) x *= j / fadeLen;
+        else if (j >= ch.length - fadeLen) x *= (ch.length - 1 - j) / fadeLen;
+      }
+      if (x > 1) x = 1; else if (x < -1) x = -1;
+      v.setInt16(off, x < 0 ? x * 0x8000 : x * 0x7fff, true);
+      off += 2;
+    }
+    if (i < gapSamples.length) off += gapSamples[i] * 2;
+  }
+  return { blob: new Blob([buf], { type: 'audio/wav' }), duration: totalSamples / sr };
+}
+
+async function buildClockBlob(kind, d){
+  const tk = timeKeys(d || new Date());
+  let seq, gaps;
+  if (kind === 'intro') {
+    seq = ['sbr-intro', 'its', tk.hKey, tk.mKey, tk.ampm];
+    gaps = [0.38, 0.035, 0.025, 0.045];
+  } else if (kind === 'outro') {
+    seq = ['its', tk.hKey, tk.mKey, tk.ampm, 'sbr-intro'];
+    gaps = [0.035, 0.025, 0.045, 1.00];
+  } else {
+    seq = ['its', tk.hKey, tk.mKey, tk.ampm];
+    gaps = [0.035, 0.025, 0.045, 1.00];
+  }
+  const bufs = await Promise.all(seq.map(fetchClipBuffer));
+  const sr = bufs[0].sampleRate;
+  const parts = bufs.map(b => trimPcm(b.getChannelData(0), sr));
+  const wav = encodeWav(parts, gaps, sr);
+  return { url: URL.createObjectURL(wav.blob), label: tk.label, key: kind + '_' + tk.key, duration: wav.duration };
+}
+
+function prewarmMinute(){
+  if (!liveClock || !AC) return;
+  const tk = timeKeys(new Date());
+  ['sbr-intro', 'its', 'am', 'pm', tk.hKey, tk.mKey, tk.nextMKey].forEach(k => {
+    fetchClipBuffer(k).catch(() => {});
+  });
+}
+
+function resolvedTrackSrc(t){
+  return (t && preloadedTracks.get(t.src)) || (t ? t.src : '');
+}
+
+function preloadTrack(i){
+  if (i < 0 || i >= TRACKS.length) return;
+  const t = TRACKS[i];
+  if (!t || !t.src || t.src.startsWith('data:') || preloadedTracks.has(t.src) || preloadingTracks.has(t.src)) return;
+  preloadingTracks.add(t.src);
+  fetch(t.src, { cache: 'force-cache' })
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.blob(); })
+    .then(b => {
+      preloadedTracks.set(t.src, URL.createObjectURL(b));
+      // Evict tracks well behind current index to keep memory small
+      for (let j = 0; j < idx - 2; j++) {
+        const old = TRACKS[j];
+        if (old && preloadedTracks.has(old.src)) {
+          URL.revokeObjectURL(preloadedTracks.get(old.src));
+          preloadedTracks.delete(old.src);
+        }
+      }
+    })
+    .catch(() => {})
+    .finally(() => preloadingTracks.delete(t.src));
+}
+
+function nextClockKindAfter(i){
+  if (!liveClock || !AC || i + 1 >= TRACKS.length) return null;
+  const curT = TRACKS[i], nextT = TRACKS[i + 1];
+  if (nextT.id === 'signoff') return 'outro';
+  if (curT.id && curT.id.startsWith('story-') && nextT.id && nextT.id.startsWith('story-')) {
+    const m = curT.id.match(/^story-(\d+)$/);
+    const sNum = m ? parseInt(m[1], 10) : 0;
+    if (sNum > 0 && sNum % TIME_CHECK_EVERY === 0) return 'check';
+  }
+  return null;
+}
+
+function prewarmNextClock(){
+  const kind = nextClockKindAfter(idx);
+  if (!kind) return;
+  const tk = timeKeys(new Date());
+  const expectedKey = kind + '_' + tk.key;
+  if (prewarmedNextClock && prewarmedNextClock.key === expectedKey) return;
+  if (prewarmNextClockPromise) return;
+  prewarmMinute();
+  prewarmNextClockPromise = buildClockBlob(kind, new Date()).then(res => {
+    if (prewarmedNextClock && prewarmedNextClock.url !== activeBlobUrl) URL.revokeObjectURL(prewarmedNextClock.url);
+    prewarmedNextClock = res;
+    prewarmNextClockPromise = null;
+    return res;
+  }).catch(() => {
+    prewarmNextClockPromise = null;
+    return null;
+  });
+}
+
+function prewarmIntro(){
+  preloadTrack(idx);
+  if (!liveClock || !AC) return Promise.resolve(null);
+  const tk = timeKeys(new Date());
+  if (prewarmedIntro && prewarmedIntro.key === 'intro_' + tk.key) return Promise.resolve(prewarmedIntro);
+  if (prewarmPromise) return prewarmPromise;
+  prewarmMinute();
+  prewarmPromise = buildClockBlob('intro', new Date()).then(res => {
+    if (prewarmedIntro && prewarmedIntro.url !== activeBlobUrl) URL.revokeObjectURL(prewarmedIntro.url);
+    prewarmedIntro = res;
+    prewarmPromise = null;
+    return res;
+  }).catch(() => {
+    prewarmPromise = null;
+    return null;
+  });
+  return prewarmPromise;
+}
+
+function setBlobSrc(url){
+  if (activeBlobUrl && activeBlobUrl !== url && (!prewarmedIntro || activeBlobUrl !== prewarmedIntro.url)) {
+    URL.revokeObjectURL(activeBlobUrl);
+  }
+  activeBlobUrl = url;
+  au.src = url;
+}
+
+function setClockActive(res, pName){
+  phase = pName;
+  setBlobSrc(res.url);
+  au.playbackRate = rate;
+  if (pName === 'intro-clock') {
+    nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
+    ntit.textContent = `This ... is SBR News · It's ${res.label}`;
+  } else if (pName === 'timecheck') {
+    nsec.textContent = `Time Check · SBR News`;
+    ntit.textContent = `It's ${res.label}`;
+  } else if (pName === 'outro-clock') {
+    nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
+    ntit.textContent = `It's ${res.label} · This ... is SBR News`;
+  }
+  durEl.textContent = fmt(res.duration);
+  curEl.textContent = '0:00';
+  seek.value = 0;
+  updateMediaSession(ntit.textContent);
+}
+
+function tryPlay(){
+  const p = au.play();
+  if (p && p.catch) p.catch(() => {});
+}
+
+function startFromGesture(){
+  userInteracted = true;
+  if (phase === 'intro-clock' || phase === 'outro-clock' || phase === 'timecheck') {
+    const kind = phase === 'intro-clock' ? 'intro' : (phase === 'outro-clock' ? 'outro' : 'check');
+    const tk = timeKeys(new Date());
+    if (kind === 'intro' && prewarmedIntro && prewarmedIntro.key === 'intro_' + tk.key) {
+      setClockActive(prewarmedIntro, 'intro-clock');
+      const p = au.play();
+      if (p && p.catch) p.catch(() => {});
+      return;
+    }
+    au.src = SILENT_WAV;
+    const prime = au.play();
+    if (prime && prime.catch) prime.catch(() => {});
+    const mySeq = loadSeq;
+    const targetPhase = phase;
+    buildClockBlob(kind, new Date()).then(res => {
+      if (mySeq !== loadSeq) return;
+      setClockActive(res, targetPhase);
+      au.play().catch(() => {});
+    }).catch(() => {
+      if (mySeq !== loadSeq) return;
+      phase = 'track';
+      au.src = resolvedTrackSrc(TRACKS[idx]);
+      au.playbackRate = rate;
+      au.play().catch(() => {});
+    });
+    return;
+  }
+  const p = au.play();
+  if (p && p.catch) p.catch(() => {});
+}
+
+function fmt(s){ if(!isFinite(s)||s<0)return '0:00'; s=Math.floor(s); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+
+function updateMediaSession(titleOverride){
+  if (!('mediaSession' in navigator)) return;
+  const t = TRACKS[idx];
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: titleOverride || t.title,
+    artist: 'SBR News',
+    album: 'Wednesday, November 25, 2026 · Night Brief',
+  });
+  navigator.mediaSession.setActionHandler('play', () => startFromGesture());
+  navigator.mediaSession.setActionHandler('pause', () => au.pause());
+  navigator.mediaSession.setActionHandler('previoustrack', () => prevBtn.click());
+  navigator.mediaSession.setActionHandler('nexttrack', () => nextBtn.click());
+  try {
+    navigator.mediaSession.setActionHandler('seekto', (d) => { if (d.seekTime != null) au.currentTime = d.seekTime; });
+  } catch {}
+}
+
+function renderList(){
+  listEl.innerHTML = '';
+  TRACKS.forEach((t, i) => {
+    const b = document.createElement('button');
+    b.className = 'row' + (i === idx ? ' on' : '');
+    b.innerHTML = `<span class="num">${t.num}</span><span class="meta"><div class="rsec">${t.section}</div><div class="rtit">${t.title}</div></span><span class="rdur">${fmt(t.duration)}</span>`;
+    b.onclick = () => {
+      userInteracted = true;
+      if (t.id === 'intro') liveClock = true;
+      load(i, true);
+    };
+    listEl.appendChild(b);
+  });
+}
+
+function playClockPhase(kind, pName, autoPlay, fallbackTrackIdx){
+  const mySeq = loadSeq;
+  phase = pName;
+  if (kind === 'intro') {
+    nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
+    ntit.textContent = TRACKS[idx].title;
+  } else if (kind === 'check') {
+    nsec.textContent = `Time Check · SBR News`;
+    ntit.textContent = `It's ${timeKeys(new Date()).label}`;
+  } else {
+    nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
+    ntit.textContent = `It's ${timeKeys(new Date()).label} · This ... is SBR News`;
+  }
+  renderList();
+  updateMediaSession(ntit.textContent);
+
+  const tk = timeKeys(new Date());
+  if (kind === 'intro' && prewarmedIntro && prewarmedIntro.key === 'intro_' + tk.key) {
+    setClockActive(prewarmedIntro, pName);
+    preloadTrack(idx);
+    if (autoPlay) tryPlay();
+    return;
+  }
+  if (kind !== 'intro' && prewarmedNextClock && prewarmedNextClock.key === kind + '_' + tk.key) {
+    setClockActive(prewarmedNextClock, pName);
+    if (kind === 'check') preloadTrack(fallbackTrackIdx);
+    if (autoPlay) tryPlay();
+    return;
+  }
+  if (kind === 'intro' && autoPlay && !userInteracted) {
+    const builder = kind === 'intro' ? prewarmIntro() : buildClockBlob(kind, new Date());
+    builder.then(res => {
+      if (mySeq !== loadSeq) return;
+      if (res) {
+        setClockActive(res, pName);
+        if (!userInteracted) tryPlay();
+      } else {
+        phase = 'track';
+        au.src = TRACKS[fallbackTrackIdx].src;
+        au.playbackRate = rate;
+        if (!userInteracted) tryPlay();
+      }
+    }).catch(() => {
+      if (mySeq !== loadSeq) return;
+      phase = 'track';
+      au.src = resolvedTrackSrc(TRACKS[fallbackTrackIdx]);
+      au.playbackRate = rate;
+      if (!userInteracted) tryPlay();
+    });
+    return;
+  }
+  (kind === 'intro' ? prewarmIntro() : buildClockBlob(kind, new Date())).then(res => {
+    if (mySeq !== loadSeq) return;
+    if (res) {
+      setClockActive(res, pName);
+      if (autoPlay) tryPlay();
+    } else {
+      phase = 'track';
+      au.src = resolvedTrackSrc(TRACKS[fallbackTrackIdx]);
+      au.playbackRate = rate;
+      if (autoPlay) tryPlay();
+    }
+  }).catch(() => {
+    if (mySeq !== loadSeq) return;
+    phase = 'track';
+    au.src = resolvedTrackSrc(TRACKS[fallbackTrackIdx]);
+    au.playbackRate = rate;
+    if (autoPlay) tryPlay();
+  });
+}
+
+function load(i, autoPlay){
+  if (i < 0) i = 0;
+  if (i >= TRACKS.length){ playing = false; playBtn.innerHTML = '&#9654; Play'; return; }
+  idx = i;
+  loadSeq++;
+  const t = TRACKS[idx];
+  if (liveClock && t.id === 'intro' && AC) {
+    playClockPhase('intro', 'intro-clock', autoPlay, idx);
+    return;
+  }
+  if (liveClock && t.id === 'signoff' && AC) {
+    playClockPhase('outro', 'outro-clock', autoPlay, idx);
+    return;
+  }
+  phase = 'track';
+  nsec.textContent = `Track ${t.num} of ${TRACKS.length} · ${t.section}`;
+  ntit.textContent = t.title;
+  au.src = resolvedTrackSrc(t);
+  au.playbackRate = rate;
+  durEl.textContent = fmt(t.duration);
+  curEl.textContent = '0:00';
+  seek.value = 0;
+  renderList();
+  updateMediaSession();
+  preloadTrack(idx + 1);
+  if (autoPlay) tryPlay();
+}
+
+playBtn.onclick = () => {
+  if (au.paused) {
+    if (!au.getAttribute('src') || (phase !== 'track' && au.currentTime === 0)) {
+      startFromGesture();
+    } else {
+      userInteracted = true;
+      au.play().catch(() => {});
+    }
+  } else {
+    au.pause();
+  }
+};
+prevBtn.onclick = () => {
+  userInteracted = true;
+  if (phase === 'timecheck') { load(idx, true); return; }
+  if (au.currentTime > 4) { au.currentTime = 0; } else { load(idx - 1, true); }
+};
+nextBtn.onclick = () => {
+  userInteracted = true;
+  if (phase === 'timecheck') { load(pendingNextIdx, true); return; }
+  load(idx + 1, true);
+};
+au.onplay = () => { playing = true; playBtn.innerHTML = '&#10074;&#10074; Pause'; if('mediaSession' in navigator) navigator.mediaSession.playbackState='playing'; };
+au.onpause = () => { playing = false; playBtn.innerHTML = '&#9654; Play'; if('mediaSession' in navigator) navigator.mediaSession.playbackState='paused'; };
+au.onended = () => {
+  if (phase === 'intro-clock') {
+    if (TRACKS[idx].clock_intro === 'after') {
+      phase = 'track';
+      au.src = resolvedTrackSrc(TRACKS[idx]);
+      au.playbackRate = rate;
+      preloadTrack(idx + 1);
+      tryPlay();
+    } else {
+      load(idx + 1, true);
+    }
+    return;
+  }
+  if (phase === 'timecheck') {
+    load(pendingNextIdx, true);
+    return;
+  }
+  if (phase === 'outro-clock') {
+    playing = false;
+    playBtn.innerHTML = '&#9654; Play';
+    return;
+  }
+  if (idx + 1 < TRACKS.length) {
+    const curT = TRACKS[idx], nextT = TRACKS[idx + 1];
+    if (liveClock && AC && curT.id && curT.id.startsWith('story-') && nextT.id && nextT.id.startsWith('story-')) {
+      const m = curT.id.match(/^story-(\d+)$/);
+      const sNum = m ? parseInt(m[1], 10) : 0;
+      if (sNum > 0 && sNum % TIME_CHECK_EVERY === 0) {
+        pendingNextIdx = idx + 1;
+        loadSeq++;
+        playClockPhase('check', 'timecheck', true, idx + 1);
+        return;
+      }
+    }
+    load(idx + 1, true);
+  }
+};
+au.ontimeupdate = () => {
+  if (!au.duration) return;
+  seek.max = au.duration;
+  seek.value = au.currentTime;
+  curEl.textContent = fmt(au.currentTime);
+  durEl.textContent = fmt(au.duration);
+  if (au.duration - au.currentTime < 25) preloadTrack(idx + 1);
+  if (liveClock && au.duration - au.currentTime < 15) prewarmNextClock();
+};
+seek.oninput = () => { au.currentTime = Number(seek.value); };
+
+[0.9, 1.0, 1.15, 1.25].forEach(r => {
+  const b = document.createElement('button');
+  b.textContent = r + 'x';
+  if (r === rate) b.className = 'on';
+  b.onclick = () => {
+    rate = r; au.playbackRate = r;
+    [...spdEl.children].forEach(c => c.className = c.textContent === (r+'x') ? 'on' : '');
+  };
+  spdEl.appendChild(b);
+});
+
+if (liveClock) {
+  prewarmIntro();
+  setInterval(() => { if (!playing && phase === 'intro-clock') prewarmIntro(); }, 15000);
+}
+load(idx, wantAuto);
+</script></body></html>

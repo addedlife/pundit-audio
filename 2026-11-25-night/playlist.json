@@ -1,0 +1,178 @@
+{
+  "brand": "SBR News",
+  "date": "2026-11-25",
+  "date_display": "Wednesday, November 25, 2026",
+  "slot": "night",
+  "label": "Night Brief",
+  "voice": "en-GB-RyanNeural",
+  "arad_delivery": "off",
+  "total_duration": 507.97,
+  "tracks": [
+    {
+      "num": 1,
+      "id": "intro",
+      "section": "SBR News",
+      "title": "This ... is SBR News (Night Brief)",
+      "file": "01-intro.mp3",
+      "duration": 5.54,
+      "text": "This ... is SBR News. Your Night Brief for 2026-11-25.",
+      "clock_intro": "after"
+    },
+    {
+      "num": 2,
+      "id": "story-01",
+      "section": "Top Stories",
+      "title": "Storm postpones Macy’s 100th parade for the first time",
+      "file": "02-story-01.mp3",
+      "duration": 67.94,
+      "text": "Macy’s 100th Thanksgiving Day Parade, scheduled for Thursday, was moved to Saturday, Nov. twenty-eight, at eight:thirty a.m. ET because of a powerful nor’easter, the first time in the event’s history that it has been postponed for weather, the Associated Press and NBC News reported. Macy’s said the decision was made “out of an abundance of caution” after consultation with city officials. The parade was last suspended during World War II; in one thousand nine hundred seventy-one its balloons were grounded for wind. New York City Mayor Zohran Mamdani told a news conference Wednesday evening that the city expects sustained winds of thirty to forty mph with gusts as high as sixty-five mph on Thursday, strong enough to bring down tree limbs and power lines. The National Weather Service issued a high wind warning and a coastal flood warning, and the mayor urged holiday travelers to budget extra time or stay indoors if conditions turn severe. Organizers said the balloons already in Manhattan would be deflated Wednesday night and stored at a facility in New Jersey before being reinflated for Saturday. Police Commissioner Jessica Tisch said there were no specific, credible threats to the parade."
+    },
+    {
+      "num": 3,
+      "id": "story-02",
+      "section": "Top Stories",
+      "title": "Third-quarter growth revised up to 4.3%",
+      "file": "03-story-02.mp3",
+      "duration": 52.53,
+      "text": "U S gross domestic product grew at a four point three percent annualized rate in the third quarter, the fastest pace in three years, the Commerce Department’s Bureau of Economic Analysis said Wednesday in its second estimate, Reuters reported. Growth had first been estimated at three point four percent; economists polled by Reuters had expected a revision to three point five percent. The economy grew at a two point two percent rate in the April-June quarter. Consumer spending growth was revised up to a four point two percent rate from three point eight percent, and business spending on equipment rose at a twenty-one point eight percent rate, reflecting heavy investment in artificial intelligence. Final sales to private domestic purchasers, a closely watched gauge of demand, rose at a five point eight percent rate, the fastest since the second quarter of twenty twenty-one. Measured from the income side, the economy grew at a four point four percent rate."
+    },
+    {
+      "num": 4,
+      "id": "story-03",
+      "section": "Top Stories",
+      "title": "Projectile explodes near tanker off Dubai",
+      "file": "04-story-03.mp3",
+      "duration": 46.76,
+      "text": "The United Kingdom Maritime Trade Operations agency said it received a report of an explosion caused by an unidentified projectile near a tanker about fifty nautical miles west of Dubai at 2130 UTC on Nov. twenty-five (four:thirty p.m. ET). The tanker’s master reported the blast; UKMTO said the vessel sustained no damage, all crew were safe and accounted for, and there was no environmental impact, Reuters reported. UKMTO classified the event as suspicious activity and advised vessels to transit with caution while authorities investigate. The tanker was not identified and no one claimed responsibility. It came hours after Iran’s Revolutionary Guards claimed an LNG tanker struck a mine in the Strait of Hormuz, part of a wave of attacks on Gulf shipping."
+    },
+    {
+      "num": 5,
+      "id": "story-04",
+      "section": "Israel",
+      "title": "Liberman’s party slated for defense, justice in Eisenkot deal",
+      "file": "05-story-04.mp3",
+      "duration": 55.8,
+      "text": "Yashar leader Gadi Eisenkot and Yisrael Beytenu chairman Avigdor Liberman agreed that Liberman’s party will receive three portfolios—defense, justice, and aliyah and integration—in the government Eisenkot is trying to form, Channel thirteen News reported, according to The Jerusalem Post. Liberman is expected to return to the Defense Ministry, which he headed from twenty sixteen to twenty eighteen, with Oded Forer at Justice and Yulia Malinovsky at Aliyah and Integration. The report said Yair Golan’s Democrats and senior Yashar officials had also sought the justice portfolio. Separately, Haaretz reported that B’Yachad chairman Naftali Bennett was running a secret negotiating channel with Prime Minister Netanyahu on a unity government, through his confidant Shalom Shlomo and Netanyahu representative Michael Rabello, without informing the other bloc leaders, and that Likud offered seven slots on its next slate to defectors. Bennett called the report false, The Times of Israel reported."
+    },
+    {
+      "num": 6,
+      "id": "story-05",
+      "section": "Israel",
+      "title": "Knesset advances repeal of Karhi broadcasting law",
+      "file": "06-story-05.mp3",
+      "duration": 44.09,
+      "text": "The Kuh-nesset passed in a first reading, fifty-one to thirty-two, legislation repealing Communications Minister Shlomo Karhi’s broadcasting law, The Times of Israel reported. The law, passed in July, overhauled media regulation by removing longstanding oversight mechanisms, minimum journalistic standards and cross-ownership limits, while giving the government greater influence over television ratings and the allocation of state advertising. The bill now returns to a special committee. Karhi criticized the pace of the repeal, saying his bill had three hundred sixty hours of committee discussion compared with about ten for the repeal. B’Yachad M K Eitan Ginzburg, who is championing the repeal, said the new Kuh-nesset was “elected to legislate, and legislate we shall.”"
+    },
+    {
+      "num": 7,
+      "id": "story-06",
+      "section": "Chareidi World",
+      "title": "Liberman: UTJ has rabbanim’s green light; Likud’s Chikli attacks draft deal",
+      "file": "07-story-06.mp3",
+      "duration": 54.36,
+      "text": "Yisrael Beytenu chairman Avigdor Liberman told Kan Reshet Bet that coalition talks with the ha-ray-dee parties were “progressing very well” and that a government with a Jewish majority could be presented by the end of next week, claiming United Torah Judaism M Ks had received a green light from their rabbanim, The Yeshiva World reported. He said a conscription law must meet the I D F’s needs and pass the chief of staff and the High Court, after which there was no reason it should not pass Rahv Dov Lando. No coalition agreement has been announced. Likud minister Amichai Chikli attacked the emerging draft arrangement, calling it a “clearance sale” of I D F fighters and reservists with “one hundred percent for draft-dodgers, refusers and Arabs and zero percent for those who serve,” Kikar HaShabbat reported. Raz Nizri, a former deputy attorney general advising Eisenkot’s Yashar on the draft, said anyone who thinks all ha-ray-deem can be drafted overnight “is living in illusions.”"
+    },
+    {
+      "num": 8,
+      "id": "story-07",
+      "section": "Tech",
+      "title": "New York bans AI chatbot toys for five years",
+      "file": "08-story-07.mp3",
+      "duration": 21.47,
+      "text": "Gov. Kathy Hochul signed a bill putting a five-year pause on the manufacturing, distribution and sale of A I chatbot toys in New York, including “talking stuffed animals, dolls and robots that use the internet to hold conversations with kids,” The Verge reported Wednesday. The measure comes one month after New York restricted how chatbots may interact with minors."
+    },
+    {
+      "num": 9,
+      "id": "story-08",
+      "section": "Other Notable",
+      "title": "Army blows up its lead azide stockpile in Iowa",
+      "file": "09-story-08.mp3",
+      "duration": 45.58,
+      "text": "Elsewhere, the U S Army intentionally blew up the nation’s entire stockpile of lead azide, about five tons of degraded bomb-making material, at the Iowa Army Ammunition Plant near Middletown on Wednesday, after officials warned it was at risk of exploding uncontrollably as temperatures cooled, the Associated Press reported. The controlled blast came at ten:fifteen a.m. local time. Maj. Gen. Eric Shirley, who led the disposal, called the operation “tremendously successful,” saying there were no secondary explosions or infrastructure damage, Al Jazeera reported. The EPA said its real-time air monitors detected no airborne lead, though agencies and independent researchers plan extensive environmental testing after days of concern over lead dust and limited public information."
+    },
+    {
+      "num": 10,
+      "id": "story-09",
+      "section": "Other Notable",
+      "title": "Colombian forces free 76 hostages in Cartagena supermarket",
+      "file": "10-story-09.mp3",
+      "duration": 43.39,
+      "text": "Colombian police and special forces stormed an Éxito supermarket in Cartagena and rescued all of the roughly seventy-six shoppers and employees held hostage for about seventeen hours, after gunmen entered the store Tuesday morning, Nov. twenty-four, following what President Abelardo de la Espriella called a failed attempt to rob an armored car, the AP and BBC reported. One gunman was killed and four were arrested; officers used stun grenades. De la Espriella, who flew to the city to oversee the operation, said the attackers were “simple bandits” with no political affiliation. Local media reported the gunmen had demanded safe passage, nearly two million dollars and armored vehicles. Flights into Cartagena were briefly halted during the siege."
+    },
+    {
+      "num": 11,
+      "id": "weather",
+      "section": "Weather",
+      "title": "South Bend, IN Forecast & 5-Day Outlook",
+      "file": "11-weather.mp3",
+      "duration": 68.26,
+      "text": "Now, your South Bend, Indiana weather forecast from the National Weather Service. Tonight: Mostly cloudy, with a low around thirty-one. Northeast wind around ten miles per hour, with gusts as high as twenty-five miles per hour. Thanksgiving day: Rain after eleven a m. Cloudy, with a high near forty-four. Northeast wind ten to fifteen miles per hour, with gusts as high as thirty miles per hour. Chance of precipitation is ninety percent. New rainfall amounts between a tenth and quarter of an inch possible. Thursday Night, light rain then rain and snow, low around thirty-five. On Friday, rain and snow, high near forty-eight. Friday Night, a chance of light rain then partly cloudy, low around twenty-eight. On Saturday, partly sunny, high near fifty. Saturday Night, mostly cloudy then a slight chance of light rain, low around thirty-four. On Sunday, light rain, high near forty-nine. Sunday Night, light rain, low around thirty-two. On Monday, partly sunny, high near forty-four. Monday Night, partly cloudy, low around twenty-six.",
+      "periods": [
+        {
+          "name": "Tonight",
+          "temp": "31F",
+          "short": "Mostly Cloudy"
+        },
+        {
+          "name": "Thanksgiving Day",
+          "temp": "44F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Thursday Night",
+          "temp": "35F",
+          "short": "Light Rain then Rain And Snow"
+        },
+        {
+          "name": "Friday",
+          "temp": "48F",
+          "short": "Rain And Snow"
+        },
+        {
+          "name": "Friday Night",
+          "temp": "28F",
+          "short": "Chance Light Rain then Partly Cloudy"
+        },
+        {
+          "name": "Saturday",
+          "temp": "50F",
+          "short": "Partly Sunny"
+        },
+        {
+          "name": "Saturday Night",
+          "temp": "34F",
+          "short": "Mostly Cloudy then Slight Chance Light Rain"
+        },
+        {
+          "name": "Sunday",
+          "temp": "49F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Sunday Night",
+          "temp": "32F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Monday",
+          "temp": "44F",
+          "short": "Partly Sunny"
+        },
+        {
+          "name": "Monday Night",
+          "temp": "26F",
+          "short": "Partly Cloudy"
+        }
+      ]
+    },
+    {
+      "num": 12,
+      "id": "signoff",
+      "section": "SBR News",
+      "title": "That's the latest from SBR News",
+      "file": "12-signoff.mp3",
+      "duration": 2.25,
+      "text": "That's the latest from SBR News."
+    }
+  ]
+}
