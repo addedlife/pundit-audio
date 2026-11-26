@@ -154,7 +154,7 @@ function timeKeys(d){
   const pr = periodInfo(h24, m);
   const hourW = ({1:'one',2:'two',3:'three',4:'four',5:'five',6:'six',7:'seven',8:'eight',9:'nine',10:'ten',11:'eleven',12:'twelve'})[h12];
   const minW = minuteWords(m);
-  const spokenCore = (pr.key === 'noon' || pr.key === 'midnight') ? ('twelve o'clock ' + pr.spoken) : (hourW + ' ' + minW + ' ' + pr.spoken);
+  const spokenCore = (pr.key === 'noon' || pr.key === 'midnight') ? ("twelve o'clock " + pr.spoken) : (hourW + ' ' + minW + ' ' + pr.spoken);
   const spoken = "It's " + spokenCore;
   const label = spokenCore;
   return { key: hKey + '_' + mKey + '_' + pr.key, hKey, mKey, ampm, periodKey: pr.key, spoken, label, nextMKey: 'm-' + String((m + 1) % 60).padStart(2, '0') };
@@ -359,13 +359,13 @@ function setClockActive(res, pName){
   au.playbackRate = rate;
   if (pName === 'intro-clock') {
     nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
-    ntit.textContent = `This ... is SBR News · ${res.spoken || ('It's ' + res.label)}`;
+    ntit.textContent = `This ... is SBR News · ${res.spoken || ("It's " + res.label)}`;
   } else if (pName === 'timecheck') {
     nsec.textContent = `Time Check · SBR News`;
     ntit.textContent = res.spoken || (`It's ${res.label}`);
   } else if (pName === 'outro-clock') {
     nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
-    ntit.textContent = `${res.spoken || ('It's ' + res.label)} · This ... is SBR News`;
+    ntit.textContent = `${res.spoken || ("It's " + res.label)} · This ... is SBR News`;
   }
   durEl.textContent = fmt(res.duration);
   curEl.textContent = '0:00';
