@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#d6d3cb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>The Garland Street Journal</title>
+<style>
+:root{--paper:#EDECE8;--desk:#d6d3cb;--ink:#1d1b19}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--desk);color:var(--ink)}
+html.zoomed,html.zoomed body{overflow:hidden;touch-action:none;overscroll-behavior:none}
+html.zoomed body{position:fixed;inset:0;width:100%;height:100%}
+.sheet{position:relative;width:100%;max-width:1100px;margin:0 auto;padding:max(10px,env(safe-area-inset-top)) 6px 18px}
+.pagebox{position:relative;width:100%;aspect-ratio:var(--ar);margin:0 auto 14px;filter:drop-shadow(0 2px 6px rgba(40,34,26,.18))}
+.pagebox.narrow{max-width:560px}
+.pagebox img.page.alt{display:none}
+.pagebox.flipped img.page.alt{display:block}
+.pagebox.flipped img.page.main{visibility:hidden}
+.pagebox.flipped .blk,.pagebox.flipped a.lk:not(.tgb){display:none}
+a.lk.tg{z-index:6;cursor:pointer}
+a.lk.tgb{display:none;z-index:6;cursor:pointer}
+.pagebox.flipped a.lk.tgb{display:block}
+.pagebox img.page{position:absolute;inset:0;width:100%;height:100%;display:block;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.blk{position:absolute;cursor:zoom-in;touch-action:manipulation;transition:background .18s}
+.blk:active,.blk.press{background:rgba(29,27,25,.06)}
+.blk.src{visibility:hidden}
+a.lk{position:absolute;display:block;z-index:3;touch-action:none}
+a.lk.pg{z-index:4;touch-action:manipulation}
+a.lk:active{background:rgba(15,126,200,.14);border-radius:2px}
+.foot{text-align:center;font:12px/1.4 Georgia,'Times New Roman',serif;letter-spacing:.06em;text-transform:uppercase;color:#5a554e;padding:6px 0 0}
+.foot a{color:inherit}
+#dim{position:fixed;inset:0;background:rgba(24,21,17,.62);opacity:0;pointer-events:none;transition:opacity .34s ease;z-index:20}
+html.zoomed #dim{opacity:1;pointer-events:auto}
+#stage{position:fixed;inset:0;overflow:hidden;z-index:21;display:none;touch-action:none;overscroll-behavior:none}
+html.zoomed #stage,html.closing #stage{display:block}
+#card{position:absolute;left:0;top:0;background:var(--paper);touch-action:none;cursor:grab;
+  transform-origin:0 0;
+  box-shadow:0 18px 50px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2)}
+#card.panning{cursor:grabbing}
+#card.live{will-change:transform}
+#card .lo,#card .hi,#card #cl{position:absolute;display:block;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+#card .lo{background-repeat:no-repeat;pointer-events:none}
+#card .hi{pointer-events:none;opacity:0;transition:opacity .2s}
+#card .hi.ok{opacity:1}
+#vec{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none;display:none;overflow:hidden}
+#vec svg{display:block;width:100%;height:100%}
+#x{position:fixed;width:34px;height:34px;border-radius:50%;z-index:22;border:1px solid rgba(29,27,25,.45);
+  background:rgba(237,236,232,.97);display:none;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.22);padding:0;touch-action:manipulation}
+html.zoomed.settled #x{display:flex}
+#x svg{width:12px;height:12px}
+.ednav{position:absolute;z-index:5;display:flex;align-items:center;justify-content:center;pointer-events:none;height:0;white-space:nowrap}
+.ednav.prev{justify-content:flex-end}
+.ednav.next{justify-content:flex-start}
+.ednav a{pointer-events:auto;color:#1d1b19;text-decoration:none;font-family:Georgia,'Times New Roman',serif;
+  font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  display:inline-flex;align-items:center;justify-content:center;min-height:32px;min-width:32px;padding:0 7px;
+  -webkit-tap-highlight-color:transparent}
+.ednav a:active{opacity:.55}
+.ednav .dot{color:#1d1b19;font-size:9.5px;padding:0 1px;line-height:32px;pointer-events:none}
+</style></head>
+<body>
+<div class="sheet">
+  <div id="pages"></div>
+  <div class="foot"><a href="brief.pdf" target="_blank" rel="noopener">PDF edition</a></div>
+</div>
+<div id="dim"></div>
+<div id="stage"><div id="card">
+  <div class="lo" id="lo"></div><img class="hi" id="hi" alt="" draggable="false">
+  <div id="vec"></div><div id="cl"></div>
+</div></div>
+<button id="x" aria-label="Close"><svg viewBox="0 0 12 12"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="#1d1b19" stroke-width="1.3" stroke-linecap="round"/></svg></button>
+<script>
+const D = {"w": 400.0799865722656, "h": 1920.0, "slug": "2026-11-26-morning", "pages": [{"w": 400.0799865722656, "h": 1920.0, "img": "front/page.jpg", "links": [[285.0, 41.25, 64.5, 9.0, "grokbot://app/v1/agent?id=b85f73f9-77e1-4856-83b6-e10be239c78a"], [105.0, 80.25, 175.5, 56.25, "https://cdn.freedomforum.org/dfp/pdf26/WSJ.pdf"], [125.25, 135.0, 135.75, 56.25, "https://cdn.freedomforum.org/dfp/pdf26/WSJ.pdf"], [20.25, 347.25, 72.0, 14.25, "https://www.arabnews.com/middle-east/irans-revolutionary-guards-say-two-oil-tankers-hit-sea-mines-near-omans-khasab-3014111"], [135.75, 347.25, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Hormuz%20tanker%20story%20from%20today%27s%20morning%20brief"], [159.75, 438.0, 35.25, 14.25, "https://www.cnbc.com/2026/11/26/trump-nato-rutte-russia-ukraine-war.html"], [239.25, 438.0, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Trump%E2%80%93Rutte%20story%20from%20today%27s%20morning%20brief"], [20.25, 529.5, 28.5, 13.5, "https://www.straitstimes.com/world/europe/russian-forces-hit-kyiv-with-ballistic-missiles-mayor-says"], [93.0, 529.5, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Kyiv%20strike%20story%20from%20today%27s%20morning%20brief"], [247.5, 603.75, 20.25, 13.5, "https://english.news.cn/20261126/9d9be8e730414538ba58af52d044e80e/c.html"], [311.25, 603.75, 19.5, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20China%20tariff%20story%20from%20today%27s%20morning%20brief"], [20.25, 694.5, 69.0, 14.25, "https://www.euronews.com/2026/11/26/after-initial-reluctance-bulgaria-says-its-ready-to-join-45-billion-ukraine-loan"], [132.75, 694.5, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20EU%20summit%20story%20from%20today%27s%20morning%20brief"], [85.5, 843.0, 21.75, 14.25, "https://www.timesofisrael.com/liveblog_entry/yashar-says-coalition-talks-with-democrats-back-on-ending-freeze/"], [151.5, 843.0, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Yashar%E2%80%93Democrats%20story%20from%20today%27s%20morning%20brief"], [255.0, 975.0, 22.5, 14.25, "https://www.timesofisrael.com/liveblog_entry/cracks-within-shas-said-to-widen-as-some-inside-party-seek-divorce-from-netanyahu/"], [321.0, 975.0, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Shas%E2%80%93Deri%20story%20from%20today%27s%20morning%20brief"], [219.75, 1049.25, 39.0, 14.25, "https://www.kikar.co.il/haredim/yahadut-hatorah-not-discussing-portfolios-only-yes"], [303.0, 1049.25, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20UTJ%20statement%20from%20today%27s%20morning%20brief"], [154.5, 1123.5, 30.75, 14.25, "https://www.theyeshivaworld.com/news/israel-news/2628783/a-mistake-for-generations-ben-gvir-issues-direct-appeal-to-chareidi-public-against-joining-eisenkot-led-government.html"], [228.75, 1123.5, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Ben-Gvir%20appeal%20from%20today%27s%20morning%20brief"], [20.25, 1215.0, 39.0, 13.5, "https://www.kikar.co.il/haredim-news/rabbeinu-chaim-ozer-yeshiva-bnei-brak-closing-debt"], [103.5, 1215.0, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Chaim%20Ozer%20yeshiva%20story%20from%20today%27s%20morning%20brief"], [20.25, 1363.5, 25.5, 14.25, "https://www.app.com/story/weather/stormwatch/2026/11/26/nj-thanksgiving-storm-updates-jersey-shore-flooding-high-winds-power-outages/92964738007/"], [90.0, 1363.5, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20nor%E2%80%99easter%20story%20from%20today%27s%20morning%20brief"], [20.25, 1512.0, 41.25, 14.25, "https://www.theverge.com/ai-artificial-intelligence/1043079/now-nvidias-stopped-sending-chips-to-southeast-asia-too"], [105.75, 1512.0, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Nvidia%20Southeast%20Asia%20story%20from%20today%27s%20morning%20brief"], [134.25, 1586.25, 42.0, 14.25, "https://www.theverge.com/ai-artificial-intelligence/1043087/anthropic-has-started-paying-out-its-copyright-settlement-to-authors"], [219.75, 1586.25, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Anthropic%20settlement%20story%20from%20today%27s%20morning%20brief"], [20.25, 1735.5, 18.75, 13.5, "https://apnews.com/article/thailand-bangkok-explosion-oil-facility-e8098146bfb994dffc14448b1027c5d1"], [82.5, 1735.5, 19.5, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Bangkok%20refinery%20story%20from%20today%27s%20morning%20brief"], [266.25, 1809.75, 22.5, 13.5, "https://www.timesofisrael.com/liveblog-november-26-2026/"], [332.25, 1809.75, 19.5, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20BBC%20antisemitism%20probe%20story%20from%20today%27s%20morning%20brief"], [78.0, 1860.0, 16.5, 8.25, "https://cdn.freedomforum.org/dfp/pdf26/WSJ.pdf"], [48.0, 1870.5, 16.5, 8.25, "https://cdn.freedomforum.org/dfp/pdf26/WSJ.pdf"], [162.75, 15.75, 60.75, 19.5, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?autoplay=1"], [159.75, 351.0, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=2"], [263.25, 442.5, 10.5, 7.5, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=3"], [116.25, 533.25, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=4"], [335.25, 607.5, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=5"], [156.75, 698.25, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=6"], [175.5, 847.5, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=7"], [345.0, 979.5, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=8"], [327.0, 1053.75, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=9"], [252.75, 1128.0, 10.5, 7.5, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=10"], [126.75, 1218.75, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=11"], [114.0, 1368.0, 10.5, 7.5, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=12"], [129.75, 1516.5, 9.75, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=13"], [243.75, 1590.75, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=14"], [106.5, 1739.25, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=15"], [20.25, 1830.75, 10.5, 7.5, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=16"]]}], "blocks": [{"pg": 0, "r": [6.0, 12.23, 388.08, 197.57], "img": "front/b00.jpg", "svg": "front/b00.svg", "label": "", "links": [[156.75, 3.52, 60.75, 19.5, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html"], [279.0, 29.02, 64.5, 9.0, "grokbot://app/v1/agent?id=b85f73f9-77e1-4856-83b6-e10be239c78a"], [99.0, 68.02, 175.5, 56.25, "https://cdn.freedomforum.org/dfp/pdf26/WSJ.pdf"], [119.25, 122.77, 135.75, 56.25, "https://cdn.freedomforum.org/dfp/pdf26/WSJ.pdf"]]}, {"pg": 0, "r": [6.0, 224.8, 388.08, 486.92], "img": "front/b01.jpg", "svg": "front/b01.svg", "label": "", "links": [[14.25, 122.45, 72.0, 14.25, "https://www.arabnews.com/middle-east/irans-revolutionary-guards-say-two-oil-tankers-hit-sea-mines-near-omans-khasab-3014111"], [129.75, 122.45, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Hormuz%20tanker%20story%20from%20today%27s%20morning%20brief"], [153.75, 126.2, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=2"], [153.75, 213.2, 35.25, 14.25, "https://www.cnbc.com/2026/11/26/trump-nato-rutte-russia-ukraine-war.html"], [233.25, 213.2, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Trump%E2%80%93Rutte%20story%20from%20today%27s%20morning%20brief"], [257.25, 217.7, 10.5, 7.5, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=3"], [14.25, 304.7, 28.5, 13.5, "https://www.straitstimes.com/world/europe/russian-forces-hit-kyiv-with-ballistic-missiles-mayor-says"], [87.0, 304.7, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Kyiv%20strike%20story%20from%20today%27s%20morning%20brief"], [110.25, 308.45, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=4"], [241.5, 378.95, 20.25, 13.5, "https://english.news.cn/20261126/9d9be8e730414538ba58af52d044e80e/c.html"], [305.25, 378.95, 19.5, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20China%20tariff%20story%20from%20today%27s%20morning%20brief"], [329.25, 382.7, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=5"], [14.25, 469.7, 69.0, 14.25, "https://www.euronews.com/2026/11/26/after-initial-reluctance-bulgaria-says-its-ready-to-join-45-billion-ukraine-loan"], [126.75, 469.7, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20EU%20summit%20story%20from%20today%27s%20morning%20brief"], [150.75, 473.45, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=6"]]}, {"pg": 0, "r": [6.0, 720.55, 388.08, 140.85], "img": "front/b02.jpg", "svg": "front/b02.svg", "label": "", "links": [[79.5, 122.45, 21.75, 14.25, "https://www.timesofisrael.com/liveblog_entry/yashar-says-coalition-talks-with-democrats-back-on-ending-freeze/"], [145.5, 122.45, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Yashar%E2%80%93Democrats%20story%20from%20today%27s%20morning%20brief"], [169.5, 126.95, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=7"]]}, {"pg": 0, "r": [6.0, 869.8, 388.08, 362.42], "img": "front/b03.jpg", "svg": "front/b03.svg", "label": "", "links": [[249.0, 105.2, 22.5, 14.25, "https://www.timesofisrael.com/liveblog_entry/cracks-within-shas-said-to-widen-as-some-inside-party-seek-divorce-from-netanyahu/"], [315.0, 105.2, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Shas%E2%80%93Deri%20story%20from%20today%27s%20morning%20brief"], [339.0, 109.7, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=8"], [213.75, 179.45, 39.0, 14.25, "https://www.kikar.co.il/haredim/yahadut-hatorah-not-discussing-portfolios-only-yes"], [297.0, 179.45, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20UTJ%20statement%20from%20today%27s%20morning%20brief"], [321.0, 183.95, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=9"], [148.5, 253.7, 30.75, 14.25, "https://www.theyeshivaworld.com/news/israel-news/2628783/a-mistake-for-generations-ben-gvir-issues-direct-appeal-to-chareidi-public-against-joining-eisenkot-led-government.html"], [222.75, 253.7, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Ben-Gvir%20appeal%20from%20today%27s%20morning%20brief"], [246.75, 258.2, 10.5, 7.5, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=10"], [14.25, 345.2, 39.0, 13.5, "https://www.kikar.co.il/haredim-news/rabbeinu-chaim-ozer-yeshiva-bnei-brak-closing-debt"], [97.5, 345.2, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Chaim%20Ozer%20yeshiva%20story%20from%20today%27s%20morning%20brief"], [120.75, 348.95, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=11"]]}, {"pg": 0, "r": [6.0, 1241.05, 388.08, 139.67], "img": "front/b04.jpg", "svg": "front/b04.svg", "label": "", "links": [[14.25, 122.45, 25.5, 14.25, "https://www.app.com/story/weather/stormwatch/2026/11/26/nj-thanksgiving-storm-updates-jersey-shore-flooding-high-winds-power-outages/92964738007/"], [84.0, 122.45, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20nor%E2%80%99easter%20story%20from%20today%27s%20morning%20brief"], [108.0, 126.95, 10.5, 7.5, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=12"]]}, {"pg": 0, "r": [6.0, 1389.55, 388.08, 215.1], "img": "front/b05.jpg", "svg": "front/b05.svg", "label": "", "links": [[14.25, 122.45, 41.25, 14.25, "https://www.theverge.com/ai-artificial-intelligence/1043079/now-nvidias-stopped-sending-chips-to-southeast-asia-too"], [99.75, 122.45, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Nvidia%20Southeast%20Asia%20story%20from%20today%27s%20morning%20brief"], [123.75, 126.95, 9.75, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=13"], [128.25, 196.7, 42.0, 14.25, "https://www.theverge.com/ai-artificial-intelligence/1043087/anthropic-has-started-paying-out-its-copyright-settlement-to-authors"], [213.75, 196.7, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Anthropic%20settlement%20story%20from%20today%27s%20morning%20brief"], [237.75, 201.2, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=14"]]}, {"pg": 0, "r": [6.0, 1613.05, 388.08, 214.35], "img": "front/b06.jpg", "svg": "front/b06.svg", "label": "", "links": [[14.25, 122.45, 18.75, 13.5, "https://apnews.com/article/thailand-bangkok-explosion-oil-facility-e8098146bfb994dffc14448b1027c5d1"], [76.5, 122.45, 19.5, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Bangkok%20refinery%20story%20from%20today%27s%20morning%20brief"], [100.5, 126.2, 10.5, 8.25, "https://addedlife.github.io/pundit-audio/2026-11-26-morning/player.html?track=15"], [260.25, 196.7, 22.5, 13.5, "https://www.timesofisrael.com/liveblog-november-26-2026/"], [326.25, 196.7, 19.5, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20BBC%20antisemitism%20probe%20story%20from%20today%27s%20morning%20brief"]]}, {"pg": 0, "r": [6.0, 1855.53, 388.08, 47.68], "img": "front/b07.jpg", "svg": "front/b07.svg", "label": "", "links": [[72.0, 4.47, 16.5, 8.25, "https://cdn.freedomforum.org/dfp/pdf26/WSJ.pdf"], [42.0, 14.97, 16.5, 8.25, "https://cdn.freedomforum.org/dfp/pdf26/WSJ.pdf"]]}]};
+const root = document.documentElement;
+const PG = D.pages || [{ w: D.w, h: D.h, img: 'front/page.jpg', links: D.links || [] }];
+const pbs = PG.map((P, k) => {
+  const el = document.createElement('div');
+  el.className = 'pagebox' + (P.w < 500 && PG.length > 1 ? ' narrow' : '');
+  el.style.setProperty('--ar', P.w + ' / ' + P.h);
+  el.innerHTML = '<img class="page main" src="' + P.img + '" alt="' + (k === 0 ? 'Front page' : 'Page ' + (k + 1)) + '" draggable="false"' + (k > 1 ? ' loading="lazy"' : '') + '>' +
+    (P.alt ? '<img class="page alt" alt="Printed page" draggable="false">' : '') +
+    (k === 0 ? '<div class="ednav prev" id="edprev" hidden></div><div class="ednav next" id="ednext" hidden></div>' : '');
+  document.getElementById('pages').appendChild(el); return el;
+});
+const pb = pbs[0];
+let curP = PG[0];
+const stage = document.getElementById('stage');
+const card = document.getElementById('card'), lo = document.getElementById('lo'), hi = document.getElementById('hi');
+const vec = document.getElementById('vec'), cl = document.getElementById('cl');
+const xb = document.getElementById('x');
+const pct = (v, t) => (100 * v / t) + '%';
+const TAP_MS = 350, TAP_PX = 10, MAX_Z = 4, DBL_Z = 2.5;
+function mkLink(l, w, h, cls) {
+  const a = document.createElement('a');
+  a.className = 'lk ' + cls; a.href = l[4];
+  if (/^https?:/.test(l[4])) { a.target = '_blank'; a.rel = 'noopener'; }
+  a.style.left = pct(l[0], w); a.style.top = pct(l[1], h); a.style.width = pct(l[2], w); a.style.height = pct(l[3], h);
+  a.addEventListener('click', e => {
+    if (cls === 'cz' && (moved || pinching || suppressClick)) { e.preventDefault(); e.stopPropagation(); }
+    else e.stopPropagation();
+  });
+  return a;
+}
+function papercut(seed) {
+  let s = seed * 9301 + 49297; const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+  const pts = [], n = 22, j = () => (rnd() * 0.5).toFixed(3);
+  for (let i = 0; i <= n; i++) pts.push(`${(100 * i / n).toFixed(2)}% ${j()}%`);
+  for (let i = 0; i <= n; i++) pts.push(`calc(100% - ${j()}%) ${(100 * i / n).toFixed(2)}%`);
+  for (let i = n; i >= 0; i--) pts.push(`${(100 * i / n).toFixed(2)}% calc(100% - ${j()}%)`);
+  for (let i = n; i >= 0; i--) pts.push(`${j()}% ${(100 * i / n).toFixed(2)}%`);
+  return `polygon(${pts.join(',')})`;
+}
+const blkEls = D.blocks.map((b, i) => {
+  const d = document.createElement('div');
+  d.className = 'blk'; d.setAttribute('role', 'button'); d.setAttribute('aria-label', b.label || 'Story');
+  const P = PG[b.pg || 0];
+  d.style.left = pct(b.r[0], P.w); d.style.top = pct(b.r[1], P.h); d.style.width = pct(b.r[2], P.w); d.style.height = pct(b.r[3], P.h);
+  d.addEventListener('click', e => {
+    // A link overlay always wins: if one sits under the pointer, open it instead of zooming.
+    const under = document.elementsFromPoint(e.clientX, e.clientY).find(n => n.matches && n.matches('a.lk.pg'));
+    if (under) { e.preventDefault(); under.click(); return; }
+    openBlk(i);
+  });
+  d.addEventListener('pointerdown', () => loadVec(i));   // start the vector fetch ~100ms before the click
+  pbs[b.pg || 0].appendChild(d); return d;
+});
+PG.forEach((P, k) => (P.links || []).forEach(l => pbs[k].appendChild(mkLink(l, P.w, P.h, 'pg'))));
+/* barcode toggle: flip the edited front page to the real printed page (and back) */
+PG.forEach((P, k) => {
+  if (!P.alt || !P.tg) return;
+  const box = pbs[k], altImg = box.querySelector('img.alt');
+  const mk = (r, cls) => {
+    const a = document.createElement('a'); a.href = '#'; a.className = 'lk pg ' + cls; a.setAttribute('role', 'button');
+    a.setAttribute('aria-label', 'Flip between the edited front page and the printed page');
+    a.style.left = pct(r[0], P.w); a.style.top = pct(r[1], P.h); a.style.width = pct(r[2], P.w); a.style.height = pct(r[3], P.h);
+    a.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      if (!altImg.getAttribute('src')) altImg.src = P.alt;
+      box.classList.toggle('flipped');
+    });
+    box.appendChild(a);
+  };
+  mk(P.tg, 'tg'); mk(P.tgb || P.tg, 'tgb');
+});
+
+/* ---- geometry: card = paper with padding; content (bw x bh pdf units) sits inside the padding ---- */
+let cur = -1, busy = false, cardLinks = [], savedY = 0, cpath = '';
+let fitS = 1, startS = 1, minS = 1, maxS = 4, x = 0, y = 0, s = 1, sb = 1;  // sb: scale the DOM is laid out at (crisp)
+let bw = 1, bh = 1, padX = 0, padT = 0, padB = 0, CW = 1, CH = 1;
+let moved = false, pinching = false, gesturePinch = false, suppressClick = false;
+const DUR = 420;
+const ease = t => 1 - Math.pow(1 - t, 3.2);
+
+function margin() { return innerWidth < 700 ? 14 : 36; }
+function planGeometry(b) {
+  const vw = innerWidth, vh = innerHeight, m = margin();
+  bw = b.r[2]; bh = b.r[3];
+  let f = (vw - 2 * m) / (bw * 1.1);
+  for (let k = 0; k < 4; k++) {            // pad = 5% of width (min 16 css px at fit; top band holds the X)
+    padX = Math.max(0.05 * bw, 16 / f);
+    padT = Math.max(padX, 44 / f);
+    padB = padX;
+    f = (vw - 2 * m) / (bw + 2 * padX);
+  }
+  CW = bw + 2 * padX; CH = padT + bh + padB;
+  const phone = vw < 700;
+  let st = Math.min(f, phone ? 2.6 : 2.45);                // start: padded width fits the screen (capped for small blocks)
+  if (CH * st > vh - 2 * m && CW * st < vw * 0.55) st = Math.max(Math.min(st, (vh - 2 * m) / CH), phone ? 1.9 : 1.75);
+  if (phone) st = Math.max(st, Math.min(1.15, f * 2));     // phones: start readable and pan sideways for wide clippings
+  startS = st; fitS = st;
+  minS = Math.min(st, f, (vh - 2 * m) / CH);               // pinch out to see the whole clipping
+  maxS = Math.max(minS * MAX_Z, st * 3);
+}
+function layout() {                       // real pixel size at the base scale sb (WebKit rasterizes at layout size)
+  card.style.width = CW * sb + 'px'; card.style.height = CH * sb + 'px';
+  for (const e of [lo, hi, cl]) { e.style.left = padX * sb + 'px'; e.style.top = padT * sb + 'px'; e.style.width = bw * sb + 'px'; e.style.height = bh * sb + 'px'; }
+  lo.style.backgroundSize = `${100 * curP.w / bw}% ${100 * curP.h / bh}%`;
+  const b = D.blocks[cur]; if (b) lo.style.backgroundPosition = `${100 * b.r[0] / (curP.w - bw || 1)}% ${100 * b.r[1] / (curP.h - bh || 1)}%`;
+  if (vst) { vec.style.left = vst.lx * sb + 'px'; vec.style.top = vst.ly * sb + 'px'; vec.style.width = vst.w * sb + 'px'; vec.style.height = vst.h * sb + 'px'; }
+}
+function gestureActive() { return fingers.size > 0 || gliding || mouseDown; }
+function settle() {                       // bake the zoom into layout: no scale() left, no will-change -> crisp re-raster
+  if (cur < 0) return;
+  if (Math.abs(s - sb) > 1e-6) { sb = s; layout(); }
+  if (!gestureActive()) card.classList.remove('live');
+  apply();
+}
+const svgCache = new Map(), svgPending = new Map();
+function loadVec(i) {
+  if (svgCache.has(i) || svgPending.has(i) || !D.blocks[i].svg) return;
+  const pr = fetch(D.blocks[i].svg).then(r => r.ok ? r.text() : Promise.reject()).then(t => {
+    svgCache.set(i, t.replace(/<\?xml[^>]*>/, '')); svgPending.delete(i);
+    if (cur === i && !busy) mountVec();
+  }).catch(() => svgPending.delete(i));
+  svgPending.set(i, pr);
+}
+let vst = null, vecFor = -1, commitRaf = 0, commitTimer = 0, vecLive = false, unveilT = 0;
+function mountVec() {
+  if (cur < 0 || !svgCache.has(cur)) return;
+  if (vecFor !== cur) { vec.innerHTML = svgCache.get(cur); vecFor = cur; const sv = vec.firstElementChild; if (sv) { sv.removeAttribute('width'); sv.removeAttribute('height'); sv.setAttribute('preserveAspectRatio', 'none'); } }
+  commit();
+}
+function commit() {                         // window the vector to what's on screen (+25%); not every pan frame
+  commitRaf = 0; clearTimeout(commitTimer); commitTimer = 0;
+  if (cur < 0 || busy || !isFinite(x + y + s)) return;
+  settle();
+  if (vecFor !== cur) return;
+  const sv = vec.firstElementChild; if (!sv) return;
+  const vw = innerWidth, vh = innerHeight;
+  const cx = x + padX * s, cy = y + padT * s, cw = bw * s, ch = bh * s;
+  const X0 = Math.max(cx, -0.25 * vw), Y0 = Math.max(cy, -0.25 * vh), X1 = Math.min(cx + cw, 1.25 * vw), Y1 = Math.min(cy + ch, 1.25 * vh);
+  if (X1 <= X0 || Y1 <= Y0) return;
+  const vbX = (X0 - cx) / s, vbY = (Y0 - cy) / s, vbW = (X1 - X0) / s, vbH = (Y1 - Y0) / s;
+  sv.setAttribute('viewBox', `${vbX} ${vbY} ${vbW} ${vbH}`);
+  vst = { lx: padX + vbX, ly: padT + vbY, w: vbW, h: vbH };
+  vec.style.left = vst.lx * sb + 'px'; vec.style.top = vst.ly * sb + 'px';
+  vec.style.width = vst.w * sb + 'px'; vec.style.height = vst.h * sb + 'px';
+  vec.style.transform = 'none'; vec.style.display = 'block';
+  if (!vecLive) {                           // keep the raster visible a moment: a big SVG can take a few hundred ms to paint (WebKit)
+    vecLive = true; clearTimeout(unveilT);
+    unveilT = setTimeout(() => { if (cur >= 0 && vecLive) { hi.classList.remove('ok'); lo.style.visibility = 'hidden'; } }, 700);
+  }
+}
+function liveVec() {                         // the card's scale already zooms the vector; only recommit if the window is missed
+  if (!vst || vecFor !== cur) return;
+  const vw = innerWidth, vh = innerHeight;
+  const r0 = x + vst.lx * s, r1 = r0 + vst.w * s, t0 = y + vst.ly * s, t1 = t0 + vst.h * s;
+  const cx = x + padX * s, cy = y + padT * s;
+  const vx0 = Math.max(0, cx), vx1 = Math.min(vw, cx + bw * s), vy0 = Math.max(0, cy), vy1 = Math.min(vh, cy + bh * s);
+  const miss = r0 > vx0 + 0.5 || r1 < vx1 - 0.5 || t0 > vy0 + 0.5 || t1 < vy1 - 0.5;
+  if (!miss) return;
+  const delay = gliding ? 140 : 80;
+  if (!commitTimer) commitTimer = setTimeout(() => { commitTimer = 0; commit(); }, delay);
+}
+function apply() {
+  const k = s / sb;
+  if (Math.abs(k - 1) < 1e-6) {               // settled: whole-pixel translate only, so WebKit paints text/SVG at full res
+    card.style.transform = `translate(${Math.round(x)}px,${Math.round(y)}px)`;
+  } else {                                     // mid-gesture: cheap GPU scale of the last crisp raster
+    card.classList.add('live');
+    card.style.transform = `translate3d(${x}px,${y}px,0) scale(${k})`;
+  }
+  const clip = (s / fitS) < 1.7 ? cpath : 'none';
+  if (card.dataset.clip !== clip) { card.style.clipPath = card.style.webkitClipPath = clip; card.dataset.clip = clip; }
+  card.dataset.scale = String(+(s / fitS).toFixed(3));
+  liveVec();
+  placeX();
+}
+function placeX() {
+  if (cur < 0 || !root.classList.contains('settled')) return;
+  const sz = 34, pad = 5;
+  const left = Math.min(Math.max(x + CW * s - pad - sz, 8), innerWidth - 8 - sz);
+  const top = Math.min(Math.max(y + pad, 8), innerHeight - 8 - sz);
+  xb.style.left = left + 'px'; xb.style.top = top + 'px';
+}
+function bounds() {
+  const m = margin(), vw = innerWidth, vh = innerHeight, cw = CW * s, ch = CH * s;
+  const midX = (vw - cw) / 2, midY = (vh - ch) / 2;
+  return {
+    minX: cw >= vw - 2 * m ? vw - m - cw : midX,
+    maxX: cw >= vw - 2 * m ? m : midX,
+    minY: ch >= vh - 2 * m ? vh - m - ch : midY,
+    maxY: ch >= vh - 2 * m ? m : midY,
+  };
+}
+function rubberDelta(over) { return over * 0.55 / (1 + over / 240); }
+function rubberAxis(v, lo, hi) {
+  if (v < lo) return lo - rubberDelta(lo - v);
+  if (v > hi) return hi + rubberDelta(v - hi);
+  return v;
+}
+function rubberXY() { const b = bounds(); x = rubberAxis(x, b.minX, b.maxX); y = rubberAxis(y, b.minY, b.maxY); }
+function rubberScale(sc) {
+  if (sc < minS) return minS - rubberDelta((minS - sc) * 180) / 180;
+  if (sc > maxS) return maxS + rubberDelta((sc - maxS) * 180) / 180;
+  return sc;
+}
+function clampPan() { const b = bounds(); x = Math.min(b.maxX, Math.max(b.minX, x)); y = Math.min(b.maxY, Math.max(b.minY, y)); }
+
+const TAU = 325, FLICK_MIN = 0.28;
+let gliding = false, vx = 0, vy = 0, samples = [];
+function stopGlide() {
+  if (gliding || vx || vy) { animId++; gliding = false; vx = 0; vy = 0; }
+}
+function noteSample() {
+  const t = performance.now();
+  samples.push({ t, x, y });
+  while (samples.length && t - samples[0].t > 100) samples.shift();
+}
+function sampleVelocity() {
+  if (samples.length < 2) return { vx: 0, vy: 0 };
+  const a = samples[0], b = samples[samples.length - 1], dt = Math.max(8, b.t - a.t);
+  return { vx: (b.x - a.x) / dt, vy: (b.y - a.y) / dt };
+}
+function startGlide(ivx, ivy) {
+  const b0 = bounds();
+  const out = x < b0.minX - 0.4 || x > b0.maxX + 0.4 || y < b0.minY - 0.4 || y > b0.maxY + 0.4
+    || s < minS - 1e-3 || s > maxS + 1e-3;
+  const spd = Math.hypot(ivx, ivy);
+  if (spd < FLICK_MIN && !out) { clampPan(); apply(); commit(); return; }
+  if (spd > 6) { const k = 6 / spd; ivx *= k; ivy *= k; }
+  animId++; vx = ivx; vy = ivy; gliding = true;
+  const id = animId;
+  let last = performance.now();
+  function step(now) {
+    if (id !== animId) { gliding = false; return; }
+    const dt = Math.min(32, Math.max(0, now - last)); last = now;
+    const decay = Math.exp(-dt / TAU);
+    x += vx * TAU * (1 - decay); y += vy * TAU * (1 - decay);
+    vx *= decay; vy *= decay;
+    const b = bounds();
+    const spring = (pos, vel, lo, hi) => {
+      let target = null;
+      if (pos < lo) target = lo; else if (pos > hi) target = hi;
+      if (target === null) return [pos, vel];
+      const K = 0.00028, C = 0.034;
+      vel += (-K * (pos - target) - C * vel) * dt;
+      pos += vel * dt;
+      if (Math.abs(pos - target) < 0.6 && Math.abs(vel) < 0.025) return [target, 0];
+      return [pos, vel];
+    };
+    [x, vx] = spring(x, vx, b.minX, b.maxX);
+    [y, vy] = spring(y, vy, b.minY, b.maxY);
+    if (s < minS || s > maxS) {
+      const target = s < minS ? minS : maxS;
+      s += (target - s) * (1 - Math.exp(-dt / 180));
+      if (Math.abs(s - target) < 0.002) s = target;
+    }
+    apply();
+    const inside = x >= b.minX - 0.5 && x <= b.maxX + 0.5 && y >= b.minY - 0.5 && y <= b.maxY + 0.5
+      && s >= minS - 1e-3 && s <= maxS + 1e-3;
+    if (inside && Math.hypot(vx, vy) < 0.02) {
+      clampPan(); apply(); gliding = false; vx = vy = 0; commit(); return;
+    }
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+function setScaleAt(newS, fx, fy, withAnim) {
+  const raw = newS, clamped = Math.max(minS, Math.min(maxS, newS));
+  newS = withAnim ? clamped : rubberScale(raw);
+  const k = newS / s;
+  const nx0 = fx - (fx - x) * k, ny0 = fy - (fy - y) * k;
+  if (withAnim) { x = nx0; y = ny0; s = newS; clampPan(); animate(x, y, s, 260, true); return; }
+  s = newS; x = nx0; y = ny0; rubberXY(); apply();
+}
+let animId = 0;
+function animate(x1, y1, s1, dur, clampEnd, done) {
+  const x0 = x, y0 = y, s0 = s, t0 = performance.now(), id = ++animId;
+  gliding = false; vx = vy = 0;
+  (function step(now) {
+    if (id !== animId) return;
+    const t = Math.min(1, (now - t0) / dur), e = ease(t);
+    s = s0 + (s1 - s0) * e; x = x0 + (x1 - x0) * e; y = y0 + (y1 - y0) * e;
+    if (clampEnd && t === 1) clampPan();
+    apply();
+    if (t < 1) requestAnimationFrame(step); else { if (done) done(); else if (clampEnd) commit(); }
+  })(performance.now());
+}
+
+window.__pan = () => ({ x, y, s, gliding, vx, vy, bounds: bounds() });
+
+function openBlk(i) {
+  if (busy || cur >= 0) return; busy = true; cur = i;
+  const b = D.blocks[i], el = blkEls[i];
+  savedY = window.scrollY || 0;
+  curP = PG[b.pg || 0];
+  stopGlide(); planGeometry(b); sb = startS; vst = null; layout();
+  cpath = papercut(i + 3);
+  hi.classList.remove('ok'); hi.onload = () => { if (!vst) hi.classList.add('ok'); }; hi.src = b.img;
+  if (hi.complete && hi.naturalWidth) hi.classList.add('ok');
+  lo.style.backgroundImage = 'url(' + curP.img + ')'; lo.style.visibility = 'visible';
+  vec.style.display = 'none'; vec.style.transform = 'none'; vst = null; vecFor = -1; vec.innerHTML = ''; vecLive = false; clearTimeout(unveilT);
+  cardLinks.forEach(a => a.remove());
+  cardLinks = b.links.map(l => cl.appendChild(mkLink(l, bw, bh, 'cz')));
+  document.body.style.top = `-${savedY}px`;
+  root.classList.add('zoomed'); root.classList.remove('settled', 'closing');
+  loadVec(i);
+  const x1 = startS * 0 + ((startS * CW >= innerWidth - 2 * margin()) ? margin() : (innerWidth - CW * startS) / 2);
+  const y1 = Math.max(margin(), (innerHeight - CH * startS) / 2);
+  const src = el.getBoundingClientRect();
+  s = src.width / bw; x = src.left - padX * s; y = src.top - padT * s;
+  el.classList.add('src');
+  apply();
+  requestAnimationFrame(() => animate(x1, y1, startS, DUR, false, () => {
+    clampPan(); apply();
+    busy = false; root.classList.add('settled'); settle(); placeX(); mountVec();
+  }));
+}
+function closeBlk() {
+  if (busy || cur < 0) return; busy = true;
+  const el = blkEls[cur];
+  stopGlide(); animId++;
+  root.classList.remove('settled'); root.classList.add('closing');
+  vec.style.display = 'none'; lo.style.visibility = 'visible'; hi.classList.add('ok');
+  const src = el.getBoundingClientRect();
+  const s1 = src.width / bw;
+  root.classList.remove('zoomed');
+  document.body.style.top = '';
+  window.scrollTo(0, savedY);
+  const src2 = el.getBoundingClientRect();
+  animate(src2.left - padX * s1, src2.top - padT * s1, s1, DUR - 40, false, () => {
+    el.classList.remove('src'); root.classList.remove('closing');
+    cur = -1; busy = false; moved = pinching = gesturePinch = false;
+    card.dataset.scale = ''; vst = null; vecFor = -1; vec.innerHTML = ''; vecLive = false; clearTimeout(unveilT);
+  });
+}
+
+/* ---------- gestures on the open clipping ---------- */
+let lastCardTap = 0, lastCardX = 0, lastCardY = 0;
+const fingers = new Map();
+let pinchStartDist = 0, pinchStartS = 1, pinchMidX = 0, pinchMidY = 0;
+let panLastX = 0, panLastY = 0, startX = 0, startY = 0, startT = 0, startOnCard = false;
+
+function onCard(el) { return el && (el === card || card.contains(el)); }
+function dist(a, b) { const dx = a.x - b.x, dy = a.y - b.y; return Math.hypot(dx, dy); }
+function pts() { return [...fingers.values()]; }
+
+function zoomAround(newS, fx, fy, anim) { setScaleAt(newS, fx, fy, anim); }
+
+function maybeOutsideClose() {
+  // A single tap on the dim area closes. A finger-up that ends a pinch or drag
+  // is not a tap (see wasMoved / wasPinch in the touch/mouse handlers).
+  closeBlk(); return true;
+}
+function maybeCardDouble(fx, fy) {
+  const now = performance.now();
+  if (now - lastCardTap < TAP_MS && Math.hypot(fx - lastCardX, fy - lastCardY) < 40) {
+    lastCardTap = 0;
+    zoomAround((s > startS * 1.4 ? startS : Math.min(maxS, startS * DBL_Z)), fx, fy, true);
+    return true;
+  }
+  lastCardTap = now; lastCardX = fx; lastCardY = fy; return false;
+}
+function fireLink(a) {
+  if (!a || !a.href) return;
+  // Don't trip the drag-suppression on the synthetic click; block only the trailing native one.
+  a.click();
+  suppressClick = true;
+  setTimeout(() => { suppressClick = false; }, 400);
+}
+
+function touchList(e) {
+  // Trust e.touches (current set). Empty touchEnd payloads otherwise leave stale fingers.
+  fingers.clear();
+  const live = e.touches || [];
+  for (const t of live) fingers.set(t.identifier, { x: t.clientX, y: t.clientY, id: t.identifier });
+}
+
+function onTouchStart(e) {
+  if (cur < 0) return;
+  e.preventDefault();
+  stopGlide();
+  if (busy) return;
+  touchList(e);
+  const t0 = e.changedTouches[0];
+  if (fingers.size === 1) {
+    startX = panLastX = t0.clientX; startY = panLastY = t0.clientY; startT = performance.now();
+    startOnCard = onCard(e.target) && e.target !== xb && !xb.contains(e.target);
+    moved = pinching = gesturePinch = false;
+    samples = [{ t: startT, x, y }];
+  }
+  if (fingers.size >= 2) {
+    const p = pts();
+    pinching = true; gesturePinch = true; moved = true;
+    pinchStartDist = dist(p[0], p[1]) || 1;
+    pinchStartS = s;
+    pinchMidX = (p[0].x + p[1].x) / 2; pinchMidY = (p[0].y + p[1].y) / 2;
+  }
+}
+function onTouchMove(e) {
+  if (cur < 0) return;
+  e.preventDefault();
+  if (busy) return;
+  touchList(e);
+  if (fingers.size >= 2) {
+    const p = pts();
+    pinching = true; gesturePinch = true; moved = true;
+    const d = dist(p[0], p[1]) || 1;
+    const midX = (p[0].x + p[1].x) / 2, midY = (p[0].y + p[1].y) / 2;
+    const newS = rubberScale(pinchStartS * (d / pinchStartDist));
+    const k = newS / s;
+    x = midX - (midX - x) * k; y = midY - (midY - y) * k; s = newS;
+    x += midX - pinchMidX; y += midY - pinchMidY;
+    pinchMidX = midX; pinchMidY = midY;
+    rubberXY(); noteSample(); apply();
+  } else if (fingers.size === 1 && !pinching) {
+    const t = pts()[0];
+    const dx = t.x - startX, dy = t.y - startY;
+    if (Math.hypot(dx, dy) > TAP_PX) moved = true;
+    if (moved && startOnCard) {
+      x += t.x - panLastX; y += t.y - panLastY;
+      panLastX = t.x; panLastY = t.y;
+      card.classList.add('panning');
+      rubberXY(); noteSample(); apply();
+    }
+  }
+}
+function onTouchEnd(e) {
+  if (cur < 0) return;
+  e.preventDefault();
+  const wasPinch = pinching || gesturePinch, wasMoved = moved, wasOnCard = startOnCard;
+  const sx = startX, sy = startY;
+  const tgt = e.target;
+  touchList(e);
+  if (fingers.size >= 2) {
+    const p = pts();
+    pinchStartDist = dist(p[0], p[1]) || 1; pinchStartS = s;
+    pinchMidX = (p[0].x + p[1].x) / 2; pinchMidY = (p[0].y + p[1].y) / 2;
+    return;
+  }
+  if (fingers.size === 1) {
+    const t = pts()[0];
+    panLastX = t.x; panLastY = t.y; pinching = false;
+    card.classList.remove('panning');
+    return;
+  }
+  pinching = false; card.classList.remove('panning');
+  if (busy) return;
+  if (tgt === xb || xb.contains(tgt)) { closeBlk(); return; }
+  const tap = !wasMoved && !wasPinch && (performance.now() - startT < 500);
+  if (!tap) {
+    const v = sampleVelocity();
+    if (wasOnCard || wasPinch) startGlide(v.vx, v.vy);
+    else { rubberXY(); apply(); startGlide(0, 0); }
+    return;
+  }
+  startGlide(0, 0);
+  if (!wasOnCard) { maybeOutsideClose(); return; }
+  if (maybeCardDouble(sx, sy)) return;
+  const top = document.elementFromPoint(sx, sy);
+  const a = top && top.closest && top.closest('a.lk.cz');
+  if (a) fireLink(a);
+}
+
+stage.addEventListener('touchstart', onTouchStart, { passive: false });
+stage.addEventListener('touchmove', onTouchMove, { passive: false });
+stage.addEventListener('touchend', onTouchEnd, { passive: false });
+stage.addEventListener('touchcancel', onTouchEnd, { passive: false });
+
+// Keep the page itself from pinch-zooming or scrolling while a clipping is open.
+function lockPage(e) { if (cur >= 0) e.preventDefault(); }
+document.addEventListener('touchmove', lockPage, { passive: false });
+document.addEventListener('gesturestart', lockPage, { passive: false });
+document.addEventListener('gesturechange', lockPage, { passive: false });
+document.addEventListener('gestureend', lockPage, { passive: false });
+
+/* mouse / trackpad */
+let mouseDown = false, wheelTimer = 0;
+stage.addEventListener('mousedown', e => {
+  if (cur < 0 || busy || e.button !== 0) return;
+  if (e.target === xb || xb.contains(e.target)) return;
+  stopGlide();
+  mouseDown = true; startOnCard = onCard(e.target);
+  startX = panLastX = e.clientX; startY = panLastY = e.clientY; startT = performance.now();
+  moved = false; samples = [{ t: startT, x, y }];
+});
+window.addEventListener('mousemove', e => {
+  if (!mouseDown || cur < 0) return;
+  if (Math.hypot(e.clientX - startX, e.clientY - startY) > TAP_PX) moved = true;
+  if (moved && startOnCard) {
+    x += e.clientX - panLastX; y += e.clientY - panLastY;
+    panLastX = e.clientX; panLastY = e.clientY;
+    card.classList.add('panning');
+    rubberXY(); noteSample(); apply();
+  }
+});
+window.addEventListener('mouseup', e => {
+  if (!mouseDown) return;
+  mouseDown = false; card.classList.remove('panning');
+  if (cur < 0 || busy) return;
+  const tap = !moved && (performance.now() - startT < 500);
+  if (!tap) {
+    suppressClick = true; setTimeout(() => { suppressClick = false; }, 400);
+    const v = sampleVelocity();
+    startGlide(startOnCard ? v.vx : 0, startOnCard ? v.vy : 0);
+    return;
+  }
+  if (!startOnCard) { maybeOutsideClose(); return; }
+  if (maybeCardDouble(e.clientX, e.clientY)) return;
+  const top = document.elementFromPoint(e.clientX, e.clientY);
+  const a = top && top.closest && top.closest('a.lk.cz');
+  if (a) fireLink(a);
+});
+stage.addEventListener('wheel', e => {
+  if (cur < 0 || busy) return;
+  e.preventDefault();
+  if (e.ctrlKey || e.metaKey) {
+    const factor = Math.exp(-e.deltaY * 0.01);
+    setScaleAt(s * factor, e.clientX, e.clientY, false);
+    noteSample();
+    clearTimeout(wheelTimer); wheelTimer = setTimeout(() => startGlide(0, 0), 160);
+  } else {
+    x -= e.deltaX; y -= e.deltaY;
+    rubberXY(); noteSample(); apply();
+  }
+}, { passive: false });
+
+xb.addEventListener('click', e => { e.stopPropagation(); e.preventDefault(); closeBlk(); });
+xb.addEventListener('touchend', e => { e.stopPropagation(); e.preventDefault(); if (!busy) closeBlk(); }, { passive: false });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBlk(); });
+window.addEventListener('resize', () => {
+  if (cur < 0 || busy) return;
+  const z = s / startS;
+  planGeometry(D.blocks[cur]);
+  s = Math.max(minS, Math.min(maxS, startS * z));
+  clampPan(); apply(); commit();
+});
+window.addEventListener('load', () => setTimeout(() => D.blocks.filter(b => !b.pg).forEach(b => { const im = new Image(); im.src = b.img; }), 600));
+
+/* ---------- edition navigation (from ../editions.json, so older pages gain 'next' as new briefs publish) ---------- */
+(function () {
+  const prevEl = document.getElementById('edprev'), nextEl = document.getElementById('ednext');
+  if (!prevEl) return;
+  const SLUG = D.slug || (location.pathname.split('/').filter(Boolean).slice(-2)[0] || '');
+  function place() {
+    if (D.nav) {                              // explicit placement (pdf units on page 1), e.g. the WSJ front page
+      prevEl.style.left = (D.nav.prev[0] / D.w * 100) + '%'; prevEl.style.width = (D.nav.prev[1] / D.w * 100) + '%'; prevEl.style.justifyContent = 'flex-start';
+      nextEl.style.left = (D.nav.next[0] / D.w * 100) + '%'; nextEl.style.width = (D.nav.next[1] / D.w * 100) + '%'; nextEl.style.justifyContent = 'flex-end';
+      prevEl.style.top = nextEl.style.top = (D.nav.top / D.h * 100) + '%';
+    } else if (D.w > 500) {                   // top margin of the sheet, right of LISTEN ALL and left of the right edge
+      prevEl.style.left = (178 / D.w * 100) + '%';
+      prevEl.style.width = (260 / D.w * 100) + '%';
+      prevEl.style.justifyContent = 'flex-start';
+      nextEl.style.left = (500 / D.w * 100) + '%';
+      nextEl.style.width = (272 / D.w * 100) + '%';
+      nextEl.style.justifyContent = 'flex-end';
+      prevEl.style.top = nextEl.style.top = (24 / D.h * 100) + '%';
+    } else {                                  // narrow What's News column: a slim strip under the top edge
+      prevEl.style.left = '2%'; prevEl.style.width = '46%'; prevEl.style.justifyContent = 'flex-start';
+      nextEl.style.left = '52%'; nextEl.style.width = '46%'; nextEl.style.justifyContent = 'flex-end';
+      prevEl.style.top = nextEl.style.top = '18px';
+    }
+  }
+  function link(e, dir) {
+    const href = '../' + (e.front || (e.slug + '/front.html'));
+    const label = dir < 0 ? '‹ ' + e.label : e.label + ' ›';
+    return '<a href="' + href + '">' + label + '</a>';
+  }
+  place();
+  fetch('../editions.json').then(r => r.ok ? r.json() : Promise.reject()).then(data => {
+    const list = (data && data.editions) || [];
+    const i = list.findIndex(e => e.slug === SLUG);
+    if (i < 0) return;
+    const prev = list.slice(Math.max(0, i - 2), i);
+    const next = list.slice(i + 1, i + 3);
+    if (prev.length) { prevEl.innerHTML = prev.map(e => link(e, -1)).join('<span class="dot"> · </span>'); prevEl.hidden = false; }
+    if (next.length) { nextEl.innerHTML = next.map(e => link(e, 1)).join('<span class="dot"> · </span>'); nextEl.hidden = false; }
+  }).catch(() => {});
+})();
+
+</script>
+</body></html>
