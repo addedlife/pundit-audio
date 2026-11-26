@@ -34,6 +34,13 @@
    "mode": "night",
    "label": "Night",
    "front": "2026-11-25-night/front.html"
+  },
+  {
+   "slug": "2026-11-26-bedtime",
+   "date": "2026-11-26",
+   "mode": "bedtime",
+   "label": "Bedtime",
+   "front": "2026-11-26-bedtime/front.html"
   }
  ]
 }
