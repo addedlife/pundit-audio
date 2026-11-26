@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>SBR News — Device voice test</title>
+<style>
+  body{font-family:Georgia,serif;background:#EDECE8;color:#231F20;max-width:640px;margin:20px auto;padding:0 16px 80px;line-height:1.45}
+  h1{font-size:24px;font-weight:normal;margin:0 0 6px}
+  h2{font-size:17px;margin:20px 0 6px}
+  p{margin:0 0 10px}
+  .card{background:#F4F3EF;border:1px solid #d5d1c8;border-radius:12px;padding:14px 16px;margin:12px 0}
+  .note{color:#5c5755;font-size:14px}
+  select,button,input[type=range]{font:inherit}
+  select{width:100%;padding:10px;border-radius:8px;border:1px solid #bdb8ad;background:#fff;font-size:16px}
+  button{padding:12px 16px;border-radius:10px;border:1px solid #231F20;background:#231F20;color:#fff;font-size:16px;margin:4px 4px 4px 0}
+  button.sec{background:#fff;color:#231F20}
+  button:disabled{opacity:.4}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+  .status{font-size:15px;margin:8px 0;min-height:1.4em}
+  #stories{list-style:none;margin:0;padding:0}
+  #stories li{padding:9px 6px;border-bottom:1px solid #d5d1c8;font-size:15px;cursor:pointer}
+  #stories li.on{background:#e4e1d6;font-weight:bold}
+  #stories li.done{color:#8a847d}
+  code{background:#e7e4da;padding:1px 4px;border-radius:4px;font-size:13px}
+  details summary{cursor:pointer;font-size:15px}
+  #voiceList{font-size:13px;color:#5c5755;white-space:pre-wrap}
+  label{font-size:15px}
+</style>
+</head>
+<body>
+<h1>Device voice test</h1>
+<p class="note">Reads this edition aloud with your iPad's own voices (the browser's built-in speech), then plays the classical music. Nothing is rendered on a server, so there is no recorded-audio quality loss. Speech must be started by a tap.</p>
+
+<div class="card">
+  <h2 style="margin-top:0">1. Pick a voice</h2>
+  <select id="voice" aria-label="Voice"></select>
+  <p class="note" id="vcount" style="margin-top:6px"></p>
+  <div class="row">
+    <button class="sec" id="testBtn">Test this voice</button>
+    <label>Speed <input type="range" id="rate" min="0.7" max="1.3" step="0.05" value="1"> <span id="rateV">1.00</span></label>
+  </div>
+  <details><summary>All voices this browser reports</summary><div id="voiceList"></div></details>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">2. Edition and music</h2>
+  <p><label>Edition <select id="edition"></select></label></p>
+  <p><label>Music after the reading
+    <select id="musicList"><option value="lively">Lively</option><option value="calm">Calm</option><option value="off">None</option></select></label></p>
+  <p><label>Music host intro
+    <select id="hostMode"><option value="device">Device voice (same as above)</option><option value="rec">Recorded (Kokoro Onyx 1.25×)</option><option value="off">Off</option></select></label></p>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">3. Play</h2>
+  <div class="row">
+    <button id="playBtn">▶ Play brief</button>
+    <button class="sec" id="pauseBtn" disabled>❚❚ Pause</button>
+    <button class="sec" id="prevBtn" disabled>⏮ Prev</button>
+    <button class="sec" id="nextBtn" disabled>Next story ⏭</button>
+    <button class="sec" id="musicBtn" disabled>Skip to music</button>
+    <button class="sec" id="stopBtn" disabled>■ Stop</button>
+  </div>
+  <div class="status" id="status">Loading edition…</div>
+  <ul id="stories"></ul>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">How to get the best voices on the iPad</h2>
+  <p>Open <b>Settings → Accessibility → Spoken Content → Voices → English</b>. Choose <b>United Kingdom</b> (or United States) and download a voice marked <b>Enhanced</b> or <b>Premium</b> (for British male, try Daniel, Oliver or Arthur where offered). Tap the voice once so it finishes downloading (it is large, so use Wi-Fi). Then fully close Safari, reopen this page, and the voice should appear in the list above.</p>
+  <p class="note">Honest limits: Safari decides which voices a web page may use. Premium and Enhanced voices normally show up; the Siri-branded voices sometimes do not, and Personal Voice never does. If a voice you downloaded is missing from the list above, that is Safari, not this page. The page shows exactly what Safari reports under "All voices this browser reports".</p>
+  <p class="note"><b>iOS rules:</b> (1) Speech only starts from a tap on this page, so this cannot start by itself at 7 AM; (2) keep the screen on and Safari in front, because iPadOS may stop speech when the screen locks or the tab is in the background; (3) the music uses the same tap permission, so it can follow the reading, but if Safari ever blocks it, tap "Skip to music". (4) Pause is implemented as a stop and restart of the current sentence, because iPad's native pause is unreliable.</p>
+</div>
+
+<script>
+(function () {
+  var synth = window.speechSynthesis;
+  var $ = function (id) { return document.getElementById(id); };
+  var base = new URL('../', location.href).href;
+  var store = {
+    get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+  if (!synth) { $('status').textContent = 'This browser has no speech synthesis.'; return; }
+
+  /* ---------- voices ---------- */
+  var voices = [];
+  var MALE_UK = /daniel|oliver|arthur|thomas|malcolm|rishi|gordon|ryan|george|lewis/i;
+  function score(v) {
+    var s = 0, n = v.name + ' ' + v.voiceURI;
+    if (/^en[-_]GB/i.test(v.lang)) s += 50;
+    else if (/^en[-_](AU|IE|ZA|IN)/i.test(v.lang)) s += 25;
+    else if (/^en/i.test(v.lang)) s += 15;
+    else return -1;
+    if (/premium/i.test(n)) s += 40;
+    if (/enhanced/i.test(n)) s += 30;
+    if (/siri/i.test(n)) s += 35;
+    if (MALE_UK.test(v.name)) s += 12;
+    if (/compact/i.test(n)) s -= 10;
+    return s;
+  }
+  function loadVoices() {
+    var all = synth.getVoices() || [];
+    voices = all.map(function (v) { return { v: v, s: score(v) }; })
+      .filter(function (x) { return x.s >= 0; })
+      .sort(function (a, b) { return b.s - a.s; });
+    var sel = $('voice'), saved = store.get('sbr_dev_voice', '');
+    sel.innerHTML = '';
+    voices.forEach(function (x, i) {
+      var o = document.createElement('option');
+      var tag = /premium/i.test(x.v.name + x.v.voiceURI) ? ' [Premium]' : /enhanced/i.test(x.v.name + x.v.voiceURI) ? ' [Enhanced]' : /siri/i.test(x.v.name + x.v.voiceURI) ? ' [Siri]' : '';
+      o.value = x.v.voiceURI; o.textContent = (i === 0 ? '★ ' : '') + x.v.name + ' (' + x.v.lang + ')' + tag;
+      if (saved && x.v.voiceURI === saved) o.selected = true;
+      sel.appendChild(o);
+    });
+    $('vcount').textContent = all.length + ' voices reported; ' + voices.length + ' English. ' + (voices.length ? 'Best match is first (★).' : 'None yet; if this stays empty, reload the page.');
+    $('voiceList').textContent = all.map(function (v) { return v.name + ' | ' + v.lang + ' | ' + (v.localService ? 'on-device' : 'network'); }).join('\n');
+  }
+  loadVoices();
+  if (synth.onvoiceschanged !== undefined) synth.onvoiceschanged = loadVoices;
+  var vtries = 0, vt = setInterval(function () { loadVoices(); if (++vtries > 8 || voices.length) clearInterval(vt); }, 500);
+  $('voice').onchange = function () { store.set('sbr_dev_voice', $('voice').value); };
+  $('rate').value = store.get('sbr_dev_rate', '1');
+  $('rateV').textContent = Number($('rate').value).toFixed(2);
+  $('rate').oninput = function () { store.set('sbr_dev_rate', $('rate').value); $('rateV').textContent = Number($('rate').value).toFixed(2); };
+  $('musicList').value = store.get('sbr_dev_music', 'lively');
+  $('musicList').onchange = function () { store.set('sbr_dev_music', $('musicList').value); };
+  $('hostMode').value = store.get('sbr_dev_host', 'device');
+  $('hostMode').onchange = function () { store.set('sbr_dev_host', $('hostMode').value); };
+
+  function curVoice() {
+    var u = $('voice').value;
+    for (var i = 0; i < voices.length; i++) if (voices[i].v.voiceURI === u) return voices[i].v;
+    return voices.length ? voices[0].v : null;
+  }
+
+  /* ---------- speaking primitive (sentence chunks, cancel-safe) ---------- */
+  var gen = 0;           // bumps on every cancel so stale callbacks are ignored
+  function chunks(text) {
+    var parts = text.replace(/\s+/g, ' ').trim().match(/[^.!?]+[.!?]+["”’)]*\s*|[^.!?]+$/g) || [text];
+    var out = [], cur = '';
+    parts.forEach(function (p) {
+      if ((cur + p).length > 180 && cur) { out.push(cur.trim()); cur = p; } else cur += p;
+    });
+    if (cur.trim()) out.push(cur.trim());
+    return out;
+  }
+  function speakChunks(list, startAt, myGen, onChunk, onDone) {
+    var i = startAt || 0;
+    (function step() {
+      if (myGen !== gen) return;
+      if (i >= list.length) { onDone(); return; }
+      onChunk(i);
+      var u = new SpeechSynthesisUtterance(list[i]);
+      var v = curVoice(); if (v) { u.voice = v; u.lang = v.lang; } else u.lang = 'en-GB';
+      u.rate = Number($('rate').value) || 1;
+      var fired = false;
+      var next = function () { if (fired || myGen !== gen) return; fired = true; clearTimeout(wd); i++; step(); };
+      u.onend = next; u.onerror = next;
+      /* watchdog: iOS sometimes never fires onend */
+      var wd = setTimeout(next, Math.max(8000, list[i].length * 140));
+      synth.speak(u);
+    })();
+  }
+  function hardCancel() { gen++; try { synth.cancel(); } catch (e) {} }
+
+  /* ---------- edition ---------- */
+  var tracks = [], dateDisplay = '', cur = -1, chunkIdx = 0, state = 'idle'; // idle|reading|paused|music
+  var manifest = null, musicQueue = [], mIdx = 0;
+  var au = new Audio(); au.preload = 'auto';
+  var audioUnlocked = false;
+
+  function setStatus(t) { $('status').textContent = t; }
+  function buttons() {
+    var on = state === 'reading' || state === 'paused' || state === 'music';
+    $('pauseBtn').disabled = !on;
+    $('pauseBtn').textContent = state === 'paused' ? '▶ Resume' : '❚❚ Pause';
+    $('prevBtn').disabled = !(state === 'reading' || state === 'paused');
+    $('nextBtn').disabled = !(state === 'reading' || state === 'paused');
+    $('musicBtn').disabled = !(state === 'reading' || state === 'paused');
+    $('stopBtn').disabled = !on;
+    $('playBtn').disabled = state === 'reading' || state === 'music';
+  }
+  function renderList() {
+    var ul = $('stories'); ul.innerHTML = '';
+    tracks.forEach(function (t, i) {
+      var li = document.createElement('li');
+      li.textContent = (i + 1) + '. ' + (t.section ? t.section + ' — ' : '') + t.title;
+      li.className = i === cur ? 'on' : (i < cur ? 'done' : '');
+      li.onclick = function () { if (state === 'reading' || state === 'paused') jump(i); };
+      ul.appendChild(li);
+    });
+  }
+  function loadEdition(id) {
+    setStatus('Loading edition…');
+    return fetch(base + id + '/playlist.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (p) {
+      dateDisplay = p.date_display || p.date;
+      var label = (p.label || 'brief').toLowerCase();
+      tracks = p.tracks.filter(function (t) { return t.id !== 'intro' && t.text; }).map(function (t) {
+        return { id: t.id, section: t.section, title: t.title, text: t.text };
+      });
+      tracks.unshift({ id: 'intro', section: 'SBR News', title: 'Opening', text: 'This is S B R News. Your ' + label + ' for ' + dateDisplay + '.' });
+      cur = -1; renderList(); setStatus('Ready: ' + tracks.length + ' items. Tap Play.');
+    }).catch(function (e) { setStatus('Could not load that edition: ' + e); });
+  }
+  fetch(base + 'editions.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (ed) {
+    var list = Array.isArray(ed) ? ed : (ed.editions || []);
+    var ids = list.map(function (e) { return typeof e === 'string' ? e : (e.id || e.slug || e.dir || e.path || ''); }).filter(Boolean);
+    return ids;
+  }).catch(function () { return []; }).then(function (ids) {
+    var q = new URLSearchParams(location.search).get('e');
+    var want = q || '2026-11-26-morning';
+    if (ids.indexOf(want) < 0) ids.unshift(want);
+    ids = ids.filter(function (x, i) { return ids.indexOf(x) === i; });
+    var sel = $('edition'); sel.innerHTML = '';
+    ids.forEach(function (id) { var o = document.createElement('option'); o.value = id; o.textContent = id; if (id === want) o.selected = true; sel.appendChild(o); });
+    sel.onchange = function () { stopAll(); loadEdition(sel.value); };
+    return loadEdition(sel.value);
+  });
+
+  /* ---------- reading ---------- */
+  function readItem(i, fromChunk) {
+    if (i >= tracks.length) { startMusic(); return; }
+    cur = i; chunkIdx = fromChunk || 0; state = 'reading'; renderList(); buttons();
+    var list = chunks(tracks[i].text), myGen = ++gen;
+    try { synth.cancel(); } catch (e) {}
+    setTimeout(function () {
+      if (myGen !== gen) return;
+      speakChunks(list, chunkIdx, myGen,
+        function (c) { chunkIdx = c; setStatus('Reading ' + (i + 1) + ' of ' + tracks.length + ': ' + tracks[i].title); },
+        function () { readItem(i + 1, 0); });
+    }, 60);
+  }
+  function jump(i) { hardCancel(); readItem(Math.max(0, Math.min(i, tracks.length - 1)), 0); }
+  function unlockAudio() {
+    if (audioUnlocked) return;
+    audioUnlocked = true;
+    /* play-then-pause a silent clip inside the tap so later au.play() calls are allowed */
+    au.src = base + 'sleep-music/silence-4s.mp3'; au.volume = 0;
+    var p = au.play(); if (p && p.then) p.then(function () { au.pause(); au.volume = 1; }).catch(function () { au.volume = 1; });
+  }
+  $('playBtn').onclick = function () {
+    if (!tracks.length) return;
+    unlockAudio();
+    if (!voices.length) loadVoices();
+    hardCancel(); readItem(0, 0);
+  };
+  $('pauseBtn').onclick = function () {
+    if (state === 'reading') { hardCancel(); state = 'paused'; setStatus('Paused (will resume at the start of this sentence).'); buttons(); }
+    else if (state === 'paused') { readItem(cur, chunkIdx); }
+    else if (state === 'music') { if (au.paused) { au.play(); setStatus('Music playing'); } else { au.pause(); setStatus('Music paused'); } }
+  };
+  $('nextBtn').onclick = function () { jump(cur + 1); };
+  $('prevBtn').onclick = function () { jump(cur - 1); };
+  $('musicBtn').onclick = function () { hardCancel(); startMusic(); };
+  function stopAll() { hardCancel(); try { au.pause(); } catch (e) {} state = 'idle'; cur = -1; renderList(); buttons(); setStatus('Stopped.'); }
+  $('stopBtn').onclick = stopAll;
+
+  $('testBtn').onclick = function () {
+    unlockAudio(); hardCancel();
+    var myGen = gen;
+    speakChunks(chunks('This is S B R News. Iran’s Revolutionary Guards said Thursday that two tankers hit sea mines. The Knesset is expected to vote at eight ten in the evening.'), 0, myGen, function () {}, function () {});
+  };
+
+  /* ---------- music after the reading ---------- */
+  function startMusic() {
+    var which = $('musicList').value;
+    if (which === 'off') { state = 'idle'; cur = tracks.length; renderList(); buttons(); setStatus('Finished reading. Music is off.'); return; }
+    var go = function (m) {
+      manifest = m; musicQueue = (m.lists[which] || {}).tracks || []; mIdx = 0; state = 'music'; buttons(); playMusicItem();
+    };
+    if (manifest) go(manifest); else fetch(base + 'sleep-music/manifest.json').then(function (r) { return r.json(); }).then(go);
+  }
+  function playMusicItem() {
+    if (state !== 'music') return;
+    if (mIdx >= musicQueue.length) { state = 'idle'; buttons(); setStatus('Finished.'); return; }
+    var t = musicQueue[mIdx], mode = $('hostMode').value, which = $('musicList').value;
+    var playPiece = function () {
+      if (state !== 'music') return;
+      au.onended = function () { mIdx++; playMusicItem(); };
+      au.onerror = function () { mIdx++; playMusicItem(); };
+      au.src = base + 'sleep-music/' + t.file; au.volume = 1;
+      var p = au.play(); if (p && p.catch) p.catch(function () { setStatus('Safari blocked the music. Tap “Pause/Resume” to start it.'); });
+      setStatus('Music: ' + t.title + (t.performer ? ' — ' + t.performer : ''));
+    };
+    if (mode === 'device' && t.intro_text) {
+      setStatus('Host intro: ' + t.title);
+      var myGen = ++gen; try { synth.cancel(); } catch (e) {}
+      setTimeout(function () { speakChunks(chunks(t.intro_text), 0, myGen, function () {}, playPiece); }, 60);
+    } else if (mode === 'rec' && t.intro) {
+      au.onended = playPiece; au.onerror = playPiece;
+      au.src = base + 'sleep-music/' + t.intro; au.volume = 1;
+      var p = au.play(); if (p && p.catch) p.catch(playPiece);
+      setStatus('Host intro (recorded): ' + t.title);
+    } else playPiece();
+  }
+  buttons();
+})();
+</script>
+</body>
+</html>
