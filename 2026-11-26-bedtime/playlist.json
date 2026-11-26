@@ -1,0 +1,196 @@
+{
+  "brand": "SBR News",
+  "date": "2026-11-26",
+  "date_display": "Thursday, November 26, 2026",
+  "slot": "bedtime",
+  "label": "Bedtime Brief",
+  "voice": "en-GB-RyanNeural",
+  "arad_delivery": "off",
+  "total_duration": 515.13,
+  "tracks": [
+    {
+      "num": 1,
+      "id": "intro",
+      "section": "SBR News",
+      "title": "This ... is SBR News (Bedtime Brief)",
+      "file": "01-intro.mp3",
+      "duration": 5.77,
+      "text": "This ... is SBR News. Your Bedtime Brief for 2026-11-26.",
+      "clock_intro": "after"
+    },
+    {
+      "num": 2,
+      "id": "story-01",
+      "section": "Top Stories",
+      "title": "Kim tours uranium plants, vows more nuclear arms",
+      "file": "02-story-01.mp3",
+      "duration": 49.89,
+      "text": "North Korean leader Kim Jong Un inspected two factories that produce nuclear materials, one newly opened and one being expanded, and called for building more nuclear weapons, state media KCNA said Thursday, the AP reported. State photos showed Kim walking past dense rows of what appeared to be uranium-enrichment centrifuges; North Korea did not say where the plants are. Kim called the growth of the North’s arsenal “an irreversible reality” and said deploying low-yield battlefield nuclear weapons across multiple domains was urgent, citing what he called nuclear threats from the U S and its allies. South Korea’s Defense Ministry said it takes the remarks seriously and remains on firm readiness with the U S The visit comes days after Pyongyang did not respond to Trump’s offer to meet during his trip to Asia. Trump told the New York Post that Kim had not ignored him and that “there’ll be a time when we meet.”"
+    },
+    {
+      "num": 3,
+      "id": "story-02",
+      "section": "Top Stories",
+      "title": "FedEx jet overruns a Miami runway on the eve of Thanksgiving",
+      "file": "03-story-02.mp3",
+      "duration": 43.55,
+      "text": "A FedEx cargo plane overran a runway at Miami International Airport at about eight forty in the evening. Wednesday, forcing all but one runway to close temporarily on one of the year’s busiest travel nights, the AP reported. No injuries were reported, and by early Thursday the FAA was reporting delays of several hours. The FAA said the McDonnell Douglas MD-eleven had flown in from Memphis and that it is investigating. FedEx said the plane had “an issue upon landing” and that its crew was safe. FedEx had only rezoomed flying MD-11s in May, after a UPS MD-eleven crashed on takeoff in Kentucky last year. The plane came to rest near where an Amazon cargo jet overshot a different runway in September, killing five people on the ground."
+    },
+    {
+      "num": 4,
+      "id": "story-03",
+      "section": "Top Stories",
+      "title": "Judge won’t extend ban on taxpayer-funded pro-Trump ads",
+      "file": "04-story-03.mp3",
+      "duration": 46.21,
+      "text": "U S District Judge Loren AliKhan in Washington on Wednesday declined to issue a preliminary injunction against government-funded TV ads that the Democratic National Committee calls illegal propaganda promoting President Trump, letting a temporary ban lapse, the AP reported. A judge in a similar New York case also declined a long-term ban. AliKhan wrote that the November midterms “have come and gone,” and rejected the DNC’s argument that the permanent nature of campaigns justified an injunction. She said, however, that the DNC was likely to succeed on its claim that using public money for the ads broke the law. The ads were paid for at least in part by a twenty million dollars Homeland Security contract. The White House has called them public service announcements; the DNC said it was disappointed and would keep fighting."
+    },
+    {
+      "num": 5,
+      "id": "story-04",
+      "section": "Israel",
+      "title": "Bennett denies secret channel to Netanyahu",
+      "file": "05-story-04.mp3",
+      "duration": 35.06,
+      "text": "Ha-ah-retz reported late Wednesday that Bee Yahkhad chairman Naftali Bennett has run a secret negotiating channel with Prime Minister Benjamin Netanyahu without telling his partners in the bloc led by Yahshar chairman Gadi Ayzenkot, The Times of Israel said. The report named Bennett confidant Shalom Shlomo and Netanyahu representative Michael Rabello. According to Ha-ah-retz, Rabello offered seven spots on Leekood’s next Kuh-nesset slate to Ayzenkot-bloc members willing to defect and form a coalition with Netanyahu. Bennett called the report false and said other reporters who looked into the supposed channel chose not to publish once they found it untrue."
+    },
+    {
+      "num": 6,
+      "id": "story-05",
+      "section": "Israel",
+      "title": "Overnight Gaza strike said to kill Hamas deputy education minister",
+      "file": "06-story-05.mp3",
+      "duration": 28.5,
+      "text": "An Israeli strike on an apartment in central Gaza’s Deir al-Balah overnight killed Khaled Abu Nada, the deputy education minister in the Hamas government, along with his wife, Palestinian media reported, The Times of Israel said. The I D F said it targeted a “senior” Hamas terrorist and would give details later. Palestinian media later reported three more people killed in a strike in Gaza City’s Shati camp, putting the overnight toll at five; the I D F had not commented on that strike."
+    },
+    {
+      "num": 7,
+      "id": "story-06",
+      "section": "Chareidi World",
+      "title": "UTJ veto keeps Reform rabbi Kariv out of Education Ministry",
+      "file": "07-story-06.mp3",
+      "duration": 40.75,
+      "text": "Senior United Toerah Judaism figures vetoed the appointment of Democrats M K Gilad Kariv, who is also a Reform rabbi, as education minister in a possible government of the change bloc, and the demand was accepted, Keekar Hashabbat reported early Thursday. The Democrats had said since the election that they wanted the education portfolio for Kariv. The issue was brought to Rosh yesheeva HaRav Moshe Hillel Hirsch, who made a full religion-and-state status quo, including no foothold for the Reform movement, a core condition for the talks, the site said. A senior Degel Ha Toerah official said it was agreed Kariv will not serve in the post; the site said M K Naama Lazimi is now reported as the likely pick."
+    },
+    {
+      "num": 8,
+      "id": "story-07",
+      "section": "Region",
+      "title": "Lakewood braces for 70 mph gusts; JCP&L warns of multiday outages",
+      "file": "08-story-07.mp3",
+      "duration": 39.55,
+      "text": "Jersey Central Power & Light said it has one,five hundred additional line workers on hand and crews on round-the-clock sixteen hour shifts as gusts of up to seventy mph were expected in Lakewood from about four o'clock in the morning. Thursday, the Lakewood Journal reported, citing a utility spokesperson’s comments to WRNJ. The utility said it is planning for a worst case of multiday restoration. Residents were advised to charge phones and medical-equipment batteries, keep flashlights and water ready, report outages to JCP&L, and call nine hundred eleven for downed wires while staying at least thirty feet away. Patch reported high wind and coastal flood warnings for the township."
+    },
+    {
+      "num": 9,
+      "id": "story-08",
+      "section": "Tech",
+      "title": "Musk pledges two SpaceX shares for every American child",
+      "file": "09-story-08.mp3",
+      "duration": 48.3,
+      "text": "SpaceX said Wednesday it will contribute one newly issued Class A share to every currently active Trump Account, the tax-advantaged savings accounts for children, and that CEO Elon Musk will personally match it, CNBC and Reuters reported. Musk then posted on X that every child in America “will receive two SpaceX shares.” Musk said the company’s share would be transferred next month and his own when his lockup expires in June. With SpaceX closing at one hundred twenty-seven point four four dollars on Wednesday, Reuters valued the pledge at nearly eighteen billion dollars; Axios said it roughly triples Michael Dell’s gift to the accounts. The White House said in October that nearly seventy million Trump Accounts had been opened; it is unclear how many count as active. Under Treasury rules, donated stock generally cannot be sold for at least five years."
+    },
+    {
+      "num": 10,
+      "id": "story-09",
+      "section": "Tech",
+      "title": "Musk touts Grok Bot for Black Friday as Amazon weighs letting AI shoppers in",
+      "file": "10-story-09.mp3",
+      "duration": 31.63,
+      "text": "Elon Musk posted on X that “Grok Bot can research the best Black Friday deals for you and confirm they’re authentic,” pitching the agent as a holiday shopper. Separately, The Verge, citing Fortune, reported that Amazon has held talks about letting Meta’s Muse A I agent shop on its marketplace, which would end its block on the agent. Amazon is said to worry about losing ad revenue that depends on human shoppers, and about the quality of the agent’s product picks. Walmart and Best Buy already let such agents in; Amazon also blocked Perplexity’s agent."
+    },
+    {
+      "num": 11,
+      "id": "story-10",
+      "section": "Other Notable",
+      "title": "Puigdemont sets Dec. 12 return to Spain after nine years",
+      "file": "11-story-10.mp3",
+      "duration": 34.53,
+      "text": "Elsewhere, Former Catalan leader Carles Puigdemont told a news conference in Brussels on Wednesday that he will return to Spain on Saturday, Dec. twelve, ending nearly a decade of self-imposed exile in Belgium, Reuters reported. Spain’s Supreme Court shelved the criminal case against him this week by applying the twenty twenty-four amnesty law. Puigdemont, who fled after the twenty seventeen independence referendum that Spanish courts ruled illegal, said he would go to the Catalan parliament and unveil a renewed independence proposal on Dec. seventeen. His return will come after Spain’s snap general election this Sunday."
+    },
+    {
+      "num": 12,
+      "id": "story-11",
+      "section": "Other Notable",
+      "title": "Florida family of six killed in plane crash off Mississippi",
+      "file": "12-story-11.mp3",
+      "duration": 39.63,
+      "text": "A Cessna two hundred ten carrying six members of a Fort Myers, Florida, family crashed into the Gulf of Mexico between Pascagoula, Mississippi, and Horn Island on Tuesday as they flew home from a fishing trip in Louisiana, the AP reported. The coroner identified the pilot as Brent Stokes, fifty; among the dead were three boys. Air traffic control lost contact with the plane at about three forty-five in the afternoon. A controller had warned the pilot of precipitation and adverse weather shortly before; tracking data showed a rapid descending turn from about nine,zero feet. Divers found the victims in the fuselage. The FAA and NTSB are investigating."
+    },
+    {
+      "num": 13,
+      "id": "weather",
+      "section": "Weather",
+      "title": "South Bend, IN Forecast & 5-Day Outlook",
+      "file": "13-weather.mp3",
+      "duration": 69.51,
+      "text": "Now, your South Bend, Indiana weather forecast from the National Weather Service. Overnight: Cloudy, with a low around thirty-one. Northeast wind around ten miles per hour, with gusts as high as twenty-five miles per hour. Thanksgiving day: Rain after ten o'clock in the morning. Cloudy. High near forty-six, with temperatures falling to around forty-one in the afternoon. Northeast wind ten to fifteen miles per hour, with gusts as high as thirty miles per hour. Chance of precipitation is one hundred percent. New rainfall amounts between a quarter and half of an inch possible. Thursday Night, light rain, low around thirty-two. On Friday, rain and snow, high near forty-eight. Friday Night, mostly cloudy, low around twenty-nine. On Saturday, mostly sunny, high near fifty-one. Saturday Night, mostly cloudy then a chance of light rain, low around thirty-five. On Sunday, light rain, high near forty-eight. Sunday Night, light rain, low around thirty-two. On Monday, mostly cloudy, high near forty-three. Monday Night, partly cloudy, low around twenty-seven.",
+      "periods": [
+        {
+          "name": "Overnight",
+          "temp": "31F",
+          "short": "Cloudy"
+        },
+        {
+          "name": "Thanksgiving Day",
+          "temp": "46F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Thursday Night",
+          "temp": "32F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Friday",
+          "temp": "48F",
+          "short": "Rain And Snow"
+        },
+        {
+          "name": "Friday Night",
+          "temp": "29F",
+          "short": "Mostly Cloudy"
+        },
+        {
+          "name": "Saturday",
+          "temp": "51F",
+          "short": "Mostly Sunny"
+        },
+        {
+          "name": "Saturday Night",
+          "temp": "35F",
+          "short": "Mostly Cloudy then Chance Light Rain"
+        },
+        {
+          "name": "Sunday",
+          "temp": "48F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Sunday Night",
+          "temp": "32F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Monday",
+          "temp": "43F",
+          "short": "Mostly Cloudy"
+        },
+        {
+          "name": "Monday Night",
+          "temp": "27F",
+          "short": "Partly Cloudy"
+        }
+      ]
+    },
+    {
+      "num": 14,
+      "id": "signoff",
+      "section": "SBR News",
+      "title": "That's the latest from SBR News",
+      "file": "14-signoff.mp3",
+      "duration": 2.25,
+      "text": "That's the latest from SBR News."
+    }
+  ]
+}
