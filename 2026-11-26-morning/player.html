@@ -71,7 +71,7 @@ button.ctrl:active{opacity:.75;transform:scale(.98)}
   </div>
   <div class="sleep" id="sleep">
     <div class="sleep-h"><span class="sleep-t">&#9834; Sleep music after the news</span><button class="sw on" id="sleepSw" aria-pressed="true">On</button></div>
-    <div class="sleep-h" style="margin-top:8px"><span class="sleep-t">Host intros</span><button class="sw on" id="hostSw" aria-pressed="true">On</button></div>
+    <div class="sleep-h" style="margin-top:8px"><span class="sleep-t">Host intros &amp; outros</span><button class="sw on" id="hostSw" aria-pressed="true">On</button></div>
     <div class="seg" id="sleepSeg"></div>
     <div class="sleep-now" id="sleepNow"></div>
     <div class="sleep-btns"><button id="sleepPrev" disabled>&#9664;&#9664; Prev piece</button><button id="sleepNext" disabled>Next piece &#9654;&#9654;</button><button id="sleepGo">Play now</button></div>
@@ -594,7 +594,12 @@ au.onended = () => {
     load(pendingNextIdx, true);
     return;
   }
-  if (phase === 'sleep') { if (sleepPart === 'intro') { playSleepAt(sleepPos, 'piece'); } else { sleepNext(); } return; }
+  if (phase === 'sleep') {
+    if (sleepPart === 'intro') { playSleepAt(sleepPos, 'piece'); }
+    else if (sleepPart === 'piece' && sleepPos >= 0 && hostOn && sleepTracks()[sleepOrder[sleepPos]].outro) { playSleepAt(sleepPos, 'outro'); }
+    else { sleepNext(); }
+    return;
+  }
   if (phase === 'outro-clock') {
     newsEnded();
     return;
@@ -695,7 +700,7 @@ function renderSleepUI(){
   sleepGoB.style.display = insl && phase === 'sleep' ? 'none' : '';
   if (phase === 'sleep') {
     const t = sleepPos >= 0 ? sleepTracks()[sleepOrder[sleepPos]] : null;
-    sleepNow.innerHTML = t ? (sleepPart === 'intro' ? 'Host: ' : '') + '<b>' + t.title + '</b><br>' + t.performer + ' · ' + (sleepPos + 1) + ' of ' + sleepOrder.length + ' · shuffled' : 'Settling in…';
+    sleepNow.innerHTML = t ? ((sleepPart === 'intro' || sleepPart === 'outro') ? 'Host: ' : '') + '<b>' + t.title + '</b><br>' + t.performer + ' · ' + (sleepPos + 1) + ' of ' + sleepOrder.length + ' · shuffled' : 'Settling in…';
   } else if (phase === 'sleep-done') {
     sleepNow.textContent = sleepOn ? 'The music has finished. Good night.' : 'Sleep music is off.';
   } else if (!sleepMan) {
@@ -746,7 +751,16 @@ function playSleepAt(pos, part){
     sleepMedia('Sleep music', sleepLabel());
   } else {
     const t = tl[sleepOrder[pos]];
-    if (hostOn && t.intro && part !== 'piece') {
+    if (part === 'outro' && !(hostOn && t.outro)) { playSleepAt(pos + 1); return; }  /* SBR_SLEEP_OUTRO_V1 */
+    if (part === 'outro') {
+      sleepPart = 'outro';
+      au.src = SLEEP_BASE + t.outro;
+      nsec.textContent = 'Sleep music · ' + sleepLabel() + ' · ' + (pos + 1) + ' of ' + sleepOrder.length + ' · host';
+      ntit.textContent = t.title;
+      durEl.textContent = fmt(t.outro_duration || 0);
+      sleepMedia('That was: ' + t.title, 'SBR Classical');
+      if (pos + 1 < sleepOrder.length) { const n = tl[sleepOrder[pos + 1]]; sleepPre.src = SLEEP_BASE + ((hostOn && n.intro) ? n.intro : n.file); }
+    } else if (hostOn && t.intro && part !== 'piece') {
       sleepPart = 'intro';
       au.src = SLEEP_BASE + t.intro;
       nsec.textContent = 'Sleep music · ' + sleepLabel() + ' · ' + (pos + 1) + ' of ' + sleepOrder.length + ' · introduction';
@@ -761,7 +775,8 @@ function playSleepAt(pos, part){
       ntit.textContent = t.title;
       durEl.textContent = fmt(t.duration);
       sleepMedia(t.title, t.performer);
-      if (pos + 1 < sleepOrder.length) { const n = tl[sleepOrder[pos + 1]]; sleepPre.src = SLEEP_BASE + ((hostOn && n.intro) ? n.intro : n.file); }
+      if (hostOn && t.outro) { sleepPre.src = SLEEP_BASE + t.outro; }
+      else if (pos + 1 < sleepOrder.length) { const n = tl[sleepOrder[pos + 1]]; sleepPre.src = SLEEP_BASE + ((hostOn && n.intro) ? n.intro : n.file); }
     }
   }
   au.playbackRate = 1;
@@ -790,6 +805,7 @@ function sleepPrev(){
   if (phase === 'sleep-done') { phase = 'sleep'; playSleepAt(Math.max(sleepOrder.length - 1, 0)); return; }
   if (sleepPart === 'piece' && au.currentTime > 4 && sleepPos >= 0) { au.currentTime = 0; tryPlay(); return; }
   if (sleepPart === 'intro' && sleepPos > 0) { playSleepAt(sleepPos - 1); return; }
+  if (sleepPart === 'outro') { playSleepAt(sleepPos); return; }
   playSleepAt(Math.max(sleepPos - 1, 0));
 }
 function sleepNext(){
@@ -798,7 +814,7 @@ function sleepNext(){
   playSleepAt(sleepPos + 1);
 }
 sleepPrevB.onclick = () => sleepPrev();
-hostSw.onclick = () => { hostOn = !hostOn; lsSet('sbr_sleep_host', hostOn ? '1' : '0'); if (!hostOn && phase === 'sleep' && sleepPart === 'intro') playSleepAt(sleepPos, 'piece'); renderSleepUI(); };
+hostSw.onclick = () => { hostOn = !hostOn; lsSet('sbr_sleep_host', hostOn ? '1' : '0'); if (!hostOn && phase === 'sleep' && sleepPart === 'intro') playSleepAt(sleepPos, 'piece'); else if (!hostOn && phase === 'sleep' && sleepPart === 'outro') sleepNext(); renderSleepUI(); };
 sleepNextB.onclick = () => sleepNext();
 sleepGoB.onclick = () => {
   userInteracted = true;

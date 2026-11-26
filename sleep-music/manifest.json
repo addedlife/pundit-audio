@@ -12,8 +12,11 @@
      "performer": "USAF Band Strolling Strings",
      "duration": 231.8,
      "intro": "intros/calm/01.mp3",
-     "intro_text": "Next... from Johann Pachelbel, the Canon in D major, in an arrangement by Frank Hudson. Pachelbel was a German organist and composer of the seventeenth century, and he taught Johann Christoph Bach, the elder brother of Johann Sebastian. Here is the Canon, played by the Strolling Strings of the United States Air Force Band.",
-     "intro_duration": 20.1
+     "intro_text": "Next, from Johann Pachelbel, the Canon in D major, in an arrangement by Frank Hudson. Pachelbel was a German organist of the seventeenth century, and he taught the older brother of Johann Sebastian Bach. A canon is like a round, such as Row, Row, Row Your Boat. A simple bass pattern repeats again and again, and the violins join in one at a time, each playing the same tune a little behind the last. It is played by the Strolling Strings of the United States Air Force Band.",
+     "intro_duration": 29.2,
+     "outro": "outros/calm/01.mp3",
+     "outro_text": "That was Pachelbel's Canon in D, in the arrangement by Frank Hudson, played by the Strolling Strings of the United States Air Force Band.",
+     "outro_duration": 9.2
     },
     {
      "file": "calm/02-bach-air.mp3",
@@ -21,8 +24,11 @@
      "performer": "USAF Band Air Force Strings",
      "duration": 186.3,
      "intro": "intros/calm/02.mp3",
-     "intro_text": "From Johann Sebastian Bach... the Air, from the Orchestral Suite number 3 in D major, B.W.V. 1068. In the nineteenth century, a violinist's arrangement made it famous as the Air on the G String, and the name stayed. Performed now by the Air Force Strings, of the United States Air Force Band.",
-     "intro_duration": 19.8
+     "intro_text": "From Johann Sebastian Bach, the Air from his Orchestral Suite number 3 in D major, B W V 1068. In the nineteenth century a violinist arranged it to be played on one string, and it became known as the Air on the G String. Listen for the long, slow melody in the first violins, floating over a steady, walking bass, like someone strolling quietly while a song is sung above. It is played by the Air Force Strings, of the United States Air Force Band.",
+     "intro_duration": 25.6,
+     "outro": "outros/calm/02.mp3",
+     "outro_text": "That was the Air from Bach's Orchestral Suite number 3, played by the Air Force Strings of the United States Air Force Band.",
+     "outro_duration": 8.4
     },
     {
      "file": "calm/03-bach-largo-bwv1056.mp3",
@@ -30,8 +36,11 @@
      "performer": "Michel Rondeau, harpsichord (via Musopen)",
      "duration": 194.8,
      "intro": "intros/calm/03.mp3",
-     "intro_text": "Now, a slow movement by Johann Sebastian Bach... the Largo, from the Keyboard Concerto number 5 in F minor, B.W.V. 1056. Bach also used this gentle melody as the opening sinfonia of one of his cantatas. Michel Rondeau is at the harpsichord.",
-     "intro_duration": 18.9
+     "intro_text": "Now, a slow movement by Johann Sebastian Bach, the Largo from his Keyboard Concerto in F minor, B W V 1056. Bach wrote this concerto in the seventeen thirties, and he reused this very tune in a church cantata, where an oboe sings it. Here, the harpsichord sings the melody, soft and unhurried, over a quiet, steady pulse in the strings, a little like a lullaby. Michel Rondeau is at the harpsichord.",
+     "intro_duration": 24.3,
+     "outro": "outros/calm/03.mp3",
+     "outro_text": "That was the Largo from Bach's Keyboard Concerto in F minor, with Michel Rondeau at the harpsichord.",
+     "outro_duration": 7.3
     },
     {
      "file": "calm/04-corelli-pastorale.mp3",
@@ -39,8 +48,11 @@
      "performer": "Advent Chamber Orchestra",
      "duration": 135.2,
      "intro": "intros/calm/04.mp3",
-     "intro_text": "From Arcangelo Corelli... the Pastorale, from the Concerto Grosso in G minor, opus 6, number 8, known as the Christmas Concerto. Corelli was an Italian violinist and composer, and his twelve concerti grossi were published in 1714, the year after his death. Performed by the Advent Chamber Orchestra.",
-     "intro_duration": 20.9
+     "intro_text": "From Arcangelo Corelli, the Pastorale, the closing movement of his Concerto Grosso in G minor, opus 6, number 8, known as the Christmas Concerto. Corelli was an Italian violinist, and his twelve concerti grossi were published in 1714, the year after his death. He wrote this one for Christmas night. Listen for the gentle rocking rhythm, like a cradle being rocked, in the spirit of shepherds' music. It is played by the Advent Chamber Orchestra.",
+     "intro_duration": 26.1,
+     "outro": "outros/calm/04.mp3",
+     "outro_text": "That was the Pastorale from Corelli's Christmas Concerto, played by the Advent Chamber Orchestra.",
+     "outro_duration": 7.3
     },
     {
      "file": "calm/06-vivaldi-rv93-largo.mp3",
@@ -48,8 +60,11 @@
      "performer": "Paul De Bra, accordion orchestra",
      "duration": 303.2,
      "intro": "intros/calm/06.mp3",
-     "intro_text": "Antonio Vivaldi now... the Largo, from the Concerto in D major, R.V. 93, written for lute, two violins, and continuo. Tonight it comes to us in an arrangement for accordion orchestra, by Paul De Bra.",
-     "intro_duration": 14.6
+     "intro_text": "Antonio Vivaldi now, the Largo from his Concerto in D major, R V 93, which he wrote for lute, two violins, and continuo. The lute is a plucked instrument, a little like a small guitar, and in this slow movement it sings a delicate, dreamy tune. Tonight it comes to us in an arrangement for accordion orchestra, so the melody breathes in and out, soft and warm. The arranger and conductor is Paul De Bra.",
+     "intro_duration": 23.6,
+     "outro": "outros/calm/06.mp3",
+     "outro_text": "That was the Largo from Vivaldi's Lute Concerto in D, in an arrangement for accordion orchestra by Paul De Bra.",
+     "outro_duration": 8.1
     },
     {
      "file": "calm/07-albinoni-oboe-adagio.mp3",
@@ -57,8 +72,11 @@
      "performer": "Paul Arden-Taylor, oboe (via Musopen)",
      "duration": 260.8,
      "intro": "intros/calm/07.mp3",
-     "intro_text": "From Tomaso Albinoni... the Adagio, from the Oboe Concerto in D minor, opus 9, number 2. Albinoni was a Venetian composer of the Baroque, and among the first Italians to write concertos for the oboe. The soloist is Paul Arden-Taylor.",
-     "intro_duration": 16.5
+     "intro_text": "From Tomaso Albinoni, the Adagio from his Oboe Concerto in D minor, opus 9, number 2. Albinoni was a Venetian composer of the Baroque, and one of the first Italians to write concertos for the oboe. In this slow movement, the oboe sings a long, wistful melody, almost like a human voice, while the strings hold a soft, steady cushion beneath it. The soloist is Paul Arden-Taylor.",
+     "intro_duration": 22.8,
+     "outro": "outros/calm/07.mp3",
+     "outro_text": "That was the Adagio from Albinoni's Oboe Concerto in D minor, opus 9, number 2, with Paul Arden-Taylor, oboe.",
+     "outro_duration": 9.0
     },
     {
      "file": "calm/09-bach-christmas-oratorio-sinfonia.mp3",
@@ -66,8 +84,11 @@
      "performer": "Phiroz Dalal, St Matthew's Concert Choir and Orchestra",
      "duration": 296.6,
      "intro": "intros/calm/09.mp3",
-     "intro_text": "Johann Sebastian Bach... the Sinfonia that opens Part Two of the Christmas Oratorio, B.W.V. 248, a gentle pastoral piece for the shepherds in the fields. Bach first performed the oratorio in Leipzig in the winter of 1734. Phiroz Dalal conducts the St Matthew's Concert Choir and Orchestra.",
-     "intro_duration": 21.1
+     "intro_text": "Johann Sebastian Bach, and the Sinfonia that opens Part Two of his Christmas Oratorio, B W V 248. Bach first performed the oratorio in Leipzig in the winter of 1734. This gentle piece sets the scene for the shepherds in the fields on the night of the Nativity. Listen for the soft, rocking rhythm, and for the wind instruments, which take turns with the strings, as if shepherds were playing their pipes in the quiet night. Phiroz Dalal conducts the St Matthew's Concert Choir and Orchestra.",
+     "intro_duration": 30.8,
+     "outro": "outros/calm/09.mp3",
+     "outro_text": "That was the Sinfonia from Bach's Christmas Oratorio, with Phiroz Dalal conducting the St Matthew's Concert Choir and Orchestra.",
+     "outro_duration": 8.7
     },
     {
      "file": "calm/10-handel-pifa.mp3",
@@ -75,8 +96,11 @@
      "performer": "MIT Concert Choir & Orchestra, W. Cutter",
      "duration": 77.5,
      "intro": "intros/calm/10.mp3",
-     "intro_text": "From George Frideric Handel... the Pastoral Symphony from Messiah... the movement Handel called the Pifa. Handel wrote Messiah in 1741, and it was first heard in Dublin the following spring. From a performance by the M.I.T. Concert Choir and orchestra.",
-     "intro_duration": 18.7
+     "intro_text": "From George Frideric Handel, the Pastoral Symphony from Messiah, the movement Handel called the Pifa. Handel wrote Messiah in 1741, and it was first heard in Dublin the following spring. In the story, this short piece comes just before the shepherds in the fields are visited by angels. It is a calm, rocking tune for strings, like a lullaby in the countryside. This performance is by the M I T Concert Choir and Orchestra.",
+     "intro_duration": 24.7,
+     "outro": "outros/calm/10.mp3",
+     "outro_text": "That was the Pastoral Symphony, the Pifa, from Handel's Messiah, performed by the M I T Concert Choir and Orchestra.",
+     "outro_duration": 8.4
     },
     {
      "file": "calm/11-satie-gymnopedie-1.mp3",
@@ -84,8 +108,11 @@
      "performer": "Robin Alciatore, piano (via Musopen)",
      "duration": 186.6,
      "intro": "intros/calm/11.mp3",
-     "intro_text": "Erik Satie now... the first Gymnopédie, marked slow and sorrowful. Satie was a French composer and pianist, and he wrote his three Gymnopédies in 1888. Robin Alciatore is the pianist.",
-     "intro_duration": 14.6
+     "intro_text": "Erik Satie now, and the first of his Gymnopédies, marked slow and sorrowful. Satie was a French composer and pianist, and he wrote his three Gymnopédies in 1888. Listen for the soft, swaying chords in the left hand, like a very slow waltz, and the simple, floating tune above, with lots of space between the notes. Robin Alciatore is the pianist.",
+     "intro_duration": 21.1,
+     "outro": "outros/calm/11.mp3",
+     "outro_text": "That was Erik Satie's first Gymnopédie, played by Robin Alciatore, piano.",
+     "outro_duration": 6.2
     },
     {
      "file": "calm/12-mozart-clarinet-adagio.mp3",
@@ -93,8 +120,11 @@
      "performer": "William McColl, basset clarinet; University of Washington Symphony, Abraham Kaplan",
      "duration": 455.8,
      "intro": "intros/calm/12.mp3",
-     "intro_text": "From Wolfgang Amadeus Mozart... the Adagio from the Clarinet Concerto in A major, K. 622. Mozart wrote it in 1791 for his friend, the clarinetist Anton Stadler... it is one of the last works he completed. William McColl is the soloist, on a basset clarinet of his own construction, with the University of Washington Symphony Orchestra, conducted by Abraham Kaplan.",
-     "intro_duration": 25.2
+     "intro_text": "From Wolfgang Amadeus Mozart, the Adagio from the Clarinet Concerto in A major, K. 622. Mozart wrote it in 1791 for his friend, the clarinetist Anton Stadler, and it is one of the last works he completed. Listen for the clarinet's warm, rich voice, singing a tender melody as if it were a song without words, with the orchestra hushed behind it. William McColl is the soloist, on a basset clarinet of his own construction, with the University of Washington Symphony Orchestra, conducted by Abraham Kaplan.",
+     "intro_duration": 33.3,
+     "outro": "outros/calm/12.mp3",
+     "outro_text": "That was the Adagio from Mozart's Clarinet Concerto, with William McColl on basset clarinet and the University of Washington Symphony, conducted by Abraham Kaplan.",
+     "outro_duration": 11.4
     },
     {
      "file": "calm/13-ravel-pavane.mp3",
@@ -102,8 +132,11 @@
      "performer": "Thérèse Dussaut, piano",
      "duration": 311.3,
      "intro": "intros/calm/13.mp3",
-     "intro_text": "From Maurice Ravel... the Pavane pour une infante défunte... Pavane for a Dead Princess. Ravel wrote it for piano in 1899, and later made a version for orchestra. Here is the original piano version, played by Thérèse Dussaut.",
-     "intro_duration": 16.9
+     "intro_text": "From Maurice Ravel, the Pavane for a Dead Princess. Ravel wrote it for piano in 1899, and later made a version for orchestra. He said it was not a lament for a real child, but a dream of the slow dance a little princess might once have danced at a Spanish court. Listen for the graceful, quiet melody, like a procession moving slowly and with dignity. Here is the original piano version, played by Thérèse Dussaut.",
+     "intro_duration": 24.0,
+     "outro": "outros/calm/13.mp3",
+     "outro_text": "That was Ravel's Pavane for a Dead Princess, in the original piano version, played by Thérèse Dussaut.",
+     "outro_duration": 7.6
     },
     {
      "file": "calm/15-saint-saens-swan.mp3",
@@ -111,11 +144,122 @@
      "performer": "Alisa Weilerstein, cello; Jason Yoder, piano",
      "duration": 179.3,
      "intro": "intros/calm/15.mp3",
-     "intro_text": "From Camille Saint-Saëns... The Swan, from The Carnival of the Animals. Saint-Saëns wrote the suite in 1886 as a lighthearted entertainment, and The Swan was the only movement he allowed to be published in his lifetime. Cellist Alisa Weilerstein, with pianist Jason Yoder, recorded at the White House in 2009.",
-     "intro_duration": 20.9
+     "intro_text": "From Camille Saint-Saëns, The Swan, from The Carnival of the Animals. Saint-Saëns wrote the suite in 1886 as a lighthearted entertainment, and The Swan was the only movement he allowed to be published in his lifetime. Listen for the cello, gliding along with a long, smooth melody, like a swan on still water, while the piano ripples softly underneath. The cellist is Alisa Weilerstein, with pianist Jason Yoder, recorded at the White House in 2009.",
+     "intro_duration": 25.8,
+     "outro": "outros/calm/15.mp3",
+     "outro_text": "That was The Swan, by Saint-Saëns, with cellist Alisa Weilerstein and pianist Jason Yoder.",
+     "outro_duration": 7.4
+    },
+    {
+     "file": "calm/16-vivaldi-autumn-ii.mp3",
+     "title": "Vivaldi — Autumn, II. Adagio molto",
+     "performer": "The Modena Chamber Orchestra (via Musopen)",
+     "duration": 203.8,
+     "intro": "intros/calm/16.mp3",
+     "intro_text": "Antonio Vivaldi, the slow second movement, Adagio molto, of Autumn, from The Four Seasons, R V 293. Vivaldi published The Four Seasons in 1725, and each concerto comes with a sonnet. In this one, the villagers who danced and celebrated the harvest have fallen asleep, and the music grows hushed and dreamy. Listen for the soft, drifting chords, like a quiet, sleepy evening after a long day. It is played by the Modena Chamber Orchestra.",
+     "outro": "outros/calm/16.mp3",
+     "outro_text": "That was the Adagio molto from Vivaldi's Autumn, played by the Modena Chamber Orchestra.",
+     "intro_duration": 29.4,
+     "outro_duration": 6.8
+    },
+    {
+     "file": "calm/17-vivaldi-cello-largo.mp3",
+     "title": "Vivaldi — Largo, Cello Concerto in G, RV 413",
+     "performer": "Stephen Balderston, cello; Advent Chamber Orchestra",
+     "duration": 240.6,
+     "intro": "intros/calm/17.mp3",
+     "intro_text": "From Antonio Vivaldi, the Largo from his Cello Concerto in G major, R V 413. Vivaldi wrote more than two dozen concertos for the cello, at a time when few composers did. Here the cello sings a slow, warm, song-like melody in its deep voice, while the orchestra accompanies it gently, almost whispering. The soloist is Stephen Balderston, with the Advent Chamber Orchestra.",
+     "outro": "outros/calm/17.mp3",
+     "outro_text": "That was the Largo from Vivaldi's Cello Concerto in G major, with cellist Stephen Balderston and the Advent Chamber Orchestra.",
+     "intro_duration": 23.7,
+     "outro_duration": 9.1
+    },
+    {
+     "file": "calm/18-vivaldi-bassoon-larghetto.mp3",
+     "title": "Vivaldi — Larghetto, Bassoon Concerto in A minor, RV 498",
+     "performer": "The Modena Chamber Orchestra (via Musopen)",
+     "duration": 234.7,
+     "intro": "intros/calm/18.mp3",
+     "intro_text": "Antonio Vivaldi, the slow movement, Larghetto, of his Bassoon Concerto in A minor, R V 498. Vivaldi wrote nearly forty bassoon concertos. The bassoon has a round, woody, gentle voice, and here it sings a calm, unhurried tune, a little like a friendly cello with a touch of humor. It is played by the Modena Chamber Orchestra.",
+     "outro": "outros/calm/18.mp3",
+     "outro_text": "That was the Larghetto from Vivaldi's Bassoon Concerto in A minor, played by the Modena Chamber Orchestra.",
+     "intro_duration": 21.6,
+     "outro_duration": 7.4
+    },
+    {
+     "file": "calm/19-vivaldi-2mandolins-andante.mp3",
+     "title": "Vivaldi — Andante, Concerto for Two Mandolins, RV 532",
+     "performer": "The Modena Chamber Orchestra (via Musopen)",
+     "duration": 186.3,
+     "intro": "intros/calm/19.mp3",
+     "intro_text": "From Antonio Vivaldi, the Andante from his Concerto for Two Mandolins in G major, R V 532. The mandolin is a small, plucked instrument, and its notes are short and sparkling. Here two mandolins play together, echoing each other in a soft, gently rippling tune, like drops falling into a quiet pond, with the strings murmuring beneath. It is played by the Modena Chamber Orchestra.",
+     "outro": "outros/calm/19.mp3",
+     "outro_text": "That was the Andante from Vivaldi's Concerto for Two Mandolins, played by the Modena Chamber Orchestra.",
+     "intro_duration": 23.4,
+     "outro_duration": 7.6
+    },
+    {
+     "file": "calm/20-vivaldi-2oboes-largo.mp3",
+     "title": "Vivaldi — Largo, Concerto for Two Oboes, RV 536",
+     "performer": "The Modena Chamber Orchestra (via Musopen)",
+     "duration": 135.5,
+     "intro": "intros/calm/20.mp3",
+     "intro_text": "Antonio Vivaldi, the Largo from his Concerto for Two Oboes in A minor, R V 536. Two oboes are the soloists, and in this slow movement they sing together in smooth, close harmony, like two voices in a quiet duet, while the strings keep a soft, steady background. It is played by the Modena Chamber Orchestra.",
+     "outro": "outros/calm/20.mp3",
+     "outro_text": "That was the Largo from Vivaldi's Concerto for Two Oboes in A minor, played by the Modena Chamber Orchestra.",
+     "intro_duration": 20.4,
+     "outro_duration": 7.7
+    },
+    {
+     "file": "calm/21-vivaldi-rv558-andante.mp3",
+     "title": "Vivaldi — Andante molto, Concerto in C, RV 558",
+     "performer": "The Modena Chamber Orchestra (via Musopen)",
+     "duration": 181.5,
+     "intro": "intros/calm/21.mp3",
+     "intro_text": "From Antonio Vivaldi, the Andante molto from his Concerto in C major, R V 558, a concerto for a large mixed group of instruments, including two flutes, two shawms, two violins, two mandolins, two theorbos, and cello. Because there are so many different plucked and blown instruments, you hear many soft colors at once, like a delicate, shimmering tapestry. It is played by the Modena Chamber Orchestra.",
+     "outro": "outros/calm/21.mp3",
+     "outro_text": "That was the Andante molto from Vivaldi's Concerto in C major, R V 558, played by the Modena Chamber Orchestra.",
+     "intro_duration": 24.4,
+     "outro_duration": 9.7
+    },
+    {
+     "file": "calm/22-vivaldi-oboe-andante.mp3",
+     "title": "Vivaldi — Andante, Oboe Concerto in C (F. VII No. 6)",
+     "performer": "Edino Biaggi, oboe; Advent Chamber Orchestra",
+     "duration": 206.1,
+     "intro": "intros/calm/22.mp3",
+     "intro_text": "Antonio Vivaldi, the Andante from his Oboe Concerto in C major. Vivaldi wrote many concertos for the oboe, a reed instrument with a sweet, singing, slightly reedy voice. Listen for the oboe singing a slow, tender melody, as though telling a quiet story, while the strings accompany softly. The soloist is Edino Biaggi, with the Advent Chamber Orchestra.",
+     "outro": "outros/calm/22.mp3",
+     "outro_text": "That was the Andante from Vivaldi's Oboe Concerto in C major, with oboist Edino Biaggi and the Advent Chamber Orchestra.",
+     "intro_duration": 22.2,
+     "outro_duration": 9.2
+    },
+    {
+     "file": "calm/23-vivaldi-autumn-ii-accordion.mp3",
+     "title": "Vivaldi — Autumn, II. Adagio molto (accordion orchestra)",
+     "performer": "Paul De Bra, accordion orchestra",
+     "duration": 144.4,
+     "intro": "intros/calm/23.mp3",
+     "intro_text": "From Antonio Vivaldi, the slow movement of Autumn, from The Four Seasons, R V 293, the Adagio molto. In the sonnet that goes with this movement, the villagers have fallen asleep after the harvest feast, and the music grows quiet and still. Tonight it is played in an arrangement for accordion orchestra, so the soft chords seem to breathe slowly, in and out, like someone sleeping. The arranger and conductor is Paul De Bra.",
+     "outro": "outros/calm/23.mp3",
+     "outro_text": "That was the Adagio molto from Vivaldi's Autumn, in an arrangement for accordion orchestra by Paul De Bra.",
+     "intro_duration": 24.2,
+     "outro_duration": 8.0
+    },
+    {
+     "file": "calm/24-vivaldi-spring-ii-accordion.mp3",
+     "title": "Vivaldi — Spring, II. Largo (accordion orchestra)",
+     "performer": "Paul De Bra, accordion orchestra",
+     "duration": 148.0,
+     "intro": "intros/calm/24.mp3",
+     "intro_text": "Antonio Vivaldi, the slow movement, Largo, of Spring, from The Four Seasons, R V 269. In Vivaldi's sonnet, a goatherd is sleeping in a meadow, with leaves rustling softly all around, and in his score, a dog barks quietly in the low strings. Listen for the soft, rustling sound and the slow, peaceful melody. This version is played in an arrangement for accordion orchestra by Paul De Bra.",
+     "outro": "outros/calm/24.mp3",
+     "outro_text": "That was the Largo from Vivaldi's Spring, in an arrangement for accordion orchestra by Paul De Bra.",
+     "intro_duration": 24.3,
+     "outro_duration": 7.3
     }
    ],
-   "total_seconds": 3047.4
+   "total_seconds": 5196.8
   },
   "lively": {
    "label": "Lively Baroque",
@@ -126,8 +270,11 @@
      "performer": "Advent Chamber Orchestra",
      "duration": 322.2,
      "intro": "intros/lively/01.mp3",
-     "intro_text": "From Johann Sebastian Bach... the first movement of the Brandenburg Concerto number 3 in G major, B.W.V. 1048, for three violins, three violas, three cellos, and continuo. Bach presented the six Brandenburg Concertos in 1721 to Christian Ludwig, Margrave of Brandenburg. Performed by the Advent Chamber Orchestra.",
-     "intro_duration": 23.1
+     "intro_text": "From Johann Sebastian Bach, the first movement of the Brandenburg Concerto number 3 in G major, B W V 1048, for three violins, three violas, three cellos, and continuo. Bach presented the six Brandenburg Concertos in 1721 to Christian Ludwig, Margrave of Brandenburg. There is no single soloist here. Listen for short, bouncy phrases tossed from one group of strings to another, like a lively conversation between three trios. It is played by the Advent Chamber Orchestra.",
+     "intro_duration": 32.3,
+     "outro": "outros/lively/01.mp3",
+     "outro_text": "That was the first movement of Bach's Brandenburg Concerto number 3, played by the Advent Chamber Orchestra.",
+     "outro_duration": 7.9
     },
     {
      "file": "lively/02-brandenburg3-iii.mp3",
@@ -135,8 +282,11 @@
      "performer": "Advent Chamber Orchestra",
      "duration": 276.7,
      "intro": "intros/lively/02.mp3",
-     "intro_text": "Johann Sebastian Bach once more... the closing Allegro of the Brandenburg Concerto number 3 in G major, B.W.V. 1048... a brisk movement for strings alone. The Advent Chamber Orchestra.",
-     "intro_duration": 16.1
+     "intro_text": "Johann Sebastian Bach once more, the closing Allegro of the Brandenburg Concerto number 3 in G major, B W V 1048, a brisk movement for strings alone. It moves in a skipping, dance-like rhythm, a little like a country jig, and the same quick phrases chase each other around the orchestra without ever slowing down. The Advent Chamber Orchestra.",
+     "intro_duration": 21.5,
+     "outro": "outros/lively/02.mp3",
+     "outro_text": "That was the finale of Bach's Brandenburg Concerto number 3, played by the Advent Chamber Orchestra.",
+     "outro_duration": 7.6
     },
     {
      "file": "lively/03-brandenburg5-i.mp3",
@@ -144,8 +294,11 @@
      "performer": "Advent Chamber Orchestra",
      "duration": 601.6,
      "intro": "intros/lively/03.mp3",
-     "intro_text": "From Johann Sebastian Bach... the opening Allegro of the Brandenburg Concerto number 5 in D major, B.W.V. 1050, for flute, violin, and harpsichord, with strings. Near the end, the harpsichord breaks away in a long solo cadenza. The Advent Chamber Orchestra, with Roxana Pavel Goldstein, violin, Constance Schoepflin, flute, and Matthew Ganong, harpsichord.",
-     "intro_duration": 23.7
+     "intro_text": "From Johann Sebastian Bach, the opening Allegro of the Brandenburg Concerto number 5 in D major, B W V 1050, for flute, violin, and harpsichord, with strings. Usually the harpsichord just supports the others, but here it steps into the spotlight. Near the end it breaks away in a long solo, racing up and down, while the others wait. The Advent Chamber Orchestra, with Roxana Pavel Goldstein, violin, Constance Schoepflin, flute, and Matthew Ganong, harpsichord.",
+     "intro_duration": 29.5,
+     "outro": "outros/lively/03.mp3",
+     "outro_text": "That was the first movement of Bach's Brandenburg Concerto number 5, with Roxana Pavel Goldstein on violin, Constance Schoepflin on flute, and Matthew Ganong at the harpsichord, with the Advent Chamber Orchestra.",
+     "outro_duration": 13.8
     },
     {
      "file": "lively/04-brandenburg5-iii.mp3",
@@ -153,8 +306,11 @@
      "performer": "Advent Chamber Orchestra",
      "duration": 300.0,
      "intro": "intros/lively/04.mp3",
-     "intro_text": "The finale now, of Bach's Brandenburg Concerto number 5 in D major, B.W.V. 1050... an Allegro in the spirit of a gigue. Roxana Pavel Goldstein, violin, Constance Schoepflin, flute, and Matthew Ganong, harpsichord, with the Advent Chamber Orchestra.",
-     "intro_duration": 18.6
+     "intro_text": "The finale now, of Bach's Brandenburg Concerto number 5 in D major, B W V 1050, an Allegro in the spirit of a gigue, which is a quick, lilting dance. Listen for the flute, the violin, and the harpsichord, each taking a turn with the same bright tune, as if three friends were passing it around. Roxana Pavel Goldstein, violin, Constance Schoepflin, flute, and Matthew Ganong, harpsichord, with the Advent Chamber Orchestra.",
+     "intro_duration": 25.2,
+     "outro": "outros/lively/04.mp3",
+     "outro_text": "That was the finale of Bach's Brandenburg Concerto number 5, played by the Advent Chamber Orchestra, with Roxana Pavel Goldstein, Constance Schoepflin, and Matthew Ganong.",
+     "outro_duration": 11.7
     },
     {
      "file": "lively/05-brandenburg6-iii.mp3",
@@ -162,8 +318,11 @@
      "performer": "Advent Chamber Orchestra",
      "duration": 338.9,
      "intro": "intros/lively/05.mp3",
-     "intro_text": "From Johann Sebastian Bach... the final Allegro of the Brandenburg Concerto number 6 in B flat major, B.W.V. 1051... scored without violins, for the darker colors of violas, violas da gamba, and cello. Performed by the Advent Chamber Orchestra.",
-     "intro_duration": 19.1
+     "intro_text": "From Johann Sebastian Bach, the final Allegro of the Brandenburg Concerto number 6 in B flat major, B W V 1051. Bach wrote it without violins, for the darker, mellower colors of violas, violas da gamba, and cello. So the sound is rich and woody, rather than bright, and the music bounces along like a lively dance. Performed by the Advent Chamber Orchestra.",
+     "intro_duration": 22.7,
+     "outro": "outros/lively/05.mp3",
+     "outro_text": "That was the last movement of Bach's Brandenburg Concerto number 6, played by the Advent Chamber Orchestra.",
+     "outro_duration": 7.9
     },
     {
      "file": "lively/06-bwv1052-i.mp3",
@@ -171,8 +330,11 @@
      "performer": "Johannes Volker Schmidt, piano; Fulda Symphonic Orchestra",
      "duration": 463.4,
      "intro": "intros/lively/06.mp3",
-     "intro_text": "Johann Sebastian Bach... the first movement, Allegro, of the Keyboard Concerto number 1 in D minor, B.W.V. 1052. Bach wrote his keyboard concertos in Leipzig, for the coffee-house concerts of the Collegium Musicum. Johannes Volker Schmidt is the piano soloist, with the Fulda Symphonic Orchestra, conducted by Simon Schindler.",
-     "intro_duration": 22.7
+     "intro_text": "Johann Sebastian Bach, the first movement, Allegro, of the Keyboard Concerto in D minor, B W V 1052. Bach wrote his keyboard concertos in Leipzig, for the coffee-house concerts of the Collegium Musicum, and he wrote this one for harpsichord. It opens with the whole orchestra stating a strong, stern tune together, and then the piano takes off with fast, racing runs. Johannes Volker Schmidt is the piano soloist, with the Fulda Symphonic Orchestra, conducted by Simon Schindler.",
+     "intro_duration": 30.8,
+     "outro": "outros/lively/06.mp3",
+     "outro_text": "That was the first movement of Bach's Keyboard Concerto in D minor, with Johannes Volker Schmidt, piano, and the Fulda Symphonic Orchestra, conducted by Simon Schindler.",
+     "outro_duration": 11.4
     },
     {
      "file": "lively/07-bwv1052-iii.mp3",
@@ -180,8 +342,11 @@
      "performer": "Johannes Volker Schmidt, piano; Fulda Symphonic Orchestra",
      "duration": 482.5,
      "intro": "intros/lively/07.mp3",
-     "intro_text": "The finale of Bach's Keyboard Concerto number 1 in D minor, B.W.V. 1052... Allegro. Pianist Johannes Volker Schmidt, and the Fulda Symphonic Orchestra under Simon Schindler, recorded in the Prince's Hall of the City Palace in Fulda, Germany.",
-     "intro_duration": 18.0
+     "intro_text": "The finale of Bach's Keyboard Concerto in D minor, B W V 1052, marked Allegro. It is a whirlwind. The piano dashes ahead with quick, flowing notes while the orchestra pushes it along, and the tune keeps coming back, like a theme you start to hum along with. Pianist Johannes Volker Schmidt, and the Fulda Symphonic Orchestra under Simon Schindler, recorded in the Prince's Hall of the City Palace in Fulda, Germany.",
+     "intro_duration": 24.1,
+     "outro": "outros/lively/07.mp3",
+     "outro_text": "That was the finale of Bach's Keyboard Concerto in D minor, with pianist Johannes Volker Schmidt and the Fulda Symphonic Orchestra.",
+     "outro_duration": 8.9
     },
     {
      "file": "lively/08-bach-2violins-i.mp3",
@@ -189,8 +354,11 @@
      "performer": "Advent Chamber Orchestra; David Parry & Roxana Pavel Goldstein",
      "duration": 232.1,
      "intro": "intros/lively/08.mp3",
-     "intro_text": "From Johann Sebastian Bach... the Vivace, from the Concerto for Two Violins in D minor, B.W.V. 1043. The two solo parts weave around each other as equals, in close counterpoint. The soloists are David Parry and Roxana Pavel Goldstein, with the Advent Chamber Orchestra.",
-     "intro_duration": 18.9
+     "intro_text": "From Johann Sebastian Bach, the Vivace, from the Concerto for Two Violins in D minor, B W V 1043. Listen for the two solo violins. One plays a tune, the other answers with the same tune a moment later, and they weave around each other as equals, like two people in an animated conversation. The soloists are David Parry and Roxana Pavel Goldstein, with the Advent Chamber Orchestra.",
+     "intro_duration": 23.9,
+     "outro": "outros/lively/08.mp3",
+     "outro_text": "That was the Vivace from Bach's Double Violin Concerto, with David Parry and Roxana Pavel Goldstein, and the Advent Chamber Orchestra.",
+     "outro_duration": 9.6
     },
     {
      "file": "lively/09-bach-2violins-iii.mp3",
@@ -198,8 +366,11 @@
      "performer": "Advent Chamber Orchestra; David Parry & Roxana Pavel Goldstein",
      "duration": 292.2,
      "intro": "intros/lively/09.mp3",
-     "intro_text": "The closing Allegro of Bach's Concerto for Two Violins in D minor, B.W.V. 1043... a work Bach later arranged as a concerto for two harpsichords. David Parry and Roxana Pavel Goldstein, violins, with the Advent Chamber Orchestra.",
-     "intro_duration": 18.0
+     "intro_text": "The closing Allegro of Bach's Concerto for Two Violins in D minor, B W V 1043, a work Bach later arranged as a concerto for two harpsichords. This is a quick, spirited finale in which the two violins chase each other, trading rapid notes back and forth. David Parry and Roxana Pavel Goldstein, violins, with the Advent Chamber Orchestra.",
+     "intro_duration": 21.5,
+     "outro": "outros/lively/09.mp3",
+     "outro_text": "That was the finale of Bach's Double Violin Concerto, with David Parry and Roxana Pavel Goldstein, and the Advent Chamber Orchestra.",
+     "outro_duration": 9.6
     },
     {
      "file": "lively/10-bach-preludio-bwv1006.mp3",
@@ -207,8 +378,11 @@
      "performer": "Gordon Rowland, guitar transcription (via Musopen)",
      "duration": 266.0,
      "intro": "intros/lively/10.mp3",
-     "intro_text": "From Johann Sebastian Bach... the Preludio, from the Partita number 3 in E major for solo violin, B.W.V. 1006. Bach later reworked this music as the sinfonia of his cantata number 29. Tonight it is played on guitar, by Gordon Rowland.",
-     "intro_duration": 18.3
+     "intro_text": "From Johann Sebastian Bach, the Preludio from the Partita number 3 in E major for solo violin, B W V 1006. Bach later reworked this music as the opening sinfonia of his cantata number 29. Listen for the steady stream of quick, repeating notes, like a bright brook that never stops running. Tonight it is played on guitar, in a transcription, by Gordon Rowland.",
+     "intro_duration": 22.8,
+     "outro": "outros/lively/10.mp3",
+     "outro_text": "That was the Preludio from Bach's Partita number 3, in a guitar transcription, played by Gordon Rowland.",
+     "outro_duration": 7.7
     },
     {
      "file": "lively/11-vivaldi-spring-i.mp3",
@@ -216,8 +390,11 @@
      "performer": "John Harrison, violin",
      "duration": 218.3,
      "intro": "intros/lively/11.mp3",
-     "intro_text": "From Antonio Vivaldi... the opening Allegro of Spring, the Concerto in E major, opus 8, number 1, R.V. 269, from The Four Seasons. Vivaldi, the red-haired priest of Venice, matched each of the four concertos with a sonnet. The violinist is John Harrison, in a live performance.",
-     "intro_duration": 19.7
+     "intro_text": "From Antonio Vivaldi, the opening Allegro of Spring, the Concerto in E major, opus 8, number 1, R V 269, from The Four Seasons. Vivaldi, the red-haired priest of Venice, matched each of the four concertos with a sonnet. In this one, listen for the violins imitating birdsong, then a gentle, rippling stream, then a thunderstorm rumbling in, and finally the birds returning. The violinist is John Harrison, in a live performance.",
+     "intro_duration": 25.6,
+     "outro": "outros/lively/11.mp3",
+     "outro_text": "That was the first movement of Spring, from Vivaldi's Four Seasons, with violinist John Harrison.",
+     "outro_duration": 7.2
     },
     {
      "file": "lively/12-vivaldi-summer-iii.mp3",
@@ -225,8 +402,11 @@
      "performer": "John Harrison, violin",
      "duration": 162.0,
      "intro": "intros/lively/12.mp3",
-     "intro_text": "Antonio Vivaldi... the Presto from Summer, the Concerto in G minor, opus 8, number 2, R.V. 315... a summer storm in music. John Harrison is the violin soloist, recorded live.",
-     "intro_duration": 15.2
+     "intro_text": "Antonio Vivaldi, the Presto from Summer, the Concerto in G minor, opus 8, number 2, R V 315, from The Four Seasons. It is a summer storm in music. Listen for the fast, furious notes in the strings, like thunder and hail crashing down over a field of ripe wheat. John Harrison is the violin soloist, recorded live.",
+     "intro_duration": 20.9,
+     "outro": "outros/lively/12.mp3",
+     "outro_text": "That was the Presto from Vivaldi's Summer, with violinist John Harrison.",
+     "outro_duration": 5.9
     },
     {
      "file": "lively/13-vivaldi-autumn-i.mp3",
@@ -234,8 +414,11 @@
      "performer": "John Harrison, violin",
      "duration": 307.3,
      "intro": "intros/lively/13.mp3",
-     "intro_text": "From The Four Seasons by Antonio Vivaldi... the first movement, Allegro, of Autumn, the Concerto in F major, opus 8, number 3, R.V. 293... a harvest celebration. Violinist John Harrison, in a live performance.",
-     "intro_duration": 17.2
+     "intro_text": "From The Four Seasons by Antonio Vivaldi, the first movement, Allegro, of Autumn, the Concerto in F major, opus 8, number 3, R V 293, a harvest celebration. Listen for the bouncy, peasant-dance tune that the whole orchestra plays, as villagers celebrate with song and dance, and the solo violin that wanders around, a little unsteady, like someone who has enjoyed the harvest wine. Violinist John Harrison, in a live performance.",
+     "intro_duration": 25.4,
+     "outro": "outros/lively/13.mp3",
+     "outro_text": "That was the first movement of Vivaldi's Autumn, with violinist John Harrison.",
+     "outro_duration": 6.3
     },
     {
      "file": "lively/14-vivaldi-autumn-iii.mp3",
@@ -243,8 +426,11 @@
      "performer": "John Harrison, violin",
      "duration": 204.2,
      "intro": "intros/lively/14.mp3",
-     "intro_text": "Vivaldi's Autumn, from The Four Seasons... the closing Allegro, the concerto in F major, R.V. 293, a picture of the hunt. Vivaldi spent much of his career teaching music at a Venetian home for orphaned girls. Played by violinist John Harrison.",
-     "intro_duration": 17.6
+     "intro_text": "Vivaldi's Autumn, from The Four Seasons, the closing Allegro of the concerto in F major, R V 293, a picture of the hunt. Listen for the horn-like calls in the strings, the rush of the chase, and the hunted animal fleeing. Vivaldi spent much of his career teaching music at a Venetian home for orphaned girls. Played by violinist John Harrison.",
+     "intro_duration": 21.2,
+     "outro": "outros/lively/14.mp3",
+     "outro_text": "That was the finale of Vivaldi's Autumn, with violinist John Harrison.",
+     "outro_duration": 5.8
     },
     {
      "file": "lively/15-vivaldi-winter-i.mp3",
@@ -252,8 +438,11 @@
      "performer": "John Harrison, violin",
      "duration": 211.9,
      "intro": "intros/lively/15.mp3",
-     "intro_text": "From Antonio Vivaldi... the first movement, Allegro non molto, of Winter, the Concerto in F minor, opus 8, number 4, R.V. 297, from The Four Seasons, published in 1725. Violinist John Harrison, in a live performance.",
-     "intro_duration": 18.5
+     "intro_text": "From Antonio Vivaldi, the first movement, Allegro non molto, of Winter, the Concerto in F minor, opus 8, number 4, R V 297, from The Four Seasons, published in 1725. Listen for the shivering, trembling notes of the strings, like teeth chattering in the cold, and the icy blasts of wind that rush past. Violinist John Harrison, in a live performance.",
+     "intro_duration": 23.1,
+     "outro": "outros/lively/15.mp3",
+     "outro_text": "That was the first movement of Vivaldi's Winter, with violinist John Harrison.",
+     "outro_duration": 6.3
     },
     {
      "file": "lively/16-vivaldi-winter-iii.mp3",
@@ -261,8 +450,11 @@
      "performer": "John Harrison, violin",
      "duration": 196.0,
      "intro": "intros/lively/16.mp3",
-     "intro_text": "The finale of Vivaldi's Winter, from The Four Seasons... the Allegro of the Concerto in F minor, R.V. 297. Vivaldi published The Four Seasons in 1725, as the first four concertos of his opus 8. John Harrison, violin.",
-     "intro_duration": 18.1
+     "intro_text": "The finale of Vivaldi's Winter, from The Four Seasons, the Allegro of the Concerto in F minor, R V 297. Vivaldi published The Four Seasons in 1725, as the first four concertos of his opus 8. Listen for careful, tiptoeing steps on the ice, a slip and a tumble, and then the winter winds rushing back in. John Harrison, violin.",
+     "intro_duration": 22.0,
+     "outro": "outros/lively/16.mp3",
+     "outro_text": "That was the finale of Vivaldi's Winter, with violinist John Harrison.",
+     "outro_duration": 5.9
     },
     {
      "file": "lively/17-handel-hornpipe.mp3",
@@ -270,8 +462,11 @@
      "performer": "US Marine Band Chamber Orchestra",
      "duration": 231.7,
      "intro": "intros/lively/17.mp3",
-     "intro_text": "From George Frideric Handel... the Alla Hornpipe, from the Water Music, Suite number 2 in D major, H.W.V. 349. The Water Music was first played in 1717, on a barge on the River Thames, for King George the First. Performed by the Marine Chamber Orchestra of the United States Marine Band.",
-     "intro_duration": 21.4
+     "intro_text": "From George Frideric Handel, the Alla Hornpipe, from the Water Music, Suite number 2 in D major, H W V 349. The Water Music was first played in 1717, on a barge on the River Thames, for King George the First. Listen for the bold trumpets and horns, and the stately, swaggering dance rhythm in three beats. Performed by the Marine Chamber Orchestra of the United States Marine Band.",
+     "intro_duration": 23.8,
+     "outro": "outros/lively/17.mp3",
+     "outro_text": "That was the Alla Hornpipe from Handel's Water Music, played by the Marine Chamber Orchestra of the United States Marine Band.",
+     "outro_duration": 8.6
     },
     {
      "file": "lively/18-handel-queen-of-sheba.mp3",
@@ -279,8 +474,11 @@
      "performer": "Advent Chamber Orchestra",
      "duration": 203.5,
      "intro": "intros/lively/18.mp3",
-     "intro_text": "George Frideric Handel... the Arrival of the Queen of Sheba, the sinfonia that opens Act Three of his oratorio Solomon, from 1749. Handel was born in Germany, and spent most of his career in London. Performed by the Advent Chamber Orchestra.",
-     "intro_duration": 17.8
+     "intro_text": "George Frideric Handel, the Arrival of the Queen of Sheba, the sinfonia that opens Act Three of his oratorio Solomon, from 1749. Handel was born in Germany, and spent most of his career in London. Listen for the quick, bubbling notes in the strings and oboes, bright and busy, like a royal procession arriving at court. Performed by the Advent Chamber Orchestra.",
+     "intro_duration": 22.1,
+     "outro": "outros/lively/18.mp3",
+     "outro_text": "That was the Arrival of the Queen of Sheba, by Handel, played by the Advent Chamber Orchestra.",
+     "outro_duration": 6.8
     },
     {
      "file": "lively/19-handel-cg-hwv316.mp3",
@@ -288,8 +486,11 @@
      "performer": "The London Baroque Orchestra, Alexander Hamilton (via Musopen)",
      "duration": 598.8,
      "intro": "intros/lively/19.mp3",
-     "intro_text": "From George Frideric Handel... the Concerto Grosso in D minor, opus 3, number 5, H.W.V. 316. Handel's opus 3 concertos were published in London in 1734. The London Baroque Orchestra is directed by Alexander Hamilton.",
-     "intro_duration": 18.9
+     "intro_text": "From George Frideric Handel, the Concerto Grosso in D minor, opus 3, number 5, H W V 316. Handel's opus 3 concertos were published in London in 1734. In a concerto grosso, a small group of soloists plays back and forth with the full orchestra, a little like a question and its answer. Expect a mix of slower, graceful sections and brisk, lively ones. The London Baroque Orchestra is directed by Alexander Hamilton.",
+     "intro_duration": 29.8,
+     "outro": "outros/lively/19.mp3",
+     "outro_text": "That was Handel's Concerto Grosso in D minor, opus 3, number 5, played by the London Baroque Orchestra, directed by Alexander Hamilton.",
+     "outro_duration": 10.4
     },
     {
      "file": "lively/20-corelli-op6-4.mp3",
@@ -297,17 +498,212 @@
      "performer": "Advent Chamber Orchestra",
      "duration": 208.1,
      "intro": "intros/lively/20.mp3",
-     "intro_text": "From Arcangelo Corelli... the opening Adagio and Allegro, from the Concerto Grosso in D major, opus 6, number 4. Corelli was the great Italian violinist of his day, and his concerti grossi became models for Handel and many others. The Advent Chamber Orchestra.",
-     "intro_duration": 18.2
+     "intro_text": "From Arcangelo Corelli, the opening Adagio and Allegro from the Concerto Grosso in D major, opus 6, number 4. Corelli was the great Italian violinist of his day, and his concerti grossi became models for Handel and many others. Listen for a slow, serious opening, followed by a quick, lively section, where a small trio of soloists trades phrases with the full string orchestra. The Advent Chamber Orchestra.",
+     "intro_duration": 24.8,
+     "outro": "outros/lively/20.mp3",
+     "outro_text": "That was the opening of Corelli's Concerto Grosso, opus 6, number 4, played by the Advent Chamber Orchestra.",
+     "outro_duration": 8.5
+    },
+    {
+     "file": "lively/21-vivaldi-spring-iii.mp3",
+     "title": "Vivaldi — Spring, III. Allegro",
+     "performer": "John Harrison, violin",
+     "duration": 247.0,
+     "intro": "intros/lively/21.mp3",
+     "intro_text": "From Antonio Vivaldi, the finale of Spring, the Allegro, from The Four Seasons, R V 269, which Vivaldi published in 1725. The sonnet describes nymphs and shepherds dancing to the sound of rustic bagpipes under the bright spring sky. Listen for the drone in the low strings that imitates the bagpipes, and the bouncy, joyful dance tune that skips along above it. The violinist is John Harrison, in a live performance.",
+     "outro": "outros/lively/21.mp3",
+     "outro_text": "That was the finale of Vivaldi's Spring, with violinist John Harrison.",
+     "intro_duration": 25.4,
+     "outro_duration": 5.8
+    },
+    {
+     "file": "lively/22-vivaldi-summer-i.mp3",
+     "title": "Vivaldi — Summer, I. Allegro non molto",
+     "performer": "John Harrison, violin",
+     "duration": 305.1,
+     "intro": "intros/lively/22.mp3",
+     "intro_text": "Antonio Vivaldi, the opening movement of Summer, the Allegro non molto, from The Four Seasons, R V 315. It begins slowly and heavily, like the sleepy, sticky heat of a summer afternoon. Then listen for the violin imitating the birds in the sonnet, a cuckoo, a turtledove, and a goldfinch, before a sudden, stormy gust sweeps in. John Harrison is the violin soloist, in a live performance.",
+     "outro": "outros/lively/22.mp3",
+     "outro_text": "That was the first movement of Vivaldi's Summer, with violinist John Harrison.",
+     "intro_duration": 24.0,
+     "outro_duration": 6.2
+    },
+    {
+     "file": "lively/23-vivaldi-l-estro-8-i.mp3",
+     "title": "Vivaldi — L'estro armonico No. 8, RV 522, I. Allegro",
+     "performer": "Jacques Israelievitch & Roxana Pavel Goldstein, violins; Advent Chamber Orchestra",
+     "duration": 206.9,
+     "intro": "intros/lively/23.mp3",
+     "intro_text": "From Antonio Vivaldi, the opening Allegro of the Concerto in A minor for two violins, R V 522, the eighth concerto of L'estro armonico, which was published in Amsterdam in 1711. Listen for the two solo violins racing and tumbling over one another, with the orchestra stepping in again and again with the same energetic tune. Johann Sebastian Bach admired this concerto enough to arrange it for the organ. The soloists are Jacques Israelievitch and Roxana Pavel Goldstein, with the Advent Chamber Orchestra.",
+     "outro": "outros/lively/23.mp3",
+     "outro_text": "That was the opening of Vivaldi's Concerto in A minor for two violins, from L'estro armonico, with Jacques Israelievitch and Roxana Pavel Goldstein, and the Advent Chamber Orchestra.",
+     "intro_duration": 33.0,
+     "outro_duration": 12.3
+    },
+    {
+     "file": "lively/24-vivaldi-l-estro-8-iii.mp3",
+     "title": "Vivaldi — L'estro armonico No. 8, RV 522, III. Allegro",
+     "performer": "Jacques Israelievitch & Roxana Pavel Goldstein, violins; Advent Chamber Orchestra",
+     "duration": 192.7,
+     "intro": "intros/lively/24.mp3",
+     "intro_text": "Antonio Vivaldi, the closing Allegro of the Concerto in A minor for two violins, R V 522, from L'estro armonico. It is a quick, bright finale in which the two soloists skip and sparkle together, echoing each other's runs, and the orchestra pushes the music along. Jacques Israelievitch and Roxana Pavel Goldstein play the violins, with the Advent Chamber Orchestra.",
+     "outro": "outros/lively/24.mp3",
+     "outro_text": "That was the finale of Vivaldi's Concerto in A minor for two violins, with Jacques Israelievitch and Roxana Pavel Goldstein, and the Advent Chamber Orchestra.",
+     "intro_duration": 23.1,
+     "outro_duration": 10.6
+    },
+    {
+     "file": "lively/25-vivaldi-l-estro-11-i.mp3",
+     "title": "Vivaldi — L'estro armonico No. 11, RV 565, I. Allegro",
+     "performer": "David Parry & Roxana Pavel Goldstein, violins; Advent Chamber Orchestra",
+     "duration": 239.8,
+     "intro": "intros/lively/25.mp3",
+     "intro_text": "From Antonio Vivaldi, the opening movement of the Concerto in D minor for two violins, R V 565, the eleventh concerto of L'estro armonico, published in 1711. It begins with a lively Allegro, passes through a slow, solemn passage, and then dashes into a fast, brilliant section where the two violins chase each other. Bach liked it so much that he arranged it for organ. The soloists are David Parry and Roxana Pavel Goldstein, with the Advent Chamber Orchestra.",
+     "outro": "outros/lively/25.mp3",
+     "outro_text": "That was the opening movement of Vivaldi's Concerto in D minor for two violins, from L'estro armonico, with David Parry and Roxana Pavel Goldstein, and the Advent Chamber Orchestra.",
+     "intro_duration": 31.5,
+     "outro_duration": 12.5
+    },
+    {
+     "file": "lively/26-vivaldi-l-estro-10-i.mp3",
+     "title": "Vivaldi — L'estro armonico No. 10, RV 580, I. Allegro",
+     "performer": "The Modena Chamber Orchestra (via Musopen)",
+     "duration": 255.0,
+     "intro": "intros/lively/26.mp3",
+     "intro_text": "Antonio Vivaldi, the opening Allegro of the Concerto in B minor for four violins, R V 580, the tenth concerto of L'estro armonico. Four soloists play at once, so the music sparkles with fast, overlapping lines, like four people all talking brightly, yet somehow in perfect harmony. Bach later arranged it for four harpsichords. It is played by the Modena Chamber Orchestra.",
+     "outro": "outros/lively/26.mp3",
+     "outro_text": "That was the opening Allegro of Vivaldi's Concerto for Four Violins in B minor, played by the Modena Chamber Orchestra.",
+     "intro_duration": 23.9,
+     "outro_duration": 8.5
+    },
+    {
+     "file": "lively/27-vivaldi-l-estro-10-iii.mp3",
+     "title": "Vivaldi — L'estro armonico No. 10, RV 580, III. Allegro",
+     "performer": "The Modena Chamber Orchestra (via Musopen)",
+     "duration": 210.6,
+     "intro": "intros/lively/27.mp3",
+     "intro_text": "From Antonio Vivaldi, the finale of the Concerto in B minor for four violins, R V 580, from L'estro armonico, the tenth of its twelve concertos. Listen for the four solo violins swapping quick, sparkling patterns, like a game of catch, with the orchestra answering in between. It is played by the Modena Chamber Orchestra.",
+     "outro": "outros/lively/27.mp3",
+     "outro_text": "That was the finale of Vivaldi's Concerto for Four Violins in B minor, played by the Modena Chamber Orchestra.",
+     "intro_duration": 20.8,
+     "outro_duration": 8.1
+    },
+    {
+     "file": "lively/28-vivaldi-cello-i.mp3",
+     "title": "Vivaldi — Cello Concerto in G, RV 413, I. Allegro",
+     "performer": "Stephen Balderston, cello; Advent Chamber Orchestra",
+     "duration": 199.5,
+     "intro": "intros/lively/28.mp3",
+     "intro_text": "Antonio Vivaldi, the opening Allegro of his Cello Concerto in G major, R V 413. The cello is usually a deep, supporting voice, but here it steps forward as the soloist, playing quick, springing notes with a warm, woody tone while the orchestra bounces along beneath. The soloist is Stephen Balderston, with the Advent Chamber Orchestra.",
+     "outro": "outros/lively/28.mp3",
+     "outro_text": "That was the opening Allegro of Vivaldi's Cello Concerto in G major, with Stephen Balderston and the Advent Chamber Orchestra.",
+     "intro_duration": 21.5,
+     "outro_duration": 9.1
+    },
+    {
+     "file": "lively/29-vivaldi-cello-iii.mp3",
+     "title": "Vivaldi — Cello Concerto in G, RV 413, III. Allegro",
+     "performer": "Stephen Balderston, cello; Advent Chamber Orchestra",
+     "duration": 162.9,
+     "intro": "intros/lively/29.mp3",
+     "intro_text": "From Antonio Vivaldi, the closing Allegro of the Cello Concerto in G major, R V 413. This is a quick, cheerful finale, and the cello skips and dances over the orchestra, like a friendly voice that cannot stop smiling. Stephen Balderston is the cellist, with the Advent Chamber Orchestra.",
+     "outro": "outros/lively/29.mp3",
+     "outro_text": "That was the finale of Vivaldi's Cello Concerto in G major, with Stephen Balderston and the Advent Chamber Orchestra.",
+     "intro_duration": 19.1,
+     "outro_duration": 8.7
+    },
+    {
+     "file": "lively/30-vivaldi-bassoon-i.mp3",
+     "title": "Vivaldi — Bassoon Concerto in A minor, RV 498, I. Allegro",
+     "performer": "The Modena Chamber Orchestra (via Musopen)",
+     "duration": 278.8,
+     "intro": "intros/lively/30.mp3",
+     "intro_text": "Antonio Vivaldi, the opening Allegro of his Bassoon Concerto in A minor, R V 498. Vivaldi wrote nearly forty concertos for the bassoon. Listen for the bassoon's round, woody voice, bouncing along with quick, playful notes, a little like a good-humored bear dancing. It is played by the Modena Chamber Orchestra.",
+     "outro": "outros/lively/30.mp3",
+     "outro_text": "That was the opening Allegro of Vivaldi's Bassoon Concerto in A minor, played by the Modena Chamber Orchestra.",
+     "intro_duration": 20.3,
+     "outro_duration": 7.9
+    },
+    {
+     "file": "lively/31-vivaldi-bassoon-iii.mp3",
+     "title": "Vivaldi — Bassoon Concerto in A minor, RV 498, III. Allegro",
+     "performer": "The Modena Chamber Orchestra (via Musopen)",
+     "duration": 190.6,
+     "intro": "intros/lively/31.mp3",
+     "intro_text": "From Antonio Vivaldi, the closing Allegro of the Bassoon Concerto in A minor, R V 498. In this finale, the bassoon scampers along with quick, bouncing notes, and the strings play a bright, lively tune that keeps returning, like a chorus you want to sing along with. It is played by the Modena Chamber Orchestra.",
+     "outro": "outros/lively/31.mp3",
+     "outro_text": "That was the finale of Vivaldi's Bassoon Concerto in A minor, played by the Modena Chamber Orchestra.",
+     "intro_duration": 19.6,
+     "outro_duration": 7.3
+    },
+    {
+     "file": "lively/32-vivaldi-2mandolins-i.mp3",
+     "title": "Vivaldi — Concerto for Two Mandolins, RV 532, I. Allegro",
+     "performer": "The Modena Chamber Orchestra (via Musopen)",
+     "duration": 305.6,
+     "intro": "intros/lively/32.mp3",
+     "intro_text": "Antonio Vivaldi, the opening Allegro of his Concerto for Two Mandolins in G major, R V 532. The mandolin is a small plucked instrument, a little like a tiny guitar, and its notes are quick and sparkling, like drops of water in the sun. Listen for the two mandolins playing together, trading fast, tinkling patterns while the strings support them. It is played by the Modena Chamber Orchestra.",
+     "outro": "outros/lively/32.mp3",
+     "outro_text": "That was the opening Allegro of Vivaldi's Concerto for Two Mandolins, played by the Modena Chamber Orchestra.",
+     "intro_duration": 23.7,
+     "outro_duration": 7.7
+    },
+    {
+     "file": "lively/33-vivaldi-2mandolins-iii.mp3",
+     "title": "Vivaldi — Concerto for Two Mandolins, RV 532, III. Allegro",
+     "performer": "The Modena Chamber Orchestra (via Musopen)",
+     "duration": 263.4,
+     "intro": "intros/lively/33.mp3",
+     "intro_text": "From Antonio Vivaldi, the finale of the Concerto for Two Mandolins in G major, R V 532. It is a bright, bouncy Allegro, and the two mandolins pluck fast and lightly, echoing each other's phrases like two friends laughing together. It is played by the Modena Chamber Orchestra.",
+     "outro": "outros/lively/33.mp3",
+     "outro_text": "That was the finale of Vivaldi's Concerto for Two Mandolins, played by the Modena Chamber Orchestra.",
+     "intro_duration": 18.6,
+     "outro_duration": 7.4
+    },
+    {
+     "file": "lively/34-vivaldi-rv558-i.mp3",
+     "title": "Vivaldi — Concerto in C, RV 558, I. Allegro molto",
+     "performer": "The Modena Chamber Orchestra (via Musopen)",
+     "duration": 337.2,
+     "intro": "intros/lively/34.mp3",
+     "intro_text": "Antonio Vivaldi, the opening Allegro molto of his Concerto in C major, R V 558, a concerto for a large mixed group of instruments, including two flutes, two shawms, two violins, two mandolins, two theorbos, and cello. Listen for the many colors, the soft breathy flutes, the reedy shawms, and the plucked mandolins, all joining in one bright, festive tune, like a village band at a celebration. It is played by the Modena Chamber Orchestra.",
+     "outro": "outros/lively/34.mp3",
+     "outro_text": "That was the opening of Vivaldi's Concerto in C major, R V 558, played by the Modena Chamber Orchestra.",
+     "intro_duration": 29.4,
+     "outro_duration": 9.1
+    },
+    {
+     "file": "lively/35-vivaldi-mandolin-rv425.mp3",
+     "title": "Vivaldi — Mandolin Concerto in C, RV 425",
+     "performer": "The Milan Baroque Soloists (via Musopen)",
+     "duration": 503.0,
+     "intro": "intros/lively/35.mp3",
+     "intro_text": "From Antonio Vivaldi, the complete Mandolin Concerto in C major, R V 425, which he wrote in 1725. Listen for the mandolin, a small plucked instrument, whose quick notes sound like drops of sparkling water. The quick outer movements bubble along brightly, and the slow middle movement is a soft, tender song, a little like a serenade under a window. It is played by the Milan Baroque Soloists.",
+     "outro": "outros/lively/35.mp3",
+     "outro_text": "That was Vivaldi's Mandolin Concerto in C major, R V 425, played by the Milan Baroque Soloists.",
+     "intro_duration": 24.8,
+     "outro_duration": 8.9
+    },
+    {
+     "file": "lively/36-vivaldi-flute-rv440-i.mp3",
+     "title": "Vivaldi — Flute Concerto in A minor, RV 440, I. Allegro non troppo (accordion orchestra)",
+     "performer": "Paul De Bra, accordion orchestra",
+     "duration": 226.0,
+     "intro": "intros/lively/36.mp3",
+     "intro_text": "Antonio Vivaldi, the opening Allegro non troppo of his Flute Concerto in A minor, R V 440. The flute is a light, airy instrument, and Vivaldi wrote many concertos for it. Listen for the quick, fluttering melody that seems to dart and swoop, like a bird in flight. Tonight it comes to us in an arrangement for accordion orchestra, by Paul De Bra.",
+     "outro": "outros/lively/36.mp3",
+     "outro_text": "That was the opening of Vivaldi's Flute Concerto in A minor, in an arrangement for accordion orchestra by Paul De Bra.",
+     "intro_duration": 21.5,
+     "outro_duration": 8.3
     }
    ],
-   "total_seconds": 6496.5
+   "total_seconds": 11420.9
   }
  },
  "host": {
-  "voice": "Onyx",
+  "voice": "Fable",
   "engine": "Kokoro",
   "synthesized": true,
-  "note": "Kokoro am_onyx, same processing as the fm2 comparison sample, played at 1.25× with pitch preserved."
+  "note": "Kokoro bm_fable at normal speed, no pitch or EQ changes. Each piece has a spoken introduction before it and a short 'That was...' back-announcement after it."
  }
 }
