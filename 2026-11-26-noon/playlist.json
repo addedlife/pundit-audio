@@ -6,7 +6,7 @@
   "label": "Noon Brief",
   "voice": "Kokoro bm_george (fallback: en-GB-RyanNeural)",
   "arad_delivery": "off",
-  "total_duration": 539.41,
+  "total_duration": 542.94,
   "tracks": [
     {
       "num": 1,
@@ -33,8 +33,8 @@
       "section": "Top Stories",
       "title": "Oil climbs toward $96 as Hormuz and Houthi threats flare",
       "file": "03-story-02.mp3",
-      "duration": 63.07,
-      "text": "Brent crude futures were up one point five three dollars, or one point six percent, at ninety-six point one four dollars a barrel as of ten thirty-nine in the morning Eastern Time, and U S West Texas Intermediate rose to eighty-four point eight eight dollars, Reuters reported. Prices reversed earlier losses after the Houthis said they hit Saudi Arabia’s largest refinery at Ras Tanura and Iran’s Revolutionary Guards said two tankers hit sea mines north of Oman’s Khasab port, claims that have not been independently verified. There is no WTI settlement Thursday because of the Thanksgiving holiday. CBS News, citing the shipping-intelligence firm Kpler, reported that tanker crossings of the Strait of Hormuz averaged eleven a day in the week ending Nov. twenty-one, against fifty a day before the war, and that weekly ship transits fell from two hundred seventeen to one hundred forty-seven between Nov. one and Nov. twenty-three."
+      "duration": 64.01,
+      "text": "Brent crude futures were up one point five three dollars, or one point six percent, at ninety-six point one four dollars a barrel as of ten thirty-nine in the morning Eastern Time, and U S West Texas Intermediate rose to eighty-four point eight eight dollars, Reuters reported. Prices reversed earlier losses after the Houthis said they hit Saudi Arabia’s largest refinery at Ras Tanura and Iran’s Revolutionary Guards said two tankers hit sea mines north of Oman’s Khasab port, claims that have not been independently verified. There is no WTI settlement Thursday because of the Thanksgiving holiday. CBS News, citing the shipping-intelligence firm Kpler, reported that tanker crossings of the Strait of Hormuz averaged eleven a day in the week ending November twenty-first, against fifty a day before the war, and that weekly ship transits fell from two hundred seventeen to one hundred forty-seven between November first and November twenty-third."
     },
     {
       "num": 4,
@@ -42,8 +42,8 @@
       "section": "Top Stories",
       "title": "Euro zone leaders back Spain’s Hernández de Cos to lead the ECB",
       "file": "04-story-03.mp3",
-      "duration": 43.58,
-      "text": "Euro zone leaders at the Brussels summit backed Pablo Hernández de Cos, the former Bank of Spain governor, to succeed Christine Lagarde, who steps down Feb. seven, after the Netherlands agreed to support a package deal crafted by France, Germany and Spain, Politico reported. Germany’s Markus Brunnermeier is slated to become chief economist and France’s Laurence Boone to take the markets portfolio. A European Parliament hearing is set for Dec. seven, and leaders are due to formalize the picks on Dec. seventeen. CNBC noted he inherits a bank facing euro-area inflation that rose to four percent in October, its highest in more than three years."
+      "duration": 44.23,
+      "text": "Euro zone leaders at the Brussels summit backed Pablo Hernández de Cos, the former Bank of Spain governor, to succeed Christine Lagarde, who steps down February seventh, after the Netherlands agreed to support a package deal crafted by France, Germany and Spain, Politico reported. Germany’s Markus Brunnermeier is slated to become chief economist and France’s Laurence Boone to take the markets portfolio. A European Parliament hearing is set for December seventh, and leaders are due to formalize the picks on December seventeenth. CNBC noted he inherits a bank facing euro-area inflation that rose to four percent in October, its highest in more than three years."
     },
     {
       "num": 5,
@@ -87,8 +87,8 @@
       "section": "Region",
       "title": "Thanksgiving nor’easter floods the Shore and knocks out power",
       "file": "09-story-08.mp3",
-      "duration": 46.51,
-      "text": "More than eight thousand outages were reported across Monmouth and Ocean counties by eleven thirteen in the morning Eastern Time, with the biggest clusters in Neptune and Brick, the Asbury Park Press reported. All lanes of Route thirty-six at the Hazlet-Union Beach border were closed by flooding, and Manasquan streets flooded. The Weather Service warned the evening high tides could bring worse flooding. ABC7 said states of emergency are in effect for New Jersey, New York City, Long Island and Westchester County, with the storm’s peak expected between two o'clock in the afternoon and eight o'clock in the evening and coastal gusts of sixty to seventy mph. The Macy’s Thanksgiving Day Parade was postponed to Saturday."
+      "duration": 46.8,
+      "text": "More than eight thousand outages were reported across Monmouth and Ocean counties by eleven thirteen in the morning Eastern Time, with the biggest clusters in Neptune and Brick, the Asbury Park Press reported. All lanes of Route thirty-six at the Hazlet-Union Beach border were closed by flooding, and Manasquan streets flooded. The Weather Service warned the evening high tides could bring worse flooding. ABC7 said states of emergency are in effect for New Jersey, New York City, Long Island and Westchester County, with the storm’s peak expected between two o'clock in the afternoon and eight o'clock in the evening and coastal gusts of sixty to seventy miles per hour. The Macy’s Thanksgiving Day Parade was postponed to Saturday."
     },
     {
       "num": 10,
@@ -105,8 +105,8 @@
       "section": "Other Notable",
       "title": "Congo Ebola outbreak passes 12,000 cases",
       "file": "11-story-10.mp3",
-      "duration": 35.71,
-      "text": "Elsewhere, Congo’s Bundibugyo-virus Ebola outbreak has passed twelve thousand cases as violence in the east disrupts the response and forces some responders to evacuate, the Associated Press and Al Jazeera reported Thursday. The World Health Organization’s latest update, as of Nov. seventeen, counted eleven thousand six hundred thirteen cases and five thousand six hundred seventy-eight deaths, and WHO maintains the outbreak remains a public health emergency of international concern."
+      "duration": 37.39,
+      "text": "Elsewhere, Congo’s Bundibugyo-virus Ebola outbreak has passed twelve thousand cases as violence in the east disrupts the response and forces some responders to evacuate, the Associated Press and Al Jazeera reported Thursday. The World Health Organization’s latest update, as of November seventeenth, counted eleven thousand six hundred thirteen cases and five thousand six hundred seventy-eight deaths, and the World Health Organization maintains the outbreak remains a public health emergency of international concern."
     },
     {
       "num": 12,
@@ -114,7 +114,7 @@
       "section": "Weather",
       "title": "South Bend, IN Forecast & 5-Day Outlook",
       "file": "12-weather.mp3",
-      "duration": 71.14,
+      "duration": 71.11,
       "text": "Now, your South Bend, Indiana weather forecast from the National Weather Service. Thanksgiving day: Rain. Cloudy, with a high near forty-four. Northeast wind around fifteen miles per hour, with gusts as high as thirty-five miles per hour. Chance of precipitation is one hundred percent. New rainfall amounts between a quarter and half of an inch possible. Tonight: Rain before two o'clock in the morning, then rain and snow. Cloudy, with a low around thirty-two. North wind ten to fifteen miles per hour, with gusts as high as thirty-five miles per hour. Chance of precipitation is one hundred percent. New rainfall amounts between a half and three quarters of an inch possible. On Friday, rain and snow, high near forty-six. Friday Night, partly cloudy, low around thirty-two. On Saturday, mostly sunny, high near forty-eight. Saturday Night, mostly cloudy then a slight chance of light rain, low around thirty-five. On Sunday, light rain, high near forty-five. Sunday Night, light rain, low around thirty-two. On Monday, partly sunny, high near forty-one. Monday Night, partly cloudy, low around twenty-seven. On Tuesday, partly sunny, high near forty-six.",
       "periods": [
         {

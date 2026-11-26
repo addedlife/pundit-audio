@@ -3,13 +3,13 @@
   "rate": "+0%",
   "pitch": "+0Hz",
   "bitrate": "64k",
-  "generated_at": "2026-11-26T11:28:55",
+  "generated_at": "2026-11-26T12:07:33",
   "count": 82,
   "clips": {
     "sbr-intro": {
       "file": "sbr-intro.mp3",
       "text": "This ... is SBR News.",
-      "duration": 2.712
+      "duration": 2.04
     },
     "its": {
       "file": "its.mp3",
