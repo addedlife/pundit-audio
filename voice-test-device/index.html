@@ -87,6 +87,7 @@
 
   /* ---------- voices ---------- */
   var voices = [];
+  var NOVELTY = /^(albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|ralph|kathy|fred|eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley)\b/i;
   var MALE_UK = /daniel|oliver|arthur|thomas|malcolm|rishi|gordon|ryan|george|lewis/i;
   function score(v) {
     var s = 0, n = v.name + ' ' + v.voiceURI;
@@ -94,6 +95,7 @@
     else if (/^en[-_](AU|IE|ZA|IN)/i.test(v.lang)) s += 25;
     else if (/^en/i.test(v.lang)) s += 15;
     else return -1;
+    if (NOVELTY.test(v.name)) return -1;
     if (/premium/i.test(n)) s += 40;
     if (/enhanced/i.test(n)) s += 30;
     if (/siri/i.test(n)) s += 35;
@@ -122,7 +124,7 @@
   if (synth.onvoiceschanged !== undefined) synth.onvoiceschanged = loadVoices;
   var vtries = 0, vt = setInterval(function () { loadVoices(); if (++vtries > 8 || voices.length) clearInterval(vt); }, 500);
   $('voice').onchange = function () { store.set('sbr_dev_voice', $('voice').value); };
-  $('rate').value = store.get('sbr_dev_rate', '1');
+  $('rate').value = '1';
   $('rateV').textContent = Number($('rate').value).toFixed(2);
   $('rate').oninput = function () { store.set('sbr_dev_rate', $('rate').value); $('rateV').textContent = Number($('rate').value).toFixed(2); };
   $('musicList').value = store.get('sbr_dev_music', 'lively');
@@ -155,7 +157,7 @@
       onChunk(i);
       var u = new SpeechSynthesisUtterance(list[i]);
       var v = curVoice(); if (v) { u.voice = v; u.lang = v.lang; } else u.lang = 'en-GB';
-      u.rate = Number($('rate').value) || 1;
+      var r = Number($('rate').value) || 1; if (Math.abs(r - 1) > 0.01) u.rate = r;
       var fired = false;
       var next = function () { if (fired || myGen !== gen) return; fired = true; clearTimeout(wd); i++; step(); };
       u.onend = next; u.onerror = next;
