@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#d6d3cb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>The Garland Street Journal</title>
+<style>
+:root{--paper:#EDECE8;--desk:#d6d3cb;--ink:#1d1b19}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--desk);color:var(--ink)}
+html.zoomed,html.zoomed body{overflow:hidden;touch-action:none;overscroll-behavior:none}
+html.zoomed body{position:fixed;inset:0;width:100%;height:100%}
+.sheet{position:relative;width:100%;max-width:1100px;margin:0 auto;padding:max(10px,env(safe-area-inset-top)) 6px 18px}
+.pagebox{position:relative;width:100%;aspect-ratio:var(--ar);margin:0 auto 14px;filter:drop-shadow(0 2px 6px rgba(40,34,26,.18))}
+.pagebox.narrow{max-width:560px}
+.pagebox img.page.alt{display:none}
+.pagebox.flipped img.page.alt{display:block}
+.pagebox.flipped img.page.main{visibility:hidden}
+.pagebox.flipped .blk,.pagebox.flipped a.lk:not(.tgb){display:none}
+a.lk.tg{z-index:6;cursor:pointer}
+a.lk.tgb{display:none;z-index:6;cursor:pointer}
+.pagebox.flipped a.lk.tgb{display:block}
+.pagebox img.page{position:absolute;inset:0;width:100%;height:100%;display:block;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.blk{position:absolute;cursor:zoom-in;touch-action:manipulation;transition:background .18s}
+.blk:active,.blk.press{background:rgba(29,27,25,.06)}
+.blk.src{visibility:hidden}
+a.lk{position:absolute;display:block;z-index:3;touch-action:none}
+a.lk.pg{z-index:4;touch-action:manipulation}
+a.lk:active{background:rgba(15,126,200,.14);border-radius:2px}
+.foot{text-align:center;font:12px/1.4 Georgia,'Times New Roman',serif;letter-spacing:.06em;text-transform:uppercase;color:#5a554e;padding:6px 0 0}
+.foot a{color:inherit}
+#dim{position:fixed;inset:0;background:rgba(24,21,17,.62);opacity:0;pointer-events:none;transition:opacity .34s ease;z-index:20}
+html.zoomed #dim{opacity:1;pointer-events:auto}
+#stage{position:fixed;inset:0;overflow:hidden;z-index:21;display:none;touch-action:none;overscroll-behavior:none}
+html.zoomed #stage,html.closing #stage{display:block}
+#card{position:absolute;left:0;top:0;background:var(--paper);touch-action:none;cursor:grab;
+  transform-origin:0 0;
+  box-shadow:0 18px 50px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2)}
+#card.panning{cursor:grabbing}
+#card.live{will-change:transform}
+#card .lo,#card .hi,#card #cl{position:absolute;display:block;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+#card .lo{background-repeat:no-repeat;pointer-events:none}
+#card .hi{pointer-events:none;opacity:0;transition:opacity .2s}
+#card .hi.ok{opacity:1}
+#vec{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none;display:none;overflow:hidden}
+#vec svg{display:block;width:100%;height:100%}
+#x{position:fixed;width:34px;height:34px;border-radius:50%;z-index:22;border:1px solid rgba(29,27,25,.45);
+  background:rgba(237,236,232,.97);display:none;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.22);padding:0;touch-action:manipulation}
+html.zoomed.settled #x{display:flex}
+#x svg{width:12px;height:12px}
+.ednav{position:absolute;z-index:5;display:flex;align-items:center;justify-content:center;pointer-events:none;height:0;white-space:nowrap}
+.ednav.prev{justify-content:flex-end}
+.ednav.next{justify-content:flex-start}
+.ednav a{pointer-events:auto;color:#1d1b19;text-decoration:none;font-family:Georgia,'Times New Roman',serif;
+  font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  display:inline-flex;align-items:center;justify-content:center;min-height:32px;min-width:32px;padding:0 7px;
+  -webkit-tap-highlight-color:transparent}
+.ednav a:active{opacity:.55}
+.ednav .dot{color:#1d1b19;font-size:9.5px;padding:0 1px;line-height:32px;pointer-events:none}
+</style></head>
+<body>
+<div class="sheet">
+  <div id="pages"></div>
+  <div class="foot"><a href="brief.pdf" target="_blank" rel="noopener">PDF edition</a></div>
+</div>
+<div id="dim"></div>
+<div id="stage"><div id="card">
+  <div class="lo" id="lo"></div><img class="hi" id="hi" alt="" draggable="false">
+  <div id="vec"></div><div id="cl"></div>
+</div></div>
+<button id="x" aria-label="Close"><svg viewBox="0 0 12 12"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="#1d1b19" stroke-width="1.3" stroke-linecap="round"/></svg></button>
+<script>
+const D = {"w": 813.0, "h": 1567.800048828125, "slug": "2026-11-26-noon", "pages": [{"w": 813.0, "h": 1567.800048828125, "img": "front/page.jpg", "links": [[39.0, 346.18, 13.71, 8.5, "https://www.dw.com/en/iranian-drone-attack-kills-2-italians-in-kuwait/a-80064974"], [55.16, 346.18, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Kuwait%20drone%20attack%20story%20from%20today%27s%20noon%20brief"], [39.0, 447.98, 25.85, 8.5, "https://finance.yahoo.com/energy/articles/oil-rises-supply-concerns-iran-030849858.html"], [67.3, 447.98, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20oil%20price%20story%20from%20today%27s%20noon%20brief"], [39.0, 540.18, 19.61, 8.5, "https://www.cnbc.com/2026/11/26/pablo-hernandez-de-cos-ecb-president.html"], [61.06, 540.18, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20ECB%20president%20story%20from%20today%27s%20noon%20brief"], [69.07, 655.88, 22.89, 8.5, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916226"], [94.41, 655.88, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Eisenkot-Golan%20coalition%20deal%20story%20from%20today%27s%20noon%20brief"], [39.0, 748.08, 15.84, 8.5, "https://www.channelnewsasia.com/world/israel-katz-threat-displace-1-million-gaza-residents-hamas-6585316"], [57.28, 748.08, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Katz%20Gaza%20threat%20story%20from%20today%27s%20noon%20brief"], [63.0, 863.78, 22.54, 8.5, "https://www.kikar.co.il/ayom-bakikar/utj-draft-law-agreement-progress"], [87.98, 863.78, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20UTJ%20draft%20law%20story%20from%20today%27s%20noon%20brief"], [74.09, 955.98, 10.51, 8.5, "https://www.israelnationalnews.com/news/437212"], [87.05, 955.98, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Goldknopf%20Liberman%20story%20from%20today%27s%20noon%20brief"], [82.73, 1071.68, 15.23, 8.5, "https://www.app.com/story/weather/stormwatch/2026/11/26/nj-thanksgiving-storm-updates-jersey-shore-flooding-high-winds-power-outages/92964738007/"], [100.4, 1071.68, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20nor%27easter%20story%20from%20today%27s%20noon%20brief"], [39.0, 1177.78, 15.46, 8.5, "https://www.nbcnews.com/science/space/spacex-fcc-authorizes-1-million-satellites-data-centers-space-rcna611341"], [56.91, 1177.78, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20SpaceX%20Starmind%20story%20from%20today%27s%20noon%20brief"], [39.0, 1274.28, 11.02, 8.5, "https://apnews.com/article/congo-ebola-outbreak-violence-0a0bc05d76d3278319472178a16be14b"], [52.47, 1274.28, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Congo%20Ebola%20story%20from%20today%27s%20noon%20brief"], [162.6, 172.4, 555.92, 85.6, "https://www.dw.com/en/iranian-drone-attack-kills-2-italians-in-kuwait/a-80064974"], [162.6, 471.5, 204.76, 8.0, "https://www.aerotime.aero/articles/italian-rheinmetall-technicians-killed-in-kuwaiti-drone-explosion"], [637.84, 476.57, 14.61, 9.62, "https://www.dw.com/en/iranian-drone-attack-kills-2-italians-in-kuwait/a-80064974"], [655.45, 476.57, 39.0, 9.62, "https://www.arabnews.com/middle-east/two-italian-workers-killed-in-iranian-drone-attack-on-kuwait-3014135"], [697.45, 476.57, 38.82, 9.62, "https://www.bloomberg.com/news/articles/2026-11-26/iran-attack-on-kuwait-kills-two-italian-rheinmetall-workers"], [742.27, 477.11, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Kuwait%20drone%20attack%20story%20from%20today%27s%20noon%20brief"], [162.6, 511.96, 235.4, 39.96, "https://finance.yahoo.com/energy/articles/oil-rises-supply-concerns-iran-030849858.html"], [162.6, 680.77, 236.88, 8.0, "https://finance.yahoo.com/energy/articles/oil-rises-supply-concerns-iran-030849858.html"], [162.6, 687.87, 36.58, 8.0, "https://finance.yahoo.com/energy/articles/oil-rises-supply-concerns-iran-030849858.html"], [298.89, 815.58, 28.56, 9.62, "https://finance.yahoo.com/energy/articles/oil-rises-supply-concerns-iran-030849858.html"], [330.46, 815.58, 35.62, 9.62, "https://www.cbsnews.com/live-updates/iran-war-us-military-ai-weapons-oil/"], [372.08, 816.12, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20oil%20price%20story%20from%20today%27s%20noon%20brief"], [409.8, 516.58, 112.34, 41.6, "https://www.cnbc.com/2026/11/26/pablo-hernandez-de-cos-ecb-president.html"], [410.8, 569.56, 114.0, 50.0, "https://www.cnbc.com/2026/11/26/pablo-hernandez-de-cos-ecb-president.html"], [409.8, 622.06, 108.99, 8.0, "https://www.cnbc.com/2026/11/26/pablo-hernandez-de-cos-ecb-president.html"], [409.8, 629.16, 104.55, 8.0, "https://www.cnbc.com/2026/11/26/pablo-hernandez-de-cos-ecb-president.html"], [410.46, 815.58, 20.85, 9.62, "https://www.cnbc.com/2026/11/26/pablo-hernandez-de-cos-ecb-president.html"], [434.31, 815.58, 55.36, 9.62, "https://www.politico.eu/article/eu-leaders-clear-path-for-spains-pablo-hernandez-de-cos-to-lead-ecb/"], [495.68, 816.12, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20ECB%20president%20story%20from%20today%27s%20noon%20brief"], [533.4, 508.6, 221.43, 48.6, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916226"], [658.0, 576.3, 114.0, 64.12, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916226"], [657.0, 642.92, 106.52, 8.0, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916226"], [657.0, 650.03, 106.64, 8.0, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916226"], [625.87, 815.58, 54.75, 9.62, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916226"], [683.62, 815.58, 53.25, 9.62, "https://www.timesofisrael.com/liveblog_entry/eisenkot-golan-announce-coalition-deal-handing-democrats-4-ministerial-posts/"], [742.88, 816.12, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Eisenkot-Golan%20coalition%20deal%20story%20from%20today%27s%20noon%20brief"], [162.6, 854.47, 235.77, 39.96, "https://www.channelnewsasia.com/world/israel-katz-threat-displace-1-million-gaza-residents-hamas-6585316"], [162.6, 1026.87, 218.51, 8.0, "https://commons.wikimedia.org/wiki/File:Israel_Katz,_the_appointed_Minister_of_Defence_of_Israel_and_the_outgoing_minister,_Yoav_Galant,_November_2024._I.jpeg"], [162.6, 1033.97, 115.43, 8.0, "https://commons.wikimedia.org/wiki/File:Israel_Katz,_the_appointed_Minister_of_Defence_of_Israel_and_the_outgoing_minister,_Yoav_Galant,_November_2024._I.jpeg"], [292.82, 1160.22, 17.0, 9.62, "https://www.channelnewsasia.com/world/israel-katz-threat-displace-1-million-gaza-residents-hamas-6585316"], [312.82, 1160.22, 53.25, 9.62, "https://www.timesofisrael.com/liveblog_entry/katz-threatens-to-launch-fresh-gaza-offensive-bucking-board-of-peace-push/"], [372.08, 1160.76, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Katz%20Gaza%20threat%20story%20from%20today%27s%20noon%20brief"], [409.8, 860.35, 107.37, 48.76, "https://www.kikar.co.il/ayom-bakikar/utj-draft-law-agreement-progress"], [410.8, 919.35, 114.0, 50.0, "https://www.kikar.co.il/ayom-bakikar/utj-draft-law-agreement-progress"], [409.8, 971.85, 107.56, 8.0, "https://www.kikar.co.il/haredim/yahadut-hatorah-eisenkot-draft-agreement-progress"], [409.8, 978.95, 92.59, 8.0, "https://www.kikar.co.il/haredim/yahadut-hatorah-eisenkot-draft-agreement-progress"], [412.56, 1160.22, 20.86, 9.62, "https://www.kikar.co.il/ayom-bakikar/utj-draft-law-agreement-progress"], [436.42, 1160.22, 53.25, 9.62, "https://www.timesofisrael.com/liveblog_entry/eisenkot-said-to-agree-to-haredi-rejection-of-reform-rabbi-mk-for-education-post/"], [495.68, 1160.76, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20UTJ%20draft%20law%20story%20from%20today%27s%20noon%20brief"], [533.4, 856.57, 231.71, 34.56, "https://www.israelnationalnews.com/news/437212"], [658.0, 905.29, 114.0, 104.0, "https://www.israelnationalnews.com/news/437212"], [657.0, 1011.79, 99.59, 8.0, "https://commons.wikimedia.org/wiki/File:Yitzchak_Goldknopf.jpg"], [657.0, 1018.89, 94.08, 8.0, "https://commons.wikimedia.org/wiki/File:Yitzchak_Goldknopf.jpg"], [637.47, 1160.22, 74.12, 9.62, "https://www.israelnationalnews.com/news/437212"], [714.59, 1160.22, 22.29, 9.62, "https://www.jfeed.com/news-israel/shas-paper-attacks-eisenkot-bloc-yeshiva-arrests"], [742.88, 1160.76, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Goldknopf%20Liberman%20story%20from%20today%27s%20noon%20brief"], [162.6, 1198.69, 233.97, 41.04, "https://www.app.com/story/weather/stormwatch/2026/11/26/nj-thanksgiving-storm-updates-jersey-shore-flooding-high-winds-power-outages/92964738007/"], [287.2, 1256.17, 114.0, 104.0, "https://www.app.com/story/weather/stormwatch/2026/11/26/nj-thanksgiving-storm-updates-jersey-shore-flooding-high-winds-power-outages/92964738007/"], [286.2, 1362.67, 107.61, 8.0, "https://abc7ny.com/live-updates/thanksgiving-storm-2026-strong-wind-rain-hit-nyc-tri-state-during-parade/20069977/entry/20085366/"], [286.2, 1369.77, 110.99, 8.0, "https://abc7ny.com/live-updates/thanksgiving-storm-2026-strong-wind-rain-hit-nyc-tri-state-during-parade/20069977/entry/20085366/"], [243.42, 1483.07, 65.1, 9.62, "https://www.app.com/story/weather/stormwatch/2026/11/26/nj-thanksgiving-storm-updates-jersey-shore-flooding-high-winds-power-outages/92964738007/"], [311.52, 1483.07, 54.56, 9.62, "https://abc7ny.com/live-updates/thanksgiving-storm-2026-strong-wind-rain-hit-nyc-tri-state-during-parade/20069977/"], [372.08, 1483.61, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20nor%27easter%20story%20from%20today%27s%20noon%20brief"], [409.8, 1204.99, 89.28, 48.76, "https://www.nbcnews.com/science/space/spacex-fcc-authorizes-1-million-satellites-data-centers-space-rcna611341"], [410.8, 1263.99, 114.0, 50.0, "https://www.nbcnews.com/science/space/spacex-fcc-authorizes-1-million-satellites-data-centers-space-rcna611341"], [409.8, 1316.49, 111.58, 8.0, "https://www.nbcnews.com/science/space/spacex-fcc-authorizes-1-million-satellites-data-centers-space-rcna611341"], [409.8, 1323.59, 108.01, 8.0, "https://www.nbcnews.com/science/space/spacex-fcc-authorizes-1-million-satellites-data-centers-space-rcna611341"], [453.75, 1483.07, 36.53, 9.62, "https://www.nbcnews.com/science/space/spacex-fcc-authorizes-1-million-satellites-data-centers-space-rcna611341"], [496.28, 1483.61, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20SpaceX%20Starmind%20story%20from%20today%27s%20noon%20brief"], [533.4, 1195.75, 192.25, 48.6, "https://apnews.com/article/congo-ebola-outbreak-violence-0a0bc05d76d3278319472178a16be14b"], [533.4, 1365.98, 207.96, 8.0, "https://commons.wikimedia.org/wiki/File:Ebola_virus_virion.jpg"], [533.4, 1373.08, 111.36, 8.0, "https://commons.wikimedia.org/wiki/File:Ebola_virus_virion.jpg"], [659.49, 1483.07, 11.85, 9.62, "https://apnews.com/article/congo-ebola-outbreak-violence-0a0bc05d76d3278319472178a16be14b"], [674.33, 1483.07, 38.69, 9.62, "https://www.aljazeera.com/news/2026/11/26/dr-congo-ebola-cases-surpass-12000-as-fighting-disrupts-response-in-east"], [716.03, 1483.07, 20.24, 9.62, "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON630"], [742.27, 1483.61, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Congo%20Ebola%20story%20from%20today%27s%20noon%20brief"], [104.0, 8.28, 68.29, 31.45, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?autoplay=1"], [652.6, 128.2, 58.99, 13.0, "grokbot://app/v1/agent?id=b85f73f9-77e1-4856-83b6-e10be239c78a"], [67.71, 344.4, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=2"], [79.86, 446.2, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=3"], [73.62, 538.4, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=4"], [106.97, 654.09, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=5"], [69.84, 746.29, 15.34, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=6"], [100.54, 861.99, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=7"], [99.6, 954.2, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=8"], [112.96, 1069.9, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=9"], [69.47, 1175.99, 15.34, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=10"], [65.03, 1272.49, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=11"], [755.4, 475.25, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=2"], [385.2, 814.25, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=3"], [508.8, 814.25, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=4"], [756.0, 814.25, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=5"], [385.2, 1158.9, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=6"], [508.8, 1158.9, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=7"], [756.0, 1158.9, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=8"], [385.2, 1481.75, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=9"], [509.41, 1481.75, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=10"], [755.4, 1481.75, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=11"]]}], "blocks": [{"pg": 0, "r": [36.0, 245.0, 115.9, 309.7], "img": "front/b00.jpg", "svg": "front/b00.svg", "label": "Top Stories", "links": [[3.0, 101.18, 13.71, 8.5, "https://www.dw.com/en/iranian-drone-attack-kills-2-italians-in-kuwait/a-80064974"], [19.16, 101.18, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Kuwait%20drone%20attack%20story%20from%20today%27s%20noon%20brief"], [31.71, 99.4, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=2"], [3.0, 202.98, 25.85, 8.5, "https://finance.yahoo.com/energy/articles/oil-rises-supply-concerns-iran-030849858.html"], [31.3, 202.98, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20oil%20price%20story%20from%20today%27s%20noon%20brief"], [43.86, 201.2, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=3"], [3.0, 295.18, 19.61, 8.5, "https://www.cnbc.com/2026/11/26/pablo-hernandez-de-cos-ecb-president.html"], [25.06, 295.18, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20ECB%20president%20story%20from%20today%27s%20noon%20brief"], [37.62, 293.4, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=4"]]}, {"pg": 0, "r": [36.0, 554.7, 115.9, 207.9], "img": "front/b01.jpg", "svg": "front/b01.svg", "label": "Israel", "links": [[33.07, 101.18, 22.89, 8.5, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916226"], [58.41, 101.18, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Eisenkot-Golan%20coalition%20deal%20story%20from%20today%27s%20noon%20brief"], [70.97, 99.39, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=5"], [3.0, 193.38, 15.84, 8.5, "https://www.channelnewsasia.com/world/israel-katz-threat-displace-1-million-gaza-residents-hamas-6585316"], [21.28, 193.38, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Katz%20Gaza%20threat%20story%20from%20today%27s%20noon%20brief"], [33.84, 191.59, 15.34, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=6"]]}, {"pg": 0, "r": [36.0, 762.6, 115.9, 207.9], "img": "front/b02.jpg", "svg": "front/b02.svg", "label": "Chareidi World", "links": [[27.0, 101.18, 22.54, 8.5, "https://www.kikar.co.il/ayom-bakikar/utj-draft-law-agreement-progress"], [51.98, 101.18, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20UTJ%20draft%20law%20story%20from%20today%27s%20noon%20brief"], [64.54, 99.4, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=7"], [38.09, 193.38, 10.51, 8.5, "https://www.israelnationalnews.com/news/437212"], [51.05, 193.38, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Goldknopf%20Liberman%20story%20from%20today%27s%20noon%20brief"], [63.6, 191.6, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=8"]]}, {"pg": 0, "r": [36.0, 970.5, 115.9, 115.7], "img": "front/b03.jpg", "svg": "front/b03.svg", "label": "Region", "links": [[46.73, 101.18, 15.23, 8.5, "https://www.app.com/story/weather/stormwatch/2026/11/26/nj-thanksgiving-storm-updates-jersey-shore-flooding-high-winds-power-outages/92964738007/"], [64.4, 101.18, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20nor%27easter%20story%20from%20today%27s%20noon%20brief"], [76.96, 99.4, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=9"]]}, {"pg": 0, "r": [36.0, 1086.2, 115.9, 106.1], "img": "front/b04.jpg", "svg": "front/b04.svg", "label": "Tech", "links": [[3.0, 91.58, 15.46, 8.5, "https://www.nbcnews.com/science/space/spacex-fcc-authorizes-1-million-satellites-data-centers-space-rcna611341"], [20.91, 91.58, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20SpaceX%20Starmind%20story%20from%20today%27s%20noon%20brief"], [33.47, 89.8, 15.34, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=10"]]}, {"pg": 0, "r": [36.0, 1192.3, 115.9, 109.5], "img": "front/b05.jpg", "svg": "front/b05.svg", "label": "Other Notable", "links": [[3.0, 81.98, 11.02, 8.5, "https://apnews.com/article/congo-ebola-outbreak-violence-0a0bc05d76d3278319472178a16be14b"], [16.47, 81.98, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Congo%20Ebola%20story%20from%20today%27s%20noon%20brief"], [29.03, 80.19, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=11"]]}, {"pg": 0, "r": [159.6, 172.0, 616.4, 321.0], "img": "front/b06.jpg", "svg": "front/b06.svg", "label": "Iranian drone attack on Kuwait kills two Italian technicians", "links": [[3.0, 0.4, 555.92, 85.6, "https://www.dw.com/en/iranian-drone-attack-kills-2-italians-in-kuwait/a-80064974"], [4.0, 117.6, 361.2, 179.4, "https://www.dw.com/en/iranian-drone-attack-kills-2-italians-in-kuwait/a-80064974"], [3.0, 299.5, 204.76, 8.0, "https://www.aerotime.aero/articles/italian-rheinmetall-technicians-killed-in-kuwaiti-drone-explosion"], [478.24, 304.57, 14.61, 9.62, "https://www.dw.com/en/iranian-drone-attack-kills-2-italians-in-kuwait/a-80064974"], [495.85, 304.57, 39.0, 9.62, "https://www.arabnews.com/middle-east/two-italian-workers-killed-in-iranian-drone-attack-on-kuwait-3014135"], [537.85, 304.57, 38.82, 9.62, "https://www.bloomberg.com/news/articles/2026-11-26/iran-attack-on-kuwait-kills-two-italian-rheinmetall-workers"], [582.67, 305.11, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Kuwait%20drone%20attack%20story%20from%20today%27s%20noon%20brief"], [595.8, 303.25, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=2"]]}, {"pg": 0, "r": [159.6, 497.0, 245.6, 335.51], "img": "front/b07.jpg", "svg": "front/b07.svg", "label": "Oil climbs toward $96 as Hormuz and Houthi threats flare", "links": [[3.0, 14.96, 235.4, 39.96, "https://finance.yahoo.com/energy/articles/oil-rises-supply-concerns-iran-030849858.html"], [4.0, 70.48, 237.6, 110.79, "https://finance.yahoo.com/energy/articles/oil-rises-supply-concerns-iran-030849858.html"], [3.0, 183.77, 236.88, 8.0, "https://finance.yahoo.com/energy/articles/oil-rises-supply-concerns-iran-030849858.html"], [3.0, 190.87, 36.58, 8.0, "https://finance.yahoo.com/energy/articles/oil-rises-supply-concerns-iran-030849858.html"], [139.29, 318.58, 28.56, 9.62, "https://finance.yahoo.com/energy/articles/oil-rises-supply-concerns-iran-030849858.html"], [170.86, 318.58, 35.62, 9.62, "https://www.cbsnews.com/live-updates/iran-war-us-military-ai-weapons-oil/"], [212.48, 319.12, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20oil%20price%20story%20from%20today%27s%20noon%20brief"], [225.6, 317.25, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=3"]]}, {"pg": 0, "r": [406.8, 497.0, 122.0, 335.51], "img": "front/b08.jpg", "svg": "front/b08.svg", "label": "Euro zone leaders back Spain’s Hernández de Cos to lead the ECB", "links": [[3.0, 19.58, 112.34, 41.6, "https://www.cnbc.com/2026/11/26/pablo-hernandez-de-cos-ecb-president.html"], [4.0, 72.56, 114.0, 50.0, "https://www.cnbc.com/2026/11/26/pablo-hernandez-de-cos-ecb-president.html"], [3.0, 125.06, 108.99, 8.0, "https://www.cnbc.com/2026/11/26/pablo-hernandez-de-cos-ecb-president.html"], [3.0, 132.16, 104.55, 8.0, "https://www.cnbc.com/2026/11/26/pablo-hernandez-de-cos-ecb-president.html"], [3.66, 318.58, 20.85, 9.62, "https://www.cnbc.com/2026/11/26/pablo-hernandez-de-cos-ecb-president.html"], [27.51, 318.58, 55.36, 9.62, "https://www.politico.eu/article/eu-leaders-clear-path-for-spains-pablo-hernandez-de-cos-to-lead-ecb/"], [88.88, 319.12, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20ECB%20president%20story%20from%20today%27s%20noon%20brief"], [102.0, 317.25, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=4"]]}, {"pg": 0, "r": [530.4, 497.0, 245.6, 335.51], "img": "front/b09.jpg", "svg": "front/b09.svg", "label": "Eisenkot and Golan agree to sign coalition deal", "links": [[3.0, 11.6, 221.43, 48.6, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916226"], [127.6, 79.3, 114.0, 64.12, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916226"], [126.6, 145.92, 106.52, 8.0, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916226"], [126.6, 153.03, 106.64, 8.0, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916226"], [95.47, 318.58, 54.75, 9.62, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916226"], [153.22, 318.58, 53.25, 9.62, "https://www.timesofisrael.com/liveblog_entry/eisenkot-golan-announce-coalition-deal-handing-democrats-4-ministerial-posts/"], [212.48, 319.12, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Eisenkot-Golan%20coalition%20deal%20story%20from%20today%27s%20noon%20brief"], [225.6, 317.25, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=5"]]}, {"pg": 0, "r": [159.6, 839.51, 245.6, 337.64], "img": "front/b10.jpg", "svg": "front/b10.svg", "label": "Katz threatens new Gaza offensive as IDF kills Hamas finance chief", "links": [[3.0, 14.96, 235.77, 39.96, "https://www.channelnewsasia.com/world/israel-katz-threat-displace-1-million-gaza-residents-hamas-6585316"], [4.0, 70.48, 237.6, 114.39, "https://www.channelnewsasia.com/world/israel-katz-threat-displace-1-million-gaza-residents-hamas-6585316"], [3.0, 187.36, 218.51, 8.0, "https://commons.wikimedia.org/wiki/File:Israel_Katz,_the_appointed_Minister_of_Defence_of_Israel_and_the_outgoing_minister,_Yoav_Galant,_November_2024._I.jpeg"], [3.0, 194.46, 115.43, 8.0, "https://commons.wikimedia.org/wiki/File:Israel_Katz,_the_appointed_Minister_of_Defence_of_Israel_and_the_outgoing_minister,_Yoav_Galant,_November_2024._I.jpeg"], [133.22, 320.71, 17.0, 9.62, "https://www.channelnewsasia.com/world/israel-katz-threat-displace-1-million-gaza-residents-hamas-6585316"], [153.22, 320.71, 53.25, 9.62, "https://www.timesofisrael.com/liveblog_entry/katz-threatens-to-launch-fresh-gaza-offensive-bucking-board-of-peace-push/"], [212.48, 321.25, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Katz%20Gaza%20threat%20story%20from%20today%27s%20noon%20brief"], [225.6, 319.39, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=6"]]}, {"pg": 0, "r": [406.8, 839.51, 122.0, 337.64], "img": "front/b11.jpg", "svg": "front/b11.svg", "label": "UTJ source: draft-law principles agreed, lawyers drafting text for the High Court", "links": [[3.0, 20.84, 107.37, 48.76, "https://www.kikar.co.il/ayom-bakikar/utj-draft-law-agreement-progress"], [4.0, 79.84, 114.0, 50.0, "https://www.kikar.co.il/ayom-bakikar/utj-draft-law-agreement-progress"], [3.0, 132.34, 107.56, 8.0, "https://www.kikar.co.il/haredim/yahadut-hatorah-eisenkot-draft-agreement-progress"], [3.0, 139.44, 92.59, 8.0, "https://www.kikar.co.il/haredim/yahadut-hatorah-eisenkot-draft-agreement-progress"], [5.76, 320.71, 20.86, 9.62, "https://www.kikar.co.il/ayom-bakikar/utj-draft-law-agreement-progress"], [29.62, 320.71, 53.25, 9.62, "https://www.timesofisrael.com/liveblog_entry/eisenkot-said-to-agree-to-haredi-rejection-of-reform-rabbi-mk-for-education-post/"], [88.88, 321.25, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20UTJ%20draft%20law%20story%20from%20today%27s%20noon%20brief"], [102.0, 319.39, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=7"]]}, {"pg": 0, "r": [530.4, 839.51, 245.6, 337.64], "img": "front/b12.jpg", "svg": "front/b12.svg", "label": "Goldknopf: Liberman asked forgiveness; Agudah demands accepted", "links": [[3.0, 17.06, 231.71, 34.56, "https://www.israelnationalnews.com/news/437212"], [127.6, 65.78, 114.0, 104.0, "https://www.israelnationalnews.com/news/437212"], [126.6, 172.28, 99.59, 8.0, "https://commons.wikimedia.org/wiki/File:Yitzchak_Goldknopf.jpg"], [126.6, 179.38, 94.08, 8.0, "https://commons.wikimedia.org/wiki/File:Yitzchak_Goldknopf.jpg"], [107.07, 320.71, 74.12, 9.62, "https://www.israelnationalnews.com/news/437212"], [184.19, 320.71, 22.29, 9.62, "https://www.jfeed.com/news-israel/shas-paper-attacks-eisenkot-bloc-yeshiva-arrests"], [212.48, 321.25, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Goldknopf%20Liberman%20story%20from%20today%27s%20noon%20brief"], [225.6, 319.39, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=8"]]}, {"pg": 0, "r": [159.6, 1184.15, 245.6, 315.85], "img": "front/b13.jpg", "svg": "front/b13.svg", "label": "Thanksgiving nor’easter floods the Shore and knocks out power", "links": [[3.0, 14.54, 233.97, 41.04, "https://www.app.com/story/weather/stormwatch/2026/11/26/nj-thanksgiving-storm-updates-jersey-shore-flooding-high-winds-power-outages/92964738007/"], [127.6, 72.02, 114.0, 104.0, "https://www.app.com/story/weather/stormwatch/2026/11/26/nj-thanksgiving-storm-updates-jersey-shore-flooding-high-winds-power-outages/92964738007/"], [126.6, 178.52, 107.61, 8.0, "https://abc7ny.com/live-updates/thanksgiving-storm-2026-strong-wind-rain-hit-nyc-tri-state-during-parade/20069977/entry/20085366/"], [126.6, 185.62, 110.99, 8.0, "https://abc7ny.com/live-updates/thanksgiving-storm-2026-strong-wind-rain-hit-nyc-tri-state-during-parade/20069977/entry/20085366/"], [83.82, 298.92, 65.1, 9.62, "https://www.app.com/story/weather/stormwatch/2026/11/26/nj-thanksgiving-storm-updates-jersey-shore-flooding-high-winds-power-outages/92964738007/"], [151.92, 298.92, 54.56, 9.62, "https://abc7ny.com/live-updates/thanksgiving-storm-2026-strong-wind-rain-hit-nyc-tri-state-during-parade/20069977/"], [212.48, 299.46, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20nor%27easter%20story%20from%20today%27s%20noon%20brief"], [225.6, 297.6, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=9"]]}, {"pg": 0, "r": [406.8, 1184.15, 122.0, 315.85], "img": "front/b14.jpg", "svg": "front/b14.svg", "label": "FCC clears SpaceX’s 1-million-satellite “Starmind” AI data-center plan", "links": [[3.0, 20.84, 89.28, 48.76, "https://www.nbcnews.com/science/space/spacex-fcc-authorizes-1-million-satellites-data-centers-space-rcna611341"], [4.0, 79.84, 114.0, 50.0, "https://www.nbcnews.com/science/space/spacex-fcc-authorizes-1-million-satellites-data-centers-space-rcna611341"], [3.0, 132.34, 111.58, 8.0, "https://www.nbcnews.com/science/space/spacex-fcc-authorizes-1-million-satellites-data-centers-space-rcna611341"], [3.0, 139.44, 108.01, 8.0, "https://www.nbcnews.com/science/space/spacex-fcc-authorizes-1-million-satellites-data-centers-space-rcna611341"], [46.95, 298.92, 36.53, 9.62, "https://www.nbcnews.com/science/space/spacex-fcc-authorizes-1-million-satellites-data-centers-space-rcna611341"], [89.48, 299.46, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20SpaceX%20Starmind%20story%20from%20today%27s%20noon%20brief"], [102.61, 297.6, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=10"]]}, {"pg": 0, "r": [530.4, 1184.15, 245.6, 315.85], "img": "front/b15.jpg", "svg": "front/b15.svg", "label": "Congo Ebola outbreak passes 12,000 cases", "links": [[3.0, 11.6, 192.25, 48.6, "https://apnews.com/article/congo-ebola-outbreak-violence-0a0bc05d76d3278319472178a16be14b"], [4.0, 78.8, 237.6, 100.53, "https://apnews.com/article/congo-ebola-outbreak-violence-0a0bc05d76d3278319472178a16be14b"], [3.0, 181.83, 207.96, 8.0, "https://commons.wikimedia.org/wiki/File:Ebola_virus_virion.jpg"], [3.0, 188.93, 111.36, 8.0, "https://commons.wikimedia.org/wiki/File:Ebola_virus_virion.jpg"], [129.09, 298.92, 11.85, 9.62, "https://apnews.com/article/congo-ebola-outbreak-violence-0a0bc05d76d3278319472178a16be14b"], [143.93, 298.92, 38.69, 9.62, "https://www.aljazeera.com/news/2026/11/26/dr-congo-ebola-cases-surpass-12000-as-fighting-disrupts-response-in-east"], [185.63, 298.92, 20.24, 9.62, "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON630"], [211.87, 299.46, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Congo%20Ebola%20story%20from%20today%27s%20noon%20brief"], [225.0, 297.6, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-26-noon/player.html?track=11"]]}]};
+const root = document.documentElement;
+const PG = D.pages || [{ w: D.w, h: D.h, img: 'front/page.jpg', links: D.links || [] }];
+const pbs = PG.map((P, k) => {
+  const el = document.createElement('div');
+  el.className = 'pagebox' + (P.w < 500 && PG.length > 1 ? ' narrow' : '');
+  el.style.setProperty('--ar', P.w + ' / ' + P.h);
+  el.innerHTML = '<img class="page main" src="' + P.img + '" alt="' + (k === 0 ? 'Front page' : 'Page ' + (k + 1)) + '" draggable="false"' + (k > 1 ? ' loading="lazy"' : '') + '>' +
+    (P.alt ? '<img class="page alt" alt="Printed page" draggable="false">' : '') +
+    (k === 0 ? '<div class="ednav prev" id="edprev" hidden></div><div class="ednav next" id="ednext" hidden></div>' : '');
+  document.getElementById('pages').appendChild(el); return el;
+});
+const pb = pbs[0];
+let curP = PG[0];
+const stage = document.getElementById('stage');
+const card = document.getElementById('card'), lo = document.getElementById('lo'), hi = document.getElementById('hi');
+const vec = document.getElementById('vec'), cl = document.getElementById('cl');
+const xb = document.getElementById('x');
+const pct = (v, t) => (100 * v / t) + '%';
+const TAP_MS = 350, TAP_PX = 10, MAX_Z = 4, DBL_Z = 2.5;
+function mkLink(l, w, h, cls) {
+  const a = document.createElement('a');
+  a.className = 'lk ' + cls; a.href = l[4];
+  if (/^https?:/.test(l[4])) { a.target = '_blank'; a.rel = 'noopener'; }
+  a.style.left = pct(l[0], w); a.style.top = pct(l[1], h); a.style.width = pct(l[2], w); a.style.height = pct(l[3], h);
+  a.addEventListener('click', e => {
+    if (cls === 'cz' && (moved || pinching || suppressClick)) { e.preventDefault(); e.stopPropagation(); }
+    else e.stopPropagation();
+  });
+  return a;
+}
+function papercut(seed) {
+  let s = seed * 9301 + 49297; const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+  const pts = [], n = 22, j = () => (rnd() * 0.5).toFixed(3);
+  for (let i = 0; i <= n; i++) pts.push(`${(100 * i / n).toFixed(2)}% ${j()}%`);
+  for (let i = 0; i <= n; i++) pts.push(`calc(100% - ${j()}%) ${(100 * i / n).toFixed(2)}%`);
+  for (let i = n; i >= 0; i--) pts.push(`${(100 * i / n).toFixed(2)}% calc(100% - ${j()}%)`);
+  for (let i = n; i >= 0; i--) pts.push(`${j()}% ${(100 * i / n).toFixed(2)}%`);
+  return `polygon(${pts.join(',')})`;
+}
+const blkEls = D.blocks.map((b, i) => {
+  const d = document.createElement('div');
+  d.className = 'blk'; d.setAttribute('role', 'button'); d.setAttribute('aria-label', b.label || 'Story');
+  const P = PG[b.pg || 0];
+  d.style.left = pct(b.r[0], P.w); d.style.top = pct(b.r[1], P.h); d.style.width = pct(b.r[2], P.w); d.style.height = pct(b.r[3], P.h);
+  d.addEventListener('click', e => {
+    // A link overlay always wins: if one sits under the pointer, open it instead of zooming.
+    const under = document.elementsFromPoint(e.clientX, e.clientY).find(n => n.matches && n.matches('a.lk.pg'));
+    if (under) { e.preventDefault(); under.click(); return; }
+    openBlk(i);
+  });
+  d.addEventListener('pointerdown', () => loadVec(i));   // start the vector fetch ~100ms before the click
+  pbs[b.pg || 0].appendChild(d); return d;
+});
+PG.forEach((P, k) => (P.links || []).forEach(l => pbs[k].appendChild(mkLink(l, P.w, P.h, 'pg'))));
+/* barcode toggle: flip the edited front page to the real printed page (and back) */
+PG.forEach((P, k) => {
+  if (!P.alt || !P.tg) return;
+  const box = pbs[k], altImg = box.querySelector('img.alt');
+  const mk = (r, cls) => {
+    const a = document.createElement('a'); a.href = '#'; a.className = 'lk pg ' + cls; a.setAttribute('role', 'button');
+    a.setAttribute('aria-label', 'Flip between the edited front page and the printed page');
+    a.style.left = pct(r[0], P.w); a.style.top = pct(r[1], P.h); a.style.width = pct(r[2], P.w); a.style.height = pct(r[3], P.h);
+    a.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      if (!altImg.getAttribute('src')) altImg.src = P.alt;
+      box.classList.toggle('flipped');
+    });
+    box.appendChild(a);
+  };
+  mk(P.tg, 'tg'); mk(P.tgb || P.tg, 'tgb');
+});
+
+/* ---- geometry: card = paper with padding; content (bw x bh pdf units) sits inside the padding ---- */
+let cur = -1, busy = false, cardLinks = [], savedY = 0, cpath = '';
+let fitS = 1, startS = 1, minS = 1, maxS = 4, x = 0, y = 0, s = 1, sb = 1;  // sb: scale the DOM is laid out at (crisp)
+let bw = 1, bh = 1, padX = 0, padT = 0, padB = 0, CW = 1, CH = 1;
+let moved = false, pinching = false, gesturePinch = false, suppressClick = false;
+const DUR = 420;
+const ease = t => 1 - Math.pow(1 - t, 3.2);
+
+function margin() { return innerWidth < 700 ? 14 : 36; }
+function planGeometry(b) {
+  const vw = innerWidth, vh = innerHeight, m = margin();
+  bw = b.r[2]; bh = b.r[3];
+  let f = (vw - 2 * m) / (bw * 1.1);
+  for (let k = 0; k < 4; k++) {            // pad = 5% of width (min 16 css px at fit; top band holds the X)
+    padX = Math.max(0.05 * bw, 16 / f);
+    padT = Math.max(padX, 44 / f);
+    padB = padX;
+    f = (vw - 2 * m) / (bw + 2 * padX);
+  }
+  CW = bw + 2 * padX; CH = padT + bh + padB;
+  const phone = vw < 700;
+  let st = Math.min(f, phone ? 2.6 : 2.45);                // start: padded width fits the screen (capped for small blocks)
+  if (CH * st > vh - 2 * m && CW * st < vw * 0.55) st = Math.max(Math.min(st, (vh - 2 * m) / CH), phone ? 1.9 : 1.75);
+  if (phone) st = Math.max(st, Math.min(1.15, f * 2));     // phones: start readable and pan sideways for wide clippings
+  startS = st; fitS = st;
+  minS = Math.min(st, f, (vh - 2 * m) / CH);               // pinch out to see the whole clipping
+  maxS = Math.max(minS * MAX_Z, st * 3);
+}
+function layout() {                       // real pixel size at the base scale sb (WebKit rasterizes at layout size)
+  card.style.width = CW * sb + 'px'; card.style.height = CH * sb + 'px';
+  for (const e of [lo, hi, cl]) { e.style.left = padX * sb + 'px'; e.style.top = padT * sb + 'px'; e.style.width = bw * sb + 'px'; e.style.height = bh * sb + 'px'; }
+  lo.style.backgroundSize = `${100 * curP.w / bw}% ${100 * curP.h / bh}%`;
+  const b = D.blocks[cur]; if (b) lo.style.backgroundPosition = `${100 * b.r[0] / (curP.w - bw || 1)}% ${100 * b.r[1] / (curP.h - bh || 1)}%`;
+  if (vst) { vec.style.left = vst.lx * sb + 'px'; vec.style.top = vst.ly * sb + 'px'; vec.style.width = vst.w * sb + 'px'; vec.style.height = vst.h * sb + 'px'; }
+}
+function gestureActive() { return fingers.size > 0 || gliding || mouseDown; }
+function settle() {                       // bake the zoom into layout: no scale() left, no will-change -> crisp re-raster
+  if (cur < 0) return;
+  if (Math.abs(s - sb) > 1e-6) { sb = s; layout(); }
+  if (!gestureActive()) card.classList.remove('live');
+  apply();
+}
+const svgCache = new Map(), svgPending = new Map();
+function loadVec(i) {
+  if (svgCache.has(i) || svgPending.has(i) || !D.blocks[i].svg) return;
+  const pr = fetch(D.blocks[i].svg).then(r => r.ok ? r.text() : Promise.reject()).then(t => {
+    svgCache.set(i, t.replace(/<\?xml[^>]*>/, '')); svgPending.delete(i);
+    if (cur === i && !busy) mountVec();
+  }).catch(() => svgPending.delete(i));
+  svgPending.set(i, pr);
+}
+let vst = null, vecFor = -1, commitRaf = 0, commitTimer = 0, vecLive = false, unveilT = 0;
+function mountVec() {
+  if (cur < 0 || !svgCache.has(cur)) return;
+  if (vecFor !== cur) { vec.innerHTML = svgCache.get(cur); vecFor = cur; const sv = vec.firstElementChild; if (sv) { sv.removeAttribute('width'); sv.removeAttribute('height'); sv.setAttribute('preserveAspectRatio', 'none'); } }
+  commit();
+}
+function commit() {                         // window the vector to what's on screen (+25%); not every pan frame
+  commitRaf = 0; clearTimeout(commitTimer); commitTimer = 0;
+  if (cur < 0 || busy || !isFinite(x + y + s)) return;
+  settle();
+  if (vecFor !== cur) return;
+  const sv = vec.firstElementChild; if (!sv) return;
+  const vw = innerWidth, vh = innerHeight;
+  const cx = x + padX * s, cy = y + padT * s, cw = bw * s, ch = bh * s;
+  const X0 = Math.max(cx, -0.25 * vw), Y0 = Math.max(cy, -0.25 * vh), X1 = Math.min(cx + cw, 1.25 * vw), Y1 = Math.min(cy + ch, 1.25 * vh);
+  if (X1 <= X0 || Y1 <= Y0) return;
+  const vbX = (X0 - cx) / s, vbY = (Y0 - cy) / s, vbW = (X1 - X0) / s, vbH = (Y1 - Y0) / s;
+  sv.setAttribute('viewBox', `${vbX} ${vbY} ${vbW} ${vbH}`);
+  vst = { lx: padX + vbX, ly: padT + vbY, w: vbW, h: vbH };
+  vec.style.left = vst.lx * sb + 'px'; vec.style.top = vst.ly * sb + 'px';
+  vec.style.width = vst.w * sb + 'px'; vec.style.height = vst.h * sb + 'px';
+  vec.style.transform = 'none'; vec.style.display = 'block';
+  if (!vecLive) {                           // keep the raster visible a moment: a big SVG can take a few hundred ms to paint (WebKit)
+    vecLive = true; clearTimeout(unveilT);
+    unveilT = setTimeout(() => { if (cur >= 0 && vecLive) { hi.classList.remove('ok'); lo.style.visibility = 'hidden'; } }, 700);
+  }
+}
+function liveVec() {                         // the card's scale already zooms the vector; only recommit if the window is missed
+  if (!vst || vecFor !== cur) return;
+  const vw = innerWidth, vh = innerHeight;
+  const r0 = x + vst.lx * s, r1 = r0 + vst.w * s, t0 = y + vst.ly * s, t1 = t0 + vst.h * s;
+  const cx = x + padX * s, cy = y + padT * s;
+  const vx0 = Math.max(0, cx), vx1 = Math.min(vw, cx + bw * s), vy0 = Math.max(0, cy), vy1 = Math.min(vh, cy + bh * s);
+  const miss = r0 > vx0 + 0.5 || r1 < vx1 - 0.5 || t0 > vy0 + 0.5 || t1 < vy1 - 0.5;
+  if (!miss) return;
+  const delay = gliding ? 140 : 80;
+  if (!commitTimer) commitTimer = setTimeout(() => { commitTimer = 0; commit(); }, delay);
+}
+function apply() {
+  const k = s / sb;
+  if (Math.abs(k - 1) < 1e-6) {               // settled: whole-pixel translate only, so WebKit paints text/SVG at full res
+    card.style.transform = `translate(${Math.round(x)}px,${Math.round(y)}px)`;
+  } else {                                     // mid-gesture: cheap GPU scale of the last crisp raster
+    card.classList.add('live');
+    card.style.transform = `translate3d(${x}px,${y}px,0) scale(${k})`;
+  }
+  const clip = (s / fitS) < 1.7 ? cpath : 'none';
+  if (card.dataset.clip !== clip) { card.style.clipPath = card.style.webkitClipPath = clip; card.dataset.clip = clip; }
+  card.dataset.scale = String(+(s / fitS).toFixed(3));
+  liveVec();
+  placeX();
+}
+function placeX() {
+  if (cur < 0 || !root.classList.contains('settled')) return;
+  const sz = 34, pad = 5;
+  const left = Math.min(Math.max(x + CW * s - pad - sz, 8), innerWidth - 8 - sz);
+  const top = Math.min(Math.max(y + pad, 8), innerHeight - 8 - sz);
+  xb.style.left = left + 'px'; xb.style.top = top + 'px';
+}
+function bounds() {
+  const m = margin(), vw = innerWidth, vh = innerHeight, cw = CW * s, ch = CH * s;
+  const midX = (vw - cw) / 2, midY = (vh - ch) / 2;
+  return {
+    minX: cw >= vw - 2 * m ? vw - m - cw : midX,
+    maxX: cw >= vw - 2 * m ? m : midX,
+    minY: ch >= vh - 2 * m ? vh - m - ch : midY,
+    maxY: ch >= vh - 2 * m ? m : midY,
+  };
+}
+function rubberDelta(over) { return over * 0.55 / (1 + over / 240); }
+function rubberAxis(v, lo, hi) {
+  if (v < lo) return lo - rubberDelta(lo - v);
+  if (v > hi) return hi + rubberDelta(v - hi);
+  return v;
+}
+function rubberXY() { const b = bounds(); x = rubberAxis(x, b.minX, b.maxX); y = rubberAxis(y, b.minY, b.maxY); }
+function rubberScale(sc) {
+  if (sc < minS) return minS - rubberDelta((minS - sc) * 180) / 180;
+  if (sc > maxS) return maxS + rubberDelta((sc - maxS) * 180) / 180;
+  return sc;
+}
+function clampPan() { const b = bounds(); x = Math.min(b.maxX, Math.max(b.minX, x)); y = Math.min(b.maxY, Math.max(b.minY, y)); }
+
+const TAU = 325, FLICK_MIN = 0.28;
+let gliding = false, vx = 0, vy = 0, samples = [];
+function stopGlide() {
+  if (gliding || vx || vy) { animId++; gliding = false; vx = 0; vy = 0; }
+}
+function noteSample() {
+  const t = performance.now();
+  samples.push({ t, x, y });
+  while (samples.length && t - samples[0].t > 100) samples.shift();
+}
+function sampleVelocity() {
+  if (samples.length < 2) return { vx: 0, vy: 0 };
+  const a = samples[0], b = samples[samples.length - 1], dt = Math.max(8, b.t - a.t);
+  return { vx: (b.x - a.x) / dt, vy: (b.y - a.y) / dt };
+}
+function startGlide(ivx, ivy) {
+  const b0 = bounds();
+  const out = x < b0.minX - 0.4 || x > b0.maxX + 0.4 || y < b0.minY - 0.4 || y > b0.maxY + 0.4
+    || s < minS - 1e-3 || s > maxS + 1e-3;
+  const spd = Math.hypot(ivx, ivy);
+  if (spd < FLICK_MIN && !out) { clampPan(); apply(); commit(); return; }
+  if (spd > 6) { const k = 6 / spd; ivx *= k; ivy *= k; }
+  animId++; vx = ivx; vy = ivy; gliding = true;
+  const id = animId;
+  let last = performance.now();
+  function step(now) {
+    if (id !== animId) { gliding = false; return; }
+    const dt = Math.min(32, Math.max(0, now - last)); last = now;
+    const decay = Math.exp(-dt / TAU);
+    x += vx * TAU * (1 - decay); y += vy * TAU * (1 - decay);
+    vx *= decay; vy *= decay;
+    const b = bounds();
+    const spring = (pos, vel, lo, hi) => {
+      let target = null;
+      if (pos < lo) target = lo; else if (pos > hi) target = hi;
+      if (target === null) return [pos, vel];
+      const K = 0.00028, C = 0.034;
+      vel += (-K * (pos - target) - C * vel) * dt;
+      pos += vel * dt;
+      if (Math.abs(pos - target) < 0.6 && Math.abs(vel) < 0.025) return [target, 0];
+      return [pos, vel];
+    };
+    [x, vx] = spring(x, vx, b.minX, b.maxX);
+    [y, vy] = spring(y, vy, b.minY, b.maxY);
+    if (s < minS || s > maxS) {
+      const target = s < minS ? minS : maxS;
+      s += (target - s) * (1 - Math.exp(-dt / 180));
+      if (Math.abs(s - target) < 0.002) s = target;
+    }
+    apply();
+    const inside = x >= b.minX - 0.5 && x <= b.maxX + 0.5 && y >= b.minY - 0.5 && y <= b.maxY + 0.5
+      && s >= minS - 1e-3 && s <= maxS + 1e-3;
+    if (inside && Math.hypot(vx, vy) < 0.02) {
+      clampPan(); apply(); gliding = false; vx = vy = 0; commit(); return;
+    }
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+function setScaleAt(newS, fx, fy, withAnim) {
+  const raw = newS, clamped = Math.max(minS, Math.min(maxS, newS));
+  newS = withAnim ? clamped : rubberScale(raw);
+  const k = newS / s;
+  const nx0 = fx - (fx - x) * k, ny0 = fy - (fy - y) * k;
+  if (withAnim) { x = nx0; y = ny0; s = newS; clampPan(); animate(x, y, s, 260, true); return; }
+  s = newS; x = nx0; y = ny0; rubberXY(); apply();
+}
+let animId = 0;
+function animate(x1, y1, s1, dur, clampEnd, done) {
+  const x0 = x, y0 = y, s0 = s, t0 = performance.now(), id = ++animId;
+  gliding = false; vx = vy = 0;
+  (function step(now) {
+    if (id !== animId) return;
+    const t = Math.min(1, (now - t0) / dur), e = ease(t);
+    s = s0 + (s1 - s0) * e; x = x0 + (x1 - x0) * e; y = y0 + (y1 - y0) * e;
+    if (clampEnd && t === 1) clampPan();
+    apply();
+    if (t < 1) requestAnimationFrame(step); else { if (done) done(); else if (clampEnd) commit(); }
+  })(performance.now());
+}
+
+window.__pan = () => ({ x, y, s, gliding, vx, vy, bounds: bounds() });
+
+function openBlk(i) {
+  if (busy || cur >= 0) return; busy = true; cur = i;
+  const b = D.blocks[i], el = blkEls[i];
+  savedY = window.scrollY || 0;
+  curP = PG[b.pg || 0];
+  stopGlide(); planGeometry(b); sb = startS; vst = null; layout();
+  cpath = papercut(i + 3);
+  hi.classList.remove('ok'); hi.onload = () => { if (!vst) hi.classList.add('ok'); }; hi.src = b.img;
+  if (hi.complete && hi.naturalWidth) hi.classList.add('ok');
+  lo.style.backgroundImage = 'url(' + curP.img + ')'; lo.style.visibility = 'visible';
+  vec.style.display = 'none'; vec.style.transform = 'none'; vst = null; vecFor = -1; vec.innerHTML = ''; vecLive = false; clearTimeout(unveilT);
+  cardLinks.forEach(a => a.remove());
+  cardLinks = b.links.map(l => cl.appendChild(mkLink(l, bw, bh, 'cz')));
+  document.body.style.top = `-${savedY}px`;
+  root.classList.add('zoomed'); root.classList.remove('settled', 'closing');
+  loadVec(i);
+  const x1 = startS * 0 + ((startS * CW >= innerWidth - 2 * margin()) ? margin() : (innerWidth - CW * startS) / 2);
+  const y1 = Math.max(margin(), (innerHeight - CH * startS) / 2);
+  const src = el.getBoundingClientRect();
+  s = src.width / bw; x = src.left - padX * s; y = src.top - padT * s;
+  el.classList.add('src');
+  apply();
+  requestAnimationFrame(() => animate(x1, y1, startS, DUR, false, () => {
+    clampPan(); apply();
+    busy = false; root.classList.add('settled'); settle(); placeX(); mountVec();
+  }));
+}
+function closeBlk() {
+  if (busy || cur < 0) return; busy = true;
+  const el = blkEls[cur];
+  stopGlide(); animId++;
+  root.classList.remove('settled'); root.classList.add('closing');
+  vec.style.display = 'none'; lo.style.visibility = 'visible'; hi.classList.add('ok');
+  const src = el.getBoundingClientRect();
+  const s1 = src.width / bw;
+  root.classList.remove('zoomed');
+  document.body.style.top = '';
+  window.scrollTo(0, savedY);
+  const src2 = el.getBoundingClientRect();
+  animate(src2.left - padX * s1, src2.top - padT * s1, s1, DUR - 40, false, () => {
+    el.classList.remove('src'); root.classList.remove('closing');
+    cur = -1; busy = false; moved = pinching = gesturePinch = false;
+    card.dataset.scale = ''; vst = null; vecFor = -1; vec.innerHTML = ''; vecLive = false; clearTimeout(unveilT);
+  });
+}
+
+/* ---------- gestures on the open clipping ---------- */
+let lastCardTap = 0, lastCardX = 0, lastCardY = 0;
+const fingers = new Map();
+let pinchStartDist = 0, pinchStartS = 1, pinchMidX = 0, pinchMidY = 0;
+let panLastX = 0, panLastY = 0, startX = 0, startY = 0, startT = 0, startOnCard = false;
+
+function onCard(el) { return el && (el === card || card.contains(el)); }
+function dist(a, b) { const dx = a.x - b.x, dy = a.y - b.y; return Math.hypot(dx, dy); }
+function pts() { return [...fingers.values()]; }
+
+function zoomAround(newS, fx, fy, anim) { setScaleAt(newS, fx, fy, anim); }
+
+function maybeOutsideClose() {
+  // A single tap on the dim area closes. A finger-up that ends a pinch or drag
+  // is not a tap (see wasMoved / wasPinch in the touch/mouse handlers).
+  closeBlk(); return true;
+}
+function maybeCardDouble(fx, fy) {
+  const now = performance.now();
+  if (now - lastCardTap < TAP_MS && Math.hypot(fx - lastCardX, fy - lastCardY) < 40) {
+    lastCardTap = 0;
+    zoomAround((s > startS * 1.4 ? startS : Math.min(maxS, startS * DBL_Z)), fx, fy, true);
+    return true;
+  }
+  lastCardTap = now; lastCardX = fx; lastCardY = fy; return false;
+}
+function fireLink(a) {
+  if (!a || !a.href) return;
+  // Don't trip the drag-suppression on the synthetic click; block only the trailing native one.
+  a.click();
+  suppressClick = true;
+  setTimeout(() => { suppressClick = false; }, 400);
+}
+
+function touchList(e) {
+  // Trust e.touches (current set). Empty touchEnd payloads otherwise leave stale fingers.
+  fingers.clear();
+  const live = e.touches || [];
+  for (const t of live) fingers.set(t.identifier, { x: t.clientX, y: t.clientY, id: t.identifier });
+}
+
+function onTouchStart(e) {
+  if (cur < 0) return;
+  e.preventDefault();
+  stopGlide();
+  if (busy) return;
+  touchList(e);
+  const t0 = e.changedTouches[0];
+  if (fingers.size === 1) {
+    startX = panLastX = t0.clientX; startY = panLastY = t0.clientY; startT = performance.now();
+    startOnCard = onCard(e.target) && e.target !== xb && !xb.contains(e.target);
+    moved = pinching = gesturePinch = false;
+    samples = [{ t: startT, x, y }];
+  }
+  if (fingers.size >= 2) {
+    const p = pts();
+    pinching = true; gesturePinch = true; moved = true;
+    pinchStartDist = dist(p[0], p[1]) || 1;
+    pinchStartS = s;
+    pinchMidX = (p[0].x + p[1].x) / 2; pinchMidY = (p[0].y + p[1].y) / 2;
+  }
+}
+function onTouchMove(e) {
+  if (cur < 0) return;
+  e.preventDefault();
+  if (busy) return;
+  touchList(e);
+  if (fingers.size >= 2) {
+    const p = pts();
+    pinching = true; gesturePinch = true; moved = true;
+    const d = dist(p[0], p[1]) || 1;
+    const midX = (p[0].x + p[1].x) / 2, midY = (p[0].y + p[1].y) / 2;
+    const newS = rubberScale(pinchStartS * (d / pinchStartDist));
+    const k = newS / s;
+    x = midX - (midX - x) * k; y = midY - (midY - y) * k; s = newS;
+    x += midX - pinchMidX; y += midY - pinchMidY;
+    pinchMidX = midX; pinchMidY = midY;
+    rubberXY(); noteSample(); apply();
+  } else if (fingers.size === 1 && !pinching) {
+    const t = pts()[0];
+    const dx = t.x - startX, dy = t.y - startY;
+    if (Math.hypot(dx, dy) > TAP_PX) moved = true;
+    if (moved && startOnCard) {
+      x += t.x - panLastX; y += t.y - panLastY;
+      panLastX = t.x; panLastY = t.y;
+      card.classList.add('panning');
+      rubberXY(); noteSample(); apply();
+    }
+  }
+}
+function onTouchEnd(e) {
+  if (cur < 0) return;
+  e.preventDefault();
+  const wasPinch = pinching || gesturePinch, wasMoved = moved, wasOnCard = startOnCard;
+  const sx = startX, sy = startY;
+  const tgt = e.target;
+  touchList(e);
+  if (fingers.size >= 2) {
+    const p = pts();
+    pinchStartDist = dist(p[0], p[1]) || 1; pinchStartS = s;
+    pinchMidX = (p[0].x + p[1].x) / 2; pinchMidY = (p[0].y + p[1].y) / 2;
+    return;
+  }
+  if (fingers.size === 1) {
+    const t = pts()[0];
+    panLastX = t.x; panLastY = t.y; pinching = false;
+    card.classList.remove('panning');
+    return;
+  }
+  pinching = false; card.classList.remove('panning');
+  if (busy) return;
+  if (tgt === xb || xb.contains(tgt)) { closeBlk(); return; }
+  const tap = !wasMoved && !wasPinch && (performance.now() - startT < 500);
+  if (!tap) {
+    const v = sampleVelocity();
+    if (wasOnCard || wasPinch) startGlide(v.vx, v.vy);
+    else { rubberXY(); apply(); startGlide(0, 0); }
+    return;
+  }
+  startGlide(0, 0);
+  if (!wasOnCard) { maybeOutsideClose(); return; }
+  if (maybeCardDouble(sx, sy)) return;
+  const top = document.elementFromPoint(sx, sy);
+  const a = top && top.closest && top.closest('a.lk.cz');
+  if (a) fireLink(a);
+}
+
+stage.addEventListener('touchstart', onTouchStart, { passive: false });
+stage.addEventListener('touchmove', onTouchMove, { passive: false });
+stage.addEventListener('touchend', onTouchEnd, { passive: false });
+stage.addEventListener('touchcancel', onTouchEnd, { passive: false });
+
+// Keep the page itself from pinch-zooming or scrolling while a clipping is open.
+function lockPage(e) { if (cur >= 0) e.preventDefault(); }
+document.addEventListener('touchmove', lockPage, { passive: false });
+document.addEventListener('gesturestart', lockPage, { passive: false });
+document.addEventListener('gesturechange', lockPage, { passive: false });
+document.addEventListener('gestureend', lockPage, { passive: false });
+
+/* mouse / trackpad */
+let mouseDown = false, wheelTimer = 0;
+stage.addEventListener('mousedown', e => {
+  if (cur < 0 || busy || e.button !== 0) return;
+  if (e.target === xb || xb.contains(e.target)) return;
+  stopGlide();
+  mouseDown = true; startOnCard = onCard(e.target);
+  startX = panLastX = e.clientX; startY = panLastY = e.clientY; startT = performance.now();
+  moved = false; samples = [{ t: startT, x, y }];
+});
+window.addEventListener('mousemove', e => {
+  if (!mouseDown || cur < 0) return;
+  if (Math.hypot(e.clientX - startX, e.clientY - startY) > TAP_PX) moved = true;
+  if (moved && startOnCard) {
+    x += e.clientX - panLastX; y += e.clientY - panLastY;
+    panLastX = e.clientX; panLastY = e.clientY;
+    card.classList.add('panning');
+    rubberXY(); noteSample(); apply();
+  }
+});
+window.addEventListener('mouseup', e => {
+  if (!mouseDown) return;
+  mouseDown = false; card.classList.remove('panning');
+  if (cur < 0 || busy) return;
+  const tap = !moved && (performance.now() - startT < 500);
+  if (!tap) {
+    suppressClick = true; setTimeout(() => { suppressClick = false; }, 400);
+    const v = sampleVelocity();
+    startGlide(startOnCard ? v.vx : 0, startOnCard ? v.vy : 0);
+    return;
+  }
+  if (!startOnCard) { maybeOutsideClose(); return; }
+  if (maybeCardDouble(e.clientX, e.clientY)) return;
+  const top = document.elementFromPoint(e.clientX, e.clientY);
+  const a = top && top.closest && top.closest('a.lk.cz');
+  if (a) fireLink(a);
+});
+stage.addEventListener('wheel', e => {
+  if (cur < 0 || busy) return;
+  e.preventDefault();
+  if (e.ctrlKey || e.metaKey) {
+    const factor = Math.exp(-e.deltaY * 0.01);
+    setScaleAt(s * factor, e.clientX, e.clientY, false);
+    noteSample();
+    clearTimeout(wheelTimer); wheelTimer = setTimeout(() => startGlide(0, 0), 160);
+  } else {
+    x -= e.deltaX; y -= e.deltaY;
+    rubberXY(); noteSample(); apply();
+  }
+}, { passive: false });
+
+xb.addEventListener('click', e => { e.stopPropagation(); e.preventDefault(); closeBlk(); });
+xb.addEventListener('touchend', e => { e.stopPropagation(); e.preventDefault(); if (!busy) closeBlk(); }, { passive: false });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBlk(); });
+window.addEventListener('resize', () => {
+  if (cur < 0 || busy) return;
+  const z = s / startS;
+  planGeometry(D.blocks[cur]);
+  s = Math.max(minS, Math.min(maxS, startS * z));
+  clampPan(); apply(); commit();
+});
+window.addEventListener('load', () => setTimeout(() => D.blocks.filter(b => !b.pg).forEach(b => { const im = new Image(); im.src = b.img; }), 600));
+
+/* ---------- edition navigation (from ../editions.json, so older pages gain 'next' as new briefs publish) ---------- */
+(function () {
+  const prevEl = document.getElementById('edprev'), nextEl = document.getElementById('ednext');
+  if (!prevEl) return;
+  const SLUG = D.slug || (location.pathname.split('/').filter(Boolean).slice(-2)[0] || '');
+  function place() {
+    if (D.nav) {                              // explicit placement (pdf units on page 1), e.g. the WSJ front page
+      prevEl.style.left = (D.nav.prev[0] / D.w * 100) + '%'; prevEl.style.width = (D.nav.prev[1] / D.w * 100) + '%'; prevEl.style.justifyContent = 'flex-start';
+      nextEl.style.left = (D.nav.next[0] / D.w * 100) + '%'; nextEl.style.width = (D.nav.next[1] / D.w * 100) + '%'; nextEl.style.justifyContent = 'flex-end';
+      prevEl.style.top = nextEl.style.top = (D.nav.top / D.h * 100) + '%';
+    } else if (D.w > 500) {                   // top margin of the sheet, right of LISTEN ALL and left of the right edge
+      prevEl.style.left = (178 / D.w * 100) + '%';
+      prevEl.style.width = (260 / D.w * 100) + '%';
+      prevEl.style.justifyContent = 'flex-start';
+      nextEl.style.left = (500 / D.w * 100) + '%';
+      nextEl.style.width = (272 / D.w * 100) + '%';
+      nextEl.style.justifyContent = 'flex-end';
+      prevEl.style.top = nextEl.style.top = (24 / D.h * 100) + '%';
+    } else {                                  // narrow What's News column: a slim strip under the top edge
+      prevEl.style.left = '2%'; prevEl.style.width = '46%'; prevEl.style.justifyContent = 'flex-start';
+      nextEl.style.left = '52%'; nextEl.style.width = '46%'; nextEl.style.justifyContent = 'flex-end';
+      prevEl.style.top = nextEl.style.top = '18px';
+    }
+  }
+  function link(e, dir) {
+    const href = '../' + (e.front || (e.slug + '/front.html'));
+    const label = dir < 0 ? '‹ ' + e.label : e.label + ' ›';
+    return '<a href="' + href + '">' + label + '</a>';
+  }
+  place();
+  fetch('../editions.json').then(r => r.ok ? r.json() : Promise.reject()).then(data => {
+    const list = (data && data.editions) || [];
+    const i = list.findIndex(e => e.slug === SLUG);
+    if (i < 0) return;
+    const prev = list.slice(Math.max(0, i - 2), i);
+    const next = list.slice(i + 1, i + 3);
+    if (prev.length) { prevEl.innerHTML = prev.map(e => link(e, -1)).join('<span class="dot"> · </span>'); prevEl.hidden = false; }
+    if (next.length) { nextEl.innerHTML = next.map(e => link(e, 1)).join('<span class="dot"> · </span>'); nextEl.hidden = false; }
+  }).catch(() => {});
+})();
+
+</script>
+</body></html>
