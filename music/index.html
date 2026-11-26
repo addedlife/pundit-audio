@@ -8,166 +8,17 @@
 <style>
 :root{--bg:#EDECE8;--card:#F4F3EF;--ink:#231F20;--mut:#5c5755;--line:#d5d1c8}
 @media(prefers-color-scheme:dark){:root{--bg:#161615;--card:#21201e;--ink:#f2efe9;--mut:#a7a29b;--line:#35332f}}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif;-webkit-text-size-adjust:100%}
-.wrap{max-width:760px;margin:0 auto;padding:18px 14px 60px}
-a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--mut)}
-a:hover{border-bottom-color:var(--ink)}
-.hdr{border-bottom:1.5px solid var(--ink);padding-bottom:10px;margin-bottom:12px;text-align:center}
-.hdr h1{margin:0;font-size:30px;letter-spacing:.02em;font-weight:700}
-.sub{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:4px;font-family:-apple-system,sans-serif}
-.back{display:inline-block;margin:0 0 12px;font-size:13px;font-family:-apple-system,sans-serif}
-.tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);margin:0 0 14px;font-family:-apple-system,sans-serif}
-.tabs button{background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:10px 2px;font-size:14px;color:var(--mut);cursor:pointer;font-family:inherit;touch-action:manipulation}
-.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--ink);font-weight:600}
-.intro{font-size:14px;line-height:1.5;color:var(--mut);margin:0 0 16px}
-h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-family:-apple-system,sans-serif;color:var(--mut);margin:22px 0 4px;border-bottom:1px solid var(--ink);padding-bottom:4px}
-.row{border-bottom:1px solid var(--line)}
-.rowh{display:flex;align-items:flex-start;gap:8px;padding:10px 0}
-.num{flex:0 0 30px;font-family:-apple-system,sans-serif;font-size:12px;color:var(--mut);padding-top:3px;text-align:right}
-.main{flex:1;min-width:0}
-.ttl{font-size:16px;line-height:1.3;font-weight:600}
-.perf{font-size:13px;color:var(--mut);margin-top:2px;line-height:1.35}
-.meta{font-size:12px;color:var(--mut);margin-top:3px;font-family:-apple-system,sans-serif}
-.play,.dots{background:none;border:0;color:var(--ink);cursor:pointer;font-family:-apple-system,sans-serif;touch-action:manipulation}
-.play{font-size:12px;min-height:44px;padding:0 6px;color:var(--mut)}
-.dots{font-size:24px;line-height:1;width:44px;min-height:44px;margin-top:-6px}
-.panel{padding:2px 0 14px 38px;font-size:14px;line-height:1.5}
-.panel[hidden]{display:none}
-dl{margin:0 0 10px;display:grid;grid-template-columns:96px 1fr;gap:3px 10px;font-size:13px}
-dt{color:var(--mut);font-family:-apple-system,sans-serif;font-size:12px;padding-top:1px}
-dd{margin:0}
-.about{margin:0 0 12px}
-.term{border-left:2px solid var(--ink);padding:2px 0 2px 10px}
-.term .k{font-family:-apple-system,sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
-.term .t{font-size:16px;font-weight:700;margin:2px 0 4px}
-.term p{margin:0}
-.src{font-size:12px;color:var(--mut);margin-top:10px;font-family:-apple-system,sans-serif}
-.foot{margin-top:28px;font-size:12px;color:var(--mut);font-family:-apple-system,sans-serif;border-top:1px solid var(--line);padding-top:10px}
-.ord .ttl{font-size:15px}
-.tn{font-weight:700}
-@media(max-width:480px){.panel{padding-left:0}dl{grid-template-columns:82px 1fr}.num{flex-basis:24px}}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);-webkit-text-size-adjust:100%}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="hdr"><h1>SBR Music</h1><div class="sub">The classical pieces that play after the brief</div></div>
-  <a class="back" id="back" href="../index.html">&larr; Back to the brief</a>
-  <div class="tabs" role="tablist">
-    <button role="tab" id="tabLists" aria-selected="true">Playlists</button>
-    <button role="tab" id="tabOrder" aria-selected="false">Learn in order</button>
-  </div>
-  <div id="view"></div>
-  <div class="foot">Recordings are free: public domain or Creative Commons. Full credits and licenses are on the <a href="../sleep-music/credits.html">credits page</a>.</div>
-</div>
-<audio id="au" preload="none"></audio>
+<div id="app"></div>
+<script src="music-panel.js"></script>
 <script>
-(function(){
-  var BASE = '../sleep-music/';
-  var man = null, credits = {}, info = null, mode = 'lists', openId = null, playing = null;
-  var view = document.getElementById('view'), au = document.getElementById('au');
-  var tabL = document.getElementById('tabLists'), tabO = document.getElementById('tabOrder');
-  function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
-  function fmt(s){ s = Math.round(s || 0); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
-  try { var r = document.referrer; if (r && r.indexOf(location.origin) === 0 && /player\.html|front\.html/.test(r)) document.getElementById('back').href = r; } catch (e) {}
-  function load(){
-    return Promise.all([
-      fetch(BASE + 'manifest.json').then(function(r){ return r.json(); }),
-      fetch(BASE + 'credits.json').then(function(r){ return r.json(); }),
-      fetch('music-info.json').then(function(r){ return r.json(); })
-    ]).then(function(a){
-      man = a[0]; info = a[2];
-      a[1].forEach(function(c){ credits[c.file] = c; });
-      render();
-    }).catch(function(){ view.textContent = 'The music list could not be loaded. Please try again.'; });
-  }
-  function total(){ return info.order.length; }
-  function trackById(f){
-    var found = null;
-    Object.keys(man.lists).forEach(function(k){ man.lists[k].tracks.forEach(function(t){ if (t.file === f) found = { t: t, list: k }; }); });
-    return found;
-  }
-  function panel(f, id){
-    var d = info.tracks[f], c = credits[f] || {}, tk = trackById(f).t;
-    var p = el('div', 'panel'); p.id = id; p.hidden = true;
-    var dl = el('dl');
-    function item(k, v){ if (!v) return; dl.appendChild(el('dt', null, k)); dl.appendChild(el('dd', null, v)); }
-    item('Composer', d.composer); item('Work', d.work); item('Movement', d.movement);
-    item('Performers', c.performer || tk.performer); item('Written', d.year);
-    p.appendChild(dl);
-    p.appendChild(el('p', 'about', d.about));
-    var t = el('div', 'term');
-    t.appendChild(el('div', 'k', 'Term ' + d.term_no + ' of ' + total()));
-    t.appendChild(el('div', 't', d.term));
-    t.appendChild(el('p', null, d.term_text));
-    p.appendChild(t);
-    var s = el('div', 'src');
-    if (c.source) { s.appendChild(document.createTextNode('Recording: ' + (c.license || '') + ' · ')); var a = el('a', null, 'source'); a.href = c.source; a.target = '_blank'; a.rel = 'noopener'; s.appendChild(a); }
-    p.appendChild(s);
-    return p;
-  }
-  function row(f, n, ord){
-    var d = info.tracks[f], tk = trackById(f).t, id = 'p-' + (ord ? 'o' : 'l') + '-' + f.replace(/[^a-z0-9]/gi, '');
-    var r = el('div', 'row' + (ord ? ' ord' : '')); r.id = 'r-' + id;
-    var h = el('div', 'rowh');
-    h.appendChild(el('div', 'num', String(n)));
-    var m = el('div', 'main');
-    if (ord) {
-      var tt = el('div', 'ttl'); tt.appendChild(el('span', 'tn', d.term)); m.appendChild(tt);
-      m.appendChild(el('div', 'perf', tk.title));
-      m.appendChild(el('div', 'meta', (f.indexOf('calm/') === 0 ? 'Calm' : 'Lively') + ' · ' + fmt(tk.duration)));
-    } else {
-      m.appendChild(el('div', 'ttl', tk.title));
-      m.appendChild(el('div', 'perf', tk.performer));
-      m.appendChild(el('div', 'meta', fmt(tk.duration) + ' · Term ' + d.term_no + ': ' + d.term));
-    }
-    h.appendChild(m);
-    var pl = el('button', 'play', playing === f ? 'Pause' : 'Play'); pl.type = 'button'; pl.setAttribute('aria-label', 'Play ' + tk.title);
-    pl.onclick = function(){ toggle(f); };
-    pl.setAttribute('data-play', f);
-    h.appendChild(pl);
-    var b = el('button', 'dots', '\u22EE'); b.type = 'button';
-    b.setAttribute('aria-label', 'More about ' + tk.title); b.setAttribute('aria-expanded', openId === id ? 'true' : 'false'); b.setAttribute('aria-controls', id);
-    h.appendChild(b);
-    r.appendChild(h);
-    var p = panel(f, id); r.appendChild(p);
-    if (openId === id) p.hidden = false;
-    b.onclick = function(){
-      var was = !p.hidden;
-      var open = view.querySelectorAll('.panel:not([hidden])'); for (var i = 0; i < open.length; i++) open[i].hidden = true;
-      var bs = view.querySelectorAll('.dots[aria-expanded=true]'); for (var j = 0; j < bs.length; j++) bs[j].setAttribute('aria-expanded', 'false');
-      if (!was) { p.hidden = false; b.setAttribute('aria-expanded', 'true'); openId = id; } else { openId = null; }
-    };
-    return r;
-  }
-  function toggle(f){
-    if (playing === f) { au.pause(); playing = null; }
-    else { au.src = BASE + f; au.play().catch(function(){}); playing = f; }
-    var bs = view.querySelectorAll('.play'); for (var i = 0; i < bs.length; i++) bs[i].textContent = (bs[i].getAttribute('data-play') === playing) ? 'Pause' : 'Play';
-  }
-  au.addEventListener('ended', function(){ playing = null; var bs = view.querySelectorAll('.play'); for (var i = 0; i < bs.length; i++) bs[i].textContent = 'Play'; });
-  function render(){
-    view.textContent = '';
-    tabL.setAttribute('aria-selected', mode === 'lists' ? 'true' : 'false'); tabO.setAttribute('aria-selected', mode === 'order' ? 'true' : 'false');
-    if (mode === 'lists') {
-      view.appendChild(el('p', 'intro', 'Both playlists play shuffled after the news. Tap the three dots on a piece for who wrote it, who plays it, and one music term that piece shows. The terms are numbered in the order to learn them.'));
-      ['lively', 'calm'].forEach(function(k){
-        var L = man.lists[k]; if (!L) return;
-        view.appendChild(el('h2', null, L.label + ' · ' + L.tracks.length + ' pieces'));
-        L.tracks.forEach(function(t, i){ view.appendChild(row(t.file, i + 1, false)); });
-      });
-    } else {
-      view.appendChild(el('p', 'intro', 'Fifty-seven terms, simplest first. Each later term only uses ideas from earlier ones, so start at 1 and go down. Each is shown by one piece; tap the three dots for the explanation.'));
-      info.order.forEach(function(f, i){ view.appendChild(row(f, i + 1, true)); });
-    }
-  }
-  tabL.onclick = function(){ mode = 'lists'; openId = null; render(); };
-  tabO.onclick = function(){ mode = 'order'; openId = null; render(); };
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && openId) { var open = view.querySelectorAll('.panel:not([hidden])'); for (var i = 0; i < open.length; i++) open[i].hidden = true; var bs = view.querySelectorAll('.dots[aria-expanded=true]'); for (var j = 0; j < bs.length; j++) bs[j].setAttribute('aria-expanded', 'false'); openId = null; }
-  });
-  load();
-})();
+SBRMusic.mount(document.getElementById('app'), { embedded: false, base: '../sleep-music/', info: 'music-info.json' }).then(function(){
+  function go(){ var h = location.hash.replace(/^#(music\/)?/, ''); if (h) SBRMusic.show(decodeURIComponent(h)); }
+  window.addEventListener('hashchange', go); go();
+}).catch(function(){ document.getElementById('app').textContent = 'The music list could not be loaded. Please try again.'; });
 </script>
 </body>
 </html>

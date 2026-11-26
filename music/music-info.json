@@ -67,7 +67,9 @@
    "about": "The Air is the slow second movement of the suite. In the 1800s a violinist arranged it to be played on one string, which gave it the name “Air on the G String.” Here it is played by a string orchestra.",
    "term": "Melody",
    "term_text": "The melody is the tune, the part you could hum. In this Air the first violins play one long, smooth tune while the lower strings keep a steady bass underneath. Follow the top line and you are following the melody.",
-   "term_no": 1
+   "term_no": 1,
+   "etym": "From Greek melōidia, “singing, chanting,” from melos, “musical phrase,” + ōidē, “song.”",
+   "etym_src": "https://en.wiktionary.org/wiki/melody#English"
   },
   "lively/31-vivaldi-bassoon-iii.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -87,7 +89,9 @@
    "about": "The three Gymnopédies are short piano pieces that Satie finished in 1888. The first is marked “Lent et douloureux,” French for “slow and sorrowful.” It lasts about three minutes.",
    "term": "Tempo",
    "term_text": "Tempo is the speed of the music. Satie’s marking, “slow and sorrowful,” sets the tempo before the first note. Slow tempo leaves space between the notes.",
-   "term_no": 3
+   "term_no": 3,
+   "etym": "Italian tempo, from Latin tempus, “time.”",
+   "etym_src": "https://en.wiktionary.org/wiki/tempo#English"
   },
   "lively/18-handel-queen-of-sheba.mp3": {
    "composer": "George Frideric Handel (1685–1759)",
@@ -97,7 +101,9 @@
    "about": "Handel was born in Germany and spent most of his career in London. This sinfonia opens Act Three of his oratorio Solomon and shows the Queen of Sheba arriving. The Advent Chamber Orchestra plays it.",
    "term": "Orchestra",
    "term_text": "An orchestra is a large group of musicians playing together: bowed strings, instruments you blow into, and drums and other percussion. This piece is mostly bowed strings, with a pair of oboes adding a brighter, reedy color. Listen for where the oboes join.",
-   "term_no": 4
+   "term_no": 4,
+   "etym": "From Greek orkhēstra, from orkheomai, “to dance.”",
+   "etym_src": "https://en.wiktionary.org/wiki/orchestra#English"
   },
   "calm/17-vivaldi-cello-largo.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -107,7 +113,9 @@
    "about": "Vivaldi wrote more than two dozen concertos for the cello, at a time when few composers did. This is the slow middle movement. Stephen Balderston is the cellist.",
    "term": "Solo",
    "term_text": "A solo is a passage played by one instrument while the others stay quiet. In this Largo the cello plays the tune alone, and the orchestra plays softly behind it. The soloist stands out because everyone else steps back.",
-   "term_no": 5
+   "term_no": 5,
+   "etym": "Italian solo, “alone,” from Latin sōlus.",
+   "etym_src": "https://en.wiktionary.org/wiki/solo#English"
   },
   "calm/22-vivaldi-oboe-andante.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -117,7 +125,9 @@
    "about": "Vivaldi wrote many concertos for the oboe. This is the slow middle movement of one in C major. Edino Biaggi is the soloist, with the Advent Chamber Orchestra.",
    "term": "Accompaniment",
    "term_text": "Accompaniment is the music that supports the main tune. Here the oboe has the melody, and the strings mostly play steadier, simpler notes beneath it. Listen to the strings alone, and they do not give you a tune to hum.",
-   "term_no": 6
+   "term_no": 6,
+   "etym": "From French accompagnement; to accompany comes from Old French compaing, “companion.”",
+   "etym_src": "https://en.wiktionary.org/wiki/accompany#English"
   },
   "lively/32-vivaldi-2mandolins-i.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -127,7 +137,9 @@
    "about": "The mandolin is a small plucked string instrument with quick, bright notes. This is the opening movement of the concerto for two. The Modena Chamber Orchestra plays it.",
    "term": "Phrase",
    "term_text": "A phrase is a short stretch of music that feels like a sentence: it starts, moves, and comes to a natural pause. In this Allegro the mandolin tune breaks into short phrases with small pauses between them. Try to feel where each one ends.",
-   "term_no": 7
+   "term_no": 7,
+   "etym": "From Greek phrasis, “manner of expression,” from phrazō, “to tell, express.”",
+   "etym_src": "https://en.wiktionary.org/wiki/phrase#English"
   },
   "lively/13-vivaldi-autumn-i.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -137,7 +149,9 @@
    "about": "In Vivaldi’s sonnet, villagers celebrate the harvest with dancing and drinking. This is the festival movement. John Harrison plays the violin.",
    "term": "Theme",
    "term_text": "A theme is the main tune of a piece or movement, the one that comes back. Autumn opens with a bouncing dance tune played by the whole orchestra, and it returns several times. Once you know it, you will recognise it each time.",
-   "term_no": 8
+   "term_no": 8,
+   "etym": "From Greek thema, from tithēmi, “to put, place.”",
+   "etym_src": "https://en.wiktionary.org/wiki/theme#English"
   },
   "lively/15-vivaldi-winter-i.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -147,7 +161,9 @@
    "about": "In the sonnet, a person shivers in the icy snow, with teeth chattering. This is the first movement. John Harrison plays the violin in a live performance.",
    "term": "Movement",
    "term_text": "A movement is one complete section of a longer piece, with a pause before the next. Each Four Seasons concerto has three: fast, slow, fast. This is the first movement of Winter.",
-   "term_no": 9
+   "term_no": 9,
+   "etym": "From Old French movement, from Latin movēre, “to move.”",
+   "etym_src": "https://en.wiktionary.org/wiki/movement#English"
   },
   "lively/27-vivaldi-l-estro-10-iii.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -157,7 +173,9 @@
    "about": "This is the closing movement of the concerto for four violins. It follows a slow middle movement. The Modena Chamber Orchestra plays it.",
    "term": "Finale",
    "term_text": "The finale is the last movement of a work with several movements. It usually brings energetic music to close. This is the third and last movement of the concerto, after a slow middle movement.",
-   "term_no": 10
+   "term_no": 10,
+   "etym": "Italian finale, “ending,” from Latin fīnis, “end.”",
+   "etym_src": "https://en.wiktionary.org/wiki/finale#English"
   },
   "calm/07-albinoni-oboe-adagio.mp3": {
    "composer": "Tomaso Albinoni (1671–1751)",
@@ -167,7 +185,9 @@
    "about": "Albinoni was a Venetian composer and one of the first Italians to write concertos for the oboe. This is the slow middle movement. Paul Arden-Taylor is the soloist.",
    "term": "Adagio",
    "term_text": "Adagio is a slow tempo, from Italian words meaning “at ease.” Here the oboe sings a long tune at an unhurried pace, with room between phrases. It is slow, but not as broad as a largo.",
-   "term_no": 11
+   "term_no": 11,
+   "etym": "Italian ad agio, “at ease.”",
+   "etym_src": "https://en.wiktionary.org/wiki/adagio#Italian"
   },
   "calm/03-bach-largo-bwv1056.mp3": {
    "composer": "Johann Sebastian Bach (1685–1750)",
@@ -177,7 +197,9 @@
    "about": "This is the slow middle movement of the concerto. Bach reused the same tune in a church cantata, where an oboe plays it. Here the harpsichord plays it, with strings behind.",
    "term": "Largo",
    "term_text": "Largo is an Italian word for a very slow, broad tempo. In this movement the harpsichord’s tune moves in long, unhurried notes while the strings play quietly behind it. The word means “broad.”",
-   "term_no": 12
+   "term_no": 12,
+   "etym": "Italian largo, “broad,” from Latin largus.",
+   "etym_src": "https://en.wiktionary.org/wiki/largo#Italian"
   },
   "calm/18-vivaldi-bassoon-larghetto.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -187,7 +209,9 @@
    "about": "Vivaldi wrote nearly forty concertos for the bassoon. This is the slow middle movement of one in A minor. The Modena Chamber Orchestra plays it.",
    "term": "Larghetto",
    "term_text": "Larghetto is a tempo a little quicker than largo. The ending “-etto” means “little,” so it is “a little largo.” In this movement the bassoon’s tune moves slowly but less stretched than a full largo.",
-   "term_no": 13
+   "term_no": 13,
+   "etym": "Italian larghetto, a diminutive of largo: “a little largo.”",
+   "etym_src": "https://en.wiktionary.org/wiki/larghetto#English"
   },
   "calm/19-vivaldi-2mandolins-andante.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -196,8 +220,10 @@
    "year": "Not reliably dated",
    "about": "The mandolin is a small plucked string instrument. This is the slow middle movement of Vivaldi’s concerto for two of them. The Modena Chamber Orchestra plays it.",
    "term": "Andante",
-   "term_text": "Andante is a moderate, walking tempo, from the Italian word for “walking.” It is faster than adagio or largo but still relaxed, like an easy stroll. Tap along with a steady, unhurried beat.",
-   "term_no": 14
+   "term_text": "Andante is a moderate, walking tempo; the Italian word means “going.” It is faster than adagio or largo but still relaxed, like an easy stroll. Tap along with a steady, unhurried beat.",
+   "term_no": 14,
+   "etym": "Italian, the present participle of andare, “to go”: “going.”",
+   "etym_src": "https://en.wiktionary.org/wiki/andante#Italian"
   },
   "lively/28-vivaldi-cello-i.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -207,7 +233,9 @@
    "about": "The cello is usually a supporting voice, but here it is the soloist. This is the opening movement. Stephen Balderston plays, with the Advent Chamber Orchestra.",
    "term": "Allegro",
    "term_text": "Allegro is Italian for “lively” or “cheerful,” and now means fast. This Allegro opens the concerto with quick, springing notes from the cello. It is the usual marking for a fast first movement.",
-   "term_no": 15
+   "term_no": 15,
+   "etym": "Italian allegro, from French allègre, from Latin alacer, “lively, cheerful.”",
+   "etym_src": "https://en.wiktionary.org/wiki/allegro#Italian"
   },
   "lively/12-vivaldi-summer-iii.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -217,7 +245,9 @@
    "about": "This movement is a summer storm. In the sonnet, hail flattens the crops. John Harrison plays the solo violin.",
    "term": "Presto",
    "term_text": "Presto is Italian for “quick” and marks a very fast tempo. Summer’s finale is marked Presto, and the notes rush past in waves like a storm. Try tapping along; it is hard to keep up.",
-   "term_no": 16
+   "term_no": 16,
+   "etym": "Italian presto, “quickly,” from Latin praestō, “at hand.”",
+   "etym_src": "https://en.wiktionary.org/wiki/presto#English"
   },
   "calm/23-vivaldi-autumn-ii-accordion.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -227,7 +257,9 @@
    "about": "This is the same slow movement as the Modena recording, arranged for accordion orchestra. In Vivaldi’s sonnet, the villagers have fallen asleep after the harvest feast. Paul De Bra made the arrangement.",
    "term": "Molto",
    "term_text": "Molto is Italian for “very.” Vivaldi marks this movement “Adagio molto,” meaning “very slow.” The word makes the slow marking slower still.",
-   "term_no": 17
+   "term_no": 17,
+   "etym": "Italian molto, “much, very,” from Latin multus.",
+   "etym_src": "https://en.wiktionary.org/wiki/molto#Italian"
   },
   "lively/22-vivaldi-summer-i.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -237,7 +269,9 @@
    "about": "Vivaldi labels the opening of Summer “languor caused by the heat.” Later the violin imitates the birds in the sonnet. John Harrison plays the violin in a live performance.",
    "term": "Non molto",
    "term_text": "“Non molto” means “not very.” Allegro non molto is “fast, but not very fast.” This movement starts heavy and slow-feeling, like the heat in the sonnet, before it picks up.",
-   "term_no": 18
+   "term_no": 18,
+   "etym": "Italian non, “not,” + molto, “much,” from Latin multus.",
+   "etym_src": "https://en.wiktionary.org/wiki/molto#Italian"
   },
   "lively/36-vivaldi-flute-rv440-i.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -247,7 +281,9 @@
    "about": "Vivaldi wrote many concertos for flute. This is the first movement of one in A minor. Paul De Bra arranged this version for accordion orchestra.",
    "term": "Non troppo",
    "term_text": "“Non troppo” means “not too much.” Allegro non troppo is fast, but held back and not rushed. Here the tune moves briskly and evenly.",
-   "term_no": 19
+   "term_no": 19,
+   "etym": "Italian non, “not,” + troppo, “too much,” a cousin of French trop.",
+   "etym_src": "https://en.wiktionary.org/wiki/troppo#Italian"
   },
   "calm/24-vivaldi-spring-ii-accordion.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -257,7 +293,9 @@
    "about": "In Vivaldi’s sonnet, a goatherd sleeps in a meadow while leaves rustle. His score has a dog barking in the viola part. Paul De Bra arranged this version for accordion orchestra.",
    "term": "Dynamics",
    "term_text": "Dynamics are how loud or soft the music is. This movement stays mostly quiet to suit the sleeping goatherd, and the barking dog in Vivaldi’s violas is meant to stand out against it. Notice how little the volume changes.",
-   "term_no": 20
+   "term_no": 20,
+   "etym": "From French dynamique, from Greek dunamikos, “powerful,” from dunamis, “power.”",
+   "etym_src": "https://en.wiktionary.org/wiki/dynamic#English"
   },
   "lively/30-vivaldi-bassoon-i.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -267,7 +305,9 @@
    "about": "Vivaldi wrote nearly forty concertos for the bassoon. This is the opening movement of one in A minor. The Modena Chamber Orchestra plays it.",
    "term": "Woodwind",
    "term_text": "Woodwinds are instruments played by blowing, traditionally made of wood, such as flute, oboe, clarinet and bassoon. The bassoon is the lowest of the main woodwinds and has a round, reedy sound. Here it is the soloist.",
-   "term_no": 21
+   "term_no": 21,
+   "etym": "English wood + wind.",
+   "etym_src": "https://en.wiktionary.org/wiki/woodwind#English"
   },
   "lively/29-vivaldi-cello-iii.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -277,7 +317,9 @@
    "about": "This is the quick closing movement of the cello concerto. Stephen Balderston plays, with the Advent Chamber Orchestra.",
    "term": "Register",
    "term_text": "Register is the range of high or low notes an instrument plays in. The cello sits in a low register, so its tune sounds deep and warm next to the violins. Listen for the soloist under the orchestra’s violins.",
-   "term_no": 22
+   "term_no": 22,
+   "etym": "From Medieval Latin registrum, “list,” from Latin regerere, “to record.”",
+   "etym_src": "https://en.wiktionary.org/wiki/register#English"
   },
   "calm/21-vivaldi-rv558-andante.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -287,7 +329,9 @@
    "about": "This concerto is written for an unusual mix of instruments: two flutes, two shawms, two violins, two mandolins, two theorbos and cello. A shawm is an old reed instrument, and a theorbo is a large lute. This is the slow movement.",
    "term": "Timbre",
    "term_text": "Timbre is the particular sound of an instrument, which lets you tell a flute from a mandolin on the same note. This concerto mixes many instruments, so many timbres appear together. Try to pick out the plucked sounds from the blown and bowed ones.",
-   "term_no": 23
+   "term_no": 23,
+   "etym": "French timbre, ultimately from Greek tympanon, “drum.”",
+   "etym_src": "https://en.wiktionary.org/wiki/timbre#English"
   },
   "lively/05-brandenburg6-iii.mp3": {
    "composer": "Johann Sebastian Bach (1685–1750)",
@@ -297,7 +341,9 @@
    "about": "Bach wrote this concerto without violins. It uses violas, violas da gamba (older bowed instruments held between the knees) and cello. This is its closing movement.",
    "term": "Scoring",
    "term_text": "Scoring means which instruments the composer chooses to write for. Bach left out the violins here, so the sound is darker and mellower than in his other concertos. Listen for the missing high, bright violin line.",
-   "term_no": 24
+   "term_no": 24,
+   "etym": "Score comes from Old English scoru, “notch, tally,” from Old Norse skor.",
+   "etym_src": "https://en.wiktionary.org/wiki/score#English"
   },
   "lively/09-bach-2violins-iii.mp3": {
    "composer": "Johann Sebastian Bach (1685–1750)",
@@ -307,7 +353,9 @@
    "about": "This is the fast finale. The two soloists trade quick notes. Bach later arranged the concerto for two harpsichords.",
    "term": "Minor key",
    "term_text": "A key is the set of notes a piece is built on. A minor key usually sounds more serious or sorrowful than a major one. This concerto is in D minor, and even this fast finale sounds more intense than playful.",
-   "term_no": 25
+   "term_no": 25,
+   "etym": "Minor is Latin for “lesser.”",
+   "etym_src": "https://en.wiktionary.org/wiki/minor#English"
   },
   "lively/17-handel-hornpipe.mp3": {
    "composer": "George Frideric Handel (1685–1759)",
@@ -317,7 +365,9 @@
    "about": "The Water Music was first played on the River Thames for King George I. This movement uses bold trumpets and horns with the strings. The Marine Chamber Orchestra of the United States Marine Band plays it.",
    "term": "Triple time",
    "term_text": "Triple time means the beat comes in groups of three: one-two-three, one-two-three. The Alla Hornpipe moves in threes, which gives it a stately, swaying step. Count along with the strings and trumpets.",
-   "term_no": 26
+   "term_no": 26,
+   "etym": "Triple comes from Latin triplus, “threefold”; it is the same word as treble.",
+   "etym_src": "https://en.wiktionary.org/wiki/triple#English"
   },
   "calm/20-vivaldi-2oboes-largo.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -327,7 +377,9 @@
    "about": "This is the slow middle movement of Vivaldi’s concerto for two oboes. The two oboes are the soloists. The Modena Chamber Orchestra plays it.",
    "term": "Harmony",
    "term_text": "Harmony is two or more different notes sounding at the same time. Here the two oboes play together, one higher than the other, so their notes blend. One oboe alone would be only a melody.",
-   "term_no": 27
+   "term_no": 27,
+   "etym": "From Greek harmonia, “joint, agreement, concord of sounds,” from harmozō, “to fit together.”",
+   "etym_src": "https://en.wiktionary.org/wiki/harmony#English"
   },
   "lively/06-bwv1052-i.mp3": {
    "composer": "Johann Sebastian Bach (1685–1750)",
@@ -337,7 +389,9 @@
    "about": "Bach wrote his keyboard concertos in Leipzig, for concerts at a coffee house. He wrote this one for harpsichord; here Johannes Volker Schmidt plays it on piano with the Fulda Symphonic Orchestra, conducted by Simon Schindler.",
    "term": "Unison",
    "term_text": "Unison means everyone playing the same notes at the same time. This movement opens with the whole orchestra playing one strong theme in unison. Soon after, the piano starts running on its own.",
-   "term_no": 28
+   "term_no": 28,
+   "etym": "From Medieval Latin ūnisonus, “having the same sound.”",
+   "etym_src": "https://en.wiktionary.org/wiki/unison#English"
   },
   "lively/02-brandenburg3-iii.mp3": {
    "composer": "Johann Sebastian Bach (1685–1750)",
@@ -347,7 +401,9 @@
    "about": "This is the fast closing movement of the concerto for strings alone. It moves in a quick, skipping rhythm. The Advent Chamber Orchestra plays it.",
    "term": "Motif",
    "term_text": "A motif is a very short musical idea, just a few notes, that a composer repeats and varies. In this finale a quick short pattern is passed among the string groups again and again. It is the building block, not the whole tune.",
-   "term_no": 29
+   "term_no": 29,
+   "etym": "From French motif, “main idea or theme”; the same word as motive.",
+   "etym_src": "https://en.wiktionary.org/wiki/motif#English"
   },
   "lively/01-brandenburg3-i.mp3": {
    "composer": "Johann Sebastian Bach (1685–1750)",
@@ -357,7 +413,9 @@
    "about": "Bach presented the six Brandenburg Concertos to Christian Ludwig, Margrave of Brandenburg, in 1721. No. 3 is for strings only: three violins, three violas and three cellos, with a bass line and harpsichord. There is no single soloist.",
    "term": "Imitation",
    "term_text": "Imitation is when one part plays a short idea and another part repeats it a moment later. In this movement one group of strings plays a short figure and another group answers with it. With three groups of three, the idea keeps moving around the orchestra.",
-   "term_no": 30
+   "term_no": 30,
+   "etym": "From Latin imitātiō, through Old French.",
+   "etym_src": "https://en.wiktionary.org/wiki/imitation#English"
   },
   "calm/01-pachelbel-canon.mp3": {
    "composer": "Johann Pachelbel (1653–1706)",
@@ -367,7 +425,9 @@
    "about": "Pachelbel was a German organist and composer. The Canon was written for three violins and a bass part, and Frank Hudson arranged it for string orchestra. Pachelbel taught the older brother of Johann Sebastian Bach.",
    "term": "Canon",
    "term_text": "In a canon, one voice plays a tune and the other voices copy it, each entering a little later. Here the violins enter one after another with the same tune, while the bass repeats one short pattern underneath. It works like the round “Row, Row, Row Your Boat.”",
-   "term_no": 31
+   "term_no": 31,
+   "etym": "From Greek kanōn, “measuring rod, standard.”",
+   "etym_src": "https://en.wiktionary.org/wiki/canon#English"
   },
   "lively/21-vivaldi-spring-iii.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -387,7 +447,9 @@
    "about": "Vivaldi paired each concerto with a sonnet. In Spring’s poem, birds greet the season, streams flow, a storm rolls in, and the birds sing again. John Harrison plays the violin in a live performance.",
    "term": "Trill",
    "term_text": "A trill is a rapid back-and-forth between two neighboring notes that makes a fluttering sound. After the opening tune, the violins play trills to imitate birdsong. Listen for the quick chirping.",
-   "term_no": 33
+   "term_no": 33,
+   "etym": "From Italian trillo, trillare.",
+   "etym_src": "https://en.wiktionary.org/wiki/trill#English"
   },
   "lively/14-vivaldi-autumn-iii.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -397,7 +459,9 @@
    "about": "The sonnet describes a hunt, with horns, dogs and a fleeing animal. This is the closing movement. Vivaldi spent much of his career teaching music at a Venetian home for orphaned girls.",
    "term": "Tone painting",
    "term_text": "Tone painting is music that imitates real sounds or actions. In Autumn’s finale the strings suggest hunting horns, the chase, and the animal running away. The sonnet tells you what to picture.",
-   "term_no": 34
+   "term_no": 34,
+   "etym": "Tone comes from Greek tonos, “strain, tension, pitch,” from teinō, “to stretch.”",
+   "etym_src": "https://en.wiktionary.org/wiki/tone#English"
   },
   "calm/16-vivaldi-autumn-ii.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -407,7 +471,9 @@
    "about": "The Four Seasons are the first four of twelve concertos in Vivaldi’s Op. 8. Each comes with a sonnet. In Autumn’s slow movement, the villagers fall asleep after the harvest festival.",
    "term": "Programme music",
    "term_text": "Programme music is instrumental music that tells a story or paints a scene. Vivaldi attached a poem to each Four Seasons concerto. In this movement the poem says the villagers fall asleep, and the music goes quiet and still to match.",
-   "term_no": 35
+   "term_no": 35,
+   "etym": "Programme comes from Greek programma, “a written public notice,” from pro, “before,” + graphō, “to write.”",
+   "etym_src": "https://en.wiktionary.org/wiki/program#English"
   },
   "calm/13-ravel-pavane.mp3": {
    "composer": "Maurice Ravel (1875–1937)",
@@ -417,7 +483,9 @@
    "about": "Ravel wrote it for solo piano while studying with Gabriel Fauré. He said it was not a lament for a real child but an image of a little princess at a Spanish court. This recording is the original piano version.",
    "term": "Pavane",
    "term_text": "A pavane is a slow, stately dance from the 1500s and 1600s, danced as a walking procession. Ravel’s piece is not for dancing, but it keeps that slow, steady walking pace. Listen for the even steps beneath the melody.",
-   "term_no": 36
+   "term_no": 36,
+   "etym": "From Italian padovana, “from Padua,” through French.",
+   "etym_src": "https://en.wiktionary.org/wiki/pavane#English"
   },
   "lively/04-brandenburg5-iii.mp3": {
    "composer": "Johann Sebastian Bach (1685–1750)",
@@ -427,7 +495,9 @@
    "about": "This is the lively finale, in the spirit of a gigue. The flute, violin and harpsichord all take part. The Advent Chamber Orchestra plays it.",
    "term": "Gigue",
    "term_text": "A gigue is a lively dance that grew from the jig of the British Isles, usually quick and skipping. This finale has that quick, light, bouncing character. Each soloist takes a turn with the same bright tune.",
-   "term_no": 37
+   "term_no": 37,
+   "etym": "French gigue, the same word as English jig; Old French gigue meant “a fiddle, a kind of dance.”",
+   "etym_src": "https://en.wiktionary.org/wiki/gigue#French"
   },
   "calm/04-corelli-pastorale.mp3": {
    "composer": "Arcangelo Corelli (1653–1713)",
@@ -437,7 +507,9 @@
    "about": "Corelli’s twelve concerti grossi were published in 1714, the year after he died. The score of this one is inscribed “made for the night of Christmas.” This is its closing movement.",
    "term": "Pastorale",
    "term_text": "A pastorale is music that suggests shepherds and country life, usually calm and gently rocking. This closing movement has a swaying rhythm like a cradle. It fits the Christmas inscription on the score.",
-   "term_no": 38
+   "term_no": 38,
+   "etym": "Italian pastorale, from Latin pāstōrālis, from pāstor, “shepherd.”",
+   "etym_src": "https://en.wiktionary.org/wiki/pastoralis#Latin"
   },
   "calm/15-saint-saens-swan.mp3": {
    "composer": "Camille Saint-Saëns (1835–1921)",
@@ -447,7 +519,9 @@
    "about": "Saint-Saëns wrote the suite for private performance and would not allow it to be played in public in his lifetime. The Swan was the only movement he allowed to be published. It is a cello melody with piano.",
    "term": "Suite",
    "term_text": "A suite is a set of short pieces played one after another. The Swan is one of fourteen in The Carnival of the Animals, each portraying an animal. Taken alone, it works as a short cello piece with piano.",
-   "term_no": 39
+   "term_no": 39,
+   "etym": "French suite, from Latin sequī, “to follow.”",
+   "etym_src": "https://en.wiktionary.org/wiki/suite#French"
   },
   "calm/10-handel-pifa.mp3": {
    "composer": "George Frideric Handel (1685–1759)",
@@ -457,7 +531,9 @@
    "about": "Handel composed Messiah in 1741. The Pastoral Symphony is a short, calm piece for strings. In the story it comes just before the shepherds in the fields are visited by angels.",
    "term": "Oratorio",
    "term_text": "An oratorio is a long work for singers, soloists and orchestra that tells a story. It is performed in concert, without scenery or acting. Messiah is one, and this piece is a purely instrumental pause inside it.",
-   "term_no": 40
+   "term_no": 40,
+   "etym": "Italian oratorio, from Latin ōrātōrius; the same word as oratory.",
+   "etym_src": "https://en.wiktionary.org/wiki/oratorio#English"
   },
   "calm/09-bach-christmas-oratorio-sinfonia.mp3": {
    "composer": "Johann Sebastian Bach (1685–1750)",
@@ -467,7 +543,9 @@
    "about": "Bach wrote the Christmas Oratorio for the Christmas season of 1734, in six parts. Part Two opens with this instrumental piece, which sets the scene of the shepherds in the fields. It comes before any singing.",
    "term": "Sinfonia",
    "term_text": "In Bach’s time, a sinfonia could be a short instrumental piece placed inside a larger work with singers. This one opens Part Two of the Christmas Oratorio and is played by instruments alone. It sets the scene before the voices enter.",
-   "term_no": 41
+   "term_no": 41,
+   "etym": "Italian sinfonia, from Greek sumphōnia; the same word as symphony.",
+   "etym_src": "https://en.wiktionary.org/wiki/sinfonia#English"
   },
   "lively/35-vivaldi-mandolin-rv425.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -477,7 +555,9 @@
    "about": "This recording is the whole concerto: fast, slow, fast. The mandolin plays over a small group of strings. The Milan Baroque Soloists play it.",
    "term": "Baroque",
    "term_text": "Baroque is the period of European music from about 1600 to 1750. Vivaldi, Bach, Handel and Corelli all wrote in it. Typical sounds are a steady bass line under busy, decorated melodies, as you hear here.",
-   "term_no": 42
+   "term_no": 42,
+   "etym": "From French baroque, which first meant a pearl of irregular shape, from Portuguese barroco.",
+   "etym_src": "https://en.wiktionary.org/wiki/baroque#English"
   },
   "lively/23-vivaldi-l-estro-8-i.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -487,7 +567,9 @@
    "about": "L’estro armonico is a set of twelve concertos published in Amsterdam in 1711. Bach arranged this one for organ. Jacques Israelievitch and Roxana Pavel Goldstein play the violins, with the Advent Chamber Orchestra.",
    "term": "Opus",
    "term_text": "Opus is Latin for “work.” An opus number labels a composer’s published works in order. L’estro armonico is Vivaldi’s Opus 3, a set of twelve concertos, and this is the eighth.",
-   "term_no": 43
+   "term_no": 43,
+   "etym": "Latin opus, “work.”",
+   "etym_src": "https://en.wiktionary.org/wiki/opus#Latin"
   },
   "calm/06-vivaldi-rv93-largo.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -497,7 +579,9 @@
    "about": "Vivaldi wrote this concerto for lute, two violins and bass. The Largo is its slow middle movement. This recording is an arrangement for accordion orchestra by Paul De Bra.",
    "term": "Arrangement",
    "term_text": "An arrangement is a piece rewritten for different instruments than the composer chose. Vivaldi wrote this Largo for a plucked lute; here an accordion orchestra plays it, so the tune is carried by accordions. The notes stay Vivaldi’s, and only the instruments change.",
-   "term_no": 44
+   "term_no": 44,
+   "etym": "From French; to arrange comes from Old French arengier, “to put in a row.”",
+   "etym_src": "https://en.wiktionary.org/wiki/arrange#English"
   },
   "lively/10-bach-preludio-bwv1006.mp3": {
    "composer": "Johann Sebastian Bach (1685–1750)",
@@ -507,7 +591,9 @@
    "about": "Bach wrote the partita for solo violin. He later used this music as the opening sinfonia of his Cantata 29. Here it is played on guitar by Gordon Rowland.",
    "term": "Transcription",
    "term_text": "A transcription is a piece moved to a different instrument with the notes kept close to the original. Bach wrote this for a violin; here a guitar plays it, plucking the fast repeating notes that a violin would bow. The music is Bach’s, and only the instrument changes.",
-   "term_no": 45
+   "term_no": 45,
+   "etym": "From Latin trānscrībere, “to transcribe.”",
+   "etym_src": "https://en.wiktionary.org/wiki/transcription#English"
   },
   "lively/34-vivaldi-rv558-i.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -517,7 +603,9 @@
    "about": "This concerto is written for a mix of instruments: two flutes, two shawms, two violins, two mandolins, two theorbos and cello. This is its fast opening movement. The Modena Chamber Orchestra plays it.",
    "term": "Chamber orchestra",
    "term_text": "A chamber orchestra is a small orchestra, once suited to a room rather than a large hall. This recording is by the Modena Chamber Orchestra. The small size lets you hear individual instruments.",
-   "term_no": 46
+   "term_no": 46,
+   "etym": "Chamber comes from Latin camera, from Greek kamara, “vaulted chamber.”",
+   "etym_src": "https://en.wiktionary.org/wiki/chamber#English"
   },
   "calm/12-mozart-clarinet-adagio.mp3": {
    "composer": "Wolfgang Amadeus Mozart (1756–1791)",
@@ -527,7 +615,9 @@
    "about": "Mozart completed this concerto a few weeks before his death, for the clarinetist Anton Stadler. This is its slow movement. William McColl plays a basset clarinet, a clarinet with extra low notes.",
    "term": "Concerto",
    "term_text": "A concerto is a piece where a solo instrument plays with an orchestra. Here the clarinet is the soloist and sings the main tune while the orchestra stays quiet behind it. Most concertos have three movements, fast, slow and fast, and this is the slow one.",
-   "term_no": 47
+   "term_no": 47,
+   "etym": "Italian concerto, from concertare; the same word as concert.",
+   "etym_src": "https://en.wiktionary.org/wiki/concerto#English"
   },
   "lively/24-vivaldi-l-estro-8-iii.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -537,7 +627,9 @@
    "about": "This is the fast finale of the concerto for two violins. The two soloists play together. Jacques Israelievitch and Roxana Pavel Goldstein play with the Advent Chamber Orchestra.",
    "term": "Tutti",
    "term_text": "Tutti is Italian for “all.” It marks passages where the full orchestra plays, as opposed to the soloists alone. In this finale the whole orchestra plays the main tune, then the two violins take over until the orchestra returns.",
-   "term_no": 48
+   "term_no": 48,
+   "etym": "Italian tutti, “all,” from Latin tōtus.",
+   "etym_src": "https://en.wiktionary.org/wiki/tutti#English"
   },
   "lively/33-vivaldi-2mandolins-iii.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -547,7 +639,9 @@
    "about": "This is the quick closing movement of the concerto for two mandolins. The Modena Chamber Orchestra plays it.",
    "term": "Double concerto",
    "term_text": "A double concerto has two soloists instead of one. Here both soloists are mandolins, playing together against the orchestra. Listen for two plucked solo lines at the same time.",
-   "term_no": 49
+   "term_no": 49,
+   "etym": "Double comes from Latin duplus, “twofold.”",
+   "etym_src": "https://en.wiktionary.org/wiki/double#English"
   },
   "lively/26-vivaldi-l-estro-10-i.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -557,7 +651,9 @@
    "about": "Bach later arranged this concerto for four harpsichords. Four solo violins play at once against the orchestra. The Modena Chamber Orchestra plays it.",
    "term": "Quartet",
    "term_text": "A quartet is a group of four performers. This concerto has four solo violins, so four soloists play together against the orchestra. Listen for four lines at once, overlapping.",
-   "term_no": 50
+   "term_no": 50,
+   "etym": "From French quartette, from Italian quartetto.",
+   "etym_src": "https://en.wiktionary.org/wiki/quartet#English"
   },
   "lively/19-handel-cg-hwv316.mp3": {
    "composer": "George Frideric Handel (1685–1759)",
@@ -567,7 +663,9 @@
    "about": "The six concertos of Op. 3 were assembled and published in London by John Walsh in 1734, from works Handel had already written. This recording is the complete concerto. The London Baroque Orchestra is directed by Alexander Hamilton.",
    "term": "Concerto grosso",
    "term_text": "A concerto grosso is a concerto for a small group of soloists and a larger orchestra. The small group and the full orchestra trade passages, a little like a question and its answer. Listen for the group of soloists alternating with the full sound.",
-   "term_no": 51
+   "term_no": 51,
+   "etym": "Italian, “big concerto”; grosso comes from Latin grossus.",
+   "etym_src": "https://en.wiktionary.org/wiki/grosso#Italian"
   },
   "lively/20-corelli-op6-4.mp3": {
    "composer": "Arcangelo Corelli (1653–1713)",
@@ -577,7 +675,9 @@
    "about": "Corelli’s twelve concerti grossi were probably written in the 1680s but not published until 1714. This opens with a slow Adagio, then a quick Allegro. The Advent Chamber Orchestra plays it.",
    "term": "Concertino",
    "term_text": "In a concerto grosso, the concertino is the small group of soloists. In Corelli’s Op. 6 it is two violins and a cello. Listen for those three trading phrases with the rest of the strings.",
-   "term_no": 52
+   "term_no": 52,
+   "etym": "Italian concertino, concerto + -ino, “little”: “a little concerto.”",
+   "etym_src": "https://en.wiktionary.org/wiki/concertino#English"
   },
   "lively/07-bwv1052-iii.mp3": {
    "composer": "Johann Sebastian Bach (1685–1750)",
@@ -587,7 +687,9 @@
    "about": "This is the fast finale. The piano plays quick, flowing notes while the orchestra pushes it along. It was recorded in the Prince’s Hall of the City Palace in Fulda, Germany.",
    "term": "Ritornello",
    "term_text": "A ritornello is a tune the orchestra plays at the start and brings back between the soloist’s sections. Italian for “little return.” In this finale, listen for the moment the full orchestra comes back with the same theme after the piano’s passages.",
-   "term_no": 53
+   "term_no": 53,
+   "etym": "Italian ritornello, “little return,” from ritorno, “return.”",
+   "etym_src": "https://en.wiktionary.org/wiki/ritornello#English"
   },
   "lively/08-bach-2violins-i.mp3": {
    "composer": "Johann Sebastian Bach (1685–1750)",
@@ -597,7 +699,9 @@
    "about": "This work is also called the Double Violin Concerto. The two soloists play as equals. David Parry and Roxana Pavel Goldstein are the soloists, with the Advent Chamber Orchestra.",
    "term": "Counterpoint",
    "term_text": "Counterpoint is two or more melodies played at once, each interesting on its own. Here the two solo violins play different lines that weave around each other. Follow one violin for a while, then switch to the other.",
-   "term_no": 54
+   "term_no": 54,
+   "etym": "From Medieval Latin contrāpūnctum, counter- + point.",
+   "etym_src": "https://en.wiktionary.org/wiki/counterpoint#English"
   },
   "lively/25-vivaldi-l-estro-11-i.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -607,7 +711,9 @@
    "about": "Bach liked this concerto enough to arrange it for organ. This first movement has fast, slow, then fast sections. David Parry and Roxana Pavel Goldstein play the violins, with the Advent Chamber Orchestra.",
    "term": "Spiccato",
    "term_text": "Spiccato is a bowing technique where the bow bounces lightly off the string, giving short, crisp notes. The middle section of this movement is marked “adagio e spiccato,” meaning slow and bouncing. Compare it with the smooth, held notes of the slow pieces.",
-   "term_no": 55
+   "term_no": 55,
+   "etym": "Italian, past participle of spiccare, “to detach, separate.”",
+   "etym_src": "https://en.wiktionary.org/wiki/spiccato#English"
   },
   "lively/16-vivaldi-winter-iii.mp3": {
    "composer": "Antonio Vivaldi (1678–1741)",
@@ -617,7 +723,9 @@
    "about": "In the sonnet, a person walks carefully on ice, slips, and then the winter winds clash. This is the closing movement. John Harrison plays the violin.",
    "term": "Virtuoso",
    "term_text": "A virtuoso is a performer with outstanding technical skill. Winter’s finale gives the solo violin quick runs that only a very skilled player can keep clean. Vivaldi himself was known as an exceptional violinist.",
-   "term_no": 56
+   "term_no": 56,
+   "etym": "Italian virtuoso, from Latin virtus, “excellence”; the same word as virtuous.",
+   "etym_src": "https://en.wiktionary.org/wiki/virtuoso#English"
   },
   "lively/03-brandenburg5-i.mp3": {
    "composer": "Johann Sebastian Bach (1685–1750)",
@@ -627,7 +735,9 @@
    "about": "This concerto has three soloists: flute, violin and harpsichord. The harpsichord usually supports the others, but here it also takes a long solo. Roxana Pavel Goldstein plays violin, Constance Schoepflin flute and Matthew Ganong harpsichord.",
    "term": "Cadenza",
    "term_text": "A cadenza is a passage where the soloist plays alone, without the orchestra, usually fast and showy. Near the end of this movement the orchestra stops and the harpsichord plays a long solo. Listen for the moment everyone else drops out.",
-   "term_no": 57
+   "term_no": 57,
+   "etym": "Italian cadenza, from Latin cadere, “to fall”; the same word as cadence.",
+   "etym_src": "https://en.wiktionary.org/wiki/cadenza#English"
   }
  }
 }

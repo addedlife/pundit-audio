@@ -74,7 +74,7 @@ button.ctrl:active{opacity:.75;transform:scale(.98)}
     <div class="sleep-h" style="margin-top:8px"><span class="sleep-t">Host intros &amp; outros</span><button class="sw on" id="hostSw" aria-pressed="true">On</button></div>
     <div class="seg" id="sleepSeg"></div>
     <div class="sleep-now" id="sleepNow"></div>
-    <div class="sleep-lnk" style="margin-top:10px;font-size:12px;font-family:-apple-system,sans-serif"><a href="../music/index.html" style="color:var(--ink);text-decoration:none;border-bottom:1px solid var(--mut)">Music page: every piece, and one term each teaches</a></div><!-- SBR_MUSIC_LINK_V1 -->
+    <div class="sleep-lnk" style="margin-top:10px;font-size:12px;font-family:-apple-system,sans-serif"><a href="#music" style="color:var(--ink);text-decoration:none;border-bottom:1px solid var(--mut)">Music page: every piece, and one term each teaches</a></div><!-- SBR_MUSIC_LINK_V1 -->
     <div class="sleep-btns"><button id="sleepPrev" disabled>&#9664;&#9664; Prev piece</button><button id="sleepNext" disabled>Next piece &#9654;&#9654;</button><button id="sleepGo">Play now</button></div>
   </div>
   <div class="list" id="list"></div>
@@ -675,6 +675,7 @@ function loadSleepManifest(){
     .catch(() => null);
 }
 function renderSleepUI(){
+  if (window.sbrMusicCurrent) window.sbrMusicCurrent();
   sleepSw.textContent = sleepOn ? 'On' : 'Off';
   sleepSw.className = 'sw' + (sleepOn ? ' on' : '');
   sleepSw.setAttribute('aria-pressed', sleepOn ? 'true' : 'false');
@@ -703,6 +704,7 @@ function renderSleepUI(){
   if (phase === 'sleep') {
     const t = sleepPos >= 0 ? sleepTracks()[sleepOrder[sleepPos]] : null;
     sleepNow.innerHTML = t ? ((sleepPart === 'intro' || sleepPart === 'outro') ? 'Host: ' : '') + '<b>' + t.title + '</b><br>' + t.performer + ' · ' + (sleepPos + 1) + ' of ' + sleepOrder.length + ' · shuffled' : 'Settling in…';
+    if (t) sleepNow.innerHTML += ' · <a href="#music/' + t.file.replace('/', '-').replace('.mp3', '') + '" style="color:var(--ink);text-decoration:none;border-bottom:1px solid var(--mut)">About this piece</a>';
   } else if (phase === 'sleep-done') {
     sleepNow.textContent = sleepOn ? 'The music has finished. Good night.' : 'Sleep music is off.';
   } else if (!sleepMan) {
@@ -839,4 +841,31 @@ if (liveClock) {
   setInterval(() => { if (!playing && phase === 'intro-clock') prewarmIntro(); }, 15000);
 }
 load(idx, wantAuto);
+
+/* SBR_MUSIC_OVERLAY_V1: the Music lesson page as an in-page overlay (#music/<track-id>), so the audio never stops. */
+(function(){
+  const MUSIC_BASE = (location.protocol === 'file:') ? 'https://addedlife.github.io/pundit-audio/music/' : '../music/';
+  const ov = document.createElement('div'); ov.id = 'musicOverlay'; ov.hidden = true;
+  ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'SBR Music');
+  ov.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:50;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--bg)';
+  document.body.appendChild(ov);
+  let mounted = null, pushed = false;
+  function curFile(){ try { return (phase === 'sleep' && sleepPos >= 0 && sleepOrder.length) ? sleepTracks()[sleepOrder[sleepPos]].file : null; } catch (e) { return null; } }
+  function loadLib(){ if (window.SBRMusic) return Promise.resolve(); return new Promise((res, rej) => { const s = document.createElement('script'); s.src = MUSIC_BASE + 'music-panel.js'; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
+  function close(){ if (pushed) { pushed = false; history.back(); } else { history.replaceState(null, '', location.pathname + location.search); route(); } }
+  function route(){
+    const h = location.hash || '';
+    if (h.indexOf('#music') === 0) {
+      ov.hidden = false; document.documentElement.style.overflow = 'hidden';
+      const id = h.split('/')[1] || '';
+      loadLib().then(() => { if (!mounted) mounted = SBRMusic.mount(ov, { embedded: true, base: SLEEP_BASE, info: MUSIC_BASE + 'music-info.json', onClose: close }); return mounted; })
+        .then(() => { SBRMusic.setCurrent(curFile()); SBRMusic.show(id ? decodeURIComponent(id) : ''); })
+        .catch(() => { ov.textContent = 'The music page could not be loaded.'; });
+    } else { ov.hidden = true; document.documentElement.style.overflow = ''; pushed = false; }
+  }
+  window.addEventListener('hashchange', route);
+  document.addEventListener('click', e => { const a = e.target.closest ? e.target.closest('a[href^="#music"]') : null; if (a && (location.hash || '').indexOf('#music') !== 0) pushed = true; }, true);
+  window.sbrMusicCurrent = () => { if (window.SBRMusic && mounted) SBRMusic.setCurrent(curFile()); };
+  route();
+})();
 </script></body></html>
