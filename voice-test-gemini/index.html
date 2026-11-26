@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>SBR News — Gemini TTS comparison</title>
+<style>
+body{font-family:Georgia,serif;background:#EDECE8;color:#231F20;max-width:760px;margin:20px auto;padding:0 16px 60px;line-height:1.45}
+h1{font-size:25px;font-weight:normal;margin:0 0 6px} h2{font-size:18px;margin:0 0 8px}
+.c{background:#F4F3EF;border:1px solid #d5d1c8;border-radius:12px;padding:14px 16px;margin:14px 0}
+.p{margin:10px 0 2px} .p b{display:block;font-size:15px} .n{color:#5c5755;font-size:13.5px;display:block;margin-top:2px}
+audio{width:100%;margin-top:3px}
+.b{font-size:11px;letter-spacing:.04em;padding:2px 7px;border-radius:9px;background:#e4e1d6;vertical-align:middle;font-weight:normal;font-family:Arial,sans-serif}
+.q{background:#fff;border-left:3px solid #231F20;padding:8px 12px;font-size:14px;margin:8px 0}
+a{color:#1d4e89} ul{margin:8px 0 0 18px;padding:0} li{margin:0 0 6px}
+</style>
+</head>
+<body>
+<h1>Gemini TTS comparison</h1>
+<p>Free-tier only: I used the Gemini API model <code>gemini-3.8-flash-tts</code>, which the official pricing page lists as free of charge on the free tier. I did not use <code>gemini-2.5-pro-preview-tts</code>, because that same page marks its free tier as “Not available.” I did not enable billing. Every Gemini clip is the same passage, at default model settings, then saved as 64 kbps mono at 24 kHz and given a flat gain to about −21.7 LUFS (the encoded files landed around −22.1 LUFS). <b>I cannot hear audio, so I am not ranking these voices. Your ears decide.</b></p>
+<p class="n">News style prompt: “Read in a calm, warm, measured British BBC Radio 4 newsreader voice.” Intro style prompt: “a warm late-night British classical radio host.” The requested studio names Charon, Orus, Iapetus, Algieba, Rasalgethi, Sadaltager and Schedar are all listed by the API as General American. I used four actual British male voices from the Extended Voice Library, plus Charon as the one requested studio voice.</p>
+<div class="q"><b>News passage</b> (today’s morning top story, after spoken_text()): Iran’s Guards claim two more tankers hit mines off Oman. Iran’s Revolutionary Guards said Thursday that two tankers exploded and caught fire after hitting sea mines north of Oman’s Khasab port while trying to cross the Strait of Hormuz by an unauthorized route, according to a statement carried by the semi-official Tasnim news agency, Reuters reported. The Guards said one was a supertanker carrying more than two million barrels of crude. The claim could not be independently verified. Separately, the U.K. Maritime Trade Operations agency reported an explosion from an unknown projectile near a tanker about fifty nautical miles west of Dubai. Guards spokesman Hossein Mohebbi said the force was using heavy firepower to keep the strait closed to pressure the U S economy, state media said.</div>
+<div class="q"><b>Classical host intro</b> (Pachelbel): Next... from Johann Pachelbel, the Canon in D major, in an arrangement by Frank Hudson. Pachelbel was a German organist and composer of the seventeenth century, and he taught Johann Christoph Bach, the elder brother of Johann Sebastian. Here is the Canon, played by the Strolling Strings of the United States Air Force Band.</div>
+<section class="c">
+<h2>Reference — today’s chosen voices (Kokoro)</h2>
+<p class="n">These are the same two passages, rendered with the voices now in the live engine, then level-matched to about −21.7 LUFS so they sit beside the Gemini clips fairly. George is the news voice; Fable is the classical-host voice.</p>
+<div class="p"><b>News — Kokoro bm_george</b><span class=n>About 50 seconds, 64 kbps</span><audio controls preload="none" src="audio/kokoro-bm_george-news.mp3"></audio></div>
+<div class="p"><b>Classical intro — Kokoro bm_fable</b><span class=n>About 19 seconds, 64 kbps</span><audio controls preload="none" src="audio/kokoro-bm_fable-intro.mp3"></audio></div>
+</section>
+<section class="c">
+<h2>Storyteller 4 <span class="b">gemini-3.8-flash-tts</span></h2>
+<p class="n">British (Bristol). Extended Voice Library. API description: 56-year-old nature-documentary narrator; deep, velvety, unhurried; low pitch.</p>
+<div class="p"><b>News — Storyteller 4</b><span class=n>About -22.1 LUFS after a flat gain of -2.3 dB; 54 seconds</span><audio controls preload="none" src="audio/en-gb-storyteller-4-news.mp3"></audio></div>
+<div class="p"><b>Classical intro — Storyteller 4</b><span class=n>About -22.2 LUFS after a flat gain of 1.6 dB; 26 seconds</span><audio controls preload="none" src="audio/en-gb-storyteller-4-intro.mp3"></audio></div>
+</section><section class="c">
+<h2>Podcaster 1 <span class="b">gemini-3.8-flash-tts</span></h2>
+<p class="n">British (Winchester). Extended Voice Library. API description: 31-year-old radio host; intimate talk-show delivery; low pitch.</p>
+<div class="p"><b>News — Podcaster 1</b><span class=n>About -22.2 LUFS after a flat gain of -2.4 dB; 50 seconds</span><audio controls preload="none" src="audio/en-gb-podcaster-1-news.mp3"></audio></div>
+<div class="p"><b>Classical intro — Podcaster 1</b><span class=n>About -22.2 LUFS after a flat gain of -1.6 dB; 24 seconds</span><audio controls preload="none" src="audio/en-gb-podcaster-1-intro.mp3"></audio></div>
+</section><section class="c">
+<h2>Advisor 8 <span class="b">gemini-3.8-flash-tts</span></h2>
+<p class="n">British (Winchester). Extended Voice Library. API description: 42-year-old doctor; crisp, eager; low pitch.</p>
+<div class="p"><b>News — Advisor 8</b><span class=n>About -22.1 LUFS after a flat gain of -3.7 dB; 50 seconds</span><audio controls preload="none" src="audio/en-gb-advisor-8-news.mp3"></audio></div>
+<div class="p"><b>Classical intro — Advisor 8</b><span class=n>About -22.2 LUFS after a flat gain of 0.8 dB; 25 seconds</span><audio controls preload="none" src="audio/en-gb-advisor-8-intro.mp3"></audio></div>
+</section><section class="c">
+<h2>Tutor 8 <span class="b">gemini-3.8-flash-tts</span></h2>
+<p class="n">British (Winchester). Extended Voice Library. API description: 49-year-old librarian; relaxed; low pitch.</p>
+<div class="p"><b>News — Tutor 8</b><span class=n>About -22.1 LUFS after a flat gain of 0.9 dB; 56 seconds</span><audio controls preload="none" src="audio/en-gb-tutor-8-news.mp3"></audio></div>
+<div class="p"><b>Classical intro — Tutor 8</b><span class=n>About -22.1 LUFS after a flat gain of 1.7 dB; 26 seconds</span><audio controls preload="none" src="audio/en-gb-tutor-8-intro.mp3"></audio></div>
+</section><section class="c">
+<h2>Charon <span class="b">gemini-3.8-flash-tts</span></h2>
+<p class="n">Studio prebuilt voice. The API lists this as General American, News &amp; Podcast Host: informative, steady, low pitch. Included because it was requested. The style prompt asked for BBC delivery; the accent is not documented as British.</p>
+<div class="p"><b>News — Charon</b><span class=n>About -22.2 LUFS after a flat gain of -3.7 dB; 57 seconds</span><audio controls preload="none" src="audio/Charon-news.mp3"></audio></div>
+<div class="p"><b>Classical intro — Charon</b><span class=n>About -22.1 LUFS after a flat gain of -1.2 dB; 25 seconds</span><audio controls preload="none" src="audio/Charon-intro.mp3"></audio></div>
+</section>
+<section class="c">
+<h2>Free-tier limits and daily use</h2>
+<p>Official sources, checked today:</p>
+<ul>
+<li><a href="https://ai.google.dev/gemini-api/docs/pricing">Pricing</a> — For <code>gemini-3.8-flash-tts</code>, input and output on the free tier are “Free of charge.” Audio is billed on the paid tier at 25 tokens per second of audio. The free-tier column also says content is “Used to improve our products.”</li>
+<li><a href="https://ai.google.dev/gemini-api/docs/rate-limits">Rate limits</a> — Limits are requests per minute (RPM), tokens per minute (TPM), and requests per day (RPD), applied per project. RPD resets at midnight Pacific time. The official page does <b>not</b> publish the numeric free-tier RPM/TPM/RPD for this TTS model; it says to view your active limits in Google AI Studio. Specified limits “are not guaranteed and actual capacity may vary.”</li>
+<li><a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts">Model page</a> — Input limit 8,192 tokens; output limit 16,384 tokens. At 25 audio tokens per second, that is about 10.9 minutes of audio in one request. I confirmed the 25 tokens/second figure on these samples (for example, Charon’s news clip was 1,435 output tokens and 57.4 seconds).</li>
+<li><a href="https://ai.google.dev/gemini-api/docs/terms">Gemini API Additional Terms</a> (effective March 23, 2026) — On unpaid services, including unpaid Gemini API quota, Google uses the content you submit and the generated responses “to provide, improve, and develop Google products and services and machine learning technologies.” Human reviewers may read, annotate, and process API input and output after it is disconnected from the account and key. The terms say: do not submit sensitive, confidential, or personal information to the unpaid services. (If the account were in the EEA, Switzerland, or the UK, a different “Paid Services” data section would apply even when the quota is free; this key’s project is being used as a US free-tier key.)</li>
+</ul>
+<p>What that means for about four briefs a day: a 12-minute brief (today’s morning test was 12.3 minutes) is longer than the 10.9-minute output cap, so it would need about two requests, not 15–20, if we send long chunks. Four briefs would be about eight requests a day. The music intros can stay pre-recorded, so they would not use daily quota. I cannot officially say that eight requests fits, because Google does not publish the free-tier RPD for this model on the rate-limits page. Unofficial forum posts from November 2026 (not Google documentation) report a free-tier cap of 3 RPM, 10,000 TPM, and <b>10 requests per day</b> for Gemini 3.8 Flash TTS. If that figure is right, eight requests a day would only just fit, with almost no room for a retry, and 15–20 calls per brief would not fit at all. This comparison itself used 10 successful requests in one session and did not receive a quota error, which is consistent with a daily cap of at least 10, but is not proof of the official number. Please check the project’s live limits in AI Studio before relying on this for daily briefs.</p>
+<p class="n">Bottom line: daily use on the free tier is only feasible if each brief is sent in one or two long requests and the project’s actual RPD is at least about 8–10. It is not feasible if the official cap is 10 RPD and we also need retries, or if the brief has to be split into many short calls. I have not switched the live engine to Gemini.</p>
+</section>
+</body>
+</html>
