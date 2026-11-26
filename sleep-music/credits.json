@@ -45,17 +45,6 @@
  },
  {
   "list": "calm",
-  "title": "Vivaldi — Winter, Largo",
-  "performer": "The Modena Chamber Orchestra (via Musopen)",
-  "file": "calm/05-vivaldi-winter-largo.mp3",
-  "source": "https://commons.wikimedia.org/wiki/File:The_Modena_Chamber_Orchestra_-_Vivaldi's_Winter,_RV_297_-_II._Largo.ogg",
-  "license": "Public domain mark (owner-released)",
-  "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
-  "credit": "The Modena Chamber Orchestra / Musopen",
-  "duration": 166.9
- },
- {
-  "list": "calm",
   "title": "Vivaldi — Largo, Concerto in D, RV 93",
   "performer": "Paul De Bra, accordion orchestra",
   "file": "calm/06-vivaldi-rv93-largo.mp3",
@@ -130,17 +119,6 @@
   "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
   "credit": "Pandora Music / Thérèse Dussaut",
   "duration": 311.3
- },
- {
-  "list": "calm",
-  "title": "Massenet — Méditation, Thaïs",
-  "performer": "Bomsori Kim, violin; Pallavi Mahidhara, piano",
-  "file": "calm/14-massenet-meditation.mp3",
-  "source": "https://commons.wikimedia.org/wiki/File:Meditation_from_Thais_-_Bomsori_Kim.opus",
-  "license": "CC BY 3.0",
-  "license_url": "https://creativecommons.org/licenses/by/3.0/",
-  "credit": "Premiere Performances of Hong Kong",
-  "duration": 289.2
  },
  {
   "list": "calm",
