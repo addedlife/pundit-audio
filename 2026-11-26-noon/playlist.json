@@ -1,0 +1,187 @@
+{
+  "brand": "SBR News",
+  "date": "2026-11-26",
+  "date_display": "Thursday, November 26, 2026",
+  "slot": "noon",
+  "label": "Noon Brief",
+  "voice": "Kokoro bm_george (fallback: en-GB-RyanNeural)",
+  "arad_delivery": "off",
+  "total_duration": 539.41,
+  "tracks": [
+    {
+      "num": 1,
+      "id": "intro",
+      "section": "SBR News",
+      "title": "This ... is SBR News (Noon Brief)",
+      "file": "01-intro.mp3",
+      "duration": 5.93,
+      "text": "This ... is SBR News. Your Noon Brief for 2026-11-26.",
+      "clock_intro": "after"
+    },
+    {
+      "num": 2,
+      "id": "story-01",
+      "section": "Top Stories",
+      "title": "Iranian drone attack on Kuwait kills two Italian technicians",
+      "file": "02-story-01.mp3",
+      "duration": 46.32,
+      "text": "Two Italian technicians employed by Rheinmetall Italia were killed Thursday in an Iranian drone attack on Kuwait, Italy’s Foreign Ministry said. They were maintaining detection antennas of the Skyguard air-defense system at what Kuwait’s defense ministry called a “vital site.” Kuwait said the two died of wounds from falling shrapnel from intercepted drones, and that a Kuwaiti and a Pakistani worker were also injured. Kuwait’s foreign ministry condemned “continued Iranian aggression.” Italian Prime Minister Giorgia Meloni offered condolences to the families, and European Commission President Ursula von der Leyen called for more pressure on Tehran. Iran denied it had attacked Kuwaiti airspace, DW reported."
+    },
+    {
+      "num": 3,
+      "id": "story-02",
+      "section": "Top Stories",
+      "title": "Oil climbs toward $96 as Hormuz and Houthi threats flare",
+      "file": "03-story-02.mp3",
+      "duration": 63.07,
+      "text": "Brent crude futures were up one point five three dollars, or one point six percent, at ninety-six point one four dollars a barrel as of ten thirty-nine in the morning Eastern Time, and U S West Texas Intermediate rose to eighty-four point eight eight dollars, Reuters reported. Prices reversed earlier losses after the Houthis said they hit Saudi Arabia’s largest refinery at Ras Tanura and Iran’s Revolutionary Guards said two tankers hit sea mines north of Oman’s Khasab port, claims that have not been independently verified. There is no WTI settlement Thursday because of the Thanksgiving holiday. CBS News, citing the shipping-intelligence firm Kpler, reported that tanker crossings of the Strait of Hormuz averaged eleven a day in the week ending Nov. twenty-one, against fifty a day before the war, and that weekly ship transits fell from two hundred seventeen to one hundred forty-seven between Nov. one and Nov. twenty-three."
+    },
+    {
+      "num": 4,
+      "id": "story-03",
+      "section": "Top Stories",
+      "title": "Euro zone leaders back Spain’s Hernández de Cos to lead the ECB",
+      "file": "04-story-03.mp3",
+      "duration": 43.58,
+      "text": "Euro zone leaders at the Brussels summit backed Pablo Hernández de Cos, the former Bank of Spain governor, to succeed Christine Lagarde, who steps down Feb. seven, after the Netherlands agreed to support a package deal crafted by France, Germany and Spain, Politico reported. Germany’s Markus Brunnermeier is slated to become chief economist and France’s Laurence Boone to take the markets portfolio. A European Parliament hearing is set for Dec. seven, and leaders are due to formalize the picks on Dec. seventeen. CNBC noted he inherits a bank facing euro-area inflation that rose to four percent in October, its highest in more than three years."
+    },
+    {
+      "num": 5,
+      "id": "story-04",
+      "section": "Israel",
+      "title": "Eisenkot and Golan agree to sign coalition deal",
+      "file": "05-story-04.mp3",
+      "duration": 54.5,
+      "text": "Yahshar chairman Gadi Ayzenkot and Democrats chairman Yair Golan announced Thursday that they had reached an understanding to sign a coalition agreement, hours after Yahshar said talks frozen Tuesday had rezoomed, the Jerusalem Post and The Times of Israel reported. The Democrats are to receive an expanded national-security portfolio, a merged labor and welfare ministry, communications, and culture and sports with a new democracy directorate, plus the chair of the Kuh-nesset Constitution Committee and a seat on the Judicial Selection Committee. They will not get education or justice. With Yisrael Baytehnoo and the Democrats signed, the Post said Ayzenkot has thirty-six seats. Separately, The Times of Israel reported that Trump is in talks with Ayzenkot to arrange a meeting if he forms a government."
+    },
+    {
+      "num": 6,
+      "id": "story-05",
+      "section": "Israel",
+      "title": "Katz threatens new Gaza offensive as IDF kills Hamas finance chief",
+      "file": "06-story-05.mp3",
+      "duration": 46.54,
+      "text": "Defense Minister Israel Katz wrote on X that Hamas would either disarm voluntarily or the I D F would disarm it in “Operation Gideon’s Chariots II,” including another evacuation of one million Gaza residents southward, AFP reported. Katz claimed the army controls seventy percent of Gaza. Hamas agreed in July to a disarmament roadmap under Trump’s Board of Peace but has not begun, while Prime Minister Benjamin Netanyahu demands verified decommissioning before any withdrawal. Separately, the I D F said it killed Khaled Abu Nada, head of the economic department of Hamas’s political bureau, in an overnight strike in Deir al-Balah. Gaza’s civil defense said his wife also died."
+    },
+    {
+      "num": 7,
+      "id": "story-06",
+      "section": "Chareidi World",
+      "title": "UTJ source: draft-law principles agreed, lawyers drafting text for the High Court",
+      "file": "07-story-06.mp3",
+      "duration": 41.9,
+      "text": "A senior United Toerah Judaism figure told Keekar Hashabbat that the principles of the draft law have already been agreed with Ayzenkot, and that attorney Boaz Ben Zur was hired to work with Ronen Manelis on a text that would survive the High Court. Kikar said Shahs figures doubt the chances and attacked Ayzenkot’s bloc, and that Naftali Bennett denied a secret channel to Netanyahu. The Times of Israel, citing Kikar, reported that U T J’s Degel Ha Toerah faction vetoed M K Gilad Kariv, a Reform rabbi, as education minister and that Ayzenkot accepted the veto. U T J denies negotiating cabinet posts."
+    },
+    {
+      "num": 8,
+      "id": "story-07",
+      "section": "Chareidi World",
+      "title": "Goldknopf: Liberman asked forgiveness; Agudah demands accepted",
+      "file": "08-story-07.mp3",
+      "duration": 39.91,
+      "text": "Agoo-das Yissroel chairman M K Yitzhak Goldknopf told Radio Kol Chai that Avigdor Liberman “asked for forgiveness” for his past remarks against the ha-ray-dee community, calling it a “slip of the tongue.” Told that Liberman had not apologized publicly, Goldknopf said, “I will speak to him about it.” Asked whether Agoo-dah’s demands on the conscription law, the status quo and education had been accepted, he said yes: “Without that, we would not have come to the table.” Shahs’s HaDerech newspaper meanwhile used its front page to attack Ayzenkot and Liberman for voting down the bill to halt arrests of yesheeva students."
+    },
+    {
+      "num": 9,
+      "id": "story-08",
+      "section": "Region",
+      "title": "Thanksgiving nor’easter floods the Shore and knocks out power",
+      "file": "09-story-08.mp3",
+      "duration": 46.51,
+      "text": "More than eight thousand outages were reported across Monmouth and Ocean counties by eleven thirteen in the morning Eastern Time, with the biggest clusters in Neptune and Brick, the Asbury Park Press reported. All lanes of Route thirty-six at the Hazlet-Union Beach border were closed by flooding, and Manasquan streets flooded. The Weather Service warned the evening high tides could bring worse flooding. ABC7 said states of emergency are in effect for New Jersey, New York City, Long Island and Westchester County, with the storm’s peak expected between two o'clock in the afternoon and eight o'clock in the evening and coastal gusts of sixty to seventy mph. The Macy’s Thanksgiving Day Parade was postponed to Saturday."
+    },
+    {
+      "num": 10,
+      "id": "story-09",
+      "section": "Tech",
+      "title": "FCC clears SpaceX’s 1-million-satellite “Starmind” AI data-center plan",
+      "file": "10-story-09.mp3",
+      "duration": 41.66,
+      "text": "The Federal Communications Commission authorized Elon Musk’s SpaceX on Wednesday to deploy a “Starmind” constellation of up to one million satellites for data centers in space, Reuters reported. SpaceX must begin deployment by November twenty thirty-three, deploy one hundred thousand by November twenty thirty-five and half by November twenty thirty-eight. Reuters noted it was unclear whether SpaceX would put one million satellites in orbit, where only about seventeen thousand exist today, and that Amazon’s Leo unit has criticized the plan. SpaceX said the satellites would use near-constant solar power."
+    },
+    {
+      "num": 11,
+      "id": "story-10",
+      "section": "Other Notable",
+      "title": "Congo Ebola outbreak passes 12,000 cases",
+      "file": "11-story-10.mp3",
+      "duration": 35.71,
+      "text": "Elsewhere, Congo’s Bundibugyo-virus Ebola outbreak has passed twelve thousand cases as violence in the east disrupts the response and forces some responders to evacuate, the Associated Press and Al Jazeera reported Thursday. The World Health Organization’s latest update, as of Nov. seventeen, counted eleven thousand six hundred thirteen cases and five thousand six hundred seventy-eight deaths, and WHO maintains the outbreak remains a public health emergency of international concern."
+    },
+    {
+      "num": 12,
+      "id": "weather",
+      "section": "Weather",
+      "title": "South Bend, IN Forecast & 5-Day Outlook",
+      "file": "12-weather.mp3",
+      "duration": 71.14,
+      "text": "Now, your South Bend, Indiana weather forecast from the National Weather Service. Thanksgiving day: Rain. Cloudy, with a high near forty-four. Northeast wind around fifteen miles per hour, with gusts as high as thirty-five miles per hour. Chance of precipitation is one hundred percent. New rainfall amounts between a quarter and half of an inch possible. Tonight: Rain before two o'clock in the morning, then rain and snow. Cloudy, with a low around thirty-two. North wind ten to fifteen miles per hour, with gusts as high as thirty-five miles per hour. Chance of precipitation is one hundred percent. New rainfall amounts between a half and three quarters of an inch possible. On Friday, rain and snow, high near forty-six. Friday Night, partly cloudy, low around thirty-two. On Saturday, mostly sunny, high near forty-eight. Saturday Night, mostly cloudy then a slight chance of light rain, low around thirty-five. On Sunday, light rain, high near forty-five. Sunday Night, light rain, low around thirty-two. On Monday, partly sunny, high near forty-one. Monday Night, partly cloudy, low around twenty-seven. On Tuesday, partly sunny, high near forty-six.",
+      "periods": [
+        {
+          "name": "Thanksgiving Day",
+          "temp": "44F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Tonight",
+          "temp": "32F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Friday",
+          "temp": "46F",
+          "short": "Rain And Snow"
+        },
+        {
+          "name": "Friday Night",
+          "temp": "32F",
+          "short": "Partly Cloudy"
+        },
+        {
+          "name": "Saturday",
+          "temp": "48F",
+          "short": "Mostly Sunny"
+        },
+        {
+          "name": "Saturday Night",
+          "temp": "35F",
+          "short": "Mostly Cloudy then Slight Chance Light Rain"
+        },
+        {
+          "name": "Sunday",
+          "temp": "45F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Sunday Night",
+          "temp": "32F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Monday",
+          "temp": "41F",
+          "short": "Partly Sunny"
+        },
+        {
+          "name": "Monday Night",
+          "temp": "27F",
+          "short": "Partly Cloudy"
+        },
+        {
+          "name": "Tuesday",
+          "temp": "46F",
+          "short": "Partly Sunny"
+        }
+      ]
+    },
+    {
+      "num": 13,
+      "id": "signoff",
+      "section": "SBR News",
+      "title": "That's the latest from SBR News",
+      "file": "13-signoff.mp3",
+      "duration": 2.64,
+      "text": "That's the latest from SBR News."
+    }
+  ]
+}
