@@ -52,7 +52,7 @@ button.ctrl:active{opacity:.75;transform:scale(.98)}
 </style></head><body>
 <div class="wrap">
   <div class="hdr"><div class="brand">SBR News</div><div class="sub">Wednesday, November 25, 2026 · Evening Brief</div>
-    <a class="fpback" href="brief.pdf" target="_blank" rel="noopener" title="Open the front page (audio keeps playing)">
+    <a class="fpback" href="front.html" target="_blank" rel="noopener" title="Open the front page (audio keeps playing)">
       <svg class="fpico" viewBox="0 0 24 18" aria-hidden="true"><rect x="1.2" y="1" width="21.6" height="16" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M1.2 5.2h21.6" stroke="currentColor" stroke-width="1.3"/><path d="M4 8.2h7.5M4 10.6h7.5M4 13h5.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><rect x="13.6" y="8" width="6.2" height="5.2" fill="none" stroke="currentColor" stroke-width="1.1"/></svg>
       Front Page
     </a></div>
@@ -127,6 +127,23 @@ function getActx(){
   return actx;
 }
 
+function minuteWords(m){
+  const ones = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];
+  const tens = ['','','twenty','thirty','forty','fifty'];
+  if (m === 0) return "o'clock";
+  if (m < 10) return 'oh ' + ones[m];
+  if (m < 20) return ones[m];
+  const t = Math.floor(m / 10), o = m % 10;
+  return tens[t] + (o ? '-' + ones[o] : '');
+}
+function periodInfo(h24, m){
+  if (h24 === 0 && m === 0) return { key: 'midnight', spoken: 'midnight' };
+  if (h24 === 12 && m === 0) return { key: 'noon', spoken: 'noon' };
+  if (h24 < 12) return { key: 'morning', spoken: 'in the morning' };
+  if (h24 < 18) return { key: 'afternoon', spoken: 'in the afternoon' };
+  if (h24 < 21) return { key: 'evening', spoken: 'in the evening' };
+  return { key: 'night', spoken: 'at night' };
+}
 function timeKeys(d){
   const h24 = d.getHours();
   const m = d.getMinutes();
@@ -134,8 +151,13 @@ function timeKeys(d){
   const ampm = h24 < 12 ? 'am' : 'pm';
   const hKey = 'h-' + String(h12).padStart(2, '0');
   const mKey = 'm-' + String(m).padStart(2, '0');
-  const label = `${h12}:${String(m).padStart(2, '0')} ${ampm.toUpperCase()}`;
-  return { key: `${hKey}_${mKey}_${ampm}`, hKey, mKey, ampm, label, nextMKey: 'm-' + String((m + 1) % 60).padStart(2, '0') };
+  const pr = periodInfo(h24, m);
+  const hourW = ({1:'one',2:'two',3:'three',4:'four',5:'five',6:'six',7:'seven',8:'eight',9:'nine',10:'ten',11:'eleven',12:'twelve'})[h12];
+  const minW = minuteWords(m);
+  const spokenCore = (pr.key === 'noon' || pr.key === 'midnight') ? ('twelve o'clock ' + pr.spoken) : (hourW + ' ' + minW + ' ' + pr.spoken);
+  const spoken = "It's " + spokenCore;
+  const label = spokenCore;
+  return { key: hKey + '_' + mKey + '_' + pr.key, hKey, mKey, ampm, periodKey: pr.key, spoken, label, nextMKey: 'm-' + String((m + 1) % 60).padStart(2, '0') };
 }
 
 async function fetchClipBuffer(name){
@@ -223,26 +245,26 @@ async function buildClockBlob(kind, d){
   const tk = timeKeys(d || new Date());
   let seq, gaps;
   if (kind === 'intro') {
-    seq = ['sbr-intro', 'its', tk.hKey, tk.mKey, tk.ampm];
+    seq = ['sbr-intro', 'its', tk.hKey, tk.mKey, tk.periodKey];
     gaps = [0.38, 0.035, 0.025, 0.045];
   } else if (kind === 'outro') {
-    seq = ['its', tk.hKey, tk.mKey, tk.ampm, 'sbr-intro'];
+    seq = ['its', tk.hKey, tk.mKey, tk.periodKey, 'sbr-intro'];
     gaps = [0.035, 0.025, 0.045, 1.00];
   } else {
-    seq = ['its', tk.hKey, tk.mKey, tk.ampm];
+    seq = ['its', tk.hKey, tk.mKey, tk.periodKey];
     gaps = [0.035, 0.025, 0.045, 1.00];
   }
   const bufs = await Promise.all(seq.map(fetchClipBuffer));
   const sr = bufs[0].sampleRate;
   const parts = bufs.map(b => trimPcm(b.getChannelData(0), sr));
   const wav = encodeWav(parts, gaps, sr);
-  return { url: URL.createObjectURL(wav.blob), label: tk.label, key: kind + '_' + tk.key, duration: wav.duration };
+  return { url: URL.createObjectURL(wav.blob), label: tk.label, spoken: tk.spoken, key: kind + '_' + tk.key, duration: wav.duration };
 }
 
 function prewarmMinute(){
   if (!liveClock || !AC) return;
   const tk = timeKeys(new Date());
-  ['sbr-intro', 'its', 'am', 'pm', tk.hKey, tk.mKey, tk.nextMKey].forEach(k => {
+  ['sbr-intro', 'its', 'morning', 'afternoon', 'evening', 'night', 'noon', 'midnight', tk.hKey, tk.mKey, tk.nextMKey, tk.periodKey].forEach(k => {
     fetchClipBuffer(k).catch(() => {});
   });
 }
@@ -337,13 +359,13 @@ function setClockActive(res, pName){
   au.playbackRate = rate;
   if (pName === 'intro-clock') {
     nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
-    ntit.textContent = `This ... is SBR News · It's ${res.label}`;
+    ntit.textContent = `This ... is SBR News · ${res.spoken || ('It's ' + res.label)}`;
   } else if (pName === 'timecheck') {
     nsec.textContent = `Time Check · SBR News`;
-    ntit.textContent = `It's ${res.label}`;
+    ntit.textContent = res.spoken || (`It's ${res.label}`);
   } else if (pName === 'outro-clock') {
     nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
-    ntit.textContent = `It's ${res.label} · This ... is SBR News`;
+    ntit.textContent = `${res.spoken || ('It's ' + res.label)} · This ... is SBR News`;
   }
   durEl.textContent = fmt(res.duration);
   curEl.textContent = '0:00';
@@ -435,10 +457,10 @@ function playClockPhase(kind, pName, autoPlay, fallbackTrackIdx){
     ntit.textContent = TRACKS[idx].title;
   } else if (kind === 'check') {
     nsec.textContent = `Time Check · SBR News`;
-    ntit.textContent = `It's ${timeKeys(new Date()).label}`;
+    ntit.textContent = timeKeys(new Date()).spoken;
   } else {
     nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
-    ntit.textContent = `It's ${timeKeys(new Date()).label} · This ... is SBR News`;
+    ntit.textContent = `${timeKeys(new Date()).spoken} · This ... is SBR News`;
   }
   renderList();
   updateMediaSession(ntit.textContent);

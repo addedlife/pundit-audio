@@ -79,7 +79,7 @@ button.ctrl:active{opacity:.75;transform:scale(.98)}
   <div class="list" id="list"></div>
 </div>
 <script>
-const TRACKS = [{"num": 1, "id": "intro", "section": "SBR News", "title": "This ... is SBR News (Night Brief)", "file": "01-intro.mp3", "duration": 5.54, "clock_intro": "after", "src": "01-intro.mp3"}, {"num": 2, "id": "story-01", "section": "Top Stories", "title": "Storm postpones Macy’s 100th parade for the first time", "file": "02-story-01.mp3", "duration": 67.94, "src": "02-story-01.mp3"}, {"num": 3, "id": "story-02", "section": "Top Stories", "title": "Third-quarter growth revised up to 4.3%", "file": "03-story-02.mp3", "duration": 52.53, "src": "03-story-02.mp3"}, {"num": 4, "id": "story-03", "section": "Top Stories", "title": "Projectile explodes near tanker off Dubai", "file": "04-story-03.mp3", "duration": 46.76, "src": "04-story-03.mp3"}, {"num": 5, "id": "story-04", "section": "Israel", "title": "Liberman’s party slated for defense, justice in Eisenkot deal", "file": "05-story-04.mp3", "duration": 55.8, "src": "05-story-04.mp3"}, {"num": 6, "id": "story-05", "section": "Israel", "title": "Knesset advances repeal of Karhi broadcasting law", "file": "06-story-05.mp3", "duration": 44.09, "src": "06-story-05.mp3"}, {"num": 7, "id": "story-06", "section": "Chareidi World", "title": "Liberman: UTJ has rabbanim’s green light; Likud’s Chikli attacks draft deal", "file": "07-story-06.mp3", "duration": 54.36, "src": "07-story-06.mp3"}, {"num": 8, "id": "story-07", "section": "Tech", "title": "New York bans AI chatbot toys for five years", "file": "08-story-07.mp3", "duration": 21.47, "src": "08-story-07.mp3"}, {"num": 9, "id": "story-08", "section": "Other Notable", "title": "Army blows up its lead azide stockpile in Iowa", "file": "09-story-08.mp3", "duration": 45.58, "src": "09-story-08.mp3"}, {"num": 10, "id": "story-09", "section": "Other Notable", "title": "Colombian forces free 76 hostages in Cartagena supermarket", "file": "10-story-09.mp3", "duration": 43.39, "src": "10-story-09.mp3"}, {"num": 11, "id": "weather", "section": "Weather", "title": "South Bend, IN Forecast & 5-Day Outlook", "file": "11-weather.mp3", "duration": 68.26, "src": "11-weather.mp3"}, {"num": 12, "id": "signoff", "section": "SBR News", "title": "That's the latest from SBR News", "file": "12-signoff.mp3", "duration": 2.25, "src": "12-signoff.mp3"}];
+const TRACKS = [{"num": 1, "id": "intro", "section": "SBR News", "title": "This ... is SBR News (Night Brief)", "file": "01-intro.mp3", "duration": 5.54, "clock_intro": "after", "src": "01-intro.mp3"}, {"num": 2, "id": "story-01", "section": "Top Stories", "title": "Storm postpones Macy’s 100th parade for the first time", "file": "02-story-01.mp3", "duration": 67.92, "src": "02-story-01.mp3"}, {"num": 3, "id": "story-02", "section": "Top Stories", "title": "Third-quarter growth revised up to 4.3%", "file": "03-story-02.mp3", "duration": 52.53, "src": "03-story-02.mp3"}, {"num": 4, "id": "story-03", "section": "Top Stories", "title": "Projectile explodes near tanker off Dubai", "file": "04-story-03.mp3", "duration": 47.07, "src": "04-story-03.mp3"}, {"num": 5, "id": "story-04", "section": "Israel", "title": "Liberman’s party slated for defense, justice in Eisenkot deal", "file": "05-story-04.mp3", "duration": 55.8, "src": "05-story-04.mp3"}, {"num": 6, "id": "story-05", "section": "Israel", "title": "Knesset advances repeal of Karhi broadcasting law", "file": "06-story-05.mp3", "duration": 44.09, "src": "06-story-05.mp3"}, {"num": 7, "id": "story-06", "section": "Chareidi World", "title": "Liberman: UTJ has rabbanim’s green light; Likud’s Chikli attacks draft deal", "file": "07-story-06.mp3", "duration": 54.36, "src": "07-story-06.mp3"}, {"num": 8, "id": "story-07", "section": "Tech", "title": "New York bans AI chatbot toys for five years", "file": "08-story-07.mp3", "duration": 21.47, "src": "08-story-07.mp3"}, {"num": 9, "id": "story-08", "section": "Other Notable", "title": "Army blows up its lead azide stockpile in Iowa", "file": "09-story-08.mp3", "duration": 45.45, "src": "09-story-08.mp3"}, {"num": 10, "id": "story-09", "section": "Other Notable", "title": "Colombian forces free 76 hostages in Cartagena supermarket", "file": "10-story-09.mp3", "duration": 43.39, "src": "10-story-09.mp3"}, {"num": 11, "id": "weather", "section": "Weather", "title": "South Bend, IN Forecast & 5-Day Outlook", "file": "11-weather.mp3", "duration": 68.26, "src": "11-weather.mp3"}, {"num": 12, "id": "signoff", "section": "SBR News", "title": "That's the latest from SBR News", "file": "12-signoff.mp3", "duration": 2.25, "src": "12-signoff.mp3"}];
 const CLOCK_ABS = "https://addedlife.github.io/pundit-audio/clock/";
 const CLOCK_BASE = false ? CLOCK_ABS : (location.protocol === 'file:' ? CLOCK_ABS : '../clock/');
 const TIME_CHECK_EVERY = 3;
@@ -127,6 +127,23 @@ function getActx(){
   return actx;
 }
 
+function minuteWords(m){
+  const ones = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];
+  const tens = ['','','twenty','thirty','forty','fifty'];
+  if (m === 0) return "o'clock";
+  if (m < 10) return 'oh ' + ones[m];
+  if (m < 20) return ones[m];
+  const t = Math.floor(m / 10), o = m % 10;
+  return tens[t] + (o ? '-' + ones[o] : '');
+}
+function periodInfo(h24, m){
+  if (h24 === 0 && m === 0) return { key: 'midnight', spoken: 'midnight' };
+  if (h24 === 12 && m === 0) return { key: 'noon', spoken: 'noon' };
+  if (h24 < 12) return { key: 'morning', spoken: 'in the morning' };
+  if (h24 < 18) return { key: 'afternoon', spoken: 'in the afternoon' };
+  if (h24 < 21) return { key: 'evening', spoken: 'in the evening' };
+  return { key: 'night', spoken: 'at night' };
+}
 function timeKeys(d){
   const h24 = d.getHours();
   const m = d.getMinutes();
@@ -134,8 +151,13 @@ function timeKeys(d){
   const ampm = h24 < 12 ? 'am' : 'pm';
   const hKey = 'h-' + String(h12).padStart(2, '0');
   const mKey = 'm-' + String(m).padStart(2, '0');
-  const label = `${h12}:${String(m).padStart(2, '0')} ${ampm.toUpperCase()}`;
-  return { key: `${hKey}_${mKey}_${ampm}`, hKey, mKey, ampm, label, nextMKey: 'm-' + String((m + 1) % 60).padStart(2, '0') };
+  const pr = periodInfo(h24, m);
+  const hourW = ({1:'one',2:'two',3:'three',4:'four',5:'five',6:'six',7:'seven',8:'eight',9:'nine',10:'ten',11:'eleven',12:'twelve'})[h12];
+  const minW = minuteWords(m);
+  const spokenCore = (pr.key === 'noon' || pr.key === 'midnight') ? ('twelve o'clock ' + pr.spoken) : (hourW + ' ' + minW + ' ' + pr.spoken);
+  const spoken = "It's " + spokenCore;
+  const label = spokenCore;
+  return { key: hKey + '_' + mKey + '_' + pr.key, hKey, mKey, ampm, periodKey: pr.key, spoken, label, nextMKey: 'm-' + String((m + 1) % 60).padStart(2, '0') };
 }
 
 async function fetchClipBuffer(name){
@@ -223,26 +245,26 @@ async function buildClockBlob(kind, d){
   const tk = timeKeys(d || new Date());
   let seq, gaps;
   if (kind === 'intro') {
-    seq = ['sbr-intro', 'its', tk.hKey, tk.mKey, tk.ampm];
+    seq = ['sbr-intro', 'its', tk.hKey, tk.mKey, tk.periodKey];
     gaps = [0.38, 0.035, 0.025, 0.045];
   } else if (kind === 'outro') {
-    seq = ['its', tk.hKey, tk.mKey, tk.ampm, 'sbr-intro'];
+    seq = ['its', tk.hKey, tk.mKey, tk.periodKey, 'sbr-intro'];
     gaps = [0.035, 0.025, 0.045, 1.00];
   } else {
-    seq = ['its', tk.hKey, tk.mKey, tk.ampm];
+    seq = ['its', tk.hKey, tk.mKey, tk.periodKey];
     gaps = [0.035, 0.025, 0.045, 1.00];
   }
   const bufs = await Promise.all(seq.map(fetchClipBuffer));
   const sr = bufs[0].sampleRate;
   const parts = bufs.map(b => trimPcm(b.getChannelData(0), sr));
   const wav = encodeWav(parts, gaps, sr);
-  return { url: URL.createObjectURL(wav.blob), label: tk.label, key: kind + '_' + tk.key, duration: wav.duration };
+  return { url: URL.createObjectURL(wav.blob), label: tk.label, spoken: tk.spoken, key: kind + '_' + tk.key, duration: wav.duration };
 }
 
 function prewarmMinute(){
   if (!liveClock || !AC) return;
   const tk = timeKeys(new Date());
-  ['sbr-intro', 'its', 'am', 'pm', tk.hKey, tk.mKey, tk.nextMKey].forEach(k => {
+  ['sbr-intro', 'its', 'morning', 'afternoon', 'evening', 'night', 'noon', 'midnight', tk.hKey, tk.mKey, tk.nextMKey, tk.periodKey].forEach(k => {
     fetchClipBuffer(k).catch(() => {});
   });
 }
@@ -337,13 +359,13 @@ function setClockActive(res, pName){
   au.playbackRate = rate;
   if (pName === 'intro-clock') {
     nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
-    ntit.textContent = `This ... is SBR News · It's ${res.label}`;
+    ntit.textContent = `This ... is SBR News · ${res.spoken || ('It's ' + res.label)}`;
   } else if (pName === 'timecheck') {
     nsec.textContent = `Time Check · SBR News`;
-    ntit.textContent = `It's ${res.label}`;
+    ntit.textContent = res.spoken || (`It's ${res.label}`);
   } else if (pName === 'outro-clock') {
     nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
-    ntit.textContent = `It's ${res.label} · This ... is SBR News`;
+    ntit.textContent = `${res.spoken || ('It's ' + res.label)} · This ... is SBR News`;
   }
   durEl.textContent = fmt(res.duration);
   curEl.textContent = '0:00';
@@ -435,10 +457,10 @@ function playClockPhase(kind, pName, autoPlay, fallbackTrackIdx){
     ntit.textContent = TRACKS[idx].title;
   } else if (kind === 'check') {
     nsec.textContent = `Time Check · SBR News`;
-    ntit.textContent = `It's ${timeKeys(new Date()).label}`;
+    ntit.textContent = timeKeys(new Date()).spoken;
   } else {
     nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
-    ntit.textContent = `It's ${timeKeys(new Date()).label} · This ... is SBR News`;
+    ntit.textContent = `${timeKeys(new Date()).spoken} · This ... is SBR News`;
   }
   renderList();
   updateMediaSession(ntit.textContent);

@@ -35,10 +35,24 @@ button.ctrl:active{opacity:.75;transform:scale(.98)}
 .rsec{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
 .rtit{font-size:14px;font-weight:600;line-height:1.25;margin-top:2px}
 .rdur{font-size:12px;color:var(--mut);white-space:nowrap}
+
+.sleep{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:14px;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif}
+.sleep-h{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sleep-t{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.sw{appearance:none;border:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700;letter-spacing:.04em;cursor:pointer;touch-action:manipulation}
+.sw.on{background:var(--ink);color:var(--bg)}
+.seg{display:flex;gap:6px;margin-top:10px}
+.seg button{flex:1;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;padding:8px 6px;font-size:13px;font-family:Georgia,'Times New Roman',serif;cursor:pointer;touch-action:manipulation}
+.seg button.on{border:1.5px solid var(--ink);font-weight:700}
+.sleep-now{font-size:13px;line-height:1.35;color:var(--mut);margin-top:10px;min-height:18px}
+.sleep-now b{color:var(--ink);font-weight:600}
+.sleep-btns{display:flex;gap:8px;margin-top:10px}
+.sleep-btns button{flex:1;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;padding:8px 6px;font-size:12px;font-family:-apple-system,sans-serif;cursor:pointer;touch-action:manipulation}
+.sleep-btns button[disabled]{opacity:.35}
 </style></head><body>
 <div class="wrap">
   <div class="hdr"><div class="brand">SBR News</div><div class="sub">Wednesday, November 25, 2026 · Noon Brief</div>
-    <a class="fpback" href="brief.pdf" target="_blank" rel="noopener" title="Open the front page (audio keeps playing)">
+    <a class="fpback" href="front.html" target="_blank" rel="noopener" title="Open the front page (audio keeps playing)">
       <svg class="fpico" viewBox="0 0 24 18" aria-hidden="true"><rect x="1.2" y="1" width="21.6" height="16" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M1.2 5.2h21.6" stroke="currentColor" stroke-width="1.3"/><path d="M4 8.2h7.5M4 10.6h7.5M4 13h5.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><rect x="13.6" y="8" width="6.2" height="5.2" fill="none" stroke="currentColor" stroke-width="1.1"/></svg>
       Front Page
     </a></div>
@@ -54,6 +68,13 @@ button.ctrl:active{opacity:.75;transform:scale(.98)}
       <button class="ctrl" id="next" aria-label="Next story">Next &#9654;&#9654;</button>
     </div>
     <div class="spd" id="spd"></div>
+  </div>
+  <div class="sleep" id="sleep">
+    <div class="sleep-h"><span class="sleep-t">&#9834; Sleep music after the news</span><button class="sw on" id="sleepSw" aria-pressed="true">On</button></div>
+    <div class="sleep-h" style="margin-top:8px"><span class="sleep-t">Host intros</span><button class="sw on" id="hostSw" aria-pressed="true">On</button></div>
+    <div class="seg" id="sleepSeg"></div>
+    <div class="sleep-now" id="sleepNow"></div>
+    <div class="sleep-btns"><button id="sleepPrev" disabled>&#9664;&#9664; Prev piece</button><button id="sleepNext" disabled>Next piece &#9654;&#9654;</button><button id="sleepGo">Play now</button></div>
   </div>
   <div class="list" id="list"></div>
 </div>
@@ -106,6 +127,23 @@ function getActx(){
   return actx;
 }
 
+function minuteWords(m){
+  const ones = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];
+  const tens = ['','','twenty','thirty','forty','fifty'];
+  if (m === 0) return "o'clock";
+  if (m < 10) return 'oh ' + ones[m];
+  if (m < 20) return ones[m];
+  const t = Math.floor(m / 10), o = m % 10;
+  return tens[t] + (o ? '-' + ones[o] : '');
+}
+function periodInfo(h24, m){
+  if (h24 === 0 && m === 0) return { key: 'midnight', spoken: 'midnight' };
+  if (h24 === 12 && m === 0) return { key: 'noon', spoken: 'noon' };
+  if (h24 < 12) return { key: 'morning', spoken: 'in the morning' };
+  if (h24 < 18) return { key: 'afternoon', spoken: 'in the afternoon' };
+  if (h24 < 21) return { key: 'evening', spoken: 'in the evening' };
+  return { key: 'night', spoken: 'at night' };
+}
 function timeKeys(d){
   const h24 = d.getHours();
   const m = d.getMinutes();
@@ -113,8 +151,13 @@ function timeKeys(d){
   const ampm = h24 < 12 ? 'am' : 'pm';
   const hKey = 'h-' + String(h12).padStart(2, '0');
   const mKey = 'm-' + String(m).padStart(2, '0');
-  const label = `${h12}:${String(m).padStart(2, '0')} ${ampm.toUpperCase()}`;
-  return { key: `${hKey}_${mKey}_${ampm}`, hKey, mKey, ampm, label, nextMKey: 'm-' + String((m + 1) % 60).padStart(2, '0') };
+  const pr = periodInfo(h24, m);
+  const hourW = ({1:'one',2:'two',3:'three',4:'four',5:'five',6:'six',7:'seven',8:'eight',9:'nine',10:'ten',11:'eleven',12:'twelve'})[h12];
+  const minW = minuteWords(m);
+  const spokenCore = (pr.key === 'noon' || pr.key === 'midnight') ? ('twelve o'clock ' + pr.spoken) : (hourW + ' ' + minW + ' ' + pr.spoken);
+  const spoken = "It's " + spokenCore;
+  const label = spokenCore;
+  return { key: hKey + '_' + mKey + '_' + pr.key, hKey, mKey, ampm, periodKey: pr.key, spoken, label, nextMKey: 'm-' + String((m + 1) % 60).padStart(2, '0') };
 }
 
 async function fetchClipBuffer(name){
@@ -202,26 +245,26 @@ async function buildClockBlob(kind, d){
   const tk = timeKeys(d || new Date());
   let seq, gaps;
   if (kind === 'intro') {
-    seq = ['sbr-intro', 'its', tk.hKey, tk.mKey, tk.ampm];
+    seq = ['sbr-intro', 'its', tk.hKey, tk.mKey, tk.periodKey];
     gaps = [0.38, 0.035, 0.025, 0.045];
   } else if (kind === 'outro') {
-    seq = ['its', tk.hKey, tk.mKey, tk.ampm, 'sbr-intro'];
+    seq = ['its', tk.hKey, tk.mKey, tk.periodKey, 'sbr-intro'];
     gaps = [0.035, 0.025, 0.045, 1.00];
   } else {
-    seq = ['its', tk.hKey, tk.mKey, tk.ampm];
+    seq = ['its', tk.hKey, tk.mKey, tk.periodKey];
     gaps = [0.035, 0.025, 0.045, 1.00];
   }
   const bufs = await Promise.all(seq.map(fetchClipBuffer));
   const sr = bufs[0].sampleRate;
   const parts = bufs.map(b => trimPcm(b.getChannelData(0), sr));
   const wav = encodeWav(parts, gaps, sr);
-  return { url: URL.createObjectURL(wav.blob), label: tk.label, key: kind + '_' + tk.key, duration: wav.duration };
+  return { url: URL.createObjectURL(wav.blob), label: tk.label, spoken: tk.spoken, key: kind + '_' + tk.key, duration: wav.duration };
 }
 
 function prewarmMinute(){
   if (!liveClock || !AC) return;
   const tk = timeKeys(new Date());
-  ['sbr-intro', 'its', 'am', 'pm', tk.hKey, tk.mKey, tk.nextMKey].forEach(k => {
+  ['sbr-intro', 'its', 'morning', 'afternoon', 'evening', 'night', 'noon', 'midnight', tk.hKey, tk.mKey, tk.nextMKey, tk.periodKey].forEach(k => {
     fetchClipBuffer(k).catch(() => {});
   });
 }
@@ -316,13 +359,13 @@ function setClockActive(res, pName){
   au.playbackRate = rate;
   if (pName === 'intro-clock') {
     nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
-    ntit.textContent = `This ... is SBR News · It's ${res.label}`;
+    ntit.textContent = `This ... is SBR News · ${res.spoken || ('It's ' + res.label)}`;
   } else if (pName === 'timecheck') {
     nsec.textContent = `Time Check · SBR News`;
-    ntit.textContent = `It's ${res.label}`;
+    ntit.textContent = res.spoken || (`It's ${res.label}`);
   } else if (pName === 'outro-clock') {
     nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
-    ntit.textContent = `It's ${res.label} · This ... is SBR News`;
+    ntit.textContent = `${res.spoken || ('It's ' + res.label)} · This ... is SBR News`;
   }
   durEl.textContent = fmt(res.duration);
   curEl.textContent = '0:00';
@@ -337,6 +380,8 @@ function tryPlay(){
 
 function startFromGesture(){
   userInteracted = true;
+  if (phase === 'sleep') { au.play().catch(() => {}); return; }
+  if (phase === 'sleep-done') { if (sleepOn && sleepMan) startSleep(false); return; }
   if (phase === 'intro-clock' || phase === 'outro-clock' || phase === 'timecheck') {
     const kind = phase === 'intro-clock' ? 'intro' : (phase === 'outro-clock' ? 'outro' : 'check');
     const tk = timeKeys(new Date());
@@ -372,6 +417,7 @@ function fmt(s){ if(!isFinite(s)||s<0)return '0:00'; s=Math.floor(s); return Mat
 
 function updateMediaSession(titleOverride){
   if (!('mediaSession' in navigator)) return;
+  if (phase === 'sleep' || phase === 'sleep-done') return;
   const t = TRACKS[idx];
   navigator.mediaSession.metadata = new MediaMetadata({
     title: titleOverride || t.title,
@@ -400,6 +446,7 @@ function renderList(){
     };
     listEl.appendChild(b);
   });
+  renderSleepUI();
 }
 
 function playClockPhase(kind, pName, autoPlay, fallbackTrackIdx){
@@ -410,10 +457,10 @@ function playClockPhase(kind, pName, autoPlay, fallbackTrackIdx){
     ntit.textContent = TRACKS[idx].title;
   } else if (kind === 'check') {
     nsec.textContent = `Time Check · SBR News`;
-    ntit.textContent = `It's ${timeKeys(new Date()).label}`;
+    ntit.textContent = timeKeys(new Date()).spoken;
   } else {
     nsec.textContent = `Track ${TRACKS[idx].num} of ${TRACKS.length} · SBR News`;
-    ntit.textContent = `It's ${timeKeys(new Date()).label} · This ... is SBR News`;
+    ntit.textContent = `${timeKeys(new Date()).spoken} · This ... is SBR News`;
   }
   renderList();
   updateMediaSession(ntit.textContent);
@@ -475,8 +522,9 @@ function playClockPhase(kind, pName, autoPlay, fallbackTrackIdx){
 
 function load(i, autoPlay){
   if (i < 0) i = 0;
-  if (i >= TRACKS.length){ playing = false; playBtn.innerHTML = '&#9654; Play'; return; }
+  if (i >= TRACKS.length){ newsEnded(); return; }
   idx = i;
+  newsFinished = false;
   loadSeq++;
   const t = TRACKS[idx];
   if (liveClock && t.id === 'intro' && AC) {
@@ -502,6 +550,8 @@ function load(i, autoPlay){
 }
 
 playBtn.onclick = () => {
+  if (phase === 'sleep-done') { userInteracted = true; if (sleepOn && sleepMan) startSleep(false); return; }
+  if (phase === 'sleep') { userInteracted = true; if (au.paused) au.play().catch(() => {}); else au.pause(); return; }
   if (au.paused) {
     if (!au.getAttribute('src') || (phase !== 'track' && au.currentTime === 0)) {
       startFromGesture();
@@ -515,11 +565,13 @@ playBtn.onclick = () => {
 };
 prevBtn.onclick = () => {
   userInteracted = true;
+  if (inSleep()) { sleepPrev(); return; }
   if (phase === 'timecheck') { load(idx, true); return; }
   if (au.currentTime > 4) { au.currentTime = 0; } else { load(idx - 1, true); }
 };
 nextBtn.onclick = () => {
   userInteracted = true;
+  if (inSleep()) { sleepNext(); return; }
   if (phase === 'timecheck') { load(pendingNextIdx, true); return; }
   load(idx + 1, true);
 };
@@ -542,9 +594,9 @@ au.onended = () => {
     load(pendingNextIdx, true);
     return;
   }
+  if (phase === 'sleep') { if (sleepPart === 'intro') { playSleepAt(sleepPos, 'piece'); } else { sleepNext(); } return; }
   if (phase === 'outro-clock') {
-    playing = false;
-    playBtn.innerHTML = '&#9654; Play';
+    newsEnded();
     return;
   }
   if (idx + 1 < TRACKS.length) {
@@ -560,6 +612,8 @@ au.onended = () => {
       }
     }
     load(idx + 1, true);
+  } else {
+    newsEnded();
   }
 };
 au.ontimeupdate = () => {
@@ -568,6 +622,7 @@ au.ontimeupdate = () => {
   seek.value = au.currentTime;
   curEl.textContent = fmt(au.currentTime);
   durEl.textContent = fmt(au.duration);
+  if (phase === 'sleep') return;
   if (au.duration - au.currentTime < 25) preloadTrack(idx + 1);
   if (liveClock && au.duration - au.currentTime < 15) prewarmNextClock();
 };
@@ -578,11 +633,183 @@ seek.oninput = () => { au.currentTime = Number(seek.value); };
   b.textContent = r + 'x';
   if (r === rate) b.className = 'on';
   b.onclick = () => {
-    rate = r; au.playbackRate = r;
+    rate = r; if (phase !== 'sleep') au.playbackRate = r;
     [...spdEl.children].forEach(c => c.className = c.textContent === (r+'x') ? 'on' : '');
   };
   spdEl.appendChild(b);
 });
+
+
+/* SBR_SLEEP_MUSIC_V1 */ /* SBR_SLEEP_HOST_V2 */
+const SLEEP_BASE = (location.protocol === 'file:') ? 'https://addedlife.github.io/pundit-audio/sleep-music/' : '../sleep-music/';
+const SLEEP_LEAD = 'silence-4s.mp3';
+let sleepMan = null, sleepOrder = [], sleepPos = -1, newsFinished = false;
+function lsGet(k, d){ try { const v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } }
+function lsSet(k, v){ try { localStorage.setItem(k, v); } catch (e) {} }
+let sleepOn = lsGet('sbr_sleep_on', '1') !== '0';
+let sleepList = lsGet('sbr_sleep_list', 'calm');
+let hostOn = lsGet('sbr_sleep_host', '1') !== '0';
+let sleepPart = 'piece';
+const hostSw = document.getElementById('hostSw');
+const sleepSw = document.getElementById('sleepSw'), sleepSeg = document.getElementById('sleepSeg'), sleepNow = document.getElementById('sleepNow');
+const sleepPrevB = document.getElementById('sleepPrev'), sleepNextB = document.getElementById('sleepNext'), sleepGoB = document.getElementById('sleepGo');
+const sleepPre = new Audio(); sleepPre.preload = 'auto'; sleepPre.muted = true;
+function inSleep(){ return phase === 'sleep' || phase === 'sleep-done'; }
+function sleepTracks(){ return (sleepMan && sleepMan.lists && sleepMan.lists[sleepList]) ? sleepMan.lists[sleepList].tracks : []; }
+function sleepLabel(){ return (sleepMan && sleepMan.lists[sleepList]) ? sleepMan.lists[sleepList].label : 'Calm'; }
+function loadSleepManifest(){
+  return fetch(SLEEP_BASE + 'manifest.json').then(r => { if (!r.ok) throw new Error('manifest'); return r.json(); })
+    .then(m => { sleepMan = m; if (!m.lists[sleepList]) sleepList = m.default || 'calm'; renderSleepUI(); return m; })
+    .catch(() => null);
+}
+function renderSleepUI(){
+  sleepSw.textContent = sleepOn ? 'On' : 'Off';
+  sleepSw.className = 'sw' + (sleepOn ? ' on' : '');
+  sleepSw.setAttribute('aria-pressed', sleepOn ? 'true' : 'false');
+  hostSw.textContent = hostOn ? 'On' : 'Off';
+  hostSw.className = 'sw' + (hostOn ? ' on' : '');
+  hostSw.setAttribute('aria-pressed', hostOn ? 'true' : 'false');
+  sleepSeg.innerHTML = '';
+  if (sleepMan) {
+    Object.keys(sleepMan.lists).forEach(k => {
+      const b = document.createElement('button');
+      const L = sleepMan.lists[k];
+      b.textContent = L.label;
+      b.className = k === sleepList ? 'on' : '';
+      b.title = L.tracks.length + ' pieces, ' + Math.round(L.total_seconds / 60) + ' min';
+      b.onclick = () => {
+        sleepList = k; lsSet('sbr_sleep_list', k); renderSleepUI();
+        if (phase === 'sleep') { userInteracted = true; startSleep(false); }
+        else if (phase === 'sleep-done' && sleepOn) { userInteracted = true; startSleep(false); }
+      };
+      sleepSeg.appendChild(b);
+    });
+  }
+  const insl = inSleep();
+  sleepPrevB.disabled = !insl; sleepNextB.disabled = !insl;
+  sleepGoB.style.display = insl && phase === 'sleep' ? 'none' : '';
+  if (phase === 'sleep') {
+    const t = sleepPos >= 0 ? sleepTracks()[sleepOrder[sleepPos]] : null;
+    sleepNow.innerHTML = t ? (sleepPart === 'intro' ? 'Host: ' : '') + '<b>' + t.title + '</b><br>' + t.performer + ' · ' + (sleepPos + 1) + ' of ' + sleepOrder.length + ' · shuffled' : 'Settling in…';
+  } else if (phase === 'sleep-done') {
+    sleepNow.textContent = sleepOn ? 'The music has finished. Good night.' : 'Sleep music is off.';
+  } else if (!sleepMan) {
+    sleepNow.textContent = '';
+  } else {
+    sleepNow.textContent = sleepOn ? 'Plays after the news, shuffled, then stops. ' + sleepTracks().length + ' pieces.' : 'Off: the player stops when the news ends.';
+  }
+}
+function shuffleOrder(n){
+  const a = Array.from({length: n}, (_, i) => i);
+  for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; }
+  const last = parseInt(lsGet('sbr_sleep_first_' + sleepList, '-1'), 10);
+  if (n > 1 && a[0] === last) { const j = 1 + Math.floor(Math.random() * (n - 1)); const t = a[0]; a[0] = a[j]; a[j] = t; }
+  lsSet('sbr_sleep_first_' + sleepList, String(a[0]));
+  return a;
+}
+function sleepMedia(title, artist){
+  if (!('mediaSession' in navigator)) return;
+  navigator.mediaSession.metadata = new MediaMetadata({ title: title, artist: artist, album: 'SBR Sleep Music · ' + sleepLabel() });
+  navigator.mediaSession.setActionHandler('play', () => startFromGesture());
+  navigator.mediaSession.setActionHandler('pause', () => au.pause());
+  navigator.mediaSession.setActionHandler('previoustrack', () => prevBtn.click());
+  navigator.mediaSession.setActionHandler('nexttrack', () => nextBtn.click());
+}
+function startSleep(withLead){
+  const tl = sleepTracks();
+  if (!sleepMan || !tl.length) return false;
+  sleepOrder = shuffleOrder(tl.length);
+  loadSeq++;
+  phase = 'sleep';
+  [...listEl.children].forEach(c => c.classList.remove('on'));
+  playSleepAt(withLead ? -1 : 0);
+  return true;
+}
+function playSleepAt(pos, part){
+  const tl = sleepTracks();
+  loadSeq++;
+  if (pos >= sleepOrder.length) { sleepFinish(); return; }
+  phase = 'sleep';
+  sleepPos = pos;
+  au.defaultPlaybackRate = 1;
+  if (pos < 0) {
+    sleepPart = 'piece';
+    au.src = SLEEP_BASE + SLEEP_LEAD;
+    nsec.textContent = 'Sleep music · ' + sleepLabel();
+    ntit.textContent = 'Settling in…';
+    durEl.textContent = '0:04';
+    sleepMedia('Sleep music', sleepLabel());
+  } else {
+    const t = tl[sleepOrder[pos]];
+    if (hostOn && t.intro && part !== 'piece') {
+      sleepPart = 'intro';
+      au.src = SLEEP_BASE + t.intro;
+      nsec.textContent = 'Sleep music · ' + sleepLabel() + ' · ' + (pos + 1) + ' of ' + sleepOrder.length + ' · introduction';
+      ntit.textContent = t.title;
+      durEl.textContent = fmt(t.intro_duration || 0);
+      sleepMedia('Introducing: ' + t.title, 'SBR Classical');
+      sleepPre.src = SLEEP_BASE + t.file;
+    } else {
+      sleepPart = 'piece';
+      au.src = SLEEP_BASE + t.file;
+      nsec.textContent = 'Sleep music · ' + sleepLabel() + ' · ' + (pos + 1) + ' of ' + sleepOrder.length;
+      ntit.textContent = t.title;
+      durEl.textContent = fmt(t.duration);
+      sleepMedia(t.title, t.performer);
+      if (pos + 1 < sleepOrder.length) { const n = tl[sleepOrder[pos + 1]]; sleepPre.src = SLEEP_BASE + ((hostOn && n.intro) ? n.intro : n.file); }
+    }
+  }
+  au.playbackRate = 1;
+  curEl.textContent = '0:00'; seek.value = 0;
+  renderSleepUI();
+  tryPlay();
+}
+function sleepFinish(){
+  phase = 'sleep-done'; playing = false;
+  playBtn.innerHTML = '&#9654; Play';
+  nsec.textContent = 'Sleep music · finished';
+  ntit.textContent = 'Good night.';
+  sleepMedia('Good night', 'SBR News');
+  if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
+  renderSleepUI();
+}
+function newsEnded(){
+  newsFinished = true; playing = false;
+  playBtn.innerHTML = '&#9654; Play';
+  if (!sleepOn) { renderSleepUI(); return; }
+  if (sleepMan) { startSleep(true); return; }
+  loadSleepManifest().then(m => { if (m && sleepOn && newsFinished && !inSleep()) startSleep(true); });
+}
+function sleepPrev(){
+  userInteracted = true;
+  if (phase === 'sleep-done') { phase = 'sleep'; playSleepAt(Math.max(sleepOrder.length - 1, 0)); return; }
+  if (sleepPart === 'piece' && au.currentTime > 4 && sleepPos >= 0) { au.currentTime = 0; tryPlay(); return; }
+  if (sleepPart === 'intro' && sleepPos > 0) { playSleepAt(sleepPos - 1); return; }
+  playSleepAt(Math.max(sleepPos - 1, 0));
+}
+function sleepNext(){
+  userInteracted = true;
+  if (phase === 'sleep-done') return;
+  playSleepAt(sleepPos + 1);
+}
+sleepPrevB.onclick = () => sleepPrev();
+hostSw.onclick = () => { hostOn = !hostOn; lsSet('sbr_sleep_host', hostOn ? '1' : '0'); if (!hostOn && phase === 'sleep' && sleepPart === 'intro') playSleepAt(sleepPos, 'piece'); renderSleepUI(); };
+sleepNextB.onclick = () => sleepNext();
+sleepGoB.onclick = () => {
+  userInteracted = true;
+  if (!sleepOn) { sleepOn = true; lsSet('sbr_sleep_on', '1'); }
+  const go = () => { newsFinished = true; startSleep(false); };
+  if (sleepMan) go(); else loadSleepManifest().then(m => { if (m) go(); });
+};
+sleepSw.onclick = () => {
+  userInteracted = true;
+  sleepOn = !sleepOn; lsSet('sbr_sleep_on', sleepOn ? '1' : '0');
+  if (!sleepOn && phase === 'sleep') { au.pause(); sleepFinish(); }
+  else if (sleepOn && (phase === 'sleep-done' || (newsFinished && !inSleep()))) { if (sleepMan) startSleep(false); }
+  renderSleepUI();
+};
+loadSleepManifest();
+renderSleepUI();
 
 if (liveClock) {
   prewarmIntro();

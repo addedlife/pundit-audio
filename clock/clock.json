@@ -3,8 +3,8 @@
   "rate": "+0%",
   "pitch": "+0Hz",
   "bitrate": "32k",
-  "generated_at": "2026-11-25T14:58:56",
-  "count": 76,
+  "generated_at": "2026-11-26T01:12:32",
+  "count": 82,
   "clips": {
     "sbr-intro": {
       "file": "sbr-intro.mp3",
@@ -25,6 +25,36 @@
       "file": "pm.mp3",
       "text": "P.M.",
       "duration": 0.496
+    },
+    "morning": {
+      "file": "morning.mp3",
+      "text": "in the morning",
+      "duration": 0.705
+    },
+    "afternoon": {
+      "file": "afternoon.mp3",
+      "text": "in the afternoon",
+      "duration": 0.914
+    },
+    "evening": {
+      "file": "evening.mp3",
+      "text": "in the evening",
+      "duration": 0.784
+    },
+    "night": {
+      "file": "night.mp3",
+      "text": "at night",
+      "duration": 0.601
+    },
+    "noon": {
+      "file": "noon.mp3",
+      "text": "noon",
+      "duration": 0.496
+    },
+    "midnight": {
+      "file": "midnight.mp3",
+      "text": "midnight",
+      "duration": 0.601
     },
     "h-01": {
       "file": "h-01.mp3",
