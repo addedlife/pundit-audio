@@ -27,9 +27,10 @@ html.zoomed #dim{opacity:1;pointer-events:auto}
 #stage{position:fixed;inset:0;overflow:hidden;z-index:21;display:none;touch-action:none;overscroll-behavior:none}
 html.zoomed #stage,html.closing #stage{display:block}
 #card{position:absolute;left:0;top:0;background:var(--paper);touch-action:none;cursor:grab;
-  transform-origin:0 0;will-change:transform;backface-visibility:hidden;
+  transform-origin:0 0;
   box-shadow:0 18px 50px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2)}
 #card.panning{cursor:grabbing}
+#card.live{will-change:transform}
 #card .lo,#card .hi,#card #cl{position:absolute;display:block;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
 #card .lo{background-repeat:no-repeat;pointer-events:none}
 #card .hi{pointer-events:none;opacity:0;transition:opacity .2s}
@@ -107,7 +108,7 @@ D.links.forEach(l => pb.appendChild(mkLink(l, D.w, D.h, 'pg')));
 
 /* ---- geometry: card = paper with padding; content (bw x bh pdf units) sits inside the padding ---- */
 let cur = -1, busy = false, cardLinks = [], savedY = 0, cpath = '';
-let fitS = 1, startS = 1, minS = 1, maxS = 4, x = 0, y = 0, s = 1;
+let fitS = 1, startS = 1, minS = 1, maxS = 4, x = 0, y = 0, s = 1, sb = 1;  // sb: scale the DOM is laid out at (crisp)
 let bw = 1, bh = 1, padX = 0, padT = 0, padB = 0, CW = 1, CH = 1;
 let moved = false, pinching = false, gesturePinch = false, suppressClick = false;
 const DUR = 420;
@@ -133,11 +134,19 @@ function planGeometry(b) {
   minS = Math.min(st, f, (vh - 2 * m) / CH);               // pinch out to see the whole clipping
   maxS = Math.max(minS * MAX_Z, st * 3);
 }
-function layout() {                       // unscaled paper; zoom is a GPU scale, not a layout resize
-  card.style.width = CW + 'px'; card.style.height = CH + 'px';
-  for (const e of [lo, hi, cl]) { e.style.left = padX + 'px'; e.style.top = padT + 'px'; e.style.width = bw + 'px'; e.style.height = bh + 'px'; }
+function layout() {                       // real pixel size at the base scale sb (WebKit rasterizes at layout size)
+  card.style.width = CW * sb + 'px'; card.style.height = CH * sb + 'px';
+  for (const e of [lo, hi, cl]) { e.style.left = padX * sb + 'px'; e.style.top = padT * sb + 'px'; e.style.width = bw * sb + 'px'; e.style.height = bh * sb + 'px'; }
   lo.style.backgroundSize = `${100 * D.w / bw}% ${100 * D.h / bh}%`;
   const b = D.blocks[cur]; if (b) lo.style.backgroundPosition = `${100 * b.r[0] / (D.w - bw || 1)}% ${100 * b.r[1] / (D.h - bh || 1)}%`;
+  if (vst) { vec.style.left = vst.lx * sb + 'px'; vec.style.top = vst.ly * sb + 'px'; vec.style.width = vst.w * sb + 'px'; vec.style.height = vst.h * sb + 'px'; }
+}
+function gestureActive() { return fingers.size > 0 || gliding || mouseDown; }
+function settle() {                       // bake the zoom into layout: no scale() left, no will-change -> crisp re-raster
+  if (cur < 0) return;
+  if (Math.abs(s - sb) > 1e-6) { sb = s; layout(); }
+  if (!gestureActive()) card.classList.remove('live');
+  apply();
 }
 const svgCache = new Map(), svgPending = new Map();
 function loadVec(i) {
@@ -156,18 +165,20 @@ function mountVec() {
 }
 function commit() {                         // window the vector to what's on screen (+25%); not every pan frame
   commitRaf = 0; clearTimeout(commitTimer); commitTimer = 0;
-  if (cur < 0 || vecFor !== cur || busy) return;
-  const sv = vec.firstElementChild; if (!sv || !isFinite(x + y + s)) return;
+  if (cur < 0 || busy || !isFinite(x + y + s)) return;
+  settle();
+  if (vecFor !== cur) return;
+  const sv = vec.firstElementChild; if (!sv) return;
   const vw = innerWidth, vh = innerHeight;
   const cx = x + padX * s, cy = y + padT * s, cw = bw * s, ch = bh * s;
   const X0 = Math.max(cx, -0.25 * vw), Y0 = Math.max(cy, -0.25 * vh), X1 = Math.min(cx + cw, 1.25 * vw), Y1 = Math.min(cy + ch, 1.25 * vh);
   if (X1 <= X0 || Y1 <= Y0) return;
   const vbX = (X0 - cx) / s, vbY = (Y0 - cy) / s, vbW = (X1 - X0) / s, vbH = (Y1 - Y0) / s;
   sv.setAttribute('viewBox', `${vbX} ${vbY} ${vbW} ${vbH}`);
-  vec.style.left = (padX + vbX) + 'px'; vec.style.top = (padT + vbY) + 'px';
-  vec.style.width = vbW + 'px'; vec.style.height = vbH + 'px';
-  vec.style.transform = 'none'; vec.style.display = 'block';
   vst = { lx: padX + vbX, ly: padT + vbY, w: vbW, h: vbH };
+  vec.style.left = vst.lx * sb + 'px'; vec.style.top = vst.ly * sb + 'px';
+  vec.style.width = vst.w * sb + 'px'; vec.style.height = vst.h * sb + 'px';
+  vec.style.transform = 'none'; vec.style.display = 'block';
   hi.classList.remove('ok'); lo.style.visibility = 'hidden';
 }
 function liveVec() {                         // the card's scale already zooms the vector; only recommit if the window is missed
@@ -182,7 +193,13 @@ function liveVec() {                         // the card's scale already zooms t
   if (!commitTimer) commitTimer = setTimeout(() => { commitTimer = 0; commit(); }, delay);
 }
 function apply() {
-  card.style.transform = `translate3d(${x}px,${y}px,0) scale(${s})`;
+  const k = s / sb;
+  if (Math.abs(k - 1) < 1e-6) {               // settled: whole-pixel translate only, so WebKit paints text/SVG at full res
+    card.style.transform = `translate(${Math.round(x)}px,${Math.round(y)}px)`;
+  } else {                                     // mid-gesture: cheap GPU scale of the last crisp raster
+    card.classList.add('live');
+    card.style.transform = `translate3d(${x}px,${y}px,0) scale(${k})`;
+  }
   const clip = (s / fitS) < 1.7 ? cpath : 'none';
   if (card.dataset.clip !== clip) { card.style.clipPath = card.style.webkitClipPath = clip; card.dataset.clip = clip; }
   card.dataset.scale = String(+(s / fitS).toFixed(3));
@@ -297,7 +314,7 @@ function animate(x1, y1, s1, dur, clampEnd, done) {
     s = s0 + (s1 - s0) * e; x = x0 + (x1 - x0) * e; y = y0 + (y1 - y0) * e;
     if (clampEnd && t === 1) clampPan();
     apply();
-    if (t < 1) requestAnimationFrame(step); else { if (done) done(); }
+    if (t < 1) requestAnimationFrame(step); else { if (done) done(); else if (clampEnd) commit(); }
   })(performance.now());
 }
 
@@ -307,7 +324,7 @@ function openBlk(i) {
   if (busy || cur >= 0) return; busy = true; cur = i;
   const b = D.blocks[i], el = blkEls[i];
   savedY = window.scrollY || 0;
-  stopGlide(); planGeometry(b); layout();
+  stopGlide(); planGeometry(b); sb = startS; vst = null; layout();
   cpath = papercut(i + 3);
   hi.classList.remove('ok'); hi.onload = () => { if (!vst) hi.classList.add('ok'); }; hi.src = b.img;
   if (hi.complete && hi.naturalWidth) hi.classList.add('ok');
@@ -326,7 +343,7 @@ function openBlk(i) {
   apply();
   requestAnimationFrame(() => animate(x1, y1, startS, DUR, false, () => {
     clampPan(); apply();
-    busy = false; root.classList.add('settled'); placeX(); mountVec();
+    busy = false; root.classList.add('settled'); settle(); placeX(); mountVec();
   }));
 }
 function closeBlk() {
@@ -488,7 +505,7 @@ document.addEventListener('gesturechange', lockPage, { passive: false });
 document.addEventListener('gestureend', lockPage, { passive: false });
 
 /* mouse / trackpad */
-let mouseDown = false;
+let mouseDown = false, wheelTimer = 0;
 stage.addEventListener('mousedown', e => {
   if (cur < 0 || busy || e.button !== 0) return;
   if (e.target === xb || xb.contains(e.target)) return;
@@ -531,6 +548,7 @@ stage.addEventListener('wheel', e => {
     const factor = Math.exp(-e.deltaY * 0.01);
     setScaleAt(s * factor, e.clientX, e.clientY, false);
     noteSample();
+    clearTimeout(wheelTimer); wheelTimer = setTimeout(() => startGlide(0, 0), 160);
   } else {
     x -= e.deltaX; y -= e.deltaY;
     rubberXY(); noteSample(); apply();
