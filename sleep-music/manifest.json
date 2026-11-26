@@ -1,0 +1,229 @@
+{
+ "version": 1,
+ "default": "calm",
+ "lead_silence": "silence-4s.mp3",
+ "lists": {
+  "calm": {
+   "label": "Calm",
+   "tracks": [
+    {
+     "file": "calm/01-pachelbel-canon.mp3",
+     "title": "Pachelbel — Canon in D",
+     "performer": "USAF Band Strolling Strings",
+     "duration": 231.8
+    },
+    {
+     "file": "calm/02-bach-air.mp3",
+     "title": "Bach — Air (Orchestral Suite No. 3)",
+     "performer": "USAF Band Air Force Strings",
+     "duration": 186.3
+    },
+    {
+     "file": "calm/03-bach-largo-bwv1056.mp3",
+     "title": "Bach — Largo, Keyboard Concerto in F minor, BWV 1056",
+     "performer": "Michel Rondeau, harpsichord (via Musopen)",
+     "duration": 194.8
+    },
+    {
+     "file": "calm/04-corelli-pastorale.mp3",
+     "title": "Corelli — Christmas Concerto, Pastorale",
+     "performer": "Advent Chamber Orchestra",
+     "duration": 135.2
+    },
+    {
+     "file": "calm/05-vivaldi-winter-largo.mp3",
+     "title": "Vivaldi — Winter, Largo",
+     "performer": "The Modena Chamber Orchestra (via Musopen)",
+     "duration": 166.9
+    },
+    {
+     "file": "calm/06-vivaldi-rv93-largo.mp3",
+     "title": "Vivaldi — Largo, Concerto in D, RV 93",
+     "performer": "Paul De Bra, accordion orchestra",
+     "duration": 303.2
+    },
+    {
+     "file": "calm/07-albinoni-oboe-adagio.mp3",
+     "title": "Albinoni — Adagio, Oboe Concerto in D minor, Op. 9 No. 2",
+     "performer": "Paul Arden-Taylor, oboe (via Musopen)",
+     "duration": 260.8
+    },
+    {
+     "file": "calm/08-handel-ombra-mai-fu.mp3",
+     "title": "Handel — Ombra mai fù (Serse)",
+     "performer": "Lea Desandre & Les Arts Florissants",
+     "duration": 180.5
+    },
+    {
+     "file": "calm/09-bach-christmas-oratorio-sinfonia.mp3",
+     "title": "Bach — Sinfonia, Christmas Oratorio",
+     "performer": "Phiroz Dalal, St Matthew's Concert Choir and Orchestra",
+     "duration": 296.6
+    },
+    {
+     "file": "calm/10-handel-pifa.mp3",
+     "title": "Handel — Pastoral Symphony (Pifa), Messiah",
+     "performer": "MIT Concert Choir & Orchestra, W. Cutter",
+     "duration": 77.5
+    },
+    {
+     "file": "calm/11-satie-gymnopedie-1.mp3",
+     "title": "Satie — Gymnopédie No. 1",
+     "performer": "Robin Alciatore, piano (via Musopen)",
+     "duration": 186.6
+    },
+    {
+     "file": "calm/12-mozart-clarinet-adagio.mp3",
+     "title": "Mozart — Adagio, Clarinet Concerto in A, K. 622",
+     "performer": "William McColl, basset clarinet; University of Washington Symphony, Abraham Kaplan",
+     "duration": 455.8
+    },
+    {
+     "file": "calm/13-ravel-pavane.mp3",
+     "title": "Ravel — Pavane pour une infante défunte",
+     "performer": "Thérèse Dussaut, piano",
+     "duration": 311.3
+    },
+    {
+     "file": "calm/14-massenet-meditation.mp3",
+     "title": "Massenet — Méditation, Thaïs",
+     "performer": "Bomsori Kim, violin; Pallavi Mahidhara, piano",
+     "duration": 289.2
+    },
+    {
+     "file": "calm/15-saint-saens-swan.mp3",
+     "title": "Saint-Saëns — The Swan",
+     "performer": "Alisa Weilerstein, cello; Jason Yoder, piano",
+     "duration": 179.3
+    }
+   ],
+   "total_seconds": 3455.8
+  },
+  "lively": {
+   "label": "Lively Baroque",
+   "tracks": [
+    {
+     "file": "lively/01-brandenburg3-i.mp3",
+     "title": "Bach — Brandenburg Concerto No. 3, I. Allegro",
+     "performer": "Advent Chamber Orchestra",
+     "duration": 322.2
+    },
+    {
+     "file": "lively/02-brandenburg3-iii.mp3",
+     "title": "Bach — Brandenburg Concerto No. 3, III. Allegro",
+     "performer": "Advent Chamber Orchestra",
+     "duration": 276.7
+    },
+    {
+     "file": "lively/03-brandenburg5-i.mp3",
+     "title": "Bach — Brandenburg Concerto No. 5, I. Allegro",
+     "performer": "Advent Chamber Orchestra",
+     "duration": 601.6
+    },
+    {
+     "file": "lively/04-brandenburg5-iii.mp3",
+     "title": "Bach — Brandenburg Concerto No. 5, III. Allegro",
+     "performer": "Advent Chamber Orchestra",
+     "duration": 300.0
+    },
+    {
+     "file": "lively/05-brandenburg6-iii.mp3",
+     "title": "Bach — Brandenburg Concerto No. 6, III. Allegro",
+     "performer": "Advent Chamber Orchestra",
+     "duration": 338.9
+    },
+    {
+     "file": "lively/06-bwv1052-i.mp3",
+     "title": "Bach — Keyboard Concerto in D minor, BWV 1052, I. Allegro",
+     "performer": "Johannes Volker Schmidt, piano; Fulda Symphonic Orchestra",
+     "duration": 463.4
+    },
+    {
+     "file": "lively/07-bwv1052-iii.mp3",
+     "title": "Bach — Keyboard Concerto in D minor, BWV 1052, III. Allegro",
+     "performer": "Johannes Volker Schmidt, piano; Fulda Symphonic Orchestra",
+     "duration": 482.5
+    },
+    {
+     "file": "lively/08-bach-2violins-i.mp3",
+     "title": "Bach — Concerto for Two Violins, BWV 1043, I. Vivace",
+     "performer": "Advent Chamber Orchestra; David Parry & Roxana Pavel Goldstein",
+     "duration": 232.1
+    },
+    {
+     "file": "lively/09-bach-2violins-iii.mp3",
+     "title": "Bach — Concerto for Two Violins, BWV 1043, III. Allegro",
+     "performer": "Advent Chamber Orchestra; David Parry & Roxana Pavel Goldstein",
+     "duration": 292.2
+    },
+    {
+     "file": "lively/10-bach-preludio-bwv1006.mp3",
+     "title": "Bach — Preludio, Partita No. 3 in E, BWV 1006",
+     "performer": "Gordon Rowland, guitar transcription (via Musopen)",
+     "duration": 266.0
+    },
+    {
+     "file": "lively/11-vivaldi-spring-i.mp3",
+     "title": "Vivaldi — Spring, I. Allegro",
+     "performer": "John Harrison, violin",
+     "duration": 218.3
+    },
+    {
+     "file": "lively/12-vivaldi-summer-iii.mp3",
+     "title": "Vivaldi — Summer, III. Presto",
+     "performer": "John Harrison, violin",
+     "duration": 162.0
+    },
+    {
+     "file": "lively/13-vivaldi-autumn-i.mp3",
+     "title": "Vivaldi — Autumn, I. Allegro",
+     "performer": "John Harrison, violin",
+     "duration": 307.3
+    },
+    {
+     "file": "lively/14-vivaldi-autumn-iii.mp3",
+     "title": "Vivaldi — Autumn, III. Allegro",
+     "performer": "John Harrison, violin",
+     "duration": 204.2
+    },
+    {
+     "file": "lively/15-vivaldi-winter-i.mp3",
+     "title": "Vivaldi — Winter, I. Allegro non molto",
+     "performer": "John Harrison, violin",
+     "duration": 211.9
+    },
+    {
+     "file": "lively/16-vivaldi-winter-iii.mp3",
+     "title": "Vivaldi — Winter, III. Allegro",
+     "performer": "John Harrison, violin",
+     "duration": 196.0
+    },
+    {
+     "file": "lively/17-handel-hornpipe.mp3",
+     "title": "Handel — Alla Hornpipe, Water Music",
+     "performer": "US Marine Band Chamber Orchestra",
+     "duration": 231.7
+    },
+    {
+     "file": "lively/18-handel-queen-of-sheba.mp3",
+     "title": "Handel — Arrival of the Queen of Sheba",
+     "performer": "Advent Chamber Orchestra",
+     "duration": 203.5
+    },
+    {
+     "file": "lively/19-handel-cg-hwv316.mp3",
+     "title": "Handel — Concerto Grosso in D minor, Op. 3 No. 5, HWV 316",
+     "performer": "The London Baroque Orchestra, Alexander Hamilton (via Musopen)",
+     "duration": 598.8
+    },
+    {
+     "file": "lively/20-corelli-op6-4.mp3",
+     "title": "Corelli — Concerto Grosso, Op. 6 No. 4, I",
+     "performer": "Advent Chamber Orchestra",
+     "duration": 208.1
+    }
+   ],
+   "total_seconds": 6117.4
+  }
+ }
+}
