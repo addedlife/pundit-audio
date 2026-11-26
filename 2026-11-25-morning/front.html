@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#d6d3cb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>The Garland Street Journal</title>
+<style>
+:root{--paper:#EDECE8;--desk:#d6d3cb;--ink:#1d1b19}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--desk);color:var(--ink)}
+html.zoomed,html.zoomed body{overflow:hidden;touch-action:none;overscroll-behavior:none}
+html.zoomed body{position:fixed;inset:0;width:100%;height:100%}
+.sheet{position:relative;width:100%;max-width:1100px;margin:0 auto;padding:max(10px,env(safe-area-inset-top)) 6px 18px}
+.pagebox{position:relative;width:100%;aspect-ratio:var(--ar);filter:drop-shadow(0 2px 6px rgba(40,34,26,.18))}
+.pagebox img.page{position:absolute;inset:0;width:100%;height:100%;display:block;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.blk{position:absolute;cursor:zoom-in;touch-action:manipulation;transition:background .18s}
+.blk:active,.blk.press{background:rgba(29,27,25,.06)}
+.blk.src{visibility:hidden}
+a.lk{position:absolute;display:block;z-index:3;touch-action:none}
+a.lk.pg{z-index:4;touch-action:manipulation}
+a.lk:active{background:rgba(15,126,200,.14);border-radius:2px}
+.foot{text-align:center;font:12px/1.4 Georgia,'Times New Roman',serif;letter-spacing:.06em;text-transform:uppercase;color:#5a554e;padding:6px 0 0}
+.foot a{color:inherit}
+#dim{position:fixed;inset:0;background:rgba(24,21,17,.62);opacity:0;pointer-events:none;transition:opacity .34s ease;z-index:20}
+html.zoomed #dim{opacity:1;pointer-events:auto}
+#stage{position:fixed;inset:0;overflow:hidden;z-index:21;display:none;touch-action:none;overscroll-behavior:none}
+html.zoomed #stage,html.closing #stage{display:block}
+#card{position:absolute;left:0;top:0;background:var(--paper);touch-action:none;cursor:grab;
+  transform-origin:0 0;will-change:transform;backface-visibility:hidden;
+  box-shadow:0 18px 50px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2)}
+#card.panning{cursor:grabbing}
+#card .lo,#card .hi,#card #cl{position:absolute;display:block;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+#card .lo{background-repeat:no-repeat;pointer-events:none}
+#card .hi{pointer-events:none;opacity:0;transition:opacity .2s}
+#card .hi.ok{opacity:1}
+#vec{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none;display:none;overflow:hidden}
+#vec svg{display:block;width:100%;height:100%}
+#x{position:fixed;width:34px;height:34px;border-radius:50%;z-index:22;border:1px solid rgba(29,27,25,.45);
+  background:rgba(237,236,232,.97);display:none;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.22);padding:0;touch-action:manipulation}
+html.zoomed.settled #x{display:flex}
+#x svg{width:12px;height:12px}
+.ednav{position:absolute;z-index:5;display:flex;align-items:center;justify-content:center;pointer-events:none;height:0;white-space:nowrap}
+.ednav.prev{justify-content:flex-end}
+.ednav.next{justify-content:flex-start}
+.ednav a{pointer-events:auto;color:#1d1b19;text-decoration:none;font-family:Georgia,'Times New Roman',serif;
+  font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  display:inline-flex;align-items:center;justify-content:center;min-height:32px;min-width:32px;padding:0 7px;
+  -webkit-tap-highlight-color:transparent}
+.ednav a:active{opacity:.55}
+.ednav .dot{color:#1d1b19;font-size:9.5px;padding:0 1px;line-height:32px;pointer-events:none}
+</style></head>
+<body>
+<div class="sheet">
+  <div class="pagebox" id="pb"><img class="page" src="front/page.jpg" alt="Front page" draggable="false">
+    <div class="ednav prev" id="edprev" hidden></div>
+    <div class="ednav next" id="ednext" hidden></div>
+  </div>
+  <div class="foot"><a href="brief.pdf" target="_blank" rel="noopener">PDF edition</a></div>
+</div>
+<div id="dim"></div>
+<div id="stage"><div id="card">
+  <div class="lo" id="lo"></div><img class="hi" id="hi" alt="" draggable="false">
+  <div id="vec"></div><div id="cl"></div>
+</div></div>
+<button id="x" aria-label="Close"><svg viewBox="0 0 12 12"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="#1d1b19" stroke-width="1.3" stroke-linecap="round"/></svg></button>
+<script>
+const D = {"w": 400.0799865722656, "h": 2298.9599609375, "slug": "2026-11-25-morning", "blocks": [{"r": [6.0, 11.28, 388.08, 173.02], "img": "front/b00.jpg", "svg": "front/b00.svg", "label": "", "links": [[283.5, 3.72, 64.5, 9.0, "grokbot://app/v1/agent?id=b85f73f9-77e1-4856-83b6-e10be239c78a"], [99.0, 42.72, 175.5, 56.25, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [119.25, 98.22, 135.75, 56.25, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [235.5, 159.72, 79.5, 9.0, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"]]}, {"r": [6.0, 198.28, 388.08, 602.45], "img": "front/b01.jpg", "svg": "front/b01.svg", "label": "", "links": [[28.5, 52.97, 125.25, 16.5, "https://www.wsj.com/finance/stocks/anthropic-had-the-biggest-ipo-ever-the-trade-is-already-unraveling-f971d7c5"], [195.0, 103.22, 15.75, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [214.5, 106.22, 26.25, 14.25, "https://www.wsj.com/finance/stocks/anthropic-had-the-biggest-ipo-ever-the-trade-is-already-unraveling-f971d7c5"], [245.25, 106.22, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Anthropic%E2%80%99s%20shares%20story%20from%20today%27s%20morning%20brief"], [28.5, 127.22, 154.5, 16.5, "https://apple.news/AT-dfx_eQSI2VpgL031Rr2A"], [249.0, 194.72, 24.75, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [14.25, 214.22, 76.5, 13.5, "https://apple.news/AT-dfx_eQSI2VpgL031Rr2A"], [134.25, 214.22, 19.5, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20White%20House%20push%20to%20reinstate%20Jensen%20Huang%20story%20from%20today%27s%20morning%20brief"], [28.5, 235.22, 117.75, 16.5, "https://www.wsj.com/business/stripes-valuation-set-to-top-200-billion-in-latest-investor-talks-122c9027"], [14.25, 285.47, 15.75, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [33.75, 288.47, 25.5, 13.5, "https://www.wsj.com/business/stripes-valuation-set-to-top-200-billion-in-latest-investor-talks-122c9027"], [63.75, 288.47, 19.5, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Stripe%E2%80%99s%20valuation%20story%20from%20today%27s%20morning%20brief"], [28.5, 309.47, 139.5, 16.5, "https://www.wsj.com/business/deals/sanofi-to-buy-insmed-for-41-0-billion-36d6b07d"], [201.75, 359.72, 15.75, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [220.5, 362.72, 26.25, 13.5, "https://www.wsj.com/business/deals/sanofi-to-buy-insmed-for-41-0-billion-36d6b07d"], [251.25, 362.72, 19.5, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Sanofi%20agreed%20to%20buy%20story%20from%20today%27s%20morning%20brief"], [28.5, 383.72, 103.5, 16.5, "https://www.wsj.com/business/autos/when-do-chinas-look-alike-suvs-become-illegal-copycats-65498462"], [90.0, 433.97, 15.75, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [108.75, 436.97, 26.25, 13.5, "https://www.wsj.com/business/autos/when-do-chinas-look-alike-suvs-become-illegal-copycats-65498462"], [139.5, 436.97, 19.5, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Britain%E2%80%99s%20Jaguar%20story%20from%20today%27s%20morning%20brief"], [28.5, 457.97, 140.25, 16.5, "https://www.wsj.com/business/retail/abercrombie-fitch-lifts-outlook-as-sales-jump-c7f6a19f"], [312.75, 490.97, 18.75, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [14.25, 510.47, 26.25, 14.25, "https://www.wsj.com/business/retail/abercrombie-fitch-lifts-outlook-as-sales-jump-c7f6a19f"], [45.0, 510.47, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Abercrombie%20%26%20Fitch%20story%20from%20today%27s%20morning%20brief"], [28.5, 532.22, 149.25, 16.5, "https://www.wsj.com/business/retail/dicks-sporting-goods-raises-profit-outlook-on-core-business-strength-067edf91"], [287.25, 565.22, 19.5, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [14.25, 584.72, 26.25, 14.25, "https://www.wsj.com/business/retail/dicks-sporting-goods-raises-profit-outlook-on-core-business-strength-067edf91"], [45.0, 584.72, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Dick%E2%80%99s%20Sporting%20Goods%20story%20from%20today%27s%20morning%20brief"]]}, {"r": [6.0, 809.8, 388.08, 609.6], "img": "front/b02.jpg", "svg": "front/b02.svg", "label": "", "links": [[28.5, 52.7, 160.5, 16.5, "https://www.wsj.com/business/telecom/chinas-huawei-convicted-of-fraud-in-u-s-criminal-trial-20e17ac3"], [258.0, 102.95, 16.5, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [14.25, 122.45, 26.25, 13.5, "https://www.wsj.com/business/telecom/chinas-huawei-convicted-of-fraud-in-u-s-criminal-trial-20e17ac3"], [84.0, 122.45, 19.5, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Huawei%20verdict%20story%20from%20today%27s%20morning%20brief"], [28.5, 143.45, 138.75, 16.5, "https://www.wsj.com/politics/national-security/intelligence-agencies-hacked-in-cybersecurity-breach-f147ad4f"], [203.25, 177.2, 19.5, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [226.5, 179.45, 25.5, 14.25, "https://www.wsj.com/politics/national-security/intelligence-agencies-hacked-in-cybersecurity-breach-f147ad4f"], [296.25, 179.45, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20intelligence%20agencies%20hack%20story%20from%20today%27s%20morning%20brief"], [28.5, 200.45, 159.75, 16.5, "https://www.wsj.com/logistics-report/china-and-other-countries-face-higher-u-s-tariffs-over-industrial-subsidies-399e2747"], [219.75, 234.2, 20.25, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [243.0, 237.2, 26.25, 14.25, "https://www.wsj.com/logistics-report/china-and-other-countries-face-higher-u-s-tariffs-over-industrial-subsidies-399e2747"], [273.75, 237.2, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20The%20Pentagon%20is%20in%20talks%20story%20from%20today%27s%20morning%20brief"], [28.5, 258.2, 145.5, 16.5, "https://www.wsj.com/us-news/law/kilmar-abrego-garcia-is-leaving-the-u-s-to-a-country-of-his-choosing-117cad88"], [150.0, 325.7, 19.5, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [173.25, 327.95, 25.5, 14.25, "https://www.wsj.com/us-news/law/kilmar-abrego-garcia-is-leaving-the-u-s-to-a-country-of-his-choosing-117cad88"], [243.0, 327.95, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Abrego%20Garcia%20story%20from%20today%27s%20morning%20brief"], [28.5, 348.95, 105.0, 16.5, "https://www.wsj.com/politics/policy/democrats-begin-looking-into-companies-with-ties-to-donald-trump-jr-a364e7ff"], [279.75, 382.7, 19.5, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [303.0, 385.7, 26.25, 13.5, "https://www.wsj.com/politics/policy/democrats-begin-looking-into-companies-with-ties-to-donald-trump-jr-a364e7ff"], [333.75, 385.7, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Companies%20tied%20story%20from%20today%27s%20morning%20brief"], [28.5, 406.7, 126.75, 16.5, "https://www.wsj.com/world/russian-warplanes-trigger-alarm-among-u-s-partners-in-asia-8c2a2157"], [92.25, 456.95, 18.75, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [114.0, 459.95, 26.25, 13.5, "https://www.wsj.com/world/russian-warplanes-trigger-alarm-among-u-s-partners-in-asia-8c2a2157"], [144.75, 459.95, 19.5, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Russian%20warplanes%20story%20from%20today%27s%20morning%20brief"], [28.5, 480.95, 117.75, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [317.25, 497.45, 19.5, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [14.25, 516.95, 26.25, 14.25, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [45.0, 516.95, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Chinese%20leader%20Xi%20story%20from%20today%27s%20morning%20brief"], [28.5, 537.95, 143.25, 16.5, "https://www.wsj.com/world/middle-east/yemens-houthis-take-second-swipe-at-tallest-tower-in-saudi-capital-11cc288c"], [55.5, 588.95, 19.5, 16.5, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"], [78.75, 591.2, 25.5, 14.25, "https://www.wsj.com/world/middle-east/yemens-houthis-take-second-swipe-at-tallest-tower-in-saudi-capital-11cc288c"], [108.75, 591.2, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20A%20projectile%20launched%20story%20from%20today%27s%20morning%20brief"]]}, {"r": [6.0, 1446.67, 388.08, 80.73], "img": "front/b03.jpg", "svg": "front/b03.svg", "label": "", "links": []}, {"r": [6.0, 1538.95, 388.08, 91.52], "img": "front/b04.jpg", "svg": "front/b04.svg", "label": "", "links": [[28.5, 3.8, 217.5, 16.5, "https://www.arabnews.com/middle-east/iran-says-ships-hit-mines-in-hormuz-warns-vessels-to-coordinate-passage-3013942"], [54.0, 74.3, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Iran%20Hormuz%20mines%20story%20from%20today%27s%20morning%20brief"]]}, {"r": [6.0, 1639.3, 388.08, 123.6], "img": "front/b05.jpg", "svg": "front/b05.svg", "label": "", "links": [[28.5, 52.7, 222.75, 16.5, "https://www.timesofisrael.com/liveblog_entry/report-eisenkot-led-bloc-hopes-to-swear-in-government-as-soon-as-next-wednesday-yisrael-beytenu-expected-to-get-defense-absorption-ministries/"], [306.75, 105.95, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Eisenkot%20government%20swearing-in%20story%20from%20today%27s%20morning%20brief"]]}, {"r": [6.0, 1771.3, 388.08, 123.6], "img": "front/b06.jpg", "svg": "front/b06.svg", "label": "", "links": [[28.5, 52.7, 157.5, 16.5, "https://www.kikar.co.il/haredim/yahadut-hatorah-eisenkot-draft-agreement-progress"], [267.75, 105.95, 19.5, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20UTJ%20draft%20agreement%20and%20arrest-freeze%20vote%20story%20from%20today%27s%20morning%20brief"]]}, {"r": [6.0, 1903.3, 388.08, 197.85], "img": "front/b07.jpg", "svg": "front/b07.svg", "label": "", "links": [[28.5, 52.7, 162.75, 16.5, "https://www.axios.com/2026/11/24/anthropic-stock-ipo-banks"], [54.0, 105.95, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Anthropic%20stock%20story%20from%20today%27s%20morning%20brief"], [28.5, 126.95, 113.25, 16.5, "https://www.investing.com/news/stock-market-news/elon-musk-asks-us-appeals-court-to-throw-out-twitter-fraud-verdict-5048808"], [230.25, 179.45, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Musk%20Twitter%20verdict%20appeal%20story%20from%20today%27s%20morning%20brief"]]}, {"r": [6.0, 2109.55, 388.08, 123.6], "img": "front/b08.jpg", "svg": "front/b08.svg", "label": "", "links": [[28.5, 52.7, 152.25, 16.5, "https://www.reuters.com/3fec1b0a85a0/science/chinas-shenzhou-24-space-flight-takes-off-with-pakistani-national-first-foreign-2026-11-25/"], [294.0, 105.2, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Shenzhou-24%20story%20from%20today%27s%20morning%20brief"]]}, {"r": [6.0, 2244.03, 388.08, 37.93], "img": "front/b09.jpg", "svg": "front/b09.svg", "label": "", "links": [[14.25, 14.97, 16.5, 8.25, "https://cdn.freedomforum.org/dfp/pdf25/WSJ.pdf"]]}], "links": []};
+const pb = document.getElementById('pb'), root = document.documentElement;
+const stage = document.getElementById('stage');
+const card = document.getElementById('card'), lo = document.getElementById('lo'), hi = document.getElementById('hi');
+const vec = document.getElementById('vec'), cl = document.getElementById('cl');
+const xb = document.getElementById('x');
+pb.style.setProperty('--ar', D.w + ' / ' + D.h);
+const pct = (v, t) => (100 * v / t) + '%';
+const TAP_MS = 350, TAP_PX = 10, MAX_Z = 4, DBL_Z = 2.5;
+function mkLink(l, w, h, cls) {
+  const a = document.createElement('a');
+  a.className = 'lk ' + cls; a.href = l[4];
+  if (/^https?:/.test(l[4])) { a.target = '_blank'; a.rel = 'noopener'; }
+  a.style.left = pct(l[0], w); a.style.top = pct(l[1], h); a.style.width = pct(l[2], w); a.style.height = pct(l[3], h);
+  a.addEventListener('click', e => {
+    if (cls === 'cz' && (moved || pinching || suppressClick)) { e.preventDefault(); e.stopPropagation(); }
+    else e.stopPropagation();
+  });
+  return a;
+}
+function papercut(seed) {
+  let s = seed * 9301 + 49297; const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+  const pts = [], n = 22, j = () => (rnd() * 0.5).toFixed(3);
+  for (let i = 0; i <= n; i++) pts.push(`${(100 * i / n).toFixed(2)}% ${j()}%`);
+  for (let i = 0; i <= n; i++) pts.push(`calc(100% - ${j()}%) ${(100 * i / n).toFixed(2)}%`);
+  for (let i = n; i >= 0; i--) pts.push(`${(100 * i / n).toFixed(2)}% calc(100% - ${j()}%)`);
+  for (let i = n; i >= 0; i--) pts.push(`${j()}% ${(100 * i / n).toFixed(2)}%`);
+  return `polygon(${pts.join(',')})`;
+}
+const blkEls = D.blocks.map((b, i) => {
+  const d = document.createElement('div');
+  d.className = 'blk'; d.setAttribute('role', 'button'); d.setAttribute('aria-label', b.label || 'Story');
+  d.style.left = pct(b.r[0], D.w); d.style.top = pct(b.r[1], D.h); d.style.width = pct(b.r[2], D.w); d.style.height = pct(b.r[3], D.h);
+  d.addEventListener('click', () => openBlk(i));
+  d.addEventListener('pointerdown', () => loadVec(i));   // start the vector fetch ~100ms before the click
+  pb.appendChild(d); return d;
+});
+D.links.forEach(l => pb.appendChild(mkLink(l, D.w, D.h, 'pg')));
+
+/* ---- geometry: card = paper with padding; content (bw x bh pdf units) sits inside the padding ---- */
+let cur = -1, busy = false, cardLinks = [], savedY = 0, cpath = '';
+let fitS = 1, startS = 1, minS = 1, maxS = 4, x = 0, y = 0, s = 1;
+let bw = 1, bh = 1, padX = 0, padT = 0, padB = 0, CW = 1, CH = 1;
+let moved = false, pinching = false, gesturePinch = false, suppressClick = false;
+const DUR = 420;
+const ease = t => 1 - Math.pow(1 - t, 3.2);
+
+function margin() { return innerWidth < 700 ? 14 : 36; }
+function planGeometry(b) {
+  const vw = innerWidth, vh = innerHeight, m = margin();
+  bw = b.r[2]; bh = b.r[3];
+  let f = (vw - 2 * m) / (bw * 1.1);
+  for (let k = 0; k < 4; k++) {            // pad = 5% of width (min 16 css px at fit; top band holds the X)
+    padX = Math.max(0.05 * bw, 16 / f);
+    padT = Math.max(padX, 44 / f);
+    padB = padX;
+    f = (vw - 2 * m) / (bw + 2 * padX);
+  }
+  CW = bw + 2 * padX; CH = padT + bh + padB;
+  const phone = vw < 700;
+  let st = Math.min(f, phone ? 2.6 : 2.45);                // start: padded width fits the screen (capped for small blocks)
+  if (CH * st > vh - 2 * m && CW * st < vw * 0.55) st = Math.max(Math.min(st, (vh - 2 * m) / CH), phone ? 1.9 : 1.75);
+  if (phone) st = Math.max(st, Math.min(1.15, f * 2));     // phones: start readable and pan sideways for wide clippings
+  startS = st; fitS = st;
+  minS = Math.min(st, f, (vh - 2 * m) / CH);               // pinch out to see the whole clipping
+  maxS = Math.max(minS * MAX_Z, st * 3);
+}
+function layout() {                       // unscaled paper; zoom is a GPU scale, not a layout resize
+  card.style.width = CW + 'px'; card.style.height = CH + 'px';
+  for (const e of [lo, hi, cl]) { e.style.left = padX + 'px'; e.style.top = padT + 'px'; e.style.width = bw + 'px'; e.style.height = bh + 'px'; }
+  lo.style.backgroundSize = `${100 * D.w / bw}% ${100 * D.h / bh}%`;
+  const b = D.blocks[cur]; if (b) lo.style.backgroundPosition = `${100 * b.r[0] / (D.w - bw || 1)}% ${100 * b.r[1] / (D.h - bh || 1)}%`;
+}
+const svgCache = new Map(), svgPending = new Map();
+function loadVec(i) {
+  if (svgCache.has(i) || svgPending.has(i) || !D.blocks[i].svg) return;
+  const pr = fetch(D.blocks[i].svg).then(r => r.ok ? r.text() : Promise.reject()).then(t => {
+    svgCache.set(i, t.replace(/<\?xml[^>]*>/, '')); svgPending.delete(i);
+    if (cur === i && !busy) mountVec();
+  }).catch(() => svgPending.delete(i));
+  svgPending.set(i, pr);
+}
+let vst = null, vecFor = -1, commitRaf = 0, commitTimer = 0;
+function mountVec() {
+  if (cur < 0 || !svgCache.has(cur)) return;
+  if (vecFor !== cur) { vec.innerHTML = svgCache.get(cur); vecFor = cur; const sv = vec.firstElementChild; if (sv) { sv.removeAttribute('width'); sv.removeAttribute('height'); sv.setAttribute('preserveAspectRatio', 'none'); } }
+  commit();
+}
+function commit() {                         // window the vector to what's on screen (+25%); not every pan frame
+  commitRaf = 0; clearTimeout(commitTimer); commitTimer = 0;
+  if (cur < 0 || vecFor !== cur || busy) return;
+  const sv = vec.firstElementChild; if (!sv || !isFinite(x + y + s)) return;
+  const vw = innerWidth, vh = innerHeight;
+  const cx = x + padX * s, cy = y + padT * s, cw = bw * s, ch = bh * s;
+  const X0 = Math.max(cx, -0.25 * vw), Y0 = Math.max(cy, -0.25 * vh), X1 = Math.min(cx + cw, 1.25 * vw), Y1 = Math.min(cy + ch, 1.25 * vh);
+  if (X1 <= X0 || Y1 <= Y0) return;
+  const vbX = (X0 - cx) / s, vbY = (Y0 - cy) / s, vbW = (X1 - X0) / s, vbH = (Y1 - Y0) / s;
+  sv.setAttribute('viewBox', `${vbX} ${vbY} ${vbW} ${vbH}`);
+  vec.style.left = (padX + vbX) + 'px'; vec.style.top = (padT + vbY) + 'px';
+  vec.style.width = vbW + 'px'; vec.style.height = vbH + 'px';
+  vec.style.transform = 'none'; vec.style.display = 'block';
+  vst = { lx: padX + vbX, ly: padT + vbY, w: vbW, h: vbH };
+  hi.classList.remove('ok'); lo.style.visibility = 'hidden';
+}
+function liveVec() {                         // the card's scale already zooms the vector; only recommit if the window is missed
+  if (!vst || vecFor !== cur) return;
+  const vw = innerWidth, vh = innerHeight;
+  const r0 = x + vst.lx * s, r1 = r0 + vst.w * s, t0 = y + vst.ly * s, t1 = t0 + vst.h * s;
+  const cx = x + padX * s, cy = y + padT * s;
+  const vx0 = Math.max(0, cx), vx1 = Math.min(vw, cx + bw * s), vy0 = Math.max(0, cy), vy1 = Math.min(vh, cy + bh * s);
+  const miss = r0 > vx0 + 0.5 || r1 < vx1 - 0.5 || t0 > vy0 + 0.5 || t1 < vy1 - 0.5;
+  if (!miss) return;
+  const delay = gliding ? 140 : 80;
+  if (!commitTimer) commitTimer = setTimeout(() => { commitTimer = 0; commit(); }, delay);
+}
+function apply() {
+  card.style.transform = `translate3d(${x}px,${y}px,0) scale(${s})`;
+  const clip = (s / fitS) < 1.7 ? cpath : 'none';
+  if (card.dataset.clip !== clip) { card.style.clipPath = card.style.webkitClipPath = clip; card.dataset.clip = clip; }
+  card.dataset.scale = String(+(s / fitS).toFixed(3));
+  liveVec();
+  placeX();
+}
+function placeX() {
+  if (cur < 0 || !root.classList.contains('settled')) return;
+  const sz = 34, pad = 5;
+  const left = Math.min(Math.max(x + CW * s - pad - sz, 8), innerWidth - 8 - sz);
+  const top = Math.min(Math.max(y + pad, 8), innerHeight - 8 - sz);
+  xb.style.left = left + 'px'; xb.style.top = top + 'px';
+}
+function bounds() {
+  const m = margin(), vw = innerWidth, vh = innerHeight, cw = CW * s, ch = CH * s;
+  const midX = (vw - cw) / 2, midY = (vh - ch) / 2;
+  return {
+    minX: cw >= vw - 2 * m ? vw - m - cw : midX,
+    maxX: cw >= vw - 2 * m ? m : midX,
+    minY: ch >= vh - 2 * m ? vh - m - ch : midY,
+    maxY: ch >= vh - 2 * m ? m : midY,
+  };
+}
+function rubberDelta(over) { return over * 0.55 / (1 + over / 240); }
+function rubberAxis(v, lo, hi) {
+  if (v < lo) return lo - rubberDelta(lo - v);
+  if (v > hi) return hi + rubberDelta(v - hi);
+  return v;
+}
+function rubberXY() { const b = bounds(); x = rubberAxis(x, b.minX, b.maxX); y = rubberAxis(y, b.minY, b.maxY); }
+function rubberScale(sc) {
+  if (sc < minS) return minS - rubberDelta((minS - sc) * 180) / 180;
+  if (sc > maxS) return maxS + rubberDelta((sc - maxS) * 180) / 180;
+  return sc;
+}
+function clampPan() { const b = bounds(); x = Math.min(b.maxX, Math.max(b.minX, x)); y = Math.min(b.maxY, Math.max(b.minY, y)); }
+
+const TAU = 325, FLICK_MIN = 0.28;
+let gliding = false, vx = 0, vy = 0, samples = [];
+function stopGlide() {
+  if (gliding || vx || vy) { animId++; gliding = false; vx = 0; vy = 0; }
+}
+function noteSample() {
+  const t = performance.now();
+  samples.push({ t, x, y });
+  while (samples.length && t - samples[0].t > 100) samples.shift();
+}
+function sampleVelocity() {
+  if (samples.length < 2) return { vx: 0, vy: 0 };
+  const a = samples[0], b = samples[samples.length - 1], dt = Math.max(8, b.t - a.t);
+  return { vx: (b.x - a.x) / dt, vy: (b.y - a.y) / dt };
+}
+function startGlide(ivx, ivy) {
+  const b0 = bounds();
+  const out = x < b0.minX - 0.4 || x > b0.maxX + 0.4 || y < b0.minY - 0.4 || y > b0.maxY + 0.4
+    || s < minS - 1e-3 || s > maxS + 1e-3;
+  const spd = Math.hypot(ivx, ivy);
+  if (spd < FLICK_MIN && !out) { clampPan(); apply(); commit(); return; }
+  if (spd > 6) { const k = 6 / spd; ivx *= k; ivy *= k; }
+  animId++; vx = ivx; vy = ivy; gliding = true;
+  const id = animId;
+  let last = performance.now();
+  function step(now) {
+    if (id !== animId) { gliding = false; return; }
+    const dt = Math.min(32, Math.max(0, now - last)); last = now;
+    const decay = Math.exp(-dt / TAU);
+    x += vx * TAU * (1 - decay); y += vy * TAU * (1 - decay);
+    vx *= decay; vy *= decay;
+    const b = bounds();
+    const spring = (pos, vel, lo, hi) => {
+      let target = null;
+      if (pos < lo) target = lo; else if (pos > hi) target = hi;
+      if (target === null) return [pos, vel];
+      const K = 0.00028, C = 0.034;
+      vel += (-K * (pos - target) - C * vel) * dt;
+      pos += vel * dt;
+      if (Math.abs(pos - target) < 0.6 && Math.abs(vel) < 0.025) return [target, 0];
+      return [pos, vel];
+    };
+    [x, vx] = spring(x, vx, b.minX, b.maxX);
+    [y, vy] = spring(y, vy, b.minY, b.maxY);
+    if (s < minS || s > maxS) {
+      const target = s < minS ? minS : maxS;
+      s += (target - s) * (1 - Math.exp(-dt / 180));
+      if (Math.abs(s - target) < 0.002) s = target;
+    }
+    apply();
+    const inside = x >= b.minX - 0.5 && x <= b.maxX + 0.5 && y >= b.minY - 0.5 && y <= b.maxY + 0.5
+      && s >= minS - 1e-3 && s <= maxS + 1e-3;
+    if (inside && Math.hypot(vx, vy) < 0.02) {
+      clampPan(); apply(); gliding = false; vx = vy = 0; commit(); return;
+    }
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+function setScaleAt(newS, fx, fy, withAnim) {
+  const raw = newS, clamped = Math.max(minS, Math.min(maxS, newS));
+  newS = withAnim ? clamped : rubberScale(raw);
+  const k = newS / s;
+  const nx0 = fx - (fx - x) * k, ny0 = fy - (fy - y) * k;
+  if (withAnim) { x = nx0; y = ny0; s = newS; clampPan(); animate(x, y, s, 260, true); return; }
+  s = newS; x = nx0; y = ny0; rubberXY(); apply();
+}
+let animId = 0;
+function animate(x1, y1, s1, dur, clampEnd, done) {
+  const x0 = x, y0 = y, s0 = s, t0 = performance.now(), id = ++animId;
+  gliding = false; vx = vy = 0;
+  (function step(now) {
+    if (id !== animId) return;
+    const t = Math.min(1, (now - t0) / dur), e = ease(t);
+    s = s0 + (s1 - s0) * e; x = x0 + (x1 - x0) * e; y = y0 + (y1 - y0) * e;
+    if (clampEnd && t === 1) clampPan();
+    apply();
+    if (t < 1) requestAnimationFrame(step); else { if (done) done(); }
+  })(performance.now());
+}
+
+window.__pan = () => ({ x, y, s, gliding, vx, vy, bounds: bounds() });
+
+function openBlk(i) {
+  if (busy || cur >= 0) return; busy = true; cur = i;
+  const b = D.blocks[i], el = blkEls[i];
+  savedY = window.scrollY || 0;
+  stopGlide(); planGeometry(b); layout();
+  cpath = papercut(i + 3);
+  hi.classList.remove('ok'); hi.onload = () => { if (!vst) hi.classList.add('ok'); }; hi.src = b.img;
+  if (hi.complete && hi.naturalWidth) hi.classList.add('ok');
+  lo.style.backgroundImage = 'url(front/page.jpg)'; lo.style.visibility = 'visible';
+  vec.style.display = 'none'; vec.style.transform = 'none'; vst = null; vecFor = -1; vec.innerHTML = '';
+  cardLinks.forEach(a => a.remove());
+  cardLinks = b.links.map(l => cl.appendChild(mkLink(l, bw, bh, 'cz')));
+  document.body.style.top = `-${savedY}px`;
+  root.classList.add('zoomed'); root.classList.remove('settled', 'closing');
+  loadVec(i);
+  const x1 = startS * 0 + ((startS * CW >= innerWidth - 2 * margin()) ? margin() : (innerWidth - CW * startS) / 2);
+  const y1 = Math.max(margin(), (innerHeight - CH * startS) / 2);
+  const src = el.getBoundingClientRect();
+  s = src.width / bw; x = src.left - padX * s; y = src.top - padT * s;
+  el.classList.add('src');
+  apply();
+  requestAnimationFrame(() => animate(x1, y1, startS, DUR, false, () => {
+    clampPan(); apply();
+    busy = false; root.classList.add('settled'); placeX(); mountVec();
+  }));
+}
+function closeBlk() {
+  if (busy || cur < 0) return; busy = true;
+  const el = blkEls[cur];
+  stopGlide(); animId++;
+  root.classList.remove('settled'); root.classList.add('closing');
+  vec.style.display = 'none'; lo.style.visibility = 'visible'; hi.classList.add('ok');
+  const src = el.getBoundingClientRect();
+  const s1 = src.width / bw;
+  root.classList.remove('zoomed');
+  document.body.style.top = '';
+  window.scrollTo(0, savedY);
+  const src2 = el.getBoundingClientRect();
+  animate(src2.left - padX * s1, src2.top - padT * s1, s1, DUR - 40, false, () => {
+    el.classList.remove('src'); root.classList.remove('closing');
+    cur = -1; busy = false; moved = pinching = gesturePinch = false;
+    card.dataset.scale = ''; vst = null; vecFor = -1; vec.innerHTML = '';
+  });
+}
+
+/* ---------- gestures on the open clipping ---------- */
+let lastCardTap = 0, lastCardX = 0, lastCardY = 0;
+const fingers = new Map();
+let pinchStartDist = 0, pinchStartS = 1, pinchMidX = 0, pinchMidY = 0;
+let panLastX = 0, panLastY = 0, startX = 0, startY = 0, startT = 0, startOnCard = false;
+
+function onCard(el) { return el && (el === card || card.contains(el)); }
+function dist(a, b) { const dx = a.x - b.x, dy = a.y - b.y; return Math.hypot(dx, dy); }
+function pts() { return [...fingers.values()]; }
+
+function zoomAround(newS, fx, fy, anim) { setScaleAt(newS, fx, fy, anim); }
+
+function maybeOutsideClose() {
+  // A single tap on the dim area closes. A finger-up that ends a pinch or drag
+  // is not a tap (see wasMoved / wasPinch in the touch/mouse handlers).
+  closeBlk(); return true;
+}
+function maybeCardDouble(fx, fy) {
+  const now = performance.now();
+  if (now - lastCardTap < TAP_MS && Math.hypot(fx - lastCardX, fy - lastCardY) < 40) {
+    lastCardTap = 0;
+    zoomAround((s > startS * 1.4 ? startS : Math.min(maxS, startS * DBL_Z)), fx, fy, true);
+    return true;
+  }
+  lastCardTap = now; lastCardX = fx; lastCardY = fy; return false;
+}
+function fireLink(a) {
+  if (!a || !a.href) return;
+  // Don't trip the drag-suppression on the synthetic click; block only the trailing native one.
+  a.click();
+  suppressClick = true;
+  setTimeout(() => { suppressClick = false; }, 400);
+}
+
+function touchList(e) {
+  // Trust e.touches (current set). Empty touchEnd payloads otherwise leave stale fingers.
+  fingers.clear();
+  const live = e.touches || [];
+  for (const t of live) fingers.set(t.identifier, { x: t.clientX, y: t.clientY, id: t.identifier });
+}
+
+function onTouchStart(e) {
+  if (cur < 0) return;
+  e.preventDefault();
+  stopGlide();
+  if (busy) return;
+  touchList(e);
+  const t0 = e.changedTouches[0];
+  if (fingers.size === 1) {
+    startX = panLastX = t0.clientX; startY = panLastY = t0.clientY; startT = performance.now();
+    startOnCard = onCard(e.target) && e.target !== xb && !xb.contains(e.target);
+    moved = pinching = gesturePinch = false;
+    samples = [{ t: startT, x, y }];
+  }
+  if (fingers.size >= 2) {
+    const p = pts();
+    pinching = true; gesturePinch = true; moved = true;
+    pinchStartDist = dist(p[0], p[1]) || 1;
+    pinchStartS = s;
+    pinchMidX = (p[0].x + p[1].x) / 2; pinchMidY = (p[0].y + p[1].y) / 2;
+  }
+}
+function onTouchMove(e) {
+  if (cur < 0) return;
+  e.preventDefault();
+  if (busy) return;
+  touchList(e);
+  if (fingers.size >= 2) {
+    const p = pts();
+    pinching = true; gesturePinch = true; moved = true;
+    const d = dist(p[0], p[1]) || 1;
+    const midX = (p[0].x + p[1].x) / 2, midY = (p[0].y + p[1].y) / 2;
+    const newS = rubberScale(pinchStartS * (d / pinchStartDist));
+    const k = newS / s;
+    x = midX - (midX - x) * k; y = midY - (midY - y) * k; s = newS;
+    x += midX - pinchMidX; y += midY - pinchMidY;
+    pinchMidX = midX; pinchMidY = midY;
+    rubberXY(); noteSample(); apply();
+  } else if (fingers.size === 1 && !pinching) {
+    const t = pts()[0];
+    const dx = t.x - startX, dy = t.y - startY;
+    if (Math.hypot(dx, dy) > TAP_PX) moved = true;
+    if (moved && startOnCard) {
+      x += t.x - panLastX; y += t.y - panLastY;
+      panLastX = t.x; panLastY = t.y;
+      card.classList.add('panning');
+      rubberXY(); noteSample(); apply();
+    }
+  }
+}
+function onTouchEnd(e) {
+  if (cur < 0) return;
+  e.preventDefault();
+  const wasPinch = pinching || gesturePinch, wasMoved = moved, wasOnCard = startOnCard;
+  const sx = startX, sy = startY;
+  const tgt = e.target;
+  touchList(e);
+  if (fingers.size >= 2) {
+    const p = pts();
+    pinchStartDist = dist(p[0], p[1]) || 1; pinchStartS = s;
+    pinchMidX = (p[0].x + p[1].x) / 2; pinchMidY = (p[0].y + p[1].y) / 2;
+    return;
+  }
+  if (fingers.size === 1) {
+    const t = pts()[0];
+    panLastX = t.x; panLastY = t.y; pinching = false;
+    card.classList.remove('panning');
+    return;
+  }
+  pinching = false; card.classList.remove('panning');
+  if (busy) return;
+  if (tgt === xb || xb.contains(tgt)) { closeBlk(); return; }
+  const tap = !wasMoved && !wasPinch && (performance.now() - startT < 500);
+  if (!tap) {
+    const v = sampleVelocity();
+    if (wasOnCard || wasPinch) startGlide(v.vx, v.vy);
+    else { rubberXY(); apply(); startGlide(0, 0); }
+    return;
+  }
+  startGlide(0, 0);
+  if (!wasOnCard) { maybeOutsideClose(); return; }
+  if (maybeCardDouble(sx, sy)) return;
+  const top = document.elementFromPoint(sx, sy);
+  const a = top && top.closest && top.closest('a.lk.cz');
+  if (a) fireLink(a);
+}
+
+stage.addEventListener('touchstart', onTouchStart, { passive: false });
+stage.addEventListener('touchmove', onTouchMove, { passive: false });
+stage.addEventListener('touchend', onTouchEnd, { passive: false });
+stage.addEventListener('touchcancel', onTouchEnd, { passive: false });
+
+// Keep the page itself from pinch-zooming or scrolling while a clipping is open.
+function lockPage(e) { if (cur >= 0) e.preventDefault(); }
+document.addEventListener('touchmove', lockPage, { passive: false });
+document.addEventListener('gesturestart', lockPage, { passive: false });
+document.addEventListener('gesturechange', lockPage, { passive: false });
+document.addEventListener('gestureend', lockPage, { passive: false });
+
+/* mouse / trackpad */
+let mouseDown = false;
+stage.addEventListener('mousedown', e => {
+  if (cur < 0 || busy || e.button !== 0) return;
+  if (e.target === xb || xb.contains(e.target)) return;
+  stopGlide();
+  mouseDown = true; startOnCard = onCard(e.target);
+  startX = panLastX = e.clientX; startY = panLastY = e.clientY; startT = performance.now();
+  moved = false; samples = [{ t: startT, x, y }];
+});
+window.addEventListener('mousemove', e => {
+  if (!mouseDown || cur < 0) return;
+  if (Math.hypot(e.clientX - startX, e.clientY - startY) > TAP_PX) moved = true;
+  if (moved && startOnCard) {
+    x += e.clientX - panLastX; y += e.clientY - panLastY;
+    panLastX = e.clientX; panLastY = e.clientY;
+    card.classList.add('panning');
+    rubberXY(); noteSample(); apply();
+  }
+});
+window.addEventListener('mouseup', e => {
+  if (!mouseDown) return;
+  mouseDown = false; card.classList.remove('panning');
+  if (cur < 0 || busy) return;
+  const tap = !moved && (performance.now() - startT < 500);
+  if (!tap) {
+    suppressClick = true; setTimeout(() => { suppressClick = false; }, 400);
+    const v = sampleVelocity();
+    startGlide(startOnCard ? v.vx : 0, startOnCard ? v.vy : 0);
+    return;
+  }
+  if (!startOnCard) { maybeOutsideClose(); return; }
+  if (maybeCardDouble(e.clientX, e.clientY)) return;
+  const top = document.elementFromPoint(e.clientX, e.clientY);
+  const a = top && top.closest && top.closest('a.lk.cz');
+  if (a) fireLink(a);
+});
+stage.addEventListener('wheel', e => {
+  if (cur < 0 || busy) return;
+  e.preventDefault();
+  if (e.ctrlKey || e.metaKey) {
+    const factor = Math.exp(-e.deltaY * 0.01);
+    setScaleAt(s * factor, e.clientX, e.clientY, false);
+    noteSample();
+  } else {
+    x -= e.deltaX; y -= e.deltaY;
+    rubberXY(); noteSample(); apply();
+  }
+}, { passive: false });
+
+xb.addEventListener('click', e => { e.stopPropagation(); e.preventDefault(); closeBlk(); });
+xb.addEventListener('touchend', e => { e.stopPropagation(); e.preventDefault(); if (!busy) closeBlk(); }, { passive: false });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBlk(); });
+window.addEventListener('resize', () => {
+  if (cur < 0 || busy) return;
+  const z = s / startS;
+  planGeometry(D.blocks[cur]);
+  s = Math.max(minS, Math.min(maxS, startS * z));
+  clampPan(); apply(); commit();
+});
+window.addEventListener('load', () => setTimeout(() => D.blocks.forEach(b => { const im = new Image(); im.src = b.img; }), 600));
+
+/* ---------- edition navigation (from ../editions.json, so older pages gain 'next' as new briefs publish) ---------- */
+(function () {
+  const prevEl = document.getElementById('edprev'), nextEl = document.getElementById('ednext');
+  if (!prevEl) return;
+  const SLUG = D.slug || (location.pathname.split('/').filter(Boolean).slice(-2)[0] || '');
+  function place() {
+    if (D.w > 500) {                          // top margin of the sheet, right of LISTEN ALL and left of the right edge
+      prevEl.style.left = (178 / D.w * 100) + '%';
+      prevEl.style.width = (260 / D.w * 100) + '%';
+      prevEl.style.justifyContent = 'flex-start';
+      nextEl.style.left = (500 / D.w * 100) + '%';
+      nextEl.style.width = (272 / D.w * 100) + '%';
+      nextEl.style.justifyContent = 'flex-end';
+      prevEl.style.top = nextEl.style.top = (24 / D.h * 100) + '%';
+    } else {                                  // narrow What's News column: a slim strip under the top edge
+      prevEl.style.left = '2%'; prevEl.style.width = '46%'; prevEl.style.justifyContent = 'flex-start';
+      nextEl.style.left = '52%'; nextEl.style.width = '46%'; nextEl.style.justifyContent = 'flex-end';
+      prevEl.style.top = nextEl.style.top = '18px';
+    }
+  }
+  function link(e, dir) {
+    const href = '../' + (e.front || (e.slug + '/front.html'));
+    const label = dir < 0 ? '‹ ' + e.label : e.label + ' ›';
+    return '<a href="' + href + '">' + label + '</a>';
+  }
+  place();
+  fetch('../editions.json').then(r => r.ok ? r.json() : Promise.reject()).then(data => {
+    const list = (data && data.editions) || [];
+    const i = list.findIndex(e => e.slug === SLUG);
+    if (i < 0) return;
+    const prev = list.slice(Math.max(0, i - 2), i);
+    const next = list.slice(i + 1, i + 3);
+    if (prev.length) { prevEl.innerHTML = prev.map(e => link(e, -1)).join('<span class="dot"> · </span>'); prevEl.hidden = false; }
+    if (next.length) { nextEl.innerHTML = next.map(e => link(e, 1)).join('<span class="dot"> · </span>'); nextEl.hidden = false; }
+  }).catch(() => {});
+})();
+
+</script>
+</body></html>

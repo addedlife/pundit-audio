@@ -27,6 +27,7 @@ html.zoomed #dim{opacity:1;pointer-events:auto}
 #stage{position:fixed;inset:0;overflow:hidden;z-index:21;display:none;touch-action:none;overscroll-behavior:none}
 html.zoomed #stage,html.closing #stage{display:block}
 #card{position:absolute;left:0;top:0;background:var(--paper);touch-action:none;cursor:grab;
+  transform-origin:0 0;will-change:transform;backface-visibility:hidden;
   box-shadow:0 18px 50px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2)}
 #card.panning{cursor:grabbing}
 #card .lo,#card .hi,#card #cl{position:absolute;display:block;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
@@ -40,10 +41,22 @@ html.zoomed #stage,html.closing #stage{display:block}
   box-shadow:0 2px 6px rgba(0,0,0,.22);padding:0;touch-action:manipulation}
 html.zoomed.settled #x{display:flex}
 #x svg{width:12px;height:12px}
+.ednav{position:absolute;z-index:5;display:flex;align-items:center;justify-content:center;pointer-events:none;height:0;white-space:nowrap}
+.ednav.prev{justify-content:flex-end}
+.ednav.next{justify-content:flex-start}
+.ednav a{pointer-events:auto;color:#1d1b19;text-decoration:none;font-family:Georgia,'Times New Roman',serif;
+  font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  display:inline-flex;align-items:center;justify-content:center;min-height:32px;min-width:32px;padding:0 7px;
+  -webkit-tap-highlight-color:transparent}
+.ednav a:active{opacity:.55}
+.ednav .dot{color:#1d1b19;font-size:9.5px;padding:0 1px;line-height:32px;pointer-events:none}
 </style></head>
 <body>
 <div class="sheet">
-  <div class="pagebox" id="pb"><img class="page" src="front/page.jpg" alt="Front page" draggable="false"></div>
+  <div class="pagebox" id="pb"><img class="page" src="front/page.jpg" alt="Front page" draggable="false">
+    <div class="ednav prev" id="edprev" hidden></div>
+    <div class="ednav next" id="ednext" hidden></div>
+  </div>
   <div class="foot"><a href="brief.pdf" target="_blank" rel="noopener">PDF edition</a></div>
 </div>
 <div id="dim"></div>
@@ -53,7 +66,7 @@ html.zoomed.settled #x{display:flex}
 </div></div>
 <button id="x" aria-label="Close"><svg viewBox="0 0 12 12"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="#1d1b19" stroke-width="1.3" stroke-linecap="round"/></svg></button>
 <script>
-const D = {"w": 813.0, "h": 1567.800048828125, "blocks": [{"r": [36.0, 245.0, 115.9, 252.1], "img": "front/b00.jpg", "svg": "front/b00.svg", "label": "Top Stories", "links": [[64.41, 91.58, 11.02, 8.5, "https://apnews.com/article/macys-thanksgiving-parade-postponed-weather-cdc870899c8dc2d32a0ac3d86119b3ba"], [77.88, 91.58, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Macy%E2%80%99s%20parade%20postponement%20story%20from%20tonight%E2%80%99s%20brief"], [90.44, 89.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=2"], [41.44, 164.58, 37.95, 8.5, "https://www.investing.com/news/economic-indicators/us-thirdquarter-gdp-growth-revised-sharply-higher-5050977"], [81.84, 164.58, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20GDP%20revision%20story%20from%20tonight%E2%80%99s%20brief"], [94.39, 162.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=3"], [42.36, 237.58, 26.74, 8.5, "https://www.ukmto.org/-/media/ukmto/products/20261125-ukmto_warning-222-26.pdf"], [71.55, 237.58, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Dubai%20tanker%20story%20from%20tonight%E2%80%99s%20brief"], [84.11, 235.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=4"]]}, {"r": [36.0, 497.1, 115.9, 217.5], "img": "front/b01.jpg", "svg": "front/b01.svg", "label": "Israel", "links": [[3.0, 110.78, 22.89, 8.5, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916148"], [28.34, 110.78, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Liberman%20portfolios%20story%20from%20tonight%E2%80%99s%20brief"], [40.89, 108.99, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=5"], [3.0, 202.98, 13.25, 8.5, "https://www.timesofisrael.com/liveblog-november-26-2026/"], [18.7, 202.98, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Karhi%20broadcasting%20law%20story%20from%20tonight%E2%80%99s%20brief"], [31.26, 201.19, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=6"]]}, {"r": [36.0, 714.6, 115.9, 125.3], "img": "front/b02.jpg", "svg": "front/b02.svg", "label": "Chareidi World", "links": [[3.0, 110.78, 18.31, 8.5, "https://www.theyeshivaworld.com/news/israel-news/2628286/lieberman-predicts-government-with-chareidi-parties-could-be-presented-by-end-of-next-week.html"], [23.76, 110.78, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Liberman%20UTJ%20draft%20story%20from%20tonight%E2%80%99s%20brief"], [36.32, 108.99, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=7"]]}, {"r": [36.0, 839.9, 115.9, 106.1], "img": "front/b03.jpg", "svg": "front/b03.svg", "label": "Tech", "links": [[3.0, 91.58, 24.41, 8.5, "https://www.theverge.com/ai-artificial-intelligence/1042261/new-york-bans-ai-chatbot-toys-for-kids"], [29.86, 91.58, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20New%20York%20AI%20toy%20ban%20story%20from%20tonight%E2%80%99s%20brief"], [42.42, 89.79, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=8"]]}, {"r": [36.0, 946.0, 115.9, 201.7], "img": "front/b04.jpg", "svg": "front/b04.svg", "label": "Other Notable", "links": [[39.67, 91.58, 11.02, 8.5, "https://apnews.com/article/iowa-lead-detonation-714e040baedc1cd90c2ba688be76cfc7"], [53.14, 91.58, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Iowa%20lead%20azide%20story%20from%20tonight%E2%80%99s%20brief"], [65.69, 89.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=9"], [49.53, 174.18, 11.02, 8.5, "https://apnews.com/article/colombia-supermarket-exito-cartagena-hostages-c6b9c0ca799ff611148fc87d4b323628"], [63.0, 174.18, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Cartagena%20hostage%20story%20from%20tonight%E2%80%99s%20brief"], [75.56, 172.4, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=10"]]}, {"r": [159.6, 172.0, 616.4, 357.0], "img": "front/b05.jpg", "svg": "front/b05.svg", "label": "Storm postpones Macy’s 100th parade for the first time", "links": [[3.0, 0.4, 577.74, 85.6, "https://apnews.com/article/macys-thanksgiving-parade-postponed-weather-cdc870899c8dc2d32a0ac3d86119b3ba"], [4.0, 117.6, 361.2, 215.4, "https://apnews.com/article/macys-thanksgiving-parade-postponed-weather-cdc870899c8dc2d32a0ac3d86119b3ba"], [3.0, 335.5, 180.98, 8.0, "https://www.bbc.co.uk/news/articles/cwkgr38l2g9yo"], [506.31, 340.57, 11.85, 9.62, "https://apnews.com/article/macys-thanksgiving-parade-postponed-weather-cdc870899c8dc2d32a0ac3d86119b3ba"], [521.16, 340.57, 36.53, 9.62, "https://www.nbcnews.com/news/us-news/macys-thanksgiving-day-parade-weather-delay-rcna611355"], [560.69, 340.57, 15.98, 9.62, "https://www.bbc.co.uk/news/articles/cwkgr38l2g9yo"], [582.67, 341.11, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Macy%E2%80%99s%20parade%20postponement%20story%20from%20tonight%E2%80%99s%20brief"], [595.8, 339.25, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=2"]]}, {"r": [159.6, 533.0, 245.6, 512.91], "img": "front/b06.jpg", "svg": "front/b06.svg", "label": "Third-quarter growth revised up to 4.3%", "links": [[3.0, 9.5, 201.55, 54.0, "https://www.investing.com/news/economic-indicators/us-thirdquarter-gdp-growth-revised-sharply-higher-5050977"], [4.0, 84.0, 237.6, 172.0, "https://www.investing.com/news/economic-indicators/us-thirdquarter-gdp-growth-revised-sharply-higher-5050977"], [3.0, 258.5, 236.7, 8.0, "https://commons.wikimedia.org/wiki/File:Herbert_C._Hoover_Building_with_a_US_Flag_hanging.jpg"], [3.0, 265.6, 58.5, 8.0, "https://commons.wikimedia.org/wiki/File:Herbert_C._Hoover_Building_with_a_US_Flag_hanging.jpg"], [133.34, 495.98, 28.56, 9.62, "https://www.investing.com/news/economic-indicators/us-thirdquarter-gdp-growth-revised-sharply-higher-5050977"], [164.9, 495.98, 21.09, 9.62, "https://www.axios.com/2026/11/25/economy-gdp-inflation-ai"], [188.99, 495.98, 16.88, 9.62, "https://www.bea.gov/news/2026/gdp-second-estimate-and-corporate-profits-3rd-quarter-2026"], [211.87, 496.53, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20GDP%20revision%20story%20from%20tonight%E2%80%99s%20brief"], [225.0, 494.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=3"]]}, {"r": [406.8, 533.0, 122.0, 512.91], "img": "front/b07.jpg", "svg": "front/b07.svg", "label": "Projectile explodes near tanker off Dubai", "links": [[3.0, 14.12, 114.36, 62.4, "https://www.ukmto.org/-/media/ukmto/products/20261125-ukmto_warning-222-26.pdf"], [4.0, 92.84, 114.0, 80.51, "https://www.ukmto.org/-/media/ukmto/products/20261125-ukmto_warning-222-26.pdf"], [3.0, 175.85, 107.31, 8.0, "https://commons.wikimedia.org/wiki/File:US_Navy_051111-N-8163B-032_An_oil_tanker_docked_to_the_Al_Basrah_Oil_Terminal_(ABOT)_takes_on_crude_oil_in_the_Persian_Gulf.jpg"], [3.0, 182.95, 110.64, 8.0, "https://commons.wikimedia.org/wiki/File:US_Navy_051111-N-8163B-032_An_oil_tanker_docked_to_the_Al_Basrah_Oil_Terminal_(ABOT)_takes_on_crude_oil_in_the_Persian_Gulf.jpg"], [22.68, 495.98, 28.63, 9.62, "https://www.ukmto.org/-/media/ukmto/products/20261125-ukmto_warning-222-26.pdf"], [54.31, 495.98, 28.56, 9.62, "https://www.ynetnews.com/article/f3bv8n20u"], [88.88, 496.53, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Dubai%20tanker%20story%20from%20tonight%E2%80%99s%20brief"], [102.0, 494.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=4"]]}, {"r": [530.4, 533.0, 122.0, 512.91], "img": "front/b08.jpg", "svg": "front/b08.svg", "label": "Liberman’s party slated for defense, justice in Eisenkot deal", "links": [[3.0, 20.0, 114.09, 40.0, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916148"], [4.0, 71.0, 114.0, 50.0, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916148"], [3.0, 123.5, 107.86, 8.0, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916148"], [3.0, 130.6, 89.7, 8.0, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916148"], [5.45, 495.98, 21.17, 9.62, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916148"], [29.62, 495.98, 53.25, 9.62, "https://www.timesofisrael.com/liveblog_entry/bennett-denies-report-that-his-aide-is-holding-secret-talks-with-pm-confidant-on-unity-govt/"], [88.88, 496.53, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Liberman%20portfolios%20story%20from%20tonight%E2%80%99s%20brief"], [102.0, 494.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=5"]]}, {"r": [654.0, 533.0, 122.0, 512.91], "img": "front/b09.jpg", "svg": "front/b09.svg", "label": "Knesset advances repeal of Karhi broadcasting law", "links": [[3.0, 15.38, 114.22, 57.6, "https://www.timesofisrael.com/liveblog-november-26-2026/"], [4.0, 88.16, 114.0, 96.91, "https://www.timesofisrael.com/liveblog-november-26-2026/"], [3.0, 187.57, 109.11, 8.0, "https://commons.wikimedia.org/wiki/File:Shlomo_Karhi_(SHL_8894).jpg"], [3.0, 194.67, 87.42, 8.0, "https://commons.wikimedia.org/wiki/File:Shlomo_Karhi_(SHL_8894).jpg"], [30.22, 495.98, 53.25, 9.62, "https://www.timesofisrael.com/liveblog-november-26-2026/"], [89.48, 496.53, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Karhi%20broadcasting%20law%20story%20from%20tonight%E2%80%99s%20brief"], [102.61, 494.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=6"]]}, {"r": [159.6, 1052.91, 245.6, 447.09], "img": "front/b10.jpg", "svg": "front/b10.svg", "label": "Liberman: UTJ has rabbanim’s green light; Likud’s Chikli attacks draft deal", "links": [[3.0, 16.64, 233.79, 35.64, "https://www.theyeshivaworld.com/news/israel-news/2628286/lieberman-predicts-government-with-chareidi-parties-could-be-presented-by-end-of-next-week.html"], [4.0, 66.32, 237.6, 130.13, "https://www.theyeshivaworld.com/news/israel-news/2628286/lieberman-predicts-government-with-chareidi-parties-could-be-presented-by-end-of-next-week.html"], [3.0, 198.96, 210.09, 8.0, "https://www.kikar.co.il/haredim-news/netanyahu-party-attacks-yeshiva-student-status-dea"], [163.38, 430.16, 19.23, 9.62, "https://www.theyeshivaworld.com/news/israel-news/2628286/lieberman-predicts-government-with-chareidi-parties-could-be-presented-by-end-of-next-week.html"], [185.62, 430.16, 20.86, 9.62, "https://www.kikar.co.il/haredim-news/netanyahu-party-attacks-yeshiva-student-status-dea"], [212.48, 430.7, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Liberman%20UTJ%20draft%20story%20from%20tonight%E2%80%99s%20brief"], [225.6, 428.84, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=7"]]}, {"r": [406.8, 1052.91, 122.0, 447.09], "img": "front/b11.jpg", "svg": "front/b11.svg", "label": "New York bans AI chatbot toys for five years", "links": [[3.0, 14.12, 107.06, 62.4, "https://www.theverge.com/ai-artificial-intelligence/1042261/new-york-bans-ai-chatbot-toys-for-kids"], [4.0, 92.84, 114.0, 93.74, "https://www.theverge.com/ai-artificial-intelligence/1042261/new-york-bans-ai-chatbot-toys-for-kids"], [3.0, 189.09, 115.66, 8.0, "https://commons.wikimedia.org/wiki/File:2019_New_York_State_Capitol_southeast_facade,_Albany,_New_York.jpg"], [3.0, 196.19, 94.9, 8.0, "https://commons.wikimedia.org/wiki/File:2019_New_York_State_Capitol_southeast_facade,_Albany,_New_York.jpg"], [61.55, 430.16, 21.92, 9.62, "https://www.theverge.com/ai-artificial-intelligence/1042261/new-york-bans-ai-chatbot-toys-for-kids"], [89.48, 430.7, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20New%20York%20AI%20toy%20ban%20story%20from%20tonight%E2%80%99s%20brief"], [102.61, 428.84, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=8"]]}, {"r": [530.4, 1052.91, 122.0, 447.09], "img": "front/b12.jpg", "svg": "front/b12.svg", "label": "Army blows up its lead azide stockpile in Iowa", "links": [[3.0, 16.22, 112.84, 54.4, "https://apnews.com/article/iowa-lead-detonation-714e040baedc1cd90c2ba688be76cfc7"], [4.0, 85.04, 114.0, 55.24, "https://apnews.com/article/iowa-lead-detonation-714e040baedc1cd90c2ba688be76cfc7"], [3.0, 142.79, 109.31, 8.0, "https://www.aljazeera.com/news/2026/11/25/us-army-declares-iowa-lead-azide-detonation-tremendously-successful"], [3.0, 149.89, 112.41, 8.0, "https://www.aljazeera.com/news/2026/11/25/us-army-declares-iowa-lead-azide-detonation-tremendously-successful"], [29.33, 430.16, 11.85, 9.62, "https://apnews.com/article/iowa-lead-detonation-714e040baedc1cd90c2ba688be76cfc7"], [44.18, 430.16, 38.69, 9.62, "https://www.aljazeera.com/news/2026/11/25/us-army-declares-iowa-lead-azide-detonation-tremendously-successful"], [88.88, 430.7, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Iowa%20lead%20azide%20story%20from%20tonight%E2%80%99s%20brief"], [102.0, 428.84, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=9"]]}, {"r": [654.0, 1052.91, 122.0, 447.09], "img": "front/b13.jpg", "svg": "front/b13.svg", "label": "Colombian forces free 76 hostages in Cartagena supermarket", "links": [[3.0, 19.16, 112.88, 43.2, "https://apnews.com/article/colombia-supermarket-exito-cartagena-hostages-c6b9c0ca799ff611148fc87d4b323628"], [4.0, 74.12, 114.0, 63.9, "https://apnews.com/article/colombia-supermarket-exito-cartagena-hostages-c6b9c0ca799ff611148fc87d4b323628"], [3.0, 140.52, 107.08, 8.0, "https://commons.wikimedia.org/wiki/File:City_walls_of_Cartagena_02.jpg"], [3.0, 147.62, 105.21, 8.0, "https://commons.wikimedia.org/wiki/File:City_walls_of_Cartagena_02.jpg"], [52.04, 430.16, 11.85, 9.62, "https://apnews.com/article/colombia-supermarket-exito-cartagena-hostages-c6b9c0ca799ff611148fc87d4b323628"], [66.89, 430.16, 15.98, 9.62, "https://www.bbc.com/news/articles/ckp80mjr9emyo"], [88.88, 430.7, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Cartagena%20hostage%20story%20from%20tonight%E2%80%99s%20brief"], [102.0, 428.84, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=10"]]}], "links": [[104.0, 8.28, 68.29, 31.45, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?autoplay=1"], [650.0, 128.2, 58.99, 13.0, "grokbot://app/v1/agent?id=b85f73f9-77e1-4856-83b6-e10be239c78a"], [126.44, 334.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=2"], [130.39, 407.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=3"], [120.11, 480.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=4"], [76.89, 606.09, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=5"], [67.26, 698.29, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=6"], [72.32, 823.59, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=7"], [78.42, 929.7, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=8"], [101.69, 1035.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=9"], [111.56, 1118.4, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=10"], [755.4, 511.25, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=2"], [384.6, 1027.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=3"], [508.8, 1027.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=4"], [632.4, 1027.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=5"], [756.61, 1027.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=6"], [385.2, 1481.75, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=7"], [509.41, 1481.75, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=8"], [632.4, 1481.75, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=9"], [756.0, 1481.75, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=10"]]};
+const D = {"w": 813.0, "h": 1567.800048828125, "slug": "2026-11-25-night", "blocks": [{"r": [36.0, 245.0, 115.9, 252.1], "img": "front/b00.jpg", "svg": "front/b00.svg", "label": "Top Stories", "links": [[64.41, 91.58, 11.02, 8.5, "https://apnews.com/article/macys-thanksgiving-parade-postponed-weather-cdc870899c8dc2d32a0ac3d86119b3ba"], [77.88, 91.58, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Macy%E2%80%99s%20parade%20postponement%20story%20from%20tonight%E2%80%99s%20brief"], [90.44, 89.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=2"], [41.44, 164.58, 37.95, 8.5, "https://www.investing.com/news/economic-indicators/us-thirdquarter-gdp-growth-revised-sharply-higher-5050977"], [81.84, 164.58, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20GDP%20revision%20story%20from%20tonight%E2%80%99s%20brief"], [94.39, 162.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=3"], [42.36, 237.58, 26.74, 8.5, "https://www.ukmto.org/-/media/ukmto/products/20261125-ukmto_warning-222-26.pdf"], [71.55, 237.58, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Dubai%20tanker%20story%20from%20tonight%E2%80%99s%20brief"], [84.11, 235.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=4"]]}, {"r": [36.0, 497.1, 115.9, 217.5], "img": "front/b01.jpg", "svg": "front/b01.svg", "label": "Israel", "links": [[3.0, 110.78, 22.89, 8.5, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916148"], [28.34, 110.78, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Liberman%20portfolios%20story%20from%20tonight%E2%80%99s%20brief"], [40.89, 108.99, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=5"], [3.0, 202.98, 13.25, 8.5, "https://www.timesofisrael.com/liveblog-november-26-2026/"], [18.7, 202.98, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Karhi%20broadcasting%20law%20story%20from%20tonight%E2%80%99s%20brief"], [31.26, 201.19, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=6"]]}, {"r": [36.0, 714.6, 115.9, 125.3], "img": "front/b02.jpg", "svg": "front/b02.svg", "label": "Chareidi World", "links": [[3.0, 110.78, 18.31, 8.5, "https://www.theyeshivaworld.com/news/israel-news/2628286/lieberman-predicts-government-with-chareidi-parties-could-be-presented-by-end-of-next-week.html"], [23.76, 110.78, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Liberman%20UTJ%20draft%20story%20from%20tonight%E2%80%99s%20brief"], [36.32, 108.99, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=7"]]}, {"r": [36.0, 839.9, 115.9, 106.1], "img": "front/b03.jpg", "svg": "front/b03.svg", "label": "Tech", "links": [[3.0, 91.58, 24.41, 8.5, "https://www.theverge.com/ai-artificial-intelligence/1042261/new-york-bans-ai-chatbot-toys-for-kids"], [29.86, 91.58, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20New%20York%20AI%20toy%20ban%20story%20from%20tonight%E2%80%99s%20brief"], [42.42, 89.79, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=8"]]}, {"r": [36.0, 946.0, 115.9, 201.7], "img": "front/b04.jpg", "svg": "front/b04.svg", "label": "Other Notable", "links": [[39.67, 91.58, 11.02, 8.5, "https://apnews.com/article/iowa-lead-detonation-714e040baedc1cd90c2ba688be76cfc7"], [53.14, 91.58, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Iowa%20lead%20azide%20story%20from%20tonight%E2%80%99s%20brief"], [65.69, 89.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=9"], [49.53, 174.18, 11.02, 8.5, "https://apnews.com/article/colombia-supermarket-exito-cartagena-hostages-c6b9c0ca799ff611148fc87d4b323628"], [63.0, 174.18, 11.11, 8.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Cartagena%20hostage%20story%20from%20tonight%E2%80%99s%20brief"], [75.56, 172.4, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=10"]]}, {"r": [159.6, 172.0, 616.4, 357.0], "img": "front/b05.jpg", "svg": "front/b05.svg", "label": "Storm postpones Macy’s 100th parade for the first time", "links": [[3.0, 0.4, 577.74, 85.6, "https://apnews.com/article/macys-thanksgiving-parade-postponed-weather-cdc870899c8dc2d32a0ac3d86119b3ba"], [4.0, 117.6, 361.2, 215.4, "https://apnews.com/article/macys-thanksgiving-parade-postponed-weather-cdc870899c8dc2d32a0ac3d86119b3ba"], [3.0, 335.5, 180.98, 8.0, "https://www.bbc.co.uk/news/articles/cwkgr38l2g9yo"], [506.31, 340.57, 11.85, 9.62, "https://apnews.com/article/macys-thanksgiving-parade-postponed-weather-cdc870899c8dc2d32a0ac3d86119b3ba"], [521.16, 340.57, 36.53, 9.62, "https://www.nbcnews.com/news/us-news/macys-thanksgiving-day-parade-weather-delay-rcna611355"], [560.69, 340.57, 15.98, 9.62, "https://www.bbc.co.uk/news/articles/cwkgr38l2g9yo"], [582.67, 341.11, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Macy%E2%80%99s%20parade%20postponement%20story%20from%20tonight%E2%80%99s%20brief"], [595.8, 339.25, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=2"]]}, {"r": [159.6, 533.0, 245.6, 512.91], "img": "front/b06.jpg", "svg": "front/b06.svg", "label": "Third-quarter growth revised up to 4.3%", "links": [[3.0, 9.5, 201.55, 54.0, "https://www.investing.com/news/economic-indicators/us-thirdquarter-gdp-growth-revised-sharply-higher-5050977"], [4.0, 84.0, 237.6, 172.0, "https://www.investing.com/news/economic-indicators/us-thirdquarter-gdp-growth-revised-sharply-higher-5050977"], [3.0, 258.5, 236.7, 8.0, "https://commons.wikimedia.org/wiki/File:Herbert_C._Hoover_Building_with_a_US_Flag_hanging.jpg"], [3.0, 265.6, 58.5, 8.0, "https://commons.wikimedia.org/wiki/File:Herbert_C._Hoover_Building_with_a_US_Flag_hanging.jpg"], [133.34, 495.98, 28.56, 9.62, "https://www.investing.com/news/economic-indicators/us-thirdquarter-gdp-growth-revised-sharply-higher-5050977"], [164.9, 495.98, 21.09, 9.62, "https://www.axios.com/2026/11/25/economy-gdp-inflation-ai"], [188.99, 495.98, 16.88, 9.62, "https://www.bea.gov/news/2026/gdp-second-estimate-and-corporate-profits-3rd-quarter-2026"], [211.87, 496.53, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20GDP%20revision%20story%20from%20tonight%E2%80%99s%20brief"], [225.0, 494.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=3"]]}, {"r": [406.8, 533.0, 122.0, 512.91], "img": "front/b07.jpg", "svg": "front/b07.svg", "label": "Projectile explodes near tanker off Dubai", "links": [[3.0, 14.12, 114.36, 62.4, "https://www.ukmto.org/-/media/ukmto/products/20261125-ukmto_warning-222-26.pdf"], [4.0, 92.84, 114.0, 80.51, "https://www.ukmto.org/-/media/ukmto/products/20261125-ukmto_warning-222-26.pdf"], [3.0, 175.85, 107.31, 8.0, "https://commons.wikimedia.org/wiki/File:US_Navy_051111-N-8163B-032_An_oil_tanker_docked_to_the_Al_Basrah_Oil_Terminal_(ABOT)_takes_on_crude_oil_in_the_Persian_Gulf.jpg"], [3.0, 182.95, 110.64, 8.0, "https://commons.wikimedia.org/wiki/File:US_Navy_051111-N-8163B-032_An_oil_tanker_docked_to_the_Al_Basrah_Oil_Terminal_(ABOT)_takes_on_crude_oil_in_the_Persian_Gulf.jpg"], [22.68, 495.98, 28.63, 9.62, "https://www.ukmto.org/-/media/ukmto/products/20261125-ukmto_warning-222-26.pdf"], [54.31, 495.98, 28.56, 9.62, "https://www.ynetnews.com/article/f3bv8n20u"], [88.88, 496.53, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Dubai%20tanker%20story%20from%20tonight%E2%80%99s%20brief"], [102.0, 494.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=4"]]}, {"r": [530.4, 533.0, 122.0, 512.91], "img": "front/b08.jpg", "svg": "front/b08.svg", "label": "Liberman’s party slated for defense, justice in Eisenkot deal", "links": [[3.0, 20.0, 114.09, 40.0, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916148"], [4.0, 71.0, 114.0, 50.0, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916148"], [3.0, 123.5, 107.86, 8.0, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916148"], [3.0, 130.6, 89.7, 8.0, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916148"], [5.45, 495.98, 21.17, 9.62, "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916148"], [29.62, 495.98, 53.25, 9.62, "https://www.timesofisrael.com/liveblog_entry/bennett-denies-report-that-his-aide-is-holding-secret-talks-with-pm-confidant-on-unity-govt/"], [88.88, 496.53, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Liberman%20portfolios%20story%20from%20tonight%E2%80%99s%20brief"], [102.0, 494.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=5"]]}, {"r": [654.0, 533.0, 122.0, 512.91], "img": "front/b09.jpg", "svg": "front/b09.svg", "label": "Knesset advances repeal of Karhi broadcasting law", "links": [[3.0, 15.38, 114.22, 57.6, "https://www.timesofisrael.com/liveblog-november-26-2026/"], [4.0, 88.16, 114.0, 96.91, "https://www.timesofisrael.com/liveblog-november-26-2026/"], [3.0, 187.57, 109.11, 8.0, "https://commons.wikimedia.org/wiki/File:Shlomo_Karhi_(SHL_8894).jpg"], [3.0, 194.67, 87.42, 8.0, "https://commons.wikimedia.org/wiki/File:Shlomo_Karhi_(SHL_8894).jpg"], [30.22, 495.98, 53.25, 9.62, "https://www.timesofisrael.com/liveblog-november-26-2026/"], [89.48, 496.53, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Karhi%20broadcasting%20law%20story%20from%20tonight%E2%80%99s%20brief"], [102.61, 494.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=6"]]}, {"r": [159.6, 1052.91, 245.6, 447.09], "img": "front/b10.jpg", "svg": "front/b10.svg", "label": "Liberman: UTJ has rabbanim’s green light; Likud’s Chikli attacks draft deal", "links": [[3.0, 16.64, 233.79, 35.64, "https://www.theyeshivaworld.com/news/israel-news/2628286/lieberman-predicts-government-with-chareidi-parties-could-be-presented-by-end-of-next-week.html"], [4.0, 66.32, 237.6, 130.13, "https://www.theyeshivaworld.com/news/israel-news/2628286/lieberman-predicts-government-with-chareidi-parties-could-be-presented-by-end-of-next-week.html"], [3.0, 198.96, 210.09, 8.0, "https://www.kikar.co.il/haredim-news/netanyahu-party-attacks-yeshiva-student-status-dea"], [163.38, 430.16, 19.23, 9.62, "https://www.theyeshivaworld.com/news/israel-news/2628286/lieberman-predicts-government-with-chareidi-parties-could-be-presented-by-end-of-next-week.html"], [185.62, 430.16, 20.86, 9.62, "https://www.kikar.co.il/haredim-news/netanyahu-party-attacks-yeshiva-student-status-dea"], [212.48, 430.7, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Liberman%20UTJ%20draft%20story%20from%20tonight%E2%80%99s%20brief"], [225.6, 428.84, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=7"]]}, {"r": [406.8, 1052.91, 122.0, 447.09], "img": "front/b11.jpg", "svg": "front/b11.svg", "label": "New York bans AI chatbot toys for five years", "links": [[3.0, 14.12, 107.06, 62.4, "https://www.theverge.com/ai-artificial-intelligence/1042261/new-york-bans-ai-chatbot-toys-for-kids"], [4.0, 92.84, 114.0, 93.74, "https://www.theverge.com/ai-artificial-intelligence/1042261/new-york-bans-ai-chatbot-toys-for-kids"], [3.0, 189.09, 115.66, 8.0, "https://commons.wikimedia.org/wiki/File:2019_New_York_State_Capitol_southeast_facade,_Albany,_New_York.jpg"], [3.0, 196.19, 94.9, 8.0, "https://commons.wikimedia.org/wiki/File:2019_New_York_State_Capitol_southeast_facade,_Albany,_New_York.jpg"], [61.55, 430.16, 21.92, 9.62, "https://www.theverge.com/ai-artificial-intelligence/1042261/new-york-bans-ai-chatbot-toys-for-kids"], [89.48, 430.7, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20New%20York%20AI%20toy%20ban%20story%20from%20tonight%E2%80%99s%20brief"], [102.61, 428.84, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=8"]]}, {"r": [530.4, 1052.91, 122.0, 447.09], "img": "front/b12.jpg", "svg": "front/b12.svg", "label": "Army blows up its lead azide stockpile in Iowa", "links": [[3.0, 16.22, 112.84, 54.4, "https://apnews.com/article/iowa-lead-detonation-714e040baedc1cd90c2ba688be76cfc7"], [4.0, 85.04, 114.0, 55.24, "https://apnews.com/article/iowa-lead-detonation-714e040baedc1cd90c2ba688be76cfc7"], [3.0, 142.79, 109.31, 8.0, "https://www.aljazeera.com/news/2026/11/25/us-army-declares-iowa-lead-azide-detonation-tremendously-successful"], [3.0, 149.89, 112.41, 8.0, "https://www.aljazeera.com/news/2026/11/25/us-army-declares-iowa-lead-azide-detonation-tremendously-successful"], [29.33, 430.16, 11.85, 9.62, "https://apnews.com/article/iowa-lead-detonation-714e040baedc1cd90c2ba688be76cfc7"], [44.18, 430.16, 38.69, 9.62, "https://www.aljazeera.com/news/2026/11/25/us-army-declares-iowa-lead-azide-detonation-tremendously-successful"], [88.88, 430.7, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Iowa%20lead%20azide%20story%20from%20tonight%E2%80%99s%20brief"], [102.0, 428.84, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=9"]]}, {"r": [654.0, 1052.91, 122.0, 447.09], "img": "front/b13.jpg", "svg": "front/b13.svg", "label": "Colombian forces free 76 hostages in Cartagena supermarket", "links": [[3.0, 19.16, 112.88, 43.2, "https://apnews.com/article/colombia-supermarket-exito-cartagena-hostages-c6b9c0ca799ff611148fc87d4b323628"], [4.0, 74.12, 114.0, 63.9, "https://apnews.com/article/colombia-supermarket-exito-cartagena-hostages-c6b9c0ca799ff611148fc87d4b323628"], [3.0, 140.52, 107.08, 8.0, "https://commons.wikimedia.org/wiki/File:City_walls_of_Cartagena_02.jpg"], [3.0, 147.62, 105.21, 8.0, "https://commons.wikimedia.org/wiki/File:City_walls_of_Cartagena_02.jpg"], [52.04, 430.16, 11.85, 9.62, "https://apnews.com/article/colombia-supermarket-exito-cartagena-hostages-c6b9c0ca799ff611148fc87d4b323628"], [66.89, 430.16, 15.98, 9.62, "https://www.bbc.com/news/articles/ckp80mjr9emyo"], [88.88, 430.7, 11.51, 8.88, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Cartagena%20hostage%20story%20from%20tonight%E2%80%99s%20brief"], [102.0, 428.84, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=10"]]}], "links": [[104.0, 8.28, 68.29, 31.45, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?autoplay=1"], [650.0, 128.2, 58.99, 13.0, "grokbot://app/v1/agent?id=b85f73f9-77e1-4856-83b6-e10be239c78a"], [126.44, 334.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=2"], [130.39, 407.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=3"], [120.11, 480.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=4"], [76.89, 606.09, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=5"], [67.26, 698.29, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=6"], [72.32, 823.59, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=7"], [78.42, 929.7, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=8"], [101.69, 1035.8, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=9"], [111.56, 1118.4, 15.33, 12.75, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=10"], [755.4, 511.25, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=2"], [384.6, 1027.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=3"], [508.8, 1027.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=4"], [632.4, 1027.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=5"], [756.61, 1027.66, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=6"], [385.2, 1481.75, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=7"], [509.41, 1481.75, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=8"], [632.4, 1481.75, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=9"], [756.0, 1481.75, 15.83, 13.31, "https://addedlife.github.io/pundit-audio/2026-11-25-night/player.html?track=10"]]};
 const pb = document.getElementById('pb'), root = document.documentElement;
 const stage = document.getElementById('stage');
 const card = document.getElementById('card'), lo = document.getElementById('lo'), hi = document.getElementById('hi');
@@ -120,10 +133,9 @@ function planGeometry(b) {
   minS = Math.min(st, f, (vh - 2 * m) / CH);               // pinch out to see the whole clipping
   maxS = Math.max(minS * MAX_Z, st * 3);
 }
-function layout() {                       // sizes of the paper + inner layers at the current scale
-  card.style.width = CW * s + 'px'; card.style.height = CH * s + 'px';
-  const ox = padX * s, oy = padT * s, w = bw * s, h = bh * s;
-  for (const e of [lo, hi, cl]) { e.style.left = ox + 'px'; e.style.top = oy + 'px'; e.style.width = w + 'px'; e.style.height = h + 'px'; }
+function layout() {                       // unscaled paper; zoom is a GPU scale, not a layout resize
+  card.style.width = CW + 'px'; card.style.height = CH + 'px';
+  for (const e of [lo, hi, cl]) { e.style.left = padX + 'px'; e.style.top = padT + 'px'; e.style.width = bw + 'px'; e.style.height = bh + 'px'; }
   lo.style.backgroundSize = `${100 * D.w / bw}% ${100 * D.h / bh}%`;
   const b = D.blocks[cur]; if (b) lo.style.backgroundPosition = `${100 * b.r[0] / (D.w - bw || 1)}% ${100 * b.r[1] / (D.h - bh || 1)}%`;
 }
@@ -142,78 +154,160 @@ function mountVec() {
   if (vecFor !== cur) { vec.innerHTML = svgCache.get(cur); vecFor = cur; const sv = vec.firstElementChild; if (sv) { sv.removeAttribute('width'); sv.removeAttribute('height'); sv.setAttribute('preserveAspectRatio', 'none'); } }
   commit();
 }
-function commit() {                         // re-render the vector at the current scale, only what is on screen (+25%)
-  commitRaf = 0; clearTimeout(commitTimer);
+function commit() {                         // window the vector to what's on screen (+25%); not every pan frame
+  commitRaf = 0; clearTimeout(commitTimer); commitTimer = 0;
   if (cur < 0 || vecFor !== cur || busy) return;
   const sv = vec.firstElementChild; if (!sv || !isFinite(x + y + s)) return;
   const vw = innerWidth, vh = innerHeight;
   const cx = x + padX * s, cy = y + padT * s, cw = bw * s, ch = bh * s;
   const X0 = Math.max(cx, -0.25 * vw), Y0 = Math.max(cy, -0.25 * vh), X1 = Math.min(cx + cw, 1.25 * vw), Y1 = Math.min(cy + ch, 1.25 * vh);
   if (X1 <= X0 || Y1 <= Y0) return;
-  sv.setAttribute('viewBox', `${(X0 - cx) / s} ${(Y0 - cy) / s} ${(X1 - X0) / s} ${(Y1 - Y0) / s}`);
-  vec.style.left = (X0 - x) + 'px'; vec.style.top = (Y0 - y) + 'px';
-  vec.style.width = (X1 - X0) + 'px'; vec.style.height = (Y1 - Y0) + 'px';
+  const vbX = (X0 - cx) / s, vbY = (Y0 - cy) / s, vbW = (X1 - X0) / s, vbH = (Y1 - Y0) / s;
+  sv.setAttribute('viewBox', `${vbX} ${vbY} ${vbW} ${vbH}`);
+  vec.style.left = (padX + vbX) + 'px'; vec.style.top = (padT + vbY) + 'px';
+  vec.style.width = vbW + 'px'; vec.style.height = vbH + 'px';
   vec.style.transform = 'none'; vec.style.display = 'block';
-  vst = { s, lx: X0 - x, ly: Y0 - y, w: X1 - X0, h: Y1 - Y0 };
+  vst = { lx: padX + vbX, ly: padT + vbY, w: vbW, h: vbH };
   hi.classList.remove('ok'); lo.style.visibility = 'hidden';
 }
-function liveVec() {                         // between commits the vector is scaled with the card (sharp again after commit)
+function liveVec() {                         // the card's scale already zooms the vector; only recommit if the window is missed
   if (!vst || vecFor !== cur) return;
-  const k = s / vst.s;
-  vec.style.transform = Math.abs(k - 1) < 1e-4 ? 'none' : `translate(${vst.lx * (k - 1)}px,${vst.ly * (k - 1)}px) scale(${k})`;
   const vw = innerWidth, vh = innerHeight;
-  const r0 = x + vst.lx * k, r1 = r0 + vst.w * k, t0 = y + vst.ly * k, t1 = t0 + vst.h * k;
+  const r0 = x + vst.lx * s, r1 = r0 + vst.w * s, t0 = y + vst.ly * s, t1 = t0 + vst.h * s;
   const cx = x + padX * s, cy = y + padT * s;
   const vx0 = Math.max(0, cx), vx1 = Math.min(vw, cx + bw * s), vy0 = Math.max(0, cy), vy1 = Math.min(vh, cy + bh * s);
   const miss = r0 > vx0 + 0.5 || r1 < vx1 - 0.5 || t0 > vy0 + 0.5 || t1 < vy1 - 0.5;
-  if (miss) { if (!commitRaf) commitRaf = requestAnimationFrame(commit); }
-  else if (Math.abs(k - 1) > 0.02) { clearTimeout(commitTimer); commitTimer = setTimeout(commit, 140); }
+  if (!miss) return;
+  const delay = gliding ? 140 : 80;
+  if (!commitTimer) commitTimer = setTimeout(() => { commitTimer = 0; commit(); }, delay);
 }
 function apply() {
-  card.style.transform = `translate(${x}px,${y}px)`;
-  layout();
+  card.style.transform = `translate3d(${x}px,${y}px,0) scale(${s})`;
   const clip = (s / fitS) < 1.7 ? cpath : 'none';
-  card.style.clipPath = card.style.webkitClipPath = clip;
+  if (card.dataset.clip !== clip) { card.style.clipPath = card.style.webkitClipPath = clip; card.dataset.clip = clip; }
   card.dataset.scale = String(+(s / fitS).toFixed(3));
-  liveVec(); placeX();
+  liveVec();
+  placeX();
 }
 function placeX() {
   if (cur < 0 || !root.classList.contains('settled')) return;
-  const r = card.getBoundingClientRect(), sz = 34, pad = 5;
-  const left = Math.min(Math.max(r.right - pad - sz, 8), innerWidth - 8 - sz);
-  const top = Math.min(Math.max(r.top + pad, 8), innerHeight - 8 - sz);
+  const sz = 34, pad = 5;
+  const left = Math.min(Math.max(x + CW * s - pad - sz, 8), innerWidth - 8 - sz);
+  const top = Math.min(Math.max(y + pad, 8), innerHeight - 8 - sz);
   xb.style.left = left + 'px'; xb.style.top = top + 'px';
 }
-function clampPan() {
+function bounds() {
   const m = margin(), vw = innerWidth, vh = innerHeight, cw = CW * s, ch = CH * s;
-  if (cw >= vw - 2 * m) x = Math.min(m, Math.max(vw - m - cw, x)); else x = (vw - cw) / 2;
-  if (ch >= vh - 2 * m) y = Math.min(m, Math.max(vh - m - ch, y)); else y = (vh - ch) / 2;
+  const midX = (vw - cw) / 2, midY = (vh - ch) / 2;
+  return {
+    minX: cw >= vw - 2 * m ? vw - m - cw : midX,
+    maxX: cw >= vw - 2 * m ? m : midX,
+    minY: ch >= vh - 2 * m ? vh - m - ch : midY,
+    maxY: ch >= vh - 2 * m ? m : midY,
+  };
+}
+function rubberDelta(over) { return over * 0.55 / (1 + over / 240); }
+function rubberAxis(v, lo, hi) {
+  if (v < lo) return lo - rubberDelta(lo - v);
+  if (v > hi) return hi + rubberDelta(v - hi);
+  return v;
+}
+function rubberXY() { const b = bounds(); x = rubberAxis(x, b.minX, b.maxX); y = rubberAxis(y, b.minY, b.maxY); }
+function rubberScale(sc) {
+  if (sc < minS) return minS - rubberDelta((minS - sc) * 180) / 180;
+  if (sc > maxS) return maxS + rubberDelta((sc - maxS) * 180) / 180;
+  return sc;
+}
+function clampPan() { const b = bounds(); x = Math.min(b.maxX, Math.max(b.minX, x)); y = Math.min(b.maxY, Math.max(b.minY, y)); }
+
+const TAU = 325, FLICK_MIN = 0.28;
+let gliding = false, vx = 0, vy = 0, samples = [];
+function stopGlide() {
+  if (gliding || vx || vy) { animId++; gliding = false; vx = 0; vy = 0; }
+}
+function noteSample() {
+  const t = performance.now();
+  samples.push({ t, x, y });
+  while (samples.length && t - samples[0].t > 100) samples.shift();
+}
+function sampleVelocity() {
+  if (samples.length < 2) return { vx: 0, vy: 0 };
+  const a = samples[0], b = samples[samples.length - 1], dt = Math.max(8, b.t - a.t);
+  return { vx: (b.x - a.x) / dt, vy: (b.y - a.y) / dt };
+}
+function startGlide(ivx, ivy) {
+  const b0 = bounds();
+  const out = x < b0.minX - 0.4 || x > b0.maxX + 0.4 || y < b0.minY - 0.4 || y > b0.maxY + 0.4
+    || s < minS - 1e-3 || s > maxS + 1e-3;
+  const spd = Math.hypot(ivx, ivy);
+  if (spd < FLICK_MIN && !out) { clampPan(); apply(); commit(); return; }
+  if (spd > 6) { const k = 6 / spd; ivx *= k; ivy *= k; }
+  animId++; vx = ivx; vy = ivy; gliding = true;
+  const id = animId;
+  let last = performance.now();
+  function step(now) {
+    if (id !== animId) { gliding = false; return; }
+    const dt = Math.min(32, Math.max(0, now - last)); last = now;
+    const decay = Math.exp(-dt / TAU);
+    x += vx * TAU * (1 - decay); y += vy * TAU * (1 - decay);
+    vx *= decay; vy *= decay;
+    const b = bounds();
+    const spring = (pos, vel, lo, hi) => {
+      let target = null;
+      if (pos < lo) target = lo; else if (pos > hi) target = hi;
+      if (target === null) return [pos, vel];
+      const K = 0.00028, C = 0.034;
+      vel += (-K * (pos - target) - C * vel) * dt;
+      pos += vel * dt;
+      if (Math.abs(pos - target) < 0.6 && Math.abs(vel) < 0.025) return [target, 0];
+      return [pos, vel];
+    };
+    [x, vx] = spring(x, vx, b.minX, b.maxX);
+    [y, vy] = spring(y, vy, b.minY, b.maxY);
+    if (s < minS || s > maxS) {
+      const target = s < minS ? minS : maxS;
+      s += (target - s) * (1 - Math.exp(-dt / 180));
+      if (Math.abs(s - target) < 0.002) s = target;
+    }
+    apply();
+    const inside = x >= b.minX - 0.5 && x <= b.maxX + 0.5 && y >= b.minY - 0.5 && y <= b.maxY + 0.5
+      && s >= minS - 1e-3 && s <= maxS + 1e-3;
+    if (inside && Math.hypot(vx, vy) < 0.02) {
+      clampPan(); apply(); gliding = false; vx = vy = 0; commit(); return;
+    }
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
 }
 function setScaleAt(newS, fx, fy, withAnim) {
-  newS = Math.max(minS, Math.min(maxS, newS));
+  const raw = newS, clamped = Math.max(minS, Math.min(maxS, newS));
+  newS = withAnim ? clamped : rubberScale(raw);
   const k = newS / s;
   const nx0 = fx - (fx - x) * k, ny0 = fy - (fy - y) * k;
-  if (withAnim) { animate(nx0, ny0, newS, 260, true); return; }
-  x = nx0; y = ny0; s = newS; clampPan(); apply();
+  if (withAnim) { x = nx0; y = ny0; s = newS; clampPan(); animate(x, y, s, 260, true); return; }
+  s = newS; x = nx0; y = ny0; rubberXY(); apply();
 }
 let animId = 0;
 function animate(x1, y1, s1, dur, clampEnd, done) {
   const x0 = x, y0 = y, s0 = s, t0 = performance.now(), id = ++animId;
+  gliding = false; vx = vy = 0;
   (function step(now) {
     if (id !== animId) return;
     const t = Math.min(1, (now - t0) / dur), e = ease(t);
     s = s0 + (s1 - s0) * e; x = x0 + (x1 - x0) * e; y = y0 + (y1 - y0) * e;
     if (clampEnd && t === 1) clampPan();
     apply();
-    if (t < 1) requestAnimationFrame(step); else if (done) done();
+    if (t < 1) requestAnimationFrame(step); else { if (done) done(); }
   })(performance.now());
 }
+
+window.__pan = () => ({ x, y, s, gliding, vx, vy, bounds: bounds() });
 
 function openBlk(i) {
   if (busy || cur >= 0) return; busy = true; cur = i;
   const b = D.blocks[i], el = blkEls[i];
   savedY = window.scrollY || 0;
-  planGeometry(b);
+  stopGlide(); planGeometry(b); layout();
   cpath = papercut(i + 3);
   hi.classList.remove('ok'); hi.onload = () => { if (!vst) hi.classList.add('ok'); }; hi.src = b.img;
   if (hi.complete && hi.naturalWidth) hi.classList.add('ok');
@@ -238,7 +332,7 @@ function openBlk(i) {
 function closeBlk() {
   if (busy || cur < 0) return; busy = true;
   const el = blkEls[cur];
-  animId++;
+  stopGlide(); animId++;
   root.classList.remove('settled'); root.classList.add('closing');
   vec.style.display = 'none'; lo.style.visibility = 'visible'; hi.classList.add('ok');
   const src = el.getBoundingClientRect();
@@ -298,6 +392,7 @@ function touchList(e) {
 function onTouchStart(e) {
   if (cur < 0) return;
   e.preventDefault();
+  stopGlide();
   if (busy) return;
   touchList(e);
   const t0 = e.changedTouches[0];
@@ -305,6 +400,7 @@ function onTouchStart(e) {
     startX = panLastX = t0.clientX; startY = panLastY = t0.clientY; startT = performance.now();
     startOnCard = onCard(e.target) && e.target !== xb && !xb.contains(e.target);
     moved = pinching = gesturePinch = false;
+    samples = [{ t: startT, x, y }];
   }
   if (fingers.size >= 2) {
     const p = pts();
@@ -324,11 +420,12 @@ function onTouchMove(e) {
     pinching = true; gesturePinch = true; moved = true;
     const d = dist(p[0], p[1]) || 1;
     const midX = (p[0].x + p[1].x) / 2, midY = (p[0].y + p[1].y) / 2;
-    setScaleAt(pinchStartS * (d / pinchStartDist), midX, midY, false);
-    // also pan by midpoint drift
+    const newS = rubberScale(pinchStartS * (d / pinchStartDist));
+    const k = newS / s;
+    x = midX - (midX - x) * k; y = midY - (midY - y) * k; s = newS;
     x += midX - pinchMidX; y += midY - pinchMidY;
     pinchMidX = midX; pinchMidY = midY;
-    clampPan(); apply();
+    rubberXY(); noteSample(); apply();
   } else if (fingers.size === 1 && !pinching) {
     const t = pts()[0];
     const dx = t.x - startX, dy = t.y - startY;
@@ -337,7 +434,7 @@ function onTouchMove(e) {
       x += t.x - panLastX; y += t.y - panLastY;
       panLastX = t.x; panLastY = t.y;
       card.classList.add('panning');
-      clampPan(); apply();
+      rubberXY(); noteSample(); apply();
     }
   }
 }
@@ -364,7 +461,13 @@ function onTouchEnd(e) {
   if (busy) return;
   if (tgt === xb || xb.contains(tgt)) { closeBlk(); return; }
   const tap = !wasMoved && !wasPinch && (performance.now() - startT < 500);
-  if (!tap) return;
+  if (!tap) {
+    const v = sampleVelocity();
+    if (wasOnCard || wasPinch) startGlide(v.vx, v.vy);
+    else { rubberXY(); apply(); startGlide(0, 0); }
+    return;
+  }
+  startGlide(0, 0);
   if (!wasOnCard) { maybeOutsideClose(); return; }
   if (maybeCardDouble(sx, sy)) return;
   const top = document.elementFromPoint(sx, sy);
@@ -389,9 +492,10 @@ let mouseDown = false;
 stage.addEventListener('mousedown', e => {
   if (cur < 0 || busy || e.button !== 0) return;
   if (e.target === xb || xb.contains(e.target)) return;
+  stopGlide();
   mouseDown = true; startOnCard = onCard(e.target);
   startX = panLastX = e.clientX; startY = panLastY = e.clientY; startT = performance.now();
-  moved = false;
+  moved = false; samples = [{ t: startT, x, y }];
 });
 window.addEventListener('mousemove', e => {
   if (!mouseDown || cur < 0) return;
@@ -400,7 +504,7 @@ window.addEventListener('mousemove', e => {
     x += e.clientX - panLastX; y += e.clientY - panLastY;
     panLastX = e.clientX; panLastY = e.clientY;
     card.classList.add('panning');
-    clampPan(); apply();
+    rubberXY(); noteSample(); apply();
   }
 });
 window.addEventListener('mouseup', e => {
@@ -408,7 +512,12 @@ window.addEventListener('mouseup', e => {
   mouseDown = false; card.classList.remove('panning');
   if (cur < 0 || busy) return;
   const tap = !moved && (performance.now() - startT < 500);
-  if (!tap) { suppressClick = true; setTimeout(() => { suppressClick = false; }, 400); return; }
+  if (!tap) {
+    suppressClick = true; setTimeout(() => { suppressClick = false; }, 400);
+    const v = sampleVelocity();
+    startGlide(startOnCard ? v.vx : 0, startOnCard ? v.vy : 0);
+    return;
+  }
   if (!startOnCard) { maybeOutsideClose(); return; }
   if (maybeCardDouble(e.clientX, e.clientY)) return;
   const top = document.elementFromPoint(e.clientX, e.clientY);
@@ -421,9 +530,10 @@ stage.addEventListener('wheel', e => {
   if (e.ctrlKey || e.metaKey) {
     const factor = Math.exp(-e.deltaY * 0.01);
     setScaleAt(s * factor, e.clientX, e.clientY, false);
+    noteSample();
   } else {
     x -= e.deltaX; y -= e.deltaY;
-    clampPan(); apply();
+    rubberXY(); noteSample(); apply();
   }
 }, { passive: false });
 
@@ -438,5 +548,43 @@ window.addEventListener('resize', () => {
   clampPan(); apply(); commit();
 });
 window.addEventListener('load', () => setTimeout(() => D.blocks.forEach(b => { const im = new Image(); im.src = b.img; }), 600));
+
+/* ---------- edition navigation (from ../editions.json, so older pages gain 'next' as new briefs publish) ---------- */
+(function () {
+  const prevEl = document.getElementById('edprev'), nextEl = document.getElementById('ednext');
+  if (!prevEl) return;
+  const SLUG = D.slug || (location.pathname.split('/').filter(Boolean).slice(-2)[0] || '');
+  function place() {
+    if (D.w > 500) {                          // top margin of the sheet, right of LISTEN ALL and left of the right edge
+      prevEl.style.left = (178 / D.w * 100) + '%';
+      prevEl.style.width = (260 / D.w * 100) + '%';
+      prevEl.style.justifyContent = 'flex-start';
+      nextEl.style.left = (500 / D.w * 100) + '%';
+      nextEl.style.width = (272 / D.w * 100) + '%';
+      nextEl.style.justifyContent = 'flex-end';
+      prevEl.style.top = nextEl.style.top = (24 / D.h * 100) + '%';
+    } else {                                  // narrow What's News column: a slim strip under the top edge
+      prevEl.style.left = '2%'; prevEl.style.width = '46%'; prevEl.style.justifyContent = 'flex-start';
+      nextEl.style.left = '52%'; nextEl.style.width = '46%'; nextEl.style.justifyContent = 'flex-end';
+      prevEl.style.top = nextEl.style.top = '18px';
+    }
+  }
+  function link(e, dir) {
+    const href = '../' + (e.front || (e.slug + '/front.html'));
+    const label = dir < 0 ? '‹ ' + e.label : e.label + ' ›';
+    return '<a href="' + href + '">' + label + '</a>';
+  }
+  place();
+  fetch('../editions.json').then(r => r.ok ? r.json() : Promise.reject()).then(data => {
+    const list = (data && data.editions) || [];
+    const i = list.findIndex(e => e.slug === SLUG);
+    if (i < 0) return;
+    const prev = list.slice(Math.max(0, i - 2), i);
+    const next = list.slice(i + 1, i + 3);
+    if (prev.length) { prevEl.innerHTML = prev.map(e => link(e, -1)).join('<span class="dot"> · </span>'); prevEl.hidden = false; }
+    if (next.length) { nextEl.innerHTML = next.map(e => link(e, 1)).join('<span class="dot"> · </span>'); nextEl.hidden = false; }
+  }).catch(() => {});
+})();
+
 </script>
 </body></html>

@@ -1,0 +1,39 @@
+{
+ "editions": [
+  {
+   "slug": "2026-11-24-night",
+   "date": "2026-11-24",
+   "mode": "night",
+   "label": "Night",
+   "front": "2026-11-24-night/front.html"
+  },
+  {
+   "slug": "2026-11-25-morning",
+   "date": "2026-11-25",
+   "mode": "morning",
+   "label": "Morning",
+   "front": "2026-11-25-morning/front.html"
+  },
+  {
+   "slug": "2026-11-25-noon",
+   "date": "2026-11-25",
+   "mode": "noon",
+   "label": "Noon",
+   "front": "2026-11-25-noon/front.html"
+  },
+  {
+   "slug": "2026-11-25-evening",
+   "date": "2026-11-25",
+   "mode": "evening",
+   "label": "Evening",
+   "front": "2026-11-25-evening/front.html"
+  },
+  {
+   "slug": "2026-11-25-night",
+   "date": "2026-11-25",
+   "mode": "night",
+   "label": "Night",
+   "front": "2026-11-25-night/front.html"
+  }
+ ]
+}
