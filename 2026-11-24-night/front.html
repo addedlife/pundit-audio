@@ -12,7 +12,15 @@ html,body{margin:0;background:var(--desk);color:var(--ink)}
 html.zoomed,html.zoomed body{overflow:hidden;touch-action:none;overscroll-behavior:none}
 html.zoomed body{position:fixed;inset:0;width:100%;height:100%}
 .sheet{position:relative;width:100%;max-width:1100px;margin:0 auto;padding:max(10px,env(safe-area-inset-top)) 6px 18px}
-.pagebox{position:relative;width:100%;aspect-ratio:var(--ar);filter:drop-shadow(0 2px 6px rgba(40,34,26,.18))}
+.pagebox{position:relative;width:100%;aspect-ratio:var(--ar);margin:0 auto 14px;filter:drop-shadow(0 2px 6px rgba(40,34,26,.18))}
+.pagebox.narrow{max-width:560px}
+.pagebox img.page.alt{display:none}
+.pagebox.flipped img.page.alt{display:block}
+.pagebox.flipped img.page.main{visibility:hidden}
+.pagebox.flipped .blk,.pagebox.flipped a.lk:not(.tgb){display:none}
+a.lk.tg{z-index:6;cursor:pointer}
+a.lk.tgb{display:none;z-index:6;cursor:pointer}
+.pagebox.flipped a.lk.tgb{display:block}
 .pagebox img.page{position:absolute;inset:0;width:100%;height:100%;display:block;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
 .blk{position:absolute;cursor:zoom-in;touch-action:manipulation;transition:background .18s}
 .blk:active,.blk.press{background:rgba(29,27,25,.06)}
@@ -54,10 +62,7 @@ html.zoomed.settled #x{display:flex}
 </style></head>
 <body>
 <div class="sheet">
-  <div class="pagebox" id="pb"><img class="page" src="front/page.jpg" alt="Front page" draggable="false">
-    <div class="ednav prev" id="edprev" hidden></div>
-    <div class="ednav next" id="ednext" hidden></div>
-  </div>
+  <div id="pages"></div>
   <div class="foot"><a href="brief.pdf" target="_blank" rel="noopener">PDF edition</a></div>
 </div>
 <div id="dim"></div>
@@ -67,13 +72,24 @@ html.zoomed.settled #x{display:flex}
 </div></div>
 <button id="x" aria-label="Close"><svg viewBox="0 0 12 12"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="#1d1b19" stroke-width="1.3" stroke-linecap="round"/></svg></button>
 <script>
-const D = {"w": 400.0799865722656, "h": 1417.919921875, "slug": "2026-11-24-night", "blocks": [{"r": [6.0, 11.28, 388.08, 173.02], "img": "front/b00.jpg", "svg": "front/b00.svg", "label": "", "links": [[267.75, 3.72, 64.5, 9.0, "grokbot://app/v1/agent?id=b85f73f9-77e1-4856-83b6-e10be239c78a"], [99.0, 42.72, 175.5, 56.25, "https://cdn.freedomforum.org/dfp/pdf24/WSJ.pdf"], [119.25, 98.22, 135.75, 56.25, "https://cdn.freedomforum.org/dfp/pdf24/WSJ.pdf"]]}, {"r": [6.0, 198.55, 388.08, 271.67], "img": "front/b01.jpg", "svg": "front/b01.svg", "label": "", "links": [[28.5, 52.7, 287.25, 16.5, "https://www.nbcnews.com/business/markets/stocks-lower-after-nvidia-fueled-gains-rcna611211"], [249.75, 88.7, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20stock%20market%20close%20story%20from%20tonight%27s%20night%20brief"], [28.5, 110.45, 309.0, 16.5, "https://abcnews.com/Politics/wireStory/democrats-clinch-historic-house-majority-259-seats-largest-138418247"], [274.5, 162.95, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20House%20majority%20story%20from%20tonight%27s%20night%20brief"], [28.5, 183.95, 244.5, 16.5, "https://www.aa.com.tr/en/middle-east/iran-says-offending-vessel-targeted-in-southern-strait-of-hormuz/4136377"], [54.0, 254.45, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Hormuz%20mine%20claim%20story%20from%20tonight%27s%20night%20brief"]]}, {"r": [6.0, 479.05, 388.08, 231.17], "img": "front/b02.jpg", "svg": "front/b02.svg", "label": "", "links": [[28.5, 52.7, 318.0, 16.5, "https://www.timesofisrael.com/liveblog_entry/yashar-says-it-signed-a-coalition-deal-with-yisrael-beytenu/"], [14.25, 69.2, 29.25, 16.5, "https://www.timesofisrael.com/liveblog_entry/yashar-says-it-signed-a-coalition-deal-with-yisrael-beytenu/"], [195.0, 122.45, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Eisenkot-Liberman%20coalition%20deal%20story%20from%20tonight%27s%20night%20brief"], [28.5, 143.45, 248.25, 16.5, "https://www.timesofisrael.com/israel-kills-hamas-security-chief-in-gaza-city-weeks-after-capturing-predecessor/"], [54.0, 213.95, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Hamas%20security%20chief%20story%20from%20tonight%27s%20night%20brief"]]}, {"r": [6.0, 719.05, 388.08, 140.1], "img": "front/b03.jpg", "svg": "front/b03.svg", "label": "", "links": [[28.5, 52.7, 295.5, 16.5, "https://www.theyeshivaworld.com/news/israel-news/2627697/fast-track-knesset-committee-fast-tracks-utj-bill-to-freeze-arrests-of-yeshiva-students-vote-set-for-wednesday.html"], [183.75, 122.45, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20yeshiva%20arrest-freeze%20bill%20story%20from%20tonight%27s%20night%20brief"]]}, {"r": [6.0, 867.55, 388.08, 231.6], "img": "front/b04.jpg", "svg": "front/b04.svg", "label": "", "links": [[28.5, 52.7, 255.0, 16.5, "https://www.axios.com/2026/11/24/anthropic-openai-unreleased-ai-safety-risks"], [116.25, 122.45, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Axios%20AI%20safety%20story%20from%20tonight%27s%20night%20brief"], [28.5, 143.45, 275.25, 16.5, "https://www.fierce-network.com/broadband/spacex-declines-bead-awards-putting-state-broadband-offices-pickle"], [138.0, 213.95, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20SpaceX%20BEAD%20subsidies%20story%20from%20tonight%27s%20night%20brief"]]}, {"r": [6.0, 1107.55, 388.08, 255.6], "img": "front/b05.jpg", "svg": "front/b05.svg", "label": "", "links": [[28.5, 52.7, 137.25, 16.5, "https://apnews.com/article/lead-azide-detonation-army-iowa-trump-83f1492cc5c3e358557f1170ea2a2d40"], [205.5, 90.2, 21.75, 10.5, "https://cdn.freedomforum.org/dfp/pdf24/WSJ.pdf"], [270.0, 88.7, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Iowa%20detonation%20story%20from%20tonight%27s%20night%20brief"], [28.5, 109.7, 261.75, 16.5, "https://www.army.mil/article/297069/army_announces_controlled_detonation_of_degraded_explosive_material_at_iowa_army_ammunition_plant"], [14.25, 126.95, 81.0, 16.5, "https://www.army.mil/article/297069/army_announces_controlled_detonation_of_degraded_explosive_material_at_iowa_army_ammunition_plant"], [304.5, 162.95, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Iowa%20detonation%20story%20from%20tonight%27s%20night%20brief"], [28.5, 183.95, 312.75, 16.5, "https://www.aljazeera.com/news/2026/11/24/sheikh-hasina-plans-to-return-to-bangladesh-from-exile-on-december-16"], [325.5, 237.2, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Sheikh%20Hasina%20story%20from%20tonight%27s%20night%20brief"]]}, {"r": [6.0, 1373.1, 388.08, 28.36], "img": "front/b06.jpg", "svg": "front/b06.svg", "label": "", "links": [[16.5, 2.4, 21.0, 11.25, "https://cdn.freedomforum.org/dfp/pdf24/WSJ.pdf"]]}], "links": []};
-const pb = document.getElementById('pb'), root = document.documentElement;
+const D = {"w": 400.0799865722656, "h": 1417.919921875, "slug": "2026-11-24-night", "pages": [{"w": 400.0799865722656, "h": 1417.919921875, "img": "front/page.jpg", "links": [[273.75, 15.0, 64.5, 9.0, "grokbot://app/v1/agent?id=b85f73f9-77e1-4856-83b6-e10be239c78a"], [105.0, 54.0, 175.5, 56.25, "https://cdn.freedomforum.org/dfp/pdf24/WSJ.pdf"], [125.25, 109.5, 135.75, 56.25, "https://cdn.freedomforum.org/dfp/pdf24/WSJ.pdf"], [34.5, 251.25, 287.25, 16.5, "https://www.nbcnews.com/business/markets/stocks-lower-after-nvidia-fueled-gains-rcna611211"], [255.75, 287.25, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20stock%20market%20close%20story%20from%20tonight%27s%20night%20brief"], [34.5, 309.0, 309.0, 16.5, "https://abcnews.com/Politics/wireStory/democrats-clinch-historic-house-majority-259-seats-largest-138418247"], [280.5, 361.5, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20House%20majority%20story%20from%20tonight%27s%20night%20brief"], [34.5, 382.5, 244.5, 16.5, "https://www.aa.com.tr/en/middle-east/iran-says-offending-vessel-targeted-in-southern-strait-of-hormuz/4136377"], [60.0, 453.0, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Hormuz%20mine%20claim%20story%20from%20tonight%27s%20night%20brief"], [34.5, 531.75, 318.0, 16.5, "https://www.timesofisrael.com/liveblog_entry/yashar-says-it-signed-a-coalition-deal-with-yisrael-beytenu/"], [20.25, 548.25, 29.25, 16.5, "https://www.timesofisrael.com/liveblog_entry/yashar-says-it-signed-a-coalition-deal-with-yisrael-beytenu/"], [201.0, 601.5, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Eisenkot-Liberman%20coalition%20deal%20story%20from%20tonight%27s%20night%20brief"], [34.5, 622.5, 248.25, 16.5, "https://www.timesofisrael.com/israel-kills-hamas-security-chief-in-gaza-city-weeks-after-capturing-predecessor/"], [60.0, 693.0, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Hamas%20security%20chief%20story%20from%20tonight%27s%20night%20brief"], [34.5, 771.75, 295.5, 16.5, "https://www.theyeshivaworld.com/news/israel-news/2627697/fast-track-knesset-committee-fast-tracks-utj-bill-to-freeze-arrests-of-yeshiva-students-vote-set-for-wednesday.html"], [189.75, 841.5, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20yeshiva%20arrest-freeze%20bill%20story%20from%20tonight%27s%20night%20brief"], [34.5, 920.25, 255.0, 16.5, "https://www.axios.com/2026/11/24/anthropic-openai-unreleased-ai-safety-risks"], [122.25, 990.0, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Axios%20AI%20safety%20story%20from%20tonight%27s%20night%20brief"], [34.5, 1011.0, 275.25, 16.5, "https://www.fierce-network.com/broadband/spacex-declines-bead-awards-putting-state-broadband-offices-pickle"], [144.0, 1081.5, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20SpaceX%20BEAD%20subsidies%20story%20from%20tonight%27s%20night%20brief"], [34.5, 1160.25, 137.25, 16.5, "https://apnews.com/article/lead-azide-detonation-army-iowa-trump-83f1492cc5c3e358557f1170ea2a2d40"], [211.5, 1197.75, 21.75, 10.5, "https://cdn.freedomforum.org/dfp/pdf24/WSJ.pdf"], [276.0, 1196.25, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Iowa%20detonation%20story%20from%20tonight%27s%20night%20brief"], [34.5, 1217.25, 261.75, 16.5, "https://www.army.mil/article/297069/army_announces_controlled_detonation_of_degraded_explosive_material_at_iowa_army_ammunition_plant"], [20.25, 1234.5, 81.0, 16.5, "https://www.army.mil/article/297069/army_announces_controlled_detonation_of_degraded_explosive_material_at_iowa_army_ammunition_plant"], [310.5, 1270.5, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Iowa%20detonation%20story%20from%20tonight%27s%20night%20brief"], [34.5, 1291.5, 312.75, 16.5, "https://www.aljazeera.com/news/2026/11/24/sheikh-hasina-plans-to-return-to-bangladesh-from-exile-on-december-16"], [331.5, 1344.75, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Sheikh%20Hasina%20story%20from%20tonight%27s%20night%20brief"], [22.5, 1375.5, 21.0, 11.25, "https://cdn.freedomforum.org/dfp/pdf24/WSJ.pdf"]]}], "blocks": [{"pg": 0, "r": [6.0, 11.28, 388.08, 173.02], "img": "front/b00.jpg", "svg": "front/b00.svg", "label": "", "links": [[267.75, 3.72, 64.5, 9.0, "grokbot://app/v1/agent?id=b85f73f9-77e1-4856-83b6-e10be239c78a"], [99.0, 42.72, 175.5, 56.25, "https://cdn.freedomforum.org/dfp/pdf24/WSJ.pdf"], [119.25, 98.22, 135.75, 56.25, "https://cdn.freedomforum.org/dfp/pdf24/WSJ.pdf"]]}, {"pg": 0, "r": [6.0, 198.55, 388.08, 271.67], "img": "front/b01.jpg", "svg": "front/b01.svg", "label": "", "links": [[28.5, 52.7, 287.25, 16.5, "https://www.nbcnews.com/business/markets/stocks-lower-after-nvidia-fueled-gains-rcna611211"], [249.75, 88.7, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20stock%20market%20close%20story%20from%20tonight%27s%20night%20brief"], [28.5, 110.45, 309.0, 16.5, "https://abcnews.com/Politics/wireStory/democrats-clinch-historic-house-majority-259-seats-largest-138418247"], [274.5, 162.95, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20House%20majority%20story%20from%20tonight%27s%20night%20brief"], [28.5, 183.95, 244.5, 16.5, "https://www.aa.com.tr/en/middle-east/iran-says-offending-vessel-targeted-in-southern-strait-of-hormuz/4136377"], [54.0, 254.45, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Hormuz%20mine%20claim%20story%20from%20tonight%27s%20night%20brief"]]}, {"pg": 0, "r": [6.0, 479.05, 388.08, 231.17], "img": "front/b02.jpg", "svg": "front/b02.svg", "label": "", "links": [[28.5, 52.7, 318.0, 16.5, "https://www.timesofisrael.com/liveblog_entry/yashar-says-it-signed-a-coalition-deal-with-yisrael-beytenu/"], [14.25, 69.2, 29.25, 16.5, "https://www.timesofisrael.com/liveblog_entry/yashar-says-it-signed-a-coalition-deal-with-yisrael-beytenu/"], [195.0, 122.45, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Eisenkot-Liberman%20coalition%20deal%20story%20from%20tonight%27s%20night%20brief"], [28.5, 143.45, 248.25, 16.5, "https://www.timesofisrael.com/israel-kills-hamas-security-chief-in-gaza-city-weeks-after-capturing-predecessor/"], [54.0, 213.95, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Hamas%20security%20chief%20story%20from%20tonight%27s%20night%20brief"]]}, {"pg": 0, "r": [6.0, 719.05, 388.08, 140.1], "img": "front/b03.jpg", "svg": "front/b03.svg", "label": "", "links": [[28.5, 52.7, 295.5, 16.5, "https://www.theyeshivaworld.com/news/israel-news/2627697/fast-track-knesset-committee-fast-tracks-utj-bill-to-freeze-arrests-of-yeshiva-students-vote-set-for-wednesday.html"], [183.75, 122.45, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20yeshiva%20arrest-freeze%20bill%20story%20from%20tonight%27s%20night%20brief"]]}, {"pg": 0, "r": [6.0, 867.55, 388.08, 231.6], "img": "front/b04.jpg", "svg": "front/b04.svg", "label": "", "links": [[28.5, 52.7, 255.0, 16.5, "https://www.axios.com/2026/11/24/anthropic-openai-unreleased-ai-safety-risks"], [116.25, 122.45, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Axios%20AI%20safety%20story%20from%20tonight%27s%20night%20brief"], [28.5, 143.45, 275.25, 16.5, "https://www.fierce-network.com/broadband/spacex-declines-bead-awards-putting-state-broadband-offices-pickle"], [138.0, 213.95, 18.75, 13.5, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20SpaceX%20BEAD%20subsidies%20story%20from%20tonight%27s%20night%20brief"]]}, {"pg": 0, "r": [6.0, 1107.55, 388.08, 255.6], "img": "front/b05.jpg", "svg": "front/b05.svg", "label": "", "links": [[28.5, 52.7, 137.25, 16.5, "https://apnews.com/article/lead-azide-detonation-army-iowa-trump-83f1492cc5c3e358557f1170ea2a2d40"], [205.5, 90.2, 21.75, 10.5, "https://cdn.freedomforum.org/dfp/pdf24/WSJ.pdf"], [270.0, 88.7, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Iowa%20detonation%20story%20from%20tonight%27s%20night%20brief"], [28.5, 109.7, 261.75, 16.5, "https://www.army.mil/article/297069/army_announces_controlled_detonation_of_degraded_explosive_material_at_iowa_army_ammunition_plant"], [14.25, 126.95, 81.0, 16.5, "https://www.army.mil/article/297069/army_announces_controlled_detonation_of_degraded_explosive_material_at_iowa_army_ammunition_plant"], [304.5, 162.95, 18.75, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Iowa%20detonation%20story%20from%20tonight%27s%20night%20brief"], [28.5, 183.95, 312.75, 16.5, "https://www.aljazeera.com/news/2026/11/24/sheikh-hasina-plans-to-return-to-bangladesh-from-exile-on-december-16"], [325.5, 237.2, 19.5, 14.25, "grokbot://app/v1/prompt?id=b85f73f9-77e1-4856-83b6-e10be239c78a&text=Show%20me%20the%20Sheikh%20Hasina%20story%20from%20tonight%27s%20night%20brief"]]}, {"pg": 0, "r": [6.0, 1373.1, 388.08, 28.36], "img": "front/b06.jpg", "svg": "front/b06.svg", "label": "", "links": [[16.5, 2.4, 21.0, 11.25, "https://cdn.freedomforum.org/dfp/pdf24/WSJ.pdf"]]}]};
+const root = document.documentElement;
+const PG = D.pages || [{ w: D.w, h: D.h, img: 'front/page.jpg', links: D.links || [] }];
+const pbs = PG.map((P, k) => {
+  const el = document.createElement('div');
+  el.className = 'pagebox' + (P.w < 500 && PG.length > 1 ? ' narrow' : '');
+  el.style.setProperty('--ar', P.w + ' / ' + P.h);
+  el.innerHTML = '<img class="page main" src="' + P.img + '" alt="' + (k === 0 ? 'Front page' : 'Page ' + (k + 1)) + '" draggable="false"' + (k > 1 ? ' loading="lazy"' : '') + '>' +
+    (P.alt ? '<img class="page alt" alt="Printed page" draggable="false">' : '') +
+    (k === 0 ? '<div class="ednav prev" id="edprev" hidden></div><div class="ednav next" id="ednext" hidden></div>' : '');
+  document.getElementById('pages').appendChild(el); return el;
+});
+const pb = pbs[0];
+let curP = PG[0];
 const stage = document.getElementById('stage');
 const card = document.getElementById('card'), lo = document.getElementById('lo'), hi = document.getElementById('hi');
 const vec = document.getElementById('vec'), cl = document.getElementById('cl');
 const xb = document.getElementById('x');
-pb.style.setProperty('--ar', D.w + ' / ' + D.h);
 const pct = (v, t) => (100 * v / t) + '%';
 const TAP_MS = 350, TAP_PX = 10, MAX_Z = 4, DBL_Z = 2.5;
 function mkLink(l, w, h, cls) {
@@ -99,12 +115,35 @@ function papercut(seed) {
 const blkEls = D.blocks.map((b, i) => {
   const d = document.createElement('div');
   d.className = 'blk'; d.setAttribute('role', 'button'); d.setAttribute('aria-label', b.label || 'Story');
-  d.style.left = pct(b.r[0], D.w); d.style.top = pct(b.r[1], D.h); d.style.width = pct(b.r[2], D.w); d.style.height = pct(b.r[3], D.h);
-  d.addEventListener('click', () => openBlk(i));
+  const P = PG[b.pg || 0];
+  d.style.left = pct(b.r[0], P.w); d.style.top = pct(b.r[1], P.h); d.style.width = pct(b.r[2], P.w); d.style.height = pct(b.r[3], P.h);
+  d.addEventListener('click', e => {
+    // A link overlay always wins: if one sits under the pointer, open it instead of zooming.
+    const under = document.elementsFromPoint(e.clientX, e.clientY).find(n => n.matches && n.matches('a.lk.pg'));
+    if (under) { e.preventDefault(); under.click(); return; }
+    openBlk(i);
+  });
   d.addEventListener('pointerdown', () => loadVec(i));   // start the vector fetch ~100ms before the click
-  pb.appendChild(d); return d;
+  pbs[b.pg || 0].appendChild(d); return d;
 });
-D.links.forEach(l => pb.appendChild(mkLink(l, D.w, D.h, 'pg')));
+PG.forEach((P, k) => (P.links || []).forEach(l => pbs[k].appendChild(mkLink(l, P.w, P.h, 'pg'))));
+/* barcode toggle: flip the edited front page to the real printed page (and back) */
+PG.forEach((P, k) => {
+  if (!P.alt || !P.tg) return;
+  const box = pbs[k], altImg = box.querySelector('img.alt');
+  const mk = (r, cls) => {
+    const a = document.createElement('a'); a.href = '#'; a.className = 'lk pg ' + cls; a.setAttribute('role', 'button');
+    a.setAttribute('aria-label', 'Flip between the edited front page and the printed page');
+    a.style.left = pct(r[0], P.w); a.style.top = pct(r[1], P.h); a.style.width = pct(r[2], P.w); a.style.height = pct(r[3], P.h);
+    a.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      if (!altImg.getAttribute('src')) altImg.src = P.alt;
+      box.classList.toggle('flipped');
+    });
+    box.appendChild(a);
+  };
+  mk(P.tg, 'tg'); mk(P.tgb || P.tg, 'tgb');
+});
 
 /* ---- geometry: card = paper with padding; content (bw x bh pdf units) sits inside the padding ---- */
 let cur = -1, busy = false, cardLinks = [], savedY = 0, cpath = '';
@@ -137,8 +176,8 @@ function planGeometry(b) {
 function layout() {                       // real pixel size at the base scale sb (WebKit rasterizes at layout size)
   card.style.width = CW * sb + 'px'; card.style.height = CH * sb + 'px';
   for (const e of [lo, hi, cl]) { e.style.left = padX * sb + 'px'; e.style.top = padT * sb + 'px'; e.style.width = bw * sb + 'px'; e.style.height = bh * sb + 'px'; }
-  lo.style.backgroundSize = `${100 * D.w / bw}% ${100 * D.h / bh}%`;
-  const b = D.blocks[cur]; if (b) lo.style.backgroundPosition = `${100 * b.r[0] / (D.w - bw || 1)}% ${100 * b.r[1] / (D.h - bh || 1)}%`;
+  lo.style.backgroundSize = `${100 * curP.w / bw}% ${100 * curP.h / bh}%`;
+  const b = D.blocks[cur]; if (b) lo.style.backgroundPosition = `${100 * b.r[0] / (curP.w - bw || 1)}% ${100 * b.r[1] / (curP.h - bh || 1)}%`;
   if (vst) { vec.style.left = vst.lx * sb + 'px'; vec.style.top = vst.ly * sb + 'px'; vec.style.width = vst.w * sb + 'px'; vec.style.height = vst.h * sb + 'px'; }
 }
 function gestureActive() { return fingers.size > 0 || gliding || mouseDown; }
@@ -157,7 +196,7 @@ function loadVec(i) {
   }).catch(() => svgPending.delete(i));
   svgPending.set(i, pr);
 }
-let vst = null, vecFor = -1, commitRaf = 0, commitTimer = 0;
+let vst = null, vecFor = -1, commitRaf = 0, commitTimer = 0, vecLive = false, unveilT = 0;
 function mountVec() {
   if (cur < 0 || !svgCache.has(cur)) return;
   if (vecFor !== cur) { vec.innerHTML = svgCache.get(cur); vecFor = cur; const sv = vec.firstElementChild; if (sv) { sv.removeAttribute('width'); sv.removeAttribute('height'); sv.setAttribute('preserveAspectRatio', 'none'); } }
@@ -179,7 +218,10 @@ function commit() {                         // window the vector to what's on sc
   vec.style.left = vst.lx * sb + 'px'; vec.style.top = vst.ly * sb + 'px';
   vec.style.width = vst.w * sb + 'px'; vec.style.height = vst.h * sb + 'px';
   vec.style.transform = 'none'; vec.style.display = 'block';
-  hi.classList.remove('ok'); lo.style.visibility = 'hidden';
+  if (!vecLive) {                           // keep the raster visible a moment: a big SVG can take a few hundred ms to paint (WebKit)
+    vecLive = true; clearTimeout(unveilT);
+    unveilT = setTimeout(() => { if (cur >= 0 && vecLive) { hi.classList.remove('ok'); lo.style.visibility = 'hidden'; } }, 700);
+  }
 }
 function liveVec() {                         // the card's scale already zooms the vector; only recommit if the window is missed
   if (!vst || vecFor !== cur) return;
@@ -324,12 +366,13 @@ function openBlk(i) {
   if (busy || cur >= 0) return; busy = true; cur = i;
   const b = D.blocks[i], el = blkEls[i];
   savedY = window.scrollY || 0;
+  curP = PG[b.pg || 0];
   stopGlide(); planGeometry(b); sb = startS; vst = null; layout();
   cpath = papercut(i + 3);
   hi.classList.remove('ok'); hi.onload = () => { if (!vst) hi.classList.add('ok'); }; hi.src = b.img;
   if (hi.complete && hi.naturalWidth) hi.classList.add('ok');
-  lo.style.backgroundImage = 'url(front/page.jpg)'; lo.style.visibility = 'visible';
-  vec.style.display = 'none'; vec.style.transform = 'none'; vst = null; vecFor = -1; vec.innerHTML = '';
+  lo.style.backgroundImage = 'url(' + curP.img + ')'; lo.style.visibility = 'visible';
+  vec.style.display = 'none'; vec.style.transform = 'none'; vst = null; vecFor = -1; vec.innerHTML = ''; vecLive = false; clearTimeout(unveilT);
   cardLinks.forEach(a => a.remove());
   cardLinks = b.links.map(l => cl.appendChild(mkLink(l, bw, bh, 'cz')));
   document.body.style.top = `-${savedY}px`;
@@ -361,7 +404,7 @@ function closeBlk() {
   animate(src2.left - padX * s1, src2.top - padT * s1, s1, DUR - 40, false, () => {
     el.classList.remove('src'); root.classList.remove('closing');
     cur = -1; busy = false; moved = pinching = gesturePinch = false;
-    card.dataset.scale = ''; vst = null; vecFor = -1; vec.innerHTML = '';
+    card.dataset.scale = ''; vst = null; vecFor = -1; vec.innerHTML = ''; vecLive = false; clearTimeout(unveilT);
   });
 }
 
@@ -565,7 +608,7 @@ window.addEventListener('resize', () => {
   s = Math.max(minS, Math.min(maxS, startS * z));
   clampPan(); apply(); commit();
 });
-window.addEventListener('load', () => setTimeout(() => D.blocks.forEach(b => { const im = new Image(); im.src = b.img; }), 600));
+window.addEventListener('load', () => setTimeout(() => D.blocks.filter(b => !b.pg).forEach(b => { const im = new Image(); im.src = b.img; }), 600));
 
 /* ---------- edition navigation (from ../editions.json, so older pages gain 'next' as new briefs publish) ---------- */
 (function () {
@@ -573,7 +616,11 @@ window.addEventListener('load', () => setTimeout(() => D.blocks.forEach(b => { c
   if (!prevEl) return;
   const SLUG = D.slug || (location.pathname.split('/').filter(Boolean).slice(-2)[0] || '');
   function place() {
-    if (D.w > 500) {                          // top margin of the sheet, right of LISTEN ALL and left of the right edge
+    if (D.nav) {                              // explicit placement (pdf units on page 1), e.g. the WSJ front page
+      prevEl.style.left = (D.nav.prev[0] / D.w * 100) + '%'; prevEl.style.width = (D.nav.prev[1] / D.w * 100) + '%'; prevEl.style.justifyContent = 'flex-start';
+      nextEl.style.left = (D.nav.next[0] / D.w * 100) + '%'; nextEl.style.width = (D.nav.next[1] / D.w * 100) + '%'; nextEl.style.justifyContent = 'flex-end';
+      prevEl.style.top = nextEl.style.top = (D.nav.top / D.h * 100) + '%';
+    } else if (D.w > 500) {                   // top margin of the sheet, right of LISTEN ALL and left of the right edge
       prevEl.style.left = (178 / D.w * 100) + '%';
       prevEl.style.width = (260 / D.w * 100) + '%';
       prevEl.style.justifyContent = 'flex-start';
