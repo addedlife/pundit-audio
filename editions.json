@@ -62,6 +62,13 @@
    "mode": "night",
    "label": "Night",
    "front": "2026-11-26-night/front.html"
+  },
+  {
+   "slug": "2026-11-27-morning",
+   "date": "2026-11-27",
+   "mode": "morning",
+   "label": "Morning",
+   "front": "2026-11-27-morning/front.html"
   }
  ]
 }
