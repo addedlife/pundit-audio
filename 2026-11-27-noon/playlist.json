@@ -1,0 +1,196 @@
+{
+  "brand": "SBR News",
+  "date": "2026-11-27",
+  "date_display": "Friday, November 27, 2026",
+  "slot": "noon",
+  "label": "Noon Brief",
+  "voice": "Kokoro bm_george (fallback: en-GB-RyanNeural)",
+  "arad_delivery": "off",
+  "total_duration": 461.49,
+  "tracks": [
+    {
+      "num": 1,
+      "id": "intro",
+      "section": "SBR News",
+      "title": "This ... is SBR News (Noon Brief)",
+      "file": "01-intro.mp3",
+      "duration": 5.95,
+      "text": "This ... is SBR News. Your Noon Brief for 2026-11-27.",
+      "clock_intro": "after"
+    },
+    {
+      "num": 2,
+      "id": "story-01",
+      "section": "Top Stories",
+      "title": "Hackers Breach Air Force’s Flagship Cloud Platform",
+      "file": "02-story-01.mp3",
+      "duration": 50.38,
+      "text": "Hackers breached the U S Air Force’s flagship Cloud One computing platform, Reuters reported Friday, citing three people familiar with the matter; Cyber Command was called in to assess the damage. The intrusion was discovered within the past month or so during upgrade work, two of the people said. Reuters could not establish who the hackers were, the full scope of the intrusion or whether any data was stolen. One source said the intruders exploited a software vulnerability to reach the platform’s control plane. Cloud One, begun in twenty seventeen, runs on Microsoft, Amazon, Oracle and Alphabet clouds and hosts personnel, pay, logistics and munitions-tracking applications. Migrations to it have been paused and updates blocked. The Air Force said it does not comment on the security of specific networks."
+    },
+    {
+      "num": 3,
+      "id": "story-02",
+      "section": "Top Stories",
+      "title": "Stocks Climb in Half-Day Session, Heading for Big Weekly Gain",
+      "file": "03-story-02.mp3",
+      "duration": 39.17,
+      "text": "Stocks jumped on Wall Street Friday in a holiday-shortened session ending at one o'clock in the afternoon Eastern, keeping the market on track for strong weekly gains despite several days of erratic swings, AP reported. As of eleven fifty-two in the morning Eastern, the S and P five hundred was up one point five percent, the Dow Jones Industrial Average six hundred thirty-two points, or one point three percent, and the Nasdaq two percent, with four of every five stocks rising, according to AP. AP said the S and P five hundred was on track for its best week in three years."
+    },
+    {
+      "num": 4,
+      "id": "story-03",
+      "section": "Top Stories",
+      "title": "Kuwait Summons Iran’s Envoy; Guards Say Tanker Hit Mine in Hormuz",
+      "file": "04-story-03.mp3",
+      "duration": 46.73,
+      "text": "Kuwait summoned Iran’s ambassador Friday and handed him a protest note over what it called “continued Iranian attacks,” including Thursday’s drone strike that killed two Italian technicians. Deputy Foreign Minister Hamad Al-Mashaan held Iran fully responsible and said Kuwait retains its right to self-defense under Article fifty-one of the U N Charter, Kuwait’s foreign ministry said. Iran has denied involvement. Separately, Iran’s Revolutionary Guards said a tanker was hit by an explosion after striking a mine while trying to cross the Strait of Hormuz by what the Guards’ navy called an unauthorized route, Reuters reported, citing a statement on state broadcaster IRIB. The vessel was not identified."
+    },
+    {
+      "num": 5,
+      "id": "story-04",
+      "section": "Top Stories",
+      "title": "Zelensky Likens Trump’s ‘Friend’ Remark About Putin to Befriending Hitler",
+      "file": "05-story-04.mp3",
+      "duration": 25.87,
+      "text": "Zelensky likened Trump’s calling Putin “my friend” to calling Hitler a friend in World War II, telling the BBC that Putin is “an aggressor and a killer” who “can’t be a friend.” Zelensky also said U S delays in delivering Patriot interceptors were costing Ukrainian lives. Trump told reporters Thursday, “We want to stop killing. I could say he’s not a friend… I want to make a deal,” adding that the two warring leaders “really hate each other.”"
+    },
+    {
+      "num": 6,
+      "id": "story-05",
+      "section": "Israel",
+      "title": "Hayya’s Son Survives Israeli Strike in Gaza City, Hamas Says",
+      "file": "06-story-05.mp3",
+      "duration": 36.48,
+      "text": "Hamas said Khalil al-Hayya’s son survived an Israeli strike on his family in Gaza City on Friday, and the I D F said ten operatives, including four October seventh attackers, were killed in recent strikes. Senior Hamas official Basem Naim confirmed the strike; Hamas sources said several people, including Hayya’s daughter-in-law, were wounded but no one was killed. The target was reported to be Hayya’s last surviving son. The I D F said those killed included a Nukhba commander who took part in a hostage handover ceremony."
+    },
+    {
+      "num": 7,
+      "id": "story-06",
+      "section": "Israel",
+      "title": "Bennett: Unity Government First, but Ready for an Alternative",
+      "file": "07-story-06.mp3",
+      "duration": 33.74,
+      "text": "Naftali Bennett said he still preferred a unity government with Ayzenkot serving first but would move to a less desirable alternative if that proved impossible, as Ayzenkot’s bloc eyed December second for signing deals. Bennett said Bee Yahkhad would not join Netanyahu’s bloc or let him use talks to stall, JPost reported. A meeting between Bennett’s and Ayzenkot’s negotiating teams was put off until Sunday. Ayzenkot’s mandate to form a government expires December sixth."
+    },
+    {
+      "num": 8,
+      "id": "story-07",
+      "section": "Chareidi World",
+      "title": "UTJ Rabbis’ Decision on Eisenkot Talks Expected Sunday",
+      "file": "08-story-07.mp3",
+      "duration": 44.52,
+      "text": "U T J’s rabbis were expected to decide Sunday on formal coalition talks with Ayzenkot, Maariv reported, leaning toward approval if Netanyahu did not agree by Saturday night to serve second in a rotation. Rahv Moshe Hillel Hirsch, back from the U S, met Rahv Duv Lando and was expected to hear from U T J M Ks Yakov Asher and Yitzhak Pindrus before deciding. Under the emerging draft, U T J would get the Construction and Housing Ministry and the Kuh-nesset Finance Committee chair; the status of yesheeva students, draft sanctions and arrests, and chinuch funding remained unresolved. A senior U T J official blasted Shahs’s loyalty to Netanyahu."
+    },
+    {
+      "num": 9,
+      "id": "story-08",
+      "section": "Tech",
+      "title": "SAP Prepares Major Job Cuts as AI Reshapes Software",
+      "file": "09-story-08.mp3",
+      "duration": 33.48,
+      "text": "SAP was preparing to cut a sizable number of jobs, two people told Reuters Friday, after Bloomberg reported Germany’s most valuable company was weighing at least ten thousand cuts in an A I-driven restructuring. SAP employs about one hundred thirteen thousand people; its works council has not yet been informed, one person said. CEO Christian Klein and CFO Dominik Asam had signaled a smaller workforce at recent investor events, Reuters reported."
+    },
+    {
+      "num": 10,
+      "id": "story-09",
+      "section": "Other Notable",
+      "title": "Canada’s Top Court Upholds Quebec Religious-Symbols Ban",
+      "file": "10-story-09.mp3",
+      "duration": 25.85,
+      "text": "Elsewhere, Canada’s Supreme Court upheld nearly all of Quebec’s secularism law, which bars some public-sector workers, including teachers, from wearing religious symbols such as yarmulkes on the job. The court ruled Quebec validly used the Charter’s notwithstanding clause; the only exception is that the ban cannot apply to members of the National Assembly. The law, Bill twenty-one, was adopted in twenty nineteen."
+    },
+    {
+      "num": 11,
+      "id": "story-10",
+      "section": "Other Notable",
+      "title": "U.S. Pushed Venezuela and Iraq to Weigh Leaving OPEC",
+      "file": "11-story-10.mp3",
+      "duration": 28.68,
+      "text": "The Trump administration encouraged Venezuela and Iraq to consider leaving OPEC earlier this year and blocked Venezuela’s membership dues, Reuters reported; Saudi Arabia’s crown prince intervened to halt the Venezuela push. Reuters cited ten people familiar with the matter. Iraq’s oil ministry talked Prime Minister Ali Faleh al-Zaidi out of leaving. A State Department official said leaving OPEC “has not been among the issues raised by high-level officials.”"
+    },
+    {
+      "num": 12,
+      "id": "story-11",
+      "section": "Other Notable",
+      "title": "Australia Sanctions Two Men Over Iran-Directed Arson at Synagogue, Deli",
+      "file": "12-story-11.mp3",
+      "duration": 28.94,
+      "text": "Australia sanctioned two men it said organized the twenty twenty-four arson attacks on Melbourne’s Adass Israel synagogue and a Sydney kosher deli for Iran’s Revolutionary Guards. Zohair Hassib and Kazem Hamad were named publicly for the first time; dealing with their assets is now a crime. The synagogue fire was in December twenty twenty-four. Australia expelled Iran’s ambassador in August twenty twenty-five after its spy agency concluded the IRGC directed both attacks."
+    },
+    {
+      "num": 13,
+      "id": "weather",
+      "section": "Weather",
+      "title": "South Bend, IN Forecast & 5-Day Outlook",
+      "file": "13-weather.mp3",
+      "duration": 59.06,
+      "text": "Now, your South Bend, Indiana weather forecast from the National Weather Service. Today: Rain likely. Cloudy, with a high near forty-six. Northwest wind around ten miles per hour, with gusts as high as twenty-five miles per hour. Chance of precipitation is sixty percent. New rainfall amounts between a tenth and quarter of an inch possible. Tonight: Mostly cloudy, with a low around thirty-two. West wind five to ten miles per hour. On Saturday, partly sunny, high near forty-eight. Saturday Night, mostly cloudy then light rain likely, low around thirty-seven. On Sunday, light rain, high near forty-four. Sunday Night, light rain, low around thirty-one. On Monday, mostly sunny, high near thirty-nine. Monday Night, partly cloudy, low around twenty-six. On Tuesday, mostly cloudy, high near forty-five. Tuesday Night, partly cloudy, low around thirty-two. On Wednesday, mostly sunny, high near fifty-four.",
+      "periods": [
+        {
+          "name": "Today",
+          "temp": "46F",
+          "short": "Light Rain Likely"
+        },
+        {
+          "name": "Tonight",
+          "temp": "32F",
+          "short": "Mostly Cloudy"
+        },
+        {
+          "name": "Saturday",
+          "temp": "48F",
+          "short": "Partly Sunny"
+        },
+        {
+          "name": "Saturday Night",
+          "temp": "37F",
+          "short": "Mostly Cloudy then Light Rain Likely"
+        },
+        {
+          "name": "Sunday",
+          "temp": "44F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Sunday Night",
+          "temp": "31F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Monday",
+          "temp": "39F",
+          "short": "Mostly Sunny"
+        },
+        {
+          "name": "Monday Night",
+          "temp": "26F",
+          "short": "Partly Cloudy"
+        },
+        {
+          "name": "Tuesday",
+          "temp": "45F",
+          "short": "Mostly Cloudy"
+        },
+        {
+          "name": "Tuesday Night",
+          "temp": "32F",
+          "short": "Partly Cloudy"
+        },
+        {
+          "name": "Wednesday",
+          "temp": "54F",
+          "short": "Mostly Sunny"
+        }
+      ]
+    },
+    {
+      "num": 14,
+      "id": "signoff",
+      "section": "SBR News",
+      "title": "That's the latest from SBR News",
+      "file": "14-signoff.mp3",
+      "duration": 2.64,
+      "text": "That's the latest from SBR News."
+    }
+  ]
+}
