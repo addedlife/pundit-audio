@@ -55,6 +55,13 @@
    "mode": "noon",
    "label": "Noon",
    "front": "2026-11-26-noon/front.html"
+  },
+  {
+   "slug": "2026-11-26-night",
+   "date": "2026-11-26",
+   "mode": "night",
+   "label": "Night",
+   "front": "2026-11-26-night/front.html"
   }
  ]
 }
