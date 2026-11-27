@@ -1,0 +1,205 @@
+{
+  "brand": "SBR News",
+  "date": "2026-11-27",
+  "date_display": "Friday, November 27, 2026",
+  "slot": "afternoon",
+  "label": "Afternoon Brief",
+  "voice": "Kokoro bm_george (fallback: en-GB-RyanNeural)",
+  "arad_delivery": "off",
+  "total_duration": 529.86,
+  "tracks": [
+    {
+      "num": 1,
+      "id": "intro",
+      "section": "SBR News",
+      "title": "This ... is SBR News (Afternoon Brief)",
+      "file": "01-intro.mp3",
+      "duration": 6.29,
+      "text": "This ... is SBR News. Your Afternoon Brief for 2026-11-27.",
+      "clock_intro": "after"
+    },
+    {
+      "num": 2,
+      "id": "story-01",
+      "section": "Top Stories",
+      "title": "Hackers Breach Air Force’s Flagship Cloud Platform",
+      "file": "02-story-01.mp3",
+      "duration": 50.38,
+      "text": "Hackers breached the U S Air Force’s flagship Cloud One computing platform, Reuters reported Friday, citing three people familiar with the matter; Cyber Command was called in to assess the damage. The intrusion was discovered within the past month or so during upgrade work, two of the people said. Reuters could not establish who the hackers were, the full scope of the intrusion or whether any data was stolen. One source said the intruders exploited a software vulnerability to reach the platform’s control plane. Cloud One, begun in twenty seventeen, runs on Microsoft, Amazon, Oracle and Alphabet clouds and hosts personnel, pay, logistics and munitions-tracking applications. Migrations to it have been paused and updates blocked. The Air Force said it does not comment on the security of specific networks."
+    },
+    {
+      "num": 3,
+      "id": "story-02",
+      "section": "Top Stories",
+      "title": "Stocks Rally in Half-Day Session; S&P’s Best Week Since April 2025",
+      "file": "03-story-02.mp3",
+      "duration": 58.94,
+      "text": "Stocks jumped on Wall Street Friday in a holiday-shortened session that ended at one o'clock in the afternoon Eastern, giving the market its strongest week in more than a year, AP reported. The S and P five hundred rose one point six percent to seven,two hundred ninety-seven.forty-nine and gained five point six percent for the week, its best week since April twenty twenty-five. The Dow Jones Industrial Average added five hundred ninety-one.ninety-nine points, or one point one eight percent, to fifty,seven hundred seventy-four.ninety-four, its biggest weekly gain since October twenty twenty-two. The Nasdaq Composite rose two point three one percent to twenty-four,one hundred twenty-nine.fifty and six point six eight percent for the week. Technology stocks led the bounce, with gains broader than the recent A I swings: AP said four out of every five stocks rose. The market was closed Thursday for Thanksgiving."
+    },
+    {
+      "num": 4,
+      "id": "story-03",
+      "section": "Top Stories",
+      "title": "U.S. Disables Another Ship Trying to Breach Iran Blockade",
+      "file": "04-story-03.mp3",
+      "duration": 43.25,
+      "text": "The U S military said Friday it had disabled another merchant ship that was trying to breach its blockade of Iranian ports. U S Central Command said the Palau-flagged M/V Pacific Archer was disabled in the Gulf of Oman on Thursday when a military aircraft fired “precision munitions” at the ship’s stern. The ship’s propulsion was disabled and the civilian crew was unharmed, Centcom said. The Pacific Archer is at least the fifteenth disclosed vessel disabled by the U S military since the blockade began in the spring, and the sixth since the blockade rezoomed this summer. The previous vessel was disabled on November seventh, AP reported."
+    },
+    {
+      "num": 5,
+      "id": "story-04",
+      "section": "Top Stories",
+      "title": "Kuwait Summons Iran’s Envoy; Guards Say Tanker Hit Mine in Hormuz",
+      "file": "05-story-04.mp3",
+      "duration": 46.73,
+      "text": "Kuwait summoned Iran’s ambassador Friday and handed him a protest note over what it called “continued Iranian attacks,” including Thursday’s drone strike that killed two Italian technicians. Deputy Foreign Minister Hamad Al-Mashaan held Iran fully responsible and said Kuwait retains its right to self-defense under Article fifty-one of the U N Charter, Kuwait’s foreign ministry said. Iran has denied involvement. Separately, Iran’s Revolutionary Guards said a tanker was hit by an explosion after striking a mine while trying to cross the Strait of Hormuz by what the Guards’ navy called an unauthorized route, Reuters reported, citing a statement on state broadcaster IRIB. The vessel was not identified."
+    },
+    {
+      "num": 6,
+      "id": "story-05",
+      "section": "Israel",
+      "title": "Eisenkot Says He Will Form a Government in Eight Days, Accuses Likud of Stalling",
+      "file": "06-story-05.mp3",
+      "duration": 45.96,
+      "text": "Yahshar chairman Gadi Ayzenkot said Friday he intends to form a government within the eight days remaining in his mandate and does not plan to seek an extension from President Isaac Herzog, The Times of Israel reported. In a statement, Ayzenkot accused Leekood of dragging out coalition talks to run down the mandate, split his bloc and force a repeat election. He said the two sides had met five times in two weeks and that Leekood had not put “any concrete proposal on the table.” Ayzenkot said he is working to sign a coalition agreement with Naftali Bennett’s Bee Yahkhad party “soon,” after a meeting scheduled for Thursday was postponed until Sunday. He has already signed deals with Yisrael Baytehnoo and The Democrats."
+    },
+    {
+      "num": 7,
+      "id": "story-06",
+      "section": "Israel",
+      "title": "Ra’am’s Abbas Set to Call Hamas a Terror Group, Opening Door to Eisenkot",
+      "file": "07-story-06.mp3",
+      "duration": 39.0,
+      "text": "Ra’am leader Mansour Abbas is set to say publicly in a Channel twelve interview airing Saturday night that he recognizes Hamas as a terror group, Hebrew media reported, a step that could let his party join a coalition led by Gadi Ayzenkot. Ayzenkot, with nine days left on his mandate, requires every coalition partner to recognize Hamas as a terror group. Abbas said Ra’am would not hold up a government if Arab communities’ needs, foremost fighting crime, are addressed. Separately, Naftali Bennett pushed Bee Yahkhad’s talks with Yahshar to Sunday over the draft issue."
+    },
+    {
+      "num": 8,
+      "id": "story-07",
+      "section": "Chareidi World",
+      "title": "UTJ Rabbis’ Decision on Eisenkot Talks Expected Sunday",
+      "file": "08-story-07.mp3",
+      "duration": 34.34,
+      "text": "U T J’s rabbis were expected to decide Sunday on formal coalition talks with Ayzenkot, Maariv reported, leaning toward approval if Netanyahu did not agree by Saturday night to serve second in a rotation. Rahv Moshe Hillel Hirsch, back from the U S, met Rahv Duv Lando and was to hear from U T J M Ks before deciding. Under the emerging draft, U T J would get the Housing Ministry and the Finance Committee chair; yesheeva students’ status remained unresolved."
+    },
+    {
+      "num": 9,
+      "id": "story-08",
+      "section": "Region",
+      "title": "Lakewood Chaverim Answer 545 Calls as Storm Floods Route 88",
+      "file": "09-story-08.mp3",
+      "duration": 26.09,
+      "text": "Lakewood Chaverim responded to five hundred forty-five calls as the Thanksgiving storm brought downed trees, wind damage and outages to Lakewood and nearby towns, Lakewood Alerts reported. Flooding closed Route eighty-eight in both directions near Clover Street Thursday afternoon, according to 511NJ, and the Jersey Shore saw coastal flooding and high winds; no serious injuries were reported."
+    },
+    {
+      "num": 10,
+      "id": "story-09",
+      "section": "Tech",
+      "title": "SpaceX Shares Jump After Musk Pledges Annual Stock for Every American Child",
+      "file": "10-story-09.mp3",
+      "duration": 37.85,
+      "text": "SpaceX shares jumped more than four percent on Friday after Elon Musk said he will give every American child another SpaceX share every year, CNBC reported, expanding a Wednesday pledge of two shares per child — one from SpaceX and one from him personally. Axios valued the two-share pledge at about eighteen billion dollars, based on roughly seventy-two million U S minors. Musk said SpaceX’s contribution would be transferred to Trump Accounts next month and his personal donation would follow when his lockup period expires in June."
+    },
+    {
+      "num": 11,
+      "id": "story-10",
+      "section": "Tech",
+      "title": "U.S. Closes Loophole on China’s Remote Access to Nvidia Chips",
+      "file": "11-story-10.mp3",
+      "duration": 27.94,
+      "text": "The U S closed a loophole in its export rules, choking off China’s access to advanced Nvidia chips that Beijing had been able to employ remotely in other countries. The Journal reports the loophole had let Chinese companies legally tap as much as a quarter of their computing power by remotely accessing Nvidia chips abroad, most notably in Malaysia. Washington is also sending export-control officers to U S embassies to police chip smuggling."
+    },
+    {
+      "num": 12,
+      "id": "story-11",
+      "section": "Other Notable",
+      "title": "Canada’s Top Court Upholds Quebec Religious-Symbols Ban",
+      "file": "12-story-11.mp3",
+      "duration": 25.85,
+      "text": "Elsewhere, Canada’s Supreme Court upheld nearly all of Quebec’s secularism law, which bars some public-sector workers, including teachers, from wearing religious symbols such as yarmulkes on the job. The court ruled Quebec validly used the Charter’s notwithstanding clause; the only exception is that the ban cannot apply to members of the National Assembly. The law, Bill twenty-one, was adopted in twenty nineteen."
+    },
+    {
+      "num": 13,
+      "id": "story-12",
+      "section": "Top Stories",
+      "title": "Thanksgiving Storm Knocks Out Power Along the East Coast",
+      "file": "13-story-12.mp3",
+      "duration": 35.52,
+      "text": "A storm upended Thanksgiving Day plans along the East Coast, with winds and rain causing power outages, flight cancellations and the postponement of Macy’s holiday parade in New York City. More than eight hundred thousand customers were without power Thursday afternoon, with Pennsylvania, New Jersey and Maryland among the hardest hit. AP said Friday that Thanksgiving storms delayed more than two thousand two hundred U S flights. The Macy’s parade, postponed for the first time because of weather, is now set for Saturday."
+    },
+    {
+      "num": 14,
+      "id": "weather",
+      "section": "Weather",
+      "title": "South Bend, IN Forecast & 5-Day Outlook",
+      "file": "14-weather.mp3",
+      "duration": 49.08,
+      "text": "Now, your South Bend, Indiana weather forecast from the National Weather Service. This afternoon: Rain likely. Cloudy, with a high near forty-six. Northwest wind around ten miles per hour. Chance of precipitation is sixty percent. Tonight: Mostly cloudy, with a low around thirty-two. West wind five to ten miles per hour. On Saturday, partly sunny, high near forty-eight. Saturday Night, mostly cloudy then light rain likely, low around thirty-seven. On Sunday, light rain, high near forty-four. Sunday Night, light rain, low around thirty-one. On Monday, mostly sunny, high near thirty-nine. Monday Night, partly cloudy, low around twenty-six. On Tuesday, partly sunny, high near forty-five. Tuesday Night, mostly cloudy, low around thirty-two. On Wednesday, mostly sunny, high near fifty-five.",
+      "periods": [
+        {
+          "name": "This Afternoon",
+          "temp": "46F",
+          "short": "Light Rain Likely"
+        },
+        {
+          "name": "Tonight",
+          "temp": "32F",
+          "short": "Mostly Cloudy"
+        },
+        {
+          "name": "Saturday",
+          "temp": "48F",
+          "short": "Partly Sunny"
+        },
+        {
+          "name": "Saturday Night",
+          "temp": "37F",
+          "short": "Mostly Cloudy then Light Rain Likely"
+        },
+        {
+          "name": "Sunday",
+          "temp": "44F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Sunday Night",
+          "temp": "31F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Monday",
+          "temp": "39F",
+          "short": "Mostly Sunny"
+        },
+        {
+          "name": "Monday Night",
+          "temp": "26F",
+          "short": "Partly Cloudy"
+        },
+        {
+          "name": "Tuesday",
+          "temp": "45F",
+          "short": "Partly Sunny"
+        },
+        {
+          "name": "Tuesday Night",
+          "temp": "32F",
+          "short": "Mostly Cloudy"
+        },
+        {
+          "name": "Wednesday",
+          "temp": "55F",
+          "short": "Mostly Sunny"
+        }
+      ]
+    },
+    {
+      "num": 15,
+      "id": "signoff",
+      "section": "SBR News",
+      "title": "That's the latest from SBR News",
+      "file": "15-signoff.mp3",
+      "duration": 2.64,
+      "text": "That's the latest from SBR News."
+    }
+  ]
+}
