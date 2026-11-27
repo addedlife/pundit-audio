@@ -1,0 +1,205 @@
+{
+  "brand": "SBR News",
+  "date": "2026-11-27",
+  "date_display": "Friday, November 27, 2026",
+  "slot": "morning",
+  "label": "Morning Brief",
+  "voice": "Kokoro bm_george (fallback: en-GB-RyanNeural)",
+  "arad_delivery": "off",
+  "total_duration": 486.56,
+  "tracks": [
+    {
+      "num": 1,
+      "id": "intro",
+      "section": "SBR News",
+      "title": "This ... is SBR News (Morning Brief)",
+      "file": "01-intro.mp3",
+      "duration": 6.22,
+      "text": "This ... is SBR News. Your Morning Brief for 2026-11-27.",
+      "clock_intro": "after"
+    },
+    {
+      "num": 2,
+      "id": "story-01",
+      "section": "Top Stories",
+      "title": "Thanksgiving Storm Knocks Out Power Along the East Coast",
+      "file": "02-story-01.mp3",
+      "duration": 39.79,
+      "text": "A storm upended Thanksgiving Day plans along the East Coast, with winds and rain causing power outages, flight cancellations and the postponement of Macy’s holiday parade in New York City. More than eight hundred thousand customers were without power Thursday afternoon, with Pennsylvania, New Jersey and Maryland among the hardest hit, and hundreds of flights were canceled and thousands delayed nationwide, according to tracking sites cited by AP and Anadolu. High-wind and flood warnings ran from Virginia Beach to New York City. The Macy’s parade, postponed for the first time because of weather, is now set for Saturday."
+    },
+    {
+      "num": 3,
+      "id": "story-02",
+      "section": "Top Stories",
+      "title": "U.S. Closes Loophole on China’s Remote Access to Nvidia Chips",
+      "file": "03-story-02.mp3",
+      "duration": 27.94,
+      "text": "The U S closed a loophole in its export rules, choking off China’s access to advanced Nvidia chips that Beijing had been able to employ remotely in other countries. The Journal reports the loophole had let Chinese companies legally tap as much as a quarter of their computing power by remotely accessing Nvidia chips abroad, most notably in Malaysia. Washington is also sending export-control officers to U S embassies to police chip smuggling."
+    },
+    {
+      "num": 4,
+      "id": "story-03",
+      "section": "Top Stories",
+      "title": "Iran Denies Drone Attack on Kuwait That Killed Two Italians",
+      "file": "04-story-03.mp3",
+      "duration": 38.74,
+      "text": "Iran denied that it was responsible for a drone attack on Kuwait that killed two Italians, contradicting the Gulf state and the foreign ministry in Rome, both of which pointed a finger at Tehran. Iranian Foreign Minister Abbas Araghchi told his Kuwaiti counterpart by phone Thursday that Tehran had no involvement and offered a joint investigation, Anadolu reported, citing Iran’s Foreign Ministry. Iran’s military spokesman alleged a false-flag operation. Kuwait’s defense ministry has called it an Iranian attack; the two dead were technicians for Rheinmetall’s Italian unit."
+    },
+    {
+      "num": 5,
+      "id": "story-04",
+      "section": "Top Stories",
+      "title": "Stock Futures Rally as Wall Street Returns for a Half Day",
+      "file": "05-story-04.mp3",
+      "duration": 25.06,
+      "text": "U S stock futures extended a late rally from the previous session as stateside investors observed the Thanksgiving Day holiday and tech stocks rose across Asia. Nasdaq futures surged early Friday as investors returned to battered A I stocks, Reuters reported. U S stock markets close early, at one o'clock in the afternoon Eastern Time, for the day after Thanksgiving."
+    },
+    {
+      "num": 6,
+      "id": "story-05",
+      "section": "Top Stories",
+      "title": "Zelensky Warns Russia Is Preparing a New Mass Strike",
+      "file": "06-story-05.mp3",
+      "duration": 34.44,
+      "text": "Ukrainian President Volodymyr Zelensky said in his nightly address Thursday that Ukraine has information Russia is preparing a new mass strike in the coming days, his second such warning this week. President Trump wrote on Truth Social that he had asked Vladimir Putin to “pull back all Military aggression against territories throughout Europe” in hopes of a quick deal, Reuters reported. Ukraine said Russia overnight hit two foreign cargo ships carrying more than one hundred thousand tons of grain near Odesa."
+    },
+    {
+      "num": 7,
+      "id": "story-06",
+      "section": "Top Stories",
+      "title": "EU Summit Ends Without Budget Deal or Ukraine Loan",
+      "file": "07-story-06.mp3",
+      "duration": 38.71,
+      "text": "European Union leaders ended a special Brussels summit early Friday without agreeing on the twenty twenty-eight-twenty thirty-four budget or a new €forty-five billion loan for Ukraine, and will try again at the December seventeenth-eighteen summit. European Council President António Costa said twenty-four member states back the loan, with Bulgaria joining only its nonmilitary part, while Slovakia, the Czech Republic and Hungary objected, according to the Council and bne IntelliNews. Germany’s Friedrich Merz had demanded deeper cuts and ruled out new borrowing."
+    },
+    {
+      "num": 8,
+      "id": "story-07",
+      "section": "Israel",
+      "title": "Ra’am’s Abbas Set to Call Hamas a Terror Group, Opening Door to Eisenkot",
+      "file": "08-story-07.mp3",
+      "duration": 39.0,
+      "text": "Ra’am leader Mansour Abbas is set to say publicly in a Channel twelve interview airing Saturday night that he recognizes Hamas as a terror group, Hebrew media reported, a step that could let his party join a coalition led by Gadi Ayzenkot. Ayzenkot, with nine days left on his mandate, requires every coalition partner to recognize Hamas as a terror group. Abbas said Ra’am would not hold up a government if Arab communities’ needs, foremost fighting crime, are addressed. Separately, Naftali Bennett pushed Bee Yahkhad’s talks with Yahshar to Sunday over the draft issue."
+    },
+    {
+      "num": 9,
+      "id": "story-08",
+      "section": "Chareidi World",
+      "title": "Rav Lando and Rav Hirsch Meet as UTJ Weighs Formal Talks With Eisenkot",
+      "file": "09-story-08.mp3",
+      "duration": 45.46,
+      "text": "Rahv Duv Lando and Rahv Moshe Hillel Hirsch met for about half an hour in B'nay Brak Thursday night after Rahv Hirsch returned from the U S; Times of Israel, citing Hebrew media, reported they green-lit official U T J talks with Gadi Ayzenkot, but YWN said no decision was reached. Yahted Ne’eman’s news editor said the gedoleem’s instructions would come and asked the public to wait until Motzaei Shah-biss. Kan reported a framework with Yahshar that would scrap enlistment quotas, tighten oversight that exempt bakhureem are really learning, add ha-ray-dee service tracks, and have rabbonim call on those not learning to enlist. U T J M Ks are to meet lawyer Boaz Ben Tzur Sunday."
+    },
+    {
+      "num": 10,
+      "id": "story-09",
+      "section": "Chareidi World",
+      "title": "Police Disperse Anti-Draft Protest at Ben Gurion Airport; Two Bochurim Freed Early",
+      "file": "10-story-09.mp3",
+      "duration": 36.98,
+      "text": "Police used tear gas to disperse dozens of ha-ray-dee anti-draft protesters who blocked the entrance to Ben Gurion Airport Thursday evening after declaring the gathering illegal; the road was cleared by about ten o'clock at night with no arrests, Times of Israel reported. The protest followed arrests of yesheeva students who did not answer draft orders, several of them at the airport. Keekar Hashabbat reported two bakhureem, including a Porat Yosef student, are to be released early from military prison after legal action by Chai Olam."
+    },
+    {
+      "num": 11,
+      "id": "story-10",
+      "section": "Region",
+      "title": "Lakewood Chaverim Answer 545 Calls as Storm Floods Route 88",
+      "file": "11-story-10.mp3",
+      "duration": 26.09,
+      "text": "Lakewood Chaverim responded to five hundred forty-five calls as the Thanksgiving storm brought downed trees, wind damage and outages to Lakewood and nearby towns, Lakewood Alerts reported. Flooding closed Route eighty-eight in both directions near Clover Street Thursday afternoon, according to 511NJ, and the Jersey Shore saw coastal flooding and high winds; no serious injuries were reported."
+    },
+    {
+      "num": 12,
+      "id": "story-11",
+      "section": "Tech",
+      "title": "Musk Pledges a SpaceX Share to Every American Child Every Year",
+      "file": "12-story-11.mp3",
+      "duration": 26.52,
+      "text": "Elon Musk said Thursday he will give every child in America another SpaceX share every year, Bloomberg reported, expanding a Wednesday pledge of two shares per child, one from SpaceX and one from him personally. Axios valued the two-share pledge at about eighteen billion dollars, based on roughly seventy-two million U S minors. Musk said SpaceX’s share would go to Trump Accounts in December and his own in June."
+    },
+    {
+      "num": 13,
+      "id": "story-12",
+      "section": "Tech",
+      "title": "WSJ: Another Nvidia Executive’s Romance Tied to Firm With China Ties",
+      "file": "13-story-12.mp3",
+      "duration": 36.38,
+      "text": "Nvidia’s longtime sales chief Jay Puri dated and in March married a senior Super Micro Computer executive while the server maker was competing for Nvidia chips, the Wall Street Journal reported. Super Micro staff have been accused of smuggling chips into China, and the FBI recently sought information about top executives, the Journal said. The executive told the Journal she never relied on personal relationships for professional gain; Nvidia and Puri, who recently stepped aside as head of global sales, did not comment."
+    },
+    {
+      "num": 14,
+      "id": "weather",
+      "section": "Weather",
+      "title": "South Bend, IN Forecast & 5-Day Outlook",
+      "file": "14-weather.mp3",
+      "duration": 62.59,
+      "text": "Now, your South Bend, Indiana weather forecast from the National Weather Service. Today: Rain before seven o'clock in the morning, then rain and snow between seven o'clock in the morning and five o'clock in the afternoon. Cloudy, with a high near forty-five. Northwest wind around ten miles per hour. Chance of precipitation is eighty percent. New rainfall amounts between a quarter and half of an inch possible. Tonight: Mostly cloudy, with a low around thirty-two. West wind five to ten miles per hour. On Saturday, mostly sunny, high near forty-eight. Saturday Night, mostly cloudy then light rain likely, low around thirty-five. On Sunday, light rain, high near forty-five. Sunday Night, light rain, low around thirty-one. On Monday, partly sunny, high near forty-one. Monday Night, partly cloudy, low around twenty-seven. On Tuesday, partly sunny, high near forty-five. Tuesday Night, mostly cloudy, low around thirty-three. On Wednesday, mostly sunny, high near fifty-four.",
+      "periods": [
+        {
+          "name": "Today",
+          "temp": "45F",
+          "short": "Rain And Snow"
+        },
+        {
+          "name": "Tonight",
+          "temp": "32F",
+          "short": "Mostly Cloudy"
+        },
+        {
+          "name": "Saturday",
+          "temp": "48F",
+          "short": "Mostly Sunny"
+        },
+        {
+          "name": "Saturday Night",
+          "temp": "35F",
+          "short": "Mostly Cloudy then Light Rain Likely"
+        },
+        {
+          "name": "Sunday",
+          "temp": "45F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Sunday Night",
+          "temp": "31F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Monday",
+          "temp": "41F",
+          "short": "Partly Sunny"
+        },
+        {
+          "name": "Monday Night",
+          "temp": "27F",
+          "short": "Partly Cloudy"
+        },
+        {
+          "name": "Tuesday",
+          "temp": "45F",
+          "short": "Partly Sunny"
+        },
+        {
+          "name": "Tuesday Night",
+          "temp": "33F",
+          "short": "Mostly Cloudy"
+        },
+        {
+          "name": "Wednesday",
+          "temp": "54F",
+          "short": "Mostly Sunny"
+        }
+      ]
+    },
+    {
+      "num": 15,
+      "id": "signoff",
+      "section": "SBR News",
+      "title": "That's the latest from SBR News",
+      "file": "15-signoff.mp3",
+      "duration": 2.64,
+      "text": "That's the latest from SBR News."
+    }
+  ]
+}
