@@ -6,7 +6,7 @@
   "label": "Night Brief",
   "voice": "Kokoro bm_george (fallback: en-GB-RyanNeural)",
   "arad_delivery": "off",
-  "total_duration": 479.68,
+  "total_duration": 480.1,
   "tracks": [
     {
       "num": 1,
@@ -42,7 +42,7 @@
       "section": "Top Stories",
       "title": "Altria weighs a cash bid for Britain’s Imperial Brands",
       "file": "04-story-03.mp3",
-      "duration": 40.68,
+      "duration": 40.66,
       "text": "Marlboro maker Altria said Thursday it was considering a possible all-cash offer for Imperial Brands and was in talks with another party over part of the British company’s business, Reuters reported via CNBC. Bloomberg reported that Japan Tobacco is also weighing a bid. Imperial shares jumped as much as seventeen point six percent in London, valuing the maker of Winston, Davidoff and Kool at about £twenty-six.eight billion. Under U K takeover rules Altria has until five o'clock in the afternoon. London time on December twenty-fourth to make a firm offer or walk away."
     },
     {
@@ -51,7 +51,7 @@
       "section": "Top Stories",
       "title": "Russia hits two grain ships near Odesa",
       "file": "05-story-04.mp3",
-      "duration": 36.98,
+      "duration": 36.96,
       "text": "Russia attacked two foreign cargo ships carrying more than one hundred thousand metric tons of grain overnight near Ukraine’s Black Sea port of Odesa, Ukrainian Prime Minister Sergiy Koretskyi said Thursday, Reuters reported. Russia says it does not attack civilian targets. Ukraine says grain shipments from the Odesa ports have all but stopped since late July, when Russia stepped up attacks on terminals and merchant ships. Ukraine has exported seven.six million tons of grain so far this season, down from eleven.five million a year earlier."
     },
     {
@@ -103,10 +103,10 @@
       "num": 11,
       "id": "story-10",
       "section": "Tech",
-      "title": "42 state AGs move to stop Character.AI selling users’ chats",
+      "title": "State attorneys general move to stop Character.AI selling chats",
       "file": "11-story-10.mp3",
-      "duration": 33.38,
-      "text": "A bipartisan coalition of forty-two state attorneys general is trying to stop bankrupt Character.A I from auctioning the chat histories of more than twenty-one million U S accounts, over two.one million registered to minors, without privacy safeguards, The Verge reported. The AGs say a buyer would not have to honor existing privacy policies or let users delete data. Character.A I filed for Chapter eleven in October, and Disney bought some of its assets and hired its CEO."
+      "duration": 33.84,
+      "text": "A bipartisan coalition of forty-two state attorneys general is trying to stop bankrupt Character.A I from auctioning the chat histories of more than twenty-one million U S accounts, over two.one million registered to minors, without privacy safeguards, The Verge reported. The attorneys general say a buyer would not have to honor existing privacy policies or let users delete data. Character.A I filed for Chapter eleven in October, and Disney bought some of its assets and hired its CEO."
     },
     {
       "num": 12,
