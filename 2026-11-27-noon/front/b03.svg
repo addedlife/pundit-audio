@@ -303,10 +303,10 @@
 <use data-text="b" xlink:href="#font_5_69" transform="matrix(9.319403,0,0,-9.319403,76.18599,128.70001)" fill="#111111"/>
 <use data-text="l" xlink:href="#font_6_9" transform="matrix(11.2,0,0,-11.2,81.35825,128.70001)" fill="#111111"/>
 <use data-text="e" xlink:href="#font_6_7" transform="matrix(11.2,0,0,-11.2,84.315059,128.70001)" fill="#111111"/>
-<use data-text="I" xlink:href="#font_2_10" transform="matrix(6.7,0,0,-6.7,127.60004,-12.069397)" fill="#111111"/>
-<use data-text="S" xlink:href="#font_2_18" transform="matrix(6.7,0,0,-6.7,129.63684,-12.069397)" fill="#111111"/>
-<use data-text="R" xlink:href="#font_2_17" transform="matrix(6.7,0,0,-6.7,133.71044,-12.069397)" fill="#111111"/>
-<use data-text="H" xlink:href="#font_8_8" transform="matrix(19.5,0,0,-19.5,127.60004,5.430603)" fill="#111111"/>
-<use data-text="S" xlink:href="#font_9_4" transform="matrix(19.5,0,0,-19.5,127.60004,25.710572)" fill="#111111"/>
+<use data-text="I" xlink:href="#font_2_10" transform="matrix(6.7,0,0,-6.7,127.60004,-6.23999)" fill="#111111"/>
+<use data-text="S" xlink:href="#font_2_18" transform="matrix(6.7,0,0,-6.7,129.63684,-6.23999)" fill="#111111"/>
+<use data-text="R" xlink:href="#font_2_17" transform="matrix(6.7,0,0,-6.7,133.71044,-6.23999)" fill="#111111"/>
+<use data-text="H" xlink:href="#font_8_8" transform="matrix(19.5,0,0,-19.5,127.60004,11.26001)" fill="#111111"/>
+<use data-text="S" xlink:href="#font_9_4" transform="matrix(19.5,0,0,-19.5,127.60004,31.539978)" fill="#111111"/>
 </g>
 </svg>
