@@ -1,0 +1,187 @@
+{
+  "brand": "SBR News",
+  "date": "2026-11-26",
+  "date_display": "Thursday, November 26, 2026",
+  "slot": "night",
+  "label": "Night Brief",
+  "voice": "Kokoro bm_george (fallback: en-GB-RyanNeural)",
+  "arad_delivery": "off",
+  "total_duration": 479.61,
+  "tracks": [
+    {
+      "num": 1,
+      "id": "intro",
+      "section": "SBR News",
+      "title": "This ... is SBR News (Night Brief)",
+      "file": "01-intro.mp3",
+      "duration": 5.88,
+      "text": "This ... is SBR News. Your Night Brief for 2026-11-26.",
+      "clock_intro": "after"
+    },
+    {
+      "num": 2,
+      "id": "story-01",
+      "section": "Top Stories",
+      "title": "Thanksgiving storm leaves nearly a million without power",
+      "file": "02-story-01.mp3",
+      "duration": 64.82,
+      "text": "A powerful Thanksgiving storm knocked out power to more than nine hundred sixty-one thousand U S utility customers as of seven thirty in the evening Eastern Time, Reuters reported, citing PowerOutage.us, including more than two hundred thirty-five thousand in Pennsylvania, over one hundred eighty thousand in New Jersey, one hundred fifty-six thousand in Maryland and one hundred thirty-two thousand in Virginia. Wind gusts of fifty to seventy miles per hour toppled trees and power lines, and king tides drove coastal flooding in low-lying communities. FlightAware counted four hundred forty U S-related cancellations and more than two thousand two hundred delays, with Washington- and New York-area airports among the hardest hit. In Missouri, a snowstorm left about one hundred six thousand customers without power and collapsed the Wentzville Ice Arena, weather.com reported. The National Weather Service said conditions would improve in the Mid-Atlantic overnight as the storm moved into New England."
+    },
+    {
+      "num": 3,
+      "id": "story-02",
+      "section": "Top Stories",
+      "title": "Trump demands probe of GDP figures released before the midterms",
+      "file": "03-story-02.mp3",
+      "duration": 45.19,
+      "text": "President Trump on Thursday demanded an immediate investigation into what he alleged, without evidence, was a deliberate release of “fake” growth numbers before the November third midterm elections, Reuters reported. On Wednesday the Bureau of Economic Analysis revised third-quarter annualized growth up to four point three percent from its October twenty-ninth advance estimate of three point four percent. Later Thursday, Trump told reporters at Mar-a-Lago that the bureau “made a mistake.” A May article co-authored by BEA Director Vipin Arora shows the bureau has revised quarterly estimates by nearly a full percentage point or more at least four times in the past twenty-five years."
+    },
+    {
+      "num": 4,
+      "id": "story-03",
+      "section": "Top Stories",
+      "title": "Altria weighs a cash bid for Britain’s Imperial Brands",
+      "file": "04-story-03.mp3",
+      "duration": 40.66,
+      "text": "Marlboro maker Altria said Thursday it was considering a possible all-cash offer for Imperial Brands and was in talks with another party over part of the British company’s business, Reuters reported via CNBC. Bloomberg reported that Japan Tobacco is also weighing a bid. Imperial shares jumped as much as seventeen point six percent in London, valuing the maker of Winston, Davidoff and Kool at about £twenty-six.eight billion. Under U K takeover rules Altria has until five o'clock in the afternoon. London time on December twenty-fourth to make a firm offer or walk away."
+    },
+    {
+      "num": 5,
+      "id": "story-04",
+      "section": "Top Stories",
+      "title": "Russia hits two grain ships near Odesa",
+      "file": "05-story-04.mp3",
+      "duration": 36.96,
+      "text": "Russia attacked two foreign cargo ships carrying more than one hundred thousand metric tons of grain overnight near Ukraine’s Black Sea port of Odesa, Ukrainian Prime Minister Sergiy Koretskyi said Thursday, Reuters reported. Russia says it does not attack civilian targets. Ukraine says grain shipments from the Odesa ports have all but stopped since late July, when Russia stepped up attacks on terminals and merchant ships. Ukraine has exported seven.six million tons of grain so far this season, down from eleven.five million a year earlier."
+    },
+    {
+      "num": 6,
+      "id": "story-05",
+      "section": "Israel",
+      "title": "IDF strikes Hezbollah rockets in the Beqaa Valley",
+      "file": "06-story-05.mp3",
+      "duration": 27.65,
+      "text": "The I D F said Thursday night that it struck dozens of Hezbollah rockets and launchers at a training camp of the group’s elite Radwan Force near Ayn al-Tina in Lebanon’s Beqaa Valley, about twenty-five kilometers north of the Israeli border, The Times of Israel reported. “The rockets and launchers were intended for use by Hezbollah terrorists to target I D F soldiers and Israeli civilians, and were struck from the air to eliminate the threat,” the army said."
+    },
+    {
+      "num": 7,
+      "id": "story-06",
+      "section": "Chareidi World",
+      "title": "Rav Dov Lando and Rav Moshe Hillel Hirsch clear UTJ for official talks with Eisenkot",
+      "file": "07-story-06.mp3",
+      "duration": 42.38,
+      "text": "Rahv Duv Lando and Rahv Moshe Hillel Hirsch met for about half an hour Thursday evening, after Rahv Hirsch returned from a fundraising trip to the U S, and decided to allow talks toward an Ayzenkot-led government to proceed, Israel Hayom and The Times of Israel reported, citing Hebrew media. Ynet reported that U T J M Ks Yahahkov Asher, Yitzhak Goldknopf, Yitzhak Pindrus and Meir Pohroosh will meet attorney Boaz Ben Tzur on Sunday morning before opening talks. Kan reported the framework scraps enlistment quotas, tightens checks that exempt yesheeva students are learning, and adds service tracks for ha-ray-dee men."
+    },
+    {
+      "num": 8,
+      "id": "story-07",
+      "section": "Chareidi World",
+      "title": "Anti-draft protesters block a Ben Gurion Airport entrance",
+      "file": "08-story-07.mp3",
+      "duration": 40.27,
+      "text": "About five hundred extremist ha-ray-dee protesters blocked the Lod–Petah Tikva gate at Ben Gurion Airport on Thursday night over the arrest of yesheeva students who did not report for the draft, Ynet and the Jerusalem Post reported. Police used a water cannon to disperse them; the airport said flights ran normally. The Times of Israel said the protesters were affiliated with the Jerusalem Faction and the Eida Chareidis. Police said the demonstrators blocked roads and police cars and called officers “Nazis”; footage showed a driver kicked and knocked down. Police said no one was injured and no arrests were made."
+    },
+    {
+      "num": 9,
+      "id": "story-08",
+      "section": "Region",
+      "title": "Protest at Midwood kosher deli ends with three summonses",
+      "file": "09-story-08.mp3",
+      "duration": 40.06,
+      "text": "About two hundred anti-Israel protesters organized by Pal-Awda scuffled with police Wednesday night outside Essen NY Deli in Midwood, Brooklyn, where an Israeli real estate event was held, facing about two hundred pro-Israel counter-protesters, The Times of Israel reported. Police issued three disorderly-conduct summonses. The realty firm, CapitIL, denied that West Bank properties were promoted. A deli representative told yesheeva World News the restaurant sold six hundred hot dogs at three dollars apiece for Jerusalem’s Shaare Zedek Medical Center in response."
+    },
+    {
+      "num": 10,
+      "id": "story-09",
+      "section": "Tech",
+      "title": "X rolls out its first parental controls",
+      "file": "10-story-09.mp3",
+      "duration": 26.86,
+      "text": "Elon Musk’s X began rolling out parental controls that let parents see a teen’s time on the platform, set daily limits, approve new followers, filter words and limit direct messages, The Verge reported. Parents cannot read private messages or see searches, and both sides must agree before the controls start. The Verge said the move comes days after Oregon and Virginia sued SpaceX over sexualized deepfakes made with Grok."
+    },
+    {
+      "num": 11,
+      "id": "story-10",
+      "section": "Tech",
+      "title": "42 state AGs move to stop Character.AI selling users’ chats",
+      "file": "11-story-10.mp3",
+      "duration": 33.38,
+      "text": "A bipartisan coalition of forty-two state attorneys general is trying to stop bankrupt Character.A I from auctioning the chat histories of more than twenty-one million U S accounts, over two.one million registered to minors, without privacy safeguards, The Verge reported. The AGs say a buyer would not have to honor existing privacy policies or let users delete data. Character.A I filed for Chapter eleven in October, and Disney bought some of its assets and hired its CEO."
+    },
+    {
+      "num": 12,
+      "id": "weather",
+      "section": "Weather",
+      "title": "South Bend, IN Forecast & 5-Day Outlook",
+      "file": "12-weather.mp3",
+      "duration": 72.86,
+      "text": "Now, your South Bend, Indiana weather forecast from the National Weather Service. Tonight: Rain before one o'clock in the morning, then rain and snow. Cloudy, with a low around thirty-four. North wind ten to fifteen miles per hour, with gusts as high as thirty-five miles per hour. Chance of precipitation is one hundred percent. New rainfall amounts between a quarter and half of an inch possible. Friday: Rain and snow before four o'clock in the afternoon. Cloudy, with a high near forty-six. Northwest wind ten to fifteen miles per hour, with gusts as high as twenty-five miles per hour. Chance of precipitation is ninety percent. New rainfall amounts between a quarter and half of an inch possible. Friday Night, partly cloudy, low around thirty-two. On Saturday, mostly sunny, high near forty-eight. Saturday Night, mostly cloudy then a slight chance of light rain, low around thirty-five. On Sunday, light rain, high near forty-five. Sunday Night, light rain, low around thirty-three. On Monday, partly sunny, high near forty-one. Monday Night, partly cloudy, low around twenty-eight. On Tuesday, partly sunny, high near forty-six. Tuesday Night, mostly cloudy, low around thirty-three.",
+      "periods": [
+        {
+          "name": "Tonight",
+          "temp": "34F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Friday",
+          "temp": "46F",
+          "short": "Rain And Snow"
+        },
+        {
+          "name": "Friday Night",
+          "temp": "32F",
+          "short": "Partly Cloudy"
+        },
+        {
+          "name": "Saturday",
+          "temp": "48F",
+          "short": "Mostly Sunny"
+        },
+        {
+          "name": "Saturday Night",
+          "temp": "35F",
+          "short": "Mostly Cloudy then Slight Chance Light Rain"
+        },
+        {
+          "name": "Sunday",
+          "temp": "45F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Sunday Night",
+          "temp": "33F",
+          "short": "Light Rain"
+        },
+        {
+          "name": "Monday",
+          "temp": "41F",
+          "short": "Partly Sunny"
+        },
+        {
+          "name": "Monday Night",
+          "temp": "28F",
+          "short": "Partly Cloudy"
+        },
+        {
+          "name": "Tuesday",
+          "temp": "46F",
+          "short": "Partly Sunny"
+        },
+        {
+          "name": "Tuesday Night",
+          "temp": "33F",
+          "short": "Mostly Cloudy"
+        }
+      ]
+    },
+    {
+      "num": 13,
+      "id": "signoff",
+      "section": "SBR News",
+      "title": "That's the latest from SBR News",
+      "file": "13-signoff.mp3",
+      "duration": 2.64,
+      "text": "That's the latest from SBR News."
+    }
+  ]
+}
